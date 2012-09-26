@@ -1,0 +1,40 @@
+package ru.yandex.qatools.htmlelements.matchers;
+
+import org.hamcrest.Description;
+import org.hamcrest.Factory;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+
+/**
+ * @author Alexander Tolmachev starlight@yandex-team.ru
+ *         Date: 24.09.12
+ */
+public class DoesElementExistMatcher extends TypeSafeMatcher<WebElement> {
+    @Override
+    protected boolean matchesSafely(WebElement element) {
+        try {
+            element.findElement(By.xpath("self::*"));
+        } catch (WebDriverException e) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void describeTo(Description description) {
+        description.appendText("element existing on page");
+    }
+
+    @Override
+    public void describeMismatchSafely(WebElement element, Description mismatchDescription) {
+        mismatchDescription.appendText(String.format("element %s not existing on page", element));
+    }
+
+    @Factory
+    public static Matcher<WebElement> exists() {
+        return new DoesElementExistMatcher();
+    }
+}

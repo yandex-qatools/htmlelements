@@ -1,0 +1,38 @@
+<browsers>
+    <browser name="*firefox" defaultVersion="3.6">
+        <version number="3.6">
+            <host name="selenium-grid.yandex.net" port="4444"></host>
+        </version>
+    </browser>
+    <browser name="*googlechrome" defaultVersion="16">
+        <version number="16">
+            <host name="selenium-grid.yandex.net" port="4444"></host>
+        </version>
+    </browser>
+    <browser name="firefox" defaultVersion="10.0">
+        <version number="3.6">
+            <host name="selenium-grid.yandex.net" port="4444"></host>
+        </version>
+        <version number="10.0">
+            <host name="selenium-grid.yandex.net" port="4444"></host>
+        </version>
+    </browser>
+    <browser name="chrome" defaultVersion="16">
+        <version number="16">
+            <host name="selenium-grid.yandex.net" port="4444"></host>
+        </version>
+    </browser>
+    <browser name="opera" defaultVersion="11.61">
+        <version number="11.61">
+            <host name="selenium-grid.yandex.net" port="4444"></host>
+        </version>
+    </browser>
+    <browser name="internet explorer" defaultVersion="9">
+        <version number="8">
+            <host name="selenium-grid.yandex.net" port="4444"></host>
+        </version>
+        <version number="9">
+            <host name="selenium-grid.yandex.net" port="4444"></host>
+        </version>
+    </browser>
+</browsers>

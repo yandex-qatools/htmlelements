@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>ru.yandex.qatools.htmlelements</groupId>
+    <artifactId>htmlelements</artifactId>
+    <version>1.8-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>QA Tools Html Elements</name>
+    <description>WebDriver PageObject extension</description>
+    <url>http://www.yandex.ru/</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/yandex-qatools/htmlelements</url>
+        <connection>scm:git:https://github.com/yandex-qatools/htmlelements</connection>
+    </scm>
+
+    <modules>
+        <module>htmlelements-java</module>
+        <module>htmlelements-matchers</module>
+    </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <aggregate>true</aggregate>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <developers>
+        <developer>
+            <id>AlexanderTolmachev</id>
+            <name>Alexander Tolmachev</name>
+        </developer>
+        <developer>
+            <id>eroshenkoam</id>
+            <name>Artem Eroshenko</name>
+        </developer>
+        <developer>
+            <id>artkoshelev</id>
+            <name>Artem Koshelev</name>
+        </developer>
+        <developer>
+            <id>leonsabr</id>
+            <name>Leonid Rudenko</name>
+        </developer>
+    </developers>
+
+</project>

@@ -1,0 +1,43 @@
+package ru.yandex.qatools.htmlelements.matchers;
+
+import org.hamcrest.*;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
+import ru.yandex.qatools.htmlelements.element.Radio;
+
+/**
+ * @author Alexander Tolmachev starlight@yandex-team.ru
+ *         Date: 26.09.12
+ */
+public class HasSelectedRadioButtonMatcher extends TypeSafeMatcher<Radio> {
+    private Matcher<WebElement> matcher;
+
+    public HasSelectedRadioButtonMatcher(Matcher<WebElement> matcher) {
+        this.matcher = matcher;
+    }
+
+    @Override
+    protected boolean matchesSafely(Radio radio) {
+        try {
+            return matcher.matches(radio.getSelectedButton());
+        } catch (NoSuchElementException e) {
+            // Process case if radio has not selected button
+            return false;
+        }
+    }
+
+    @Override
+    public void describeTo(Description description) {
+        description.appendText("radio has selected button ");
+    }
+
+    @Override
+    protected void describeMismatchSafely(Radio radio, Description mismatchDescription) {
+        mismatchDescription.appendText(String.format("radio %s has not selected button ", radio));
+    }
+
+    @Factory
+    public static Matcher<Radio> hasSelectedRadioButton(Matcher<WebElement> buttonMatcher) {
+        return new HasSelectedRadioButtonMatcher(buttonMatcher);
+    }
+}
