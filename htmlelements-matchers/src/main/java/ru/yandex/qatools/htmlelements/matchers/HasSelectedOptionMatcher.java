@@ -9,6 +9,9 @@ import org.openqa.selenium.WebElement;
 import ru.yandex.qatools.htmlelements.element.Select;
 
 /**
+ * Checks that {@link Select} has selected option matching the specified matcher.
+ * In case select has not selected option this matcher will also return false.
+ *
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 26.09.12
  */
@@ -36,7 +39,7 @@ public class HasSelectedOptionMatcher extends TypeSafeMatcher<Select> {
 
     @Override
     protected void describeMismatchSafely(Select select, Description mismatchDescription) {
-        mismatchDescription.appendText(String.format("select %s has not selected option ", select));
+        mismatchDescription.appendText(String.format("select '%s' has not selected option ", select));
     }
 
     @Factory

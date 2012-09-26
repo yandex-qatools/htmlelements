@@ -7,6 +7,8 @@ import org.hamcrest.TypeSafeMatcher;
 import org.openqa.selenium.WebElement;
 
 /**
+ * Checks if element is enabled or not.
+ *
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 24.09.12
  */
@@ -23,7 +25,7 @@ public class IsElementEnabledMatcher extends TypeSafeMatcher<WebElement> {
 
     @Override
     public void describeMismatchSafely(WebElement element, Description mismatchDescription) {
-        mismatchDescription.appendText(String.format("element %s is not enabled", element));
+        mismatchDescription.appendText(String.format("element '%s' is not enabled", element));
     }
 
     @Factory

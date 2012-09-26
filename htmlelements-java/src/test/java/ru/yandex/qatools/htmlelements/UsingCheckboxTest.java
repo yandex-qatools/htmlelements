@@ -17,6 +17,9 @@ import ru.yandex.qatools.htmlelements.element.CheckBox;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
 
+/**
+ * @author Artem Koshelev artkoshelev@yandex-team.ru
+ */
 public class UsingCheckboxTest {
     WebDriver driver = mock(WebDriver.class);
     WebElement loginForm = mock(WebElement.class);

@@ -45,8 +45,8 @@ import java.util.List;
  * Note that this class implements {@link WebElement} interface so you can substitute instances of your block classes
  * for {@code WebElements} where it's necessary.
  *
- * @author Artem Koshelev artkoshelev@yandex-team.ru
  * @author Artem Eroshenko eroshenkoam@yandex-team.ru
+ * @author Artem Koshelev artkoshelev@yandex-team.ru
  * @author Alexander Tolmachev starlight@yandex-team.ru
  */
 public class HtmlElement implements WebElement, WrapsElement, Named {

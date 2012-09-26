@@ -14,6 +14,9 @@ import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.element.Select;
 import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
 
+/**
+ * @author Artem Koshelev artkoshelev@yandex-team.ru
+ */
 public class UsingSelectTest {
     @Test
     public void withSimpleElement() {

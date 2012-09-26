@@ -7,6 +7,8 @@ import org.hamcrest.TypeSafeMatcher;
 import org.openqa.selenium.WebElement;
 
 /**
+ * Indicates if element is displayed on page or not.
+ *
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 24.09.12
  */
@@ -23,7 +25,7 @@ public class IsElementDisplayedMatcher extends TypeSafeMatcher<WebElement> {
 
     @Override
     public void describeMismatchSafely(WebElement element, Description mismatchDescription) {
-        mismatchDescription.appendText(String.format("element %s is not displayed on page", element));
+        mismatchDescription.appendText(String.format("element '%s' is not displayed on page", element));
     }
 
     @Factory

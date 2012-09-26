@@ -8,6 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 
 /**
+ * This matcher allows you to use {@link WebElement} matchers with objects implementing {@link WrapsElement} interface.
+ *
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 24.09.12
  */

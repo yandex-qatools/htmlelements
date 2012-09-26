@@ -6,6 +6,9 @@ import org.openqa.selenium.WebElement;
 import ru.yandex.qatools.htmlelements.element.Radio;
 
 /**
+ * Checks that {@link Radio} has selected button matching the specified matcher.
+ * In case select has not selected button this matcher will also return false.
+ *
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 26.09.12
  */
@@ -33,7 +36,7 @@ public class HasSelectedRadioButtonMatcher extends TypeSafeMatcher<Radio> {
 
     @Override
     protected void describeMismatchSafely(Radio radio, Description mismatchDescription) {
-        mismatchDescription.appendText(String.format("radio %s has not selected button ", radio));
+        mismatchDescription.appendText(String.format("radio '%s' has not selected button ", radio));
     }
 
     @Factory

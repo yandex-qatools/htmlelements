@@ -6,6 +6,11 @@ import org.hamcrest.TypeSafeMatcher;
 
 import ru.yandex.qatools.htmlelements.element.CheckBox;
 
+/**
+ * Indicates whether {@link CheckBox} is checked or not.
+ *
+ * @author Artem Koshelev artkoshelev@yandex-team.ru
+ */
 public class IsCheckBoxSelectedMatcher extends TypeSafeMatcher<CheckBox> {
     @Override
     public boolean matchesSafely(CheckBox checkBox) {
@@ -14,7 +19,7 @@ public class IsCheckBoxSelectedMatcher extends TypeSafeMatcher<CheckBox> {
 
     @Override
     public void describeMismatchSafely(CheckBox checkBox, Description description) {
-        description.appendText(String.format("checkbox '%1$s' is not checked", checkBox));
+        description.appendText(String.format("checkbox '%s' is not checked", checkBox));
     }
 
 	@Override

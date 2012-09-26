@@ -7,6 +7,8 @@ import org.hamcrest.TypeSafeMatcher;
 import ru.yandex.qatools.htmlelements.element.TextInput;
 
 /**
+ * Matches entered in {@link TextInput} text with specified matcher.
+ *
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 26.09.12
  */
@@ -29,7 +31,7 @@ public class HasEnteredTextMatcher extends TypeSafeMatcher<TextInput> {
 
     @Override
     protected void describeMismatchSafely(TextInput textInput, Description mismatchDescription) {
-        mismatchDescription.appendText(String.format("text input %s has not entered text ", textInput));
+        mismatchDescription.appendText(String.format("text input '%s' has not entered text ", textInput));
     }
 
     @Factory
