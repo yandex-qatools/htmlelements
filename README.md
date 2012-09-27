@@ -44,8 +44,8 @@ For example, let's create a block for the search form on the page http://www.yan
         }
     }
 
-Combine blocks with your page objects
--------------------------------
+Construct page object using created blocks
+------------------------------------------
 You can easily use created blocks in page objects:
 
     import org.openqa.selenium.WebDriver;
