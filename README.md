@@ -2,7 +2,7 @@ HtmlElements library
 ====================
 
 This library is designed to provide easy-to-use way of interaction with web-page elements in your tests. It may be 
-considered as extension of WebDriver Page Object.
+considered as an extension of WebDriver Page Object.
 
 Include HtmlElements in your project
 ------------------------------------
@@ -16,7 +16,7 @@ Maven dependencies:
 
 Create blocks of elements
 -------------------------
-For example, let's create block for the search form on page http://www.yandex.com:
+For example, let's create a block for the search form on the page http://www.yandex.com:
 
     import org.openqa.selenium.support.FindBy;
     import ru.yandex.qatools.htmlelements.annotations.Block;
@@ -44,7 +44,7 @@ For example, let's create block for the search form on page http://www.yandex.co
         }
     }
 
-Use blocks in your page objects
+Combine blocks with your page objects
 -------------------------------
 You can easily use created blocks in page objects:
 
@@ -72,8 +72,7 @@ You can easily use created blocks in page objects:
 
 Use page objects in your tests
 ------------------------------
-After you have created page object you can use it in your tests. It will make them more comprehensive and
-very easy to write.
+Created page objects can be used in your tests. That makes tests more comprehensive and easy to write.
 
     import org.junit.Before;
     import org.junit.Test;
