@@ -3,6 +3,7 @@ package ru.yandex.qatools.htmlelements.testelements;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
+import ru.yandex.qatools.htmlelements.annotations.Name;
 import ru.yandex.qatools.htmlelements.element.Button;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.element.TextInput;
@@ -15,6 +16,7 @@ import java.util.List;
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 13.08.12
  */
+@Name(SearchArrowData.SEARCH_ARROW_NAME)
 @Block(@FindBy(className = SearchArrowData.SEARCH_ARROW_CLASS))
 public class SearchArrow extends HtmlElement {
 

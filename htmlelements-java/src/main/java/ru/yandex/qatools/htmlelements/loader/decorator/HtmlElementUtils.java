@@ -108,6 +108,9 @@ public class HtmlElementUtils {
     public static String getElementName(Field field) {
         if (field.isAnnotationPresent(Name.class)) {
             return field.getAnnotation(Name.class).value();
+        }
+        if (field.getType().isAnnotationPresent(Name.class)) {
+            return field.getType().getAnnotation(Name.class).value();
         } else {
             return splitCamelCase(field.getName());
         }

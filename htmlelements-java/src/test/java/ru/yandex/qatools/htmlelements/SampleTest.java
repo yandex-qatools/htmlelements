@@ -34,7 +34,7 @@ public class SampleTest {
 
     @Test
     public void testLogoName() {
-        assertThat(searchPage.getLogo().toString(), is("Logo"));
+        assertThat(searchPage.getLogo().toString(), is("Logotype"));
     }
 
     @Test
