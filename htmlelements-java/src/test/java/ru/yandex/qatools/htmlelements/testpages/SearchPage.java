@@ -26,9 +26,9 @@ public class SearchPage {
 
     private static final String LOGO_CLASS = "b-logo";
 
-    @Name(SearchArrowData.SEARCH_ARROW_NAME)
     private SearchArrow searchArrow;
 
+    @Name("Logotype")
     @FindBy(className = LOGO_CLASS)
     private WebElement logo;
 
