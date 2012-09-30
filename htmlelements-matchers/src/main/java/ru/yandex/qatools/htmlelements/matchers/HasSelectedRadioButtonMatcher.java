@@ -39,6 +39,10 @@ public class HasSelectedRadioButtonMatcher extends TypeSafeMatcher<Radio> {
         mismatchDescription.appendText(String.format("radio '%s' has not selected button ", radio));
     }
 
+    /**
+     * Creates matcher that tests if {@link Radio} has selected button matching the specified matcher.
+     * @param buttonMatcher Matcher to match selected radio button with.
+     */
     @Factory
     public static Matcher<Radio> hasSelectedRadioButton(Matcher<WebElement> buttonMatcher) {
         return new HasSelectedRadioButtonMatcher(buttonMatcher);

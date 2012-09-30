@@ -57,7 +57,7 @@ public class WebElementMatchers {
     /**
      * Creates matcher that matches specified attribute of element with given matcher.
      *
-     * @param attribute Name of attribute to be matched.
+     * @param attribute Name of matched attribute.
      * @param matcher   Matcher to match attribute with.
      */
     public static Matcher<WebElement> hasAttribute(String attribute, Matcher<String> matcher) {
@@ -67,7 +67,7 @@ public class WebElementMatchers {
     /**
      * Creates matcher that checks if value of specified element attribute equals to the given value.
      *
-     * @param attribute Name of attribute to be matched.
+     * @param attribute Name of matched attribute.
      * @param value     Expected attribute value.
      */
     public static Matcher<WebElement> hasAttribute(String attribute, String value) {
@@ -84,7 +84,7 @@ public class WebElementMatchers {
 
     /**
      * Creates matcher that checks if 'class' attribute of specified element has expected value.
-     * @param value Expected value if 'class' attribute.
+     * @param value Expected value of 'class' attribute.
      */
     public static Matcher<WebElement> hasClass(String value) {
         return AttributeMatcher.attribute("class", is(value));
@@ -100,15 +100,15 @@ public class WebElementMatchers {
 
     /**
      * Creates matcher that checks if 'name' attribute of specified element has expected value.
-     * @param value Expected value if 'name' attribute.
+     * @param value Expected value of 'name' attribute.
      */
     public static Matcher<WebElement> hasName(String value) {
         return AttributeMatcher.attribute("name", is(value));
     }
 
     /**
-     * Creates matcher that matches 'is' attribute of specified element with given matcher.
-     * @param matcher Matcher to match 'is' attribute with.
+     * Creates matcher that matches 'id' attribute of specified element with given matcher.
+     * @param matcher Matcher to match 'id' attribute with.
      */
     public static Matcher<WebElement> hasId(Matcher<String> matcher) {
         return AttributeMatcher.attribute("id", matcher);
@@ -116,7 +116,7 @@ public class WebElementMatchers {
 
     /**
      * Creates matcher that checks if 'id' attribute of specified element has expected value.
-     * @param value Expected value if 'id' attribute.
+     * @param value Expected value of 'id' attribute.
      */
     public static Matcher<WebElement> hasId(String value) {
         return AttributeMatcher.attribute("id", is(value));
@@ -132,7 +132,7 @@ public class WebElementMatchers {
 
     /**
      * Creates matcher that checks if 'value' attribute of specified element has expected value.
-     * @param value Expected value if 'value' attribute.
+     * @param value Expected value of 'value' attribute.
      */
     public static Matcher<WebElement> hasValue(String value) {
         return AttributeMatcher.attribute("value", is(value));

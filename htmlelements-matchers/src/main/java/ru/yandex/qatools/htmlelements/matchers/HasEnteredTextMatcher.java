@@ -36,11 +36,19 @@ public class HasEnteredTextMatcher extends TypeSafeMatcher<TextInput> {
         mismatchDescription.appendText(String.format("text input '%s' has not entered text ", textInput));
     }
 
+    /**
+     * Creates matcher that matches text entered in {@link TextInput} with specified matcher.
+     * @param textMatcher Matcher to match entered text with.
+     */
     @Factory
     public static Matcher<TextInput> hasEnteredText(Matcher<String> textMatcher) {
         return new HasEnteredTextMatcher(textMatcher);
     }
 
+    /**
+     * Creates matcher that checks if text entered in {@link TextInput} equals to given text.
+     * @param text Expected entered text.
+     */
     @Factory
     public static Matcher<TextInput> hasEnteredText(String text) {
         return new HasEnteredTextMatcher(is(text));

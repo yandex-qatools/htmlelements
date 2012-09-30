@@ -70,6 +70,9 @@ public class CheckBox extends TypifiedElement {
         }
     }
 
+    /**
+     * Indicates whether checkbox is selected.
+     */
     public boolean isSelected() {
         return getWrappedElement().isSelected();
     }

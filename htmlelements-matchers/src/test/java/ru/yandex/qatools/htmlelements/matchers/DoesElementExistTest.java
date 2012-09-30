@@ -12,6 +12,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.not;
 import static ru.yandex.qatools.htmlelements.matchers.WebElementMatchers.exists;
 
+/**
+ * @author Alexander Tolmachev starlight@yandex-team.ru
+ *         Date: 30.09.12
+ */
 public class DoesElementExistTest {
     private WebDriver driver = MockFactory.mockDriver();
 

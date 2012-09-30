@@ -28,6 +28,9 @@ public class IsElementEnabledMatcher extends TypeSafeMatcher<WebElement> {
         mismatchDescription.appendText(String.format("element '%s' is not enabled", element));
     }
 
+    /**
+     * Creates matcher that checks if element is currently enabled.
+     */
     @Factory
     public static Matcher<WebElement> isEnabled() {
         return new IsElementEnabledMatcher();
