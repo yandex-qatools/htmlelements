@@ -35,6 +35,10 @@ public class WrapsElementMatcher extends TypeSafeMatcher<WrapsElement> {
         matcher.describeMismatch(element, mismatchDescription);
     }
 
+    /**
+     * Creates matcher that matches wrapped {@link WebElement} of {@link WrapsElement} with given matcher.
+     * @param matcher Matcher to match wrapped element with.
+     */
     @Factory
     public static Matcher<WrapsElement> element(Matcher<WebElement> matcher) {
         return new WrapsElementMatcher(matcher);

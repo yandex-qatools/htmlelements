@@ -11,10 +11,10 @@ import java.util.List;
  * A patch for {@code WebDriver} {@link org.openqa.selenium.support.pagefactory.DefaultElementLocator} class.
  * <p/>
  * The need for creating it is that the original {@code WebDriver} source code provides no possibility for
- * using different annotations processing in {@link org.openqa.selenium.support.pagefactory.DefaultElementLocator}.
- * This leads to code duplication.
+ * using different ways of annotations handling in
+ * {@link org.openqa.selenium.support.pagefactory.DefaultElementLocator}. This leads to code duplication.
  * <p/>
- * We need to use a little bit different annotations processing with
+ * We need to use a little bit different way of annotations handling while keeping implemented in
  * {@link org.openqa.selenium.support.pagefactory.DefaultElementLocator} mechanism of locating elements.
  * So we've just changed the constructor of the original class.
  */

@@ -12,7 +12,10 @@ import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.element.CheckBox;
 import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
 
-public class WithCheckBoxPage {
+/**
+ * @author Artem Koshelev artkoshelev@yandex-team.ru
+ */
+public class PageWithCheckBox {
 	private static final String VARIANT_A = "//checkBoxA";
 	private static final String VARIANT_B = "//checkBoxB";
 	private static final String VARIANT_C = "//checkBoxC";
@@ -26,11 +29,11 @@ public class WithCheckBoxPage {
 	@FindBy(xpath = VARIANT_C)
 	public CheckBox allOfThis;
 	
-	public WithCheckBoxPage() {
+	public PageWithCheckBox() {
 		this(mockDriver());
 	}
 	
-	public WithCheckBoxPage(WebDriver driver) {
+	public PageWithCheckBox(WebDriver driver) {
 		HtmlElementLoader.populatePageObject(this, driver);
 	}
 	

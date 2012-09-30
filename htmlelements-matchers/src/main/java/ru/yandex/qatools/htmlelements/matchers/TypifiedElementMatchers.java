@@ -24,7 +24,7 @@ public class TypifiedElementMatchers {
 
     /**
      * Creates matcher that tests if {@link Select} has selected option matching the specified matcher.
-     * @param optionMatcher
+     * @param optionMatcher Matcher to match selected option with.
      */
     public static Matcher<Select> hasSelectedOption(Matcher<WebElement> optionMatcher) {
         return HasSelectedOptionMatcher.hasSelectedOption(optionMatcher);
@@ -32,17 +32,25 @@ public class TypifiedElementMatchers {
 
     /**
      * Creates matcher that tests if {@link Radio} has selected button matching the specified matcher.
-     * @param buttonMatcher
+     * @param buttonMatcher Matcher to match selected radio button with.
      */
     public static Matcher<Radio> hasSelectedRadioButton(Matcher<WebElement> buttonMatcher) {
         return HasSelectedRadioButtonMatcher.hasSelectedRadioButton(buttonMatcher);
     }
 
     /**
-     * Creates matcher that matches entered in {@link TextInput} text with specified matcher.
-     * @param textMatcher
+     * Creates matcher that matches text entered in {@link TextInput} with specified matcher.
+     * @param textMatcher Matcher to match entered text with.
      */
     public static Matcher<TextInput> hasEnteredText(Matcher<String> textMatcher) {
         return HasEnteredTextMatcher.hasEnteredText(textMatcher);
+    }
+
+    /**
+     * Creates matcher that checks if text entered in {@link TextInput} equals to given text.
+     * @param text Expected entered text.
+     */
+    public static Matcher<TextInput> hasEnteredText(String text) {
+        return HasEnteredTextMatcher.hasEnteredText(text);
     }
 }

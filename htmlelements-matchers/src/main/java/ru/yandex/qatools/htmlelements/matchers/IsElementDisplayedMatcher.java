@@ -28,6 +28,10 @@ public class IsElementDisplayedMatcher extends TypeSafeMatcher<WebElement> {
         mismatchDescription.appendText(String.format("element '%s' is not displayed on page", element));
     }
 
+    /**
+     * Creates matcher that checks if element is currently displayed on page.
+     *
+     */
     @Factory
     public static Matcher<WebElement> isDisplayed() {
         return new IsElementDisplayedMatcher();

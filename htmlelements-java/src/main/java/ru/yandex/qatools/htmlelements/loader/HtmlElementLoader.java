@@ -14,7 +14,7 @@ import static ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementUtils.g
 import static ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementUtils.isHtmlElement;
 
 /**
- * Contains methods for initialization of blocks of elements and page objects.
+ * Contains methods for blocks of elements initialization and page objects initialization.
  *
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 13.08.12
@@ -22,7 +22,7 @@ import static ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementUtils.i
 public class HtmlElementLoader {
     /**
      * Creates and initializes a block of elements if the given class is {@link HtmlElement} or its successor
-     * and page object otherwise.
+     * and initializes page object otherwise.
      *
      * @param clazz  A class to be instantiated and initialized.
      * @param driver The {@code WebDriver} instance that will be used to look up the elements.

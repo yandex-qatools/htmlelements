@@ -38,6 +38,9 @@ public class DoesElementExistMatcher extends TypeSafeMatcher<WebElement> {
         mismatchDescription.appendText(String.format("element %s not existing on page", element));
     }
 
+    /**
+     * Creates matcher that checks if element currently exists on page.
+     */
     @Factory
     public static Matcher<WebElement> exists() {
         return new DoesElementExistMatcher();

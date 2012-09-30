@@ -20,7 +20,7 @@ public class IsElementDisplayedTest {
     private WebDriver driver = MockFactory.mockDriver();
 
     @Test
-    public void blockIsDisplayed() {
+    public void isElementDisplayed() {
         WebElement element = MockFactory.mockDisplayedElement(By.className(CustomBlock.CLASS_NAME), driver);
         PageWithCustomBlock page = new PageWithCustomBlock(driver);
 
@@ -29,7 +29,7 @@ public class IsElementDisplayedTest {
     }
 
     @Test
-    public void blockIsNotDisplayed() {
+    public void isElementNotDisplayed() {
         WebElement element = MockFactory.mockNotDisplayedElement(By.className(CustomBlock.CLASS_NAME), driver);
         PageWithCustomBlock page = new PageWithCustomBlock(driver);
 

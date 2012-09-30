@@ -42,6 +42,10 @@ public class HasSelectedOptionMatcher extends TypeSafeMatcher<Select> {
         mismatchDescription.appendText(String.format("select '%s' has not selected option ", select));
     }
 
+    /**
+     * Creates matcher that tests if {@link Select} has selected option matching the specified matcher.
+     * @param optionMatcher Matcher to match selected option with.
+     */
     @Factory
     public static Matcher<Select> hasSelectedOption(Matcher<WebElement> optionMatcher) {
         return new HasSelectedOptionMatcher(optionMatcher);

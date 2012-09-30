@@ -66,7 +66,7 @@ public class WrapsElementMatchers {
     /**
      * Creates matcher that matches specified attribute of element with given matcher.
      *
-     * @param attribute Name of attribute to be matched.
+     * @param attribute Name of matched attribute.
      * @param matcher   Matcher to match attribute with.
      */
     public static Matcher<WrapsElement> hasAttribute(String attribute, Matcher<String> matcher) {
@@ -76,7 +76,7 @@ public class WrapsElementMatchers {
     /**
      * Creates matcher that checks if value of specified element attribute equals to the given value.
      *
-     * @param attribute Name of attribute to be matched.
+     * @param attribute Name of matched attribute.
      * @param value     Expected attribute value.
      */
     public static Matcher<WrapsElement> hasAttribute(String attribute, String value) {
@@ -93,7 +93,7 @@ public class WrapsElementMatchers {
 
     /**
      * Creates matcher that checks if 'class' attribute of specified element has expected value.
-     * @param value Expected value if 'class' attribute.
+     * @param value Expected value of 'class' attribute.
      */
     public static Matcher<WrapsElement> hasClass(String value) {
         return element(AttributeMatcher.attribute("class", is(value)));
@@ -109,7 +109,7 @@ public class WrapsElementMatchers {
 
     /**
      * Creates matcher that checks if 'name' attribute of specified element has expected value.
-     * @param value Expected value if 'name' attribute.
+     * @param value Expected value of 'name' attribute.
      */
     public static Matcher<WrapsElement> hasName(String value) {
         return element(AttributeMatcher.attribute("name", is(value)));
@@ -125,7 +125,7 @@ public class WrapsElementMatchers {
 
     /**
      * Creates matcher that checks if 'id' attribute of specified element has expected value.
-     * @param value Expected value if 'id' attribute.
+     * @param value Expected value of 'id' attribute.
      */
     public static Matcher<WrapsElement> hasId(String value) {
         return element(AttributeMatcher.attribute("id", is(value)));
@@ -141,7 +141,7 @@ public class WrapsElementMatchers {
 
     /**
      * Creates matcher that checks if 'value' attribute of specified element has expected value.
-     * @param value Expected value if 'value' attribute.
+     * @param value Expected value of 'value' attribute.
      */
     public static Matcher<WrapsElement> hasValue(String value) {
         return element(AttributeMatcher.attribute("value", is(value)));

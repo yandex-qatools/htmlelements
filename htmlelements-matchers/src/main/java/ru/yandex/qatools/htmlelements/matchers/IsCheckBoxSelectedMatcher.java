@@ -27,6 +27,9 @@ public class IsCheckBoxSelectedMatcher extends TypeSafeMatcher<CheckBox> {
 		description.appendText("checkbox is checked");
 	}
 
+    /**
+     * Creates matcher that tests if {@link CheckBox} is checked.
+     */
     @Factory
     public static IsCheckBoxSelectedMatcher isSelected() {
         return new IsCheckBoxSelectedMatcher();

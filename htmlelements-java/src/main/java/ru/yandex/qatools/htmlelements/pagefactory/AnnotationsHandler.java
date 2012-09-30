@@ -14,13 +14,13 @@ import java.util.Set;
  * A patch for {@code WebDriver} {@link org.openqa.selenium.support.pagefactory.Annotations} class.
  * <p/>
  * The need for creating it is that the original {@code WebDriver} source code provides no possibility for
- * processing different field and class annotations (only field annotations {@link FindBy}, {@link FindBys} and
- * {@link org.openqa.selenium.support.CacheLookup}) and for using different annotations processing in
+ * handling different field and class annotations (only field annotations {@link FindBy}, {@link FindBys} and
+ * {@link org.openqa.selenium.support.CacheLookup}) and for using different ways of annotations handling in
  * {@link org.openqa.selenium.support.pagefactory.DefaultElementLocator}.
  * <p/>
- * We need to process {@link ru.yandex.qatools.htmlelements.annotations.Block} annotation, so we divided
- * {@link org.openqa.selenium.support.pagefactory.Annotations} class into {@link AnnotationsHandler}
- * and {@link DefaultFieldAnnotationsHandler} to make class annotations processing possible.
+ * We need to process {@link ru.yandex.qatools.htmlelements.annotations.Block} annotation to locate blocks,
+ * so we divided {@link org.openqa.selenium.support.pagefactory.Annotations} class into {@link AnnotationsHandler}
+ * and {@link DefaultFieldAnnotationsHandler} to make class annotations handling possible.
  *
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 20.08.12
