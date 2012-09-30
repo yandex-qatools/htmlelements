@@ -11,7 +11,7 @@ Maven dependencies:
     <dependency>
         <groupId>ru.yandex.qatools.htmlelements</groupId>
         <artifactId>htmlelements</artifactId>
-        <version>1.8-SNAPSHOT</version>
+        <version>1.8</version>
     </dependency>
 
 Create blocks of elements
