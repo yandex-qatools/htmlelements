@@ -45,4 +45,8 @@ public class TypifiedElementMatchers {
     public static Matcher<TextInput> hasEnteredText(Matcher<String> textMatcher) {
         return HasEnteredTextMatcher.hasEnteredText(textMatcher);
     }
+
+    public static Matcher<TextInput> hasEnteredText(String text) {
+        return HasEnteredTextMatcher.hasEnteredText(text);
+    }
 }

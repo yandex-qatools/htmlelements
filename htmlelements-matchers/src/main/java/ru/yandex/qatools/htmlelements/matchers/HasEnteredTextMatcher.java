@@ -6,6 +6,8 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import ru.yandex.qatools.htmlelements.element.TextInput;
 
+import static org.hamcrest.Matchers.is;
+
 /**
  * Matches entered in {@link TextInput} text with specified matcher.
  *
@@ -37,5 +39,10 @@ public class HasEnteredTextMatcher extends TypeSafeMatcher<TextInput> {
     @Factory
     public static Matcher<TextInput> hasEnteredText(Matcher<String> textMatcher) {
         return new HasEnteredTextMatcher(textMatcher);
+    }
+
+    @Factory
+    public static Matcher<TextInput> hasEnteredText(String text) {
+        return new HasEnteredTextMatcher(is(text));
     }
 }
