@@ -5,7 +5,7 @@
 
 	<groupId>ru.yandex.qatools.htmlelements</groupId>
 	<artifactId>htmlelements</artifactId>
-	<version>1.8-SNAPSHOT</version>
+	<version>1.8</version>
 	<packaging>pom</packaging>
 
 	<name>QA Tools Html Elements</name>
