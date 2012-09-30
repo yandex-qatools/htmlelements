@@ -5,7 +5,7 @@
 
 	<groupId>ru.yandex.qatools.htmlelements</groupId>
 	<artifactId>htmlelements</artifactId>
-	<version>1.8</version>
+	<version>1.8-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>QA Tools Html Elements</name>
@@ -31,8 +31,9 @@
 	</licenses>
 
 	<scm>
-		<url>https://github.com/yandex-qatools/htmlelements</url>
-		<connection>scm:git:https://github.com/yandex-qatools/htmlelements</connection>
+		<url>git@github.com:yandex-qatools/htmlelements.git</url>
+		<connection>scm:git:git@github.com:yandex-qatools/htmlelements.git</connection>
+        <developerConnection>scm:git:git@github.com:yandex-qatools/htmlelements.git</developerConnection>
 	</scm>
 
 	<modules>
