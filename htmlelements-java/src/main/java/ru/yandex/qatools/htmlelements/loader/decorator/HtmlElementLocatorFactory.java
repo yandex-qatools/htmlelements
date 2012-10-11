@@ -3,6 +3,8 @@ package ru.yandex.qatools.htmlelements.loader.decorator;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
+
+import ru.yandex.qatools.htmlelements.pagefactory.AnnotationsHandlerFactory;
 import ru.yandex.qatools.htmlelements.pagefactory.DefaultElementLocator;
 
 import java.lang.reflect.Field;
@@ -15,9 +17,11 @@ import java.lang.reflect.Field;
  */
 public class HtmlElementLocatorFactory implements ElementLocatorFactory {
     private final SearchContext searchContext;
+    private final AnnotationsHandlerFactory annotationsHandlerFactory;
 
-    public HtmlElementLocatorFactory(SearchContext searchContext) {
+    public HtmlElementLocatorFactory(SearchContext searchContext, AnnotationsHandlerFactory annotationsHandlerFactory) {
         this.searchContext = searchContext;
+        this.annotationsHandlerFactory = annotationsHandlerFactory;
     }
 
     /**
@@ -28,6 +32,6 @@ public class HtmlElementLocatorFactory implements ElementLocatorFactory {
      */
     @Override
     public ElementLocator createLocator(Field field) {
-        return new DefaultElementLocator(searchContext, new HtmlElementFieldAnnotationsHandler(field));
+        return new DefaultElementLocator(searchContext, annotationsHandlerFactory.getFieldAnnotationsHandler(field));
     }
 }

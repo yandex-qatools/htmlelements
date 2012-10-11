@@ -5,9 +5,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
+import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementAnnotationsHandlerFactory;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementClassAnnotationsHandler;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementFactory;
+import ru.yandex.qatools.htmlelements.pagefactory.AnnotationsHandler;
+import ru.yandex.qatools.htmlelements.pagefactory.AnnotationsHandlerFactory;
 import ru.yandex.qatools.htmlelements.pagefactory.DefaultElementLocator;
 
 import static ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementUtils.getElementName;
@@ -141,11 +144,17 @@ public class HtmlElementLoader {
      * @param driver      The {@code WebDriver} instance that will be used to look up the elements.
      */
     public static void populateHtmlElement(HtmlElement htmlElement, WebDriver driver) {
+    	populateHtmlElement(htmlElement, new HtmlElementAnnotationsHandlerFactory<HtmlElement>(), driver);
+    }
+    
+    public static void populateHtmlElement(HtmlElement htmlElement, 
+    		AnnotationsHandlerFactory<HtmlElement> annotationsHandlerFactory, WebDriver driver) {
+    	
         @SuppressWarnings("unchecked")
         Class<HtmlElement> htmlElementClass = (Class<HtmlElement>) htmlElement.getClass();
         // Create locator that will handle Block annotation
-        HtmlElementClassAnnotationsHandler<HtmlElement> annotations =
-                new HtmlElementClassAnnotationsHandler<HtmlElement>(htmlElementClass);
+        AnnotationsHandler annotations =
+                annotationsHandlerFactory.getClassAnnotationsHandler(htmlElementClass);
         ElementLocator locator = new DefaultElementLocator(driver, annotations);
         ClassLoader htmlElementClassLoader = htmlElement.getClass().getClassLoader();
         // Initialize block with WebElement proxy and set its name
@@ -154,7 +163,7 @@ public class HtmlElementLoader {
         String elementName = getElementName(htmlElementClass);
         htmlElement.setName(elementName);
         // Initialize elements of the block
-        PageFactory.initElements(new HtmlElementDecorator(elementToWrap), htmlElement);
+        PageFactory.initElements(new HtmlElementDecorator(elementToWrap), htmlElement);    	
     }
 
     /**
