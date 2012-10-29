@@ -10,7 +10,7 @@ Maven dependencies:
 
     <dependency>
         <groupId>ru.yandex.qatools.htmlelements</groupId>
-        <artifactId>htmlelements</artifactId>
+        <artifactId>htmlelements-java</artifactId>
         <version>1.8</version>
     </dependency>
 
