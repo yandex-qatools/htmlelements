@@ -154,7 +154,7 @@ public class HtmlElementLoader {
         Class<HtmlElement> htmlElementClass = (Class<HtmlElement>) htmlElement.getClass();
         // Create locator that will handle Block annotation
         AnnotationsHandler annotations =
-                annotationsHandlerFactory.getClassAnnotationsHandler(htmlElementClass);
+                annotationsHandlerFactory.getAnnotationsHandler(htmlElementClass);
         ElementLocator locator = new DefaultElementLocator(driver, annotations);
         ClassLoader htmlElementClassLoader = htmlElement.getClass().getClassLoader();
         // Initialize block with WebElement proxy and set its name

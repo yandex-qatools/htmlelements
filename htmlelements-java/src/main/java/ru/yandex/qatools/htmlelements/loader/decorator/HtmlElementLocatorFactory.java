@@ -32,6 +32,6 @@ public class HtmlElementLocatorFactory implements ElementLocatorFactory {
      */
     @Override
     public ElementLocator createLocator(Field field) {
-        return new DefaultElementLocator(searchContext, annotationsHandlerFactory.getFieldAnnotationsHandler(field));
+        return new DefaultElementLocator(searchContext, annotationsHandlerFactory.getAnnotationsHandler(field));
     }
 }

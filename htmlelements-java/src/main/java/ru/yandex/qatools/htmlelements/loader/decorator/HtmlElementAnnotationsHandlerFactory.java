@@ -9,12 +9,12 @@ import ru.yandex.qatools.htmlelements.pagefactory.AnnotationsHandlerFactory;
 public class HtmlElementAnnotationsHandlerFactory<T extends HtmlElement> implements AnnotationsHandlerFactory<T> {
 
 	@Override
-	public AnnotationsHandler getFieldAnnotationsHandler(Field field) {
+	public AnnotationsHandler getAnnotationsHandler(Field field) {
 		return new HtmlElementFieldAnnotationsHandler(field);
 	}
 
 	@Override
-	public AnnotationsHandler getClassAnnotationsHandler(Class<T> clazz) {
+	public AnnotationsHandler getAnnotationsHandler(Class<T> clazz) {
 		return new HtmlElementClassAnnotationsHandler<>(clazz);
 	}
 
