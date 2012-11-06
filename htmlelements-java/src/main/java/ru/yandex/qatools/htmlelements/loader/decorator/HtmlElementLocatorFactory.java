@@ -1,13 +1,14 @@
 package ru.yandex.qatools.htmlelements.loader.decorator;
 
+import java.lang.reflect.Field;
+
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
+import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.pagefactory.AnnotationsHandlerFactory;
 import ru.yandex.qatools.htmlelements.pagefactory.DefaultElementLocator;
-
-import java.lang.reflect.Field;
 
 /**
  * A factory for producing locator instances.
@@ -17,9 +18,10 @@ import java.lang.reflect.Field;
  */
 public class HtmlElementLocatorFactory implements ElementLocatorFactory {
     private final SearchContext searchContext;
-    private final AnnotationsHandlerFactory annotationsHandlerFactory;
+    private final AnnotationsHandlerFactory<HtmlElement> annotationsHandlerFactory;
 
-    public HtmlElementLocatorFactory(SearchContext searchContext, AnnotationsHandlerFactory annotationsHandlerFactory) {
+    public HtmlElementLocatorFactory(SearchContext searchContext, 
+    		AnnotationsHandlerFactory<HtmlElement> annotationsHandlerFactory) {
         this.searchContext = searchContext;
         this.annotationsHandlerFactory = annotationsHandlerFactory;
     }
