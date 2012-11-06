@@ -2,11 +2,10 @@ package ru.yandex.qatools.htmlelements.loader.decorator;
 
 import java.lang.reflect.Field;
 
-import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.pagefactory.AnnotationsHandler;
 import ru.yandex.qatools.htmlelements.pagefactory.AnnotationsHandlerFactory;
 
-public class HtmlElementAnnotationsHandlerFactory<T extends HtmlElement> implements AnnotationsHandlerFactory<T> {
+public class HtmlElementAnnotationsHandlerFactory implements AnnotationsHandlerFactory {
 
 	@Override
 	public AnnotationsHandler getAnnotationsHandler(Field field) {
@@ -14,8 +13,8 @@ public class HtmlElementAnnotationsHandlerFactory<T extends HtmlElement> impleme
 	}
 
 	@Override
-	public AnnotationsHandler getAnnotationsHandler(Class<T> clazz) {
-		return new HtmlElementClassAnnotationsHandler<>(clazz);
+	public AnnotationsHandler getAnnotationsHandler(Class clazz) {
+		return new HtmlElementClassAnnotationsHandler(clazz);
 	}
 
 }

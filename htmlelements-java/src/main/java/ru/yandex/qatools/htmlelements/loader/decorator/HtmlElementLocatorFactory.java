@@ -18,10 +18,9 @@ import ru.yandex.qatools.htmlelements.pagefactory.DefaultElementLocator;
  */
 public class HtmlElementLocatorFactory implements ElementLocatorFactory {
     private final SearchContext searchContext;
-    private final AnnotationsHandlerFactory<HtmlElement> annotationsHandlerFactory;
+    private final AnnotationsHandlerFactory annotationsHandlerFactory;
 
-    public HtmlElementLocatorFactory(SearchContext searchContext, 
-    		AnnotationsHandlerFactory<HtmlElement> annotationsHandlerFactory) {
+    public HtmlElementLocatorFactory(SearchContext searchContext, AnnotationsHandlerFactory annotationsHandlerFactory) {
         this.searchContext = searchContext;
         this.annotationsHandlerFactory = annotationsHandlerFactory;
     }

@@ -144,11 +144,11 @@ public class HtmlElementLoader {
      * @param driver      The {@code WebDriver} instance that will be used to look up the elements.
      */
     public static void populateHtmlElement(HtmlElement htmlElement, WebDriver driver) {
-    	populateHtmlElement(htmlElement, new HtmlElementAnnotationsHandlerFactory<HtmlElement>(), driver);
+    	populateHtmlElement(htmlElement, new HtmlElementAnnotationsHandlerFactory(), driver);
     }
     
     public static void populateHtmlElement(HtmlElement htmlElement, 
-    		AnnotationsHandlerFactory<HtmlElement> annotationsHandlerFactory, WebDriver driver) {
+    		AnnotationsHandlerFactory annotationsHandlerFactory, WebDriver driver) {
     	
         @SuppressWarnings("unchecked")
         Class<HtmlElement> htmlElementClass = (Class<HtmlElement>) htmlElement.getClass();
