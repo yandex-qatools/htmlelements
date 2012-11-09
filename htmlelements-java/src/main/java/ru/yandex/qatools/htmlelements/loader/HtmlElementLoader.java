@@ -1,20 +1,21 @@
 package ru.yandex.qatools.htmlelements.loader;
 
+import static ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementUtils.getElementName;
+import static ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementUtils.isHtmlElement;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
+
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementAnnotationsHandlerFactory;
-import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementClassAnnotationsHandler;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementFactory;
+import ru.yandex.qatools.htmlelements.pagefactory.AjaxElementLocator;
+import ru.yandex.qatools.htmlelements.pagefactory.AjaxElementLocatorFactory;
 import ru.yandex.qatools.htmlelements.pagefactory.AnnotationsHandler;
 import ru.yandex.qatools.htmlelements.pagefactory.AnnotationsHandlerFactory;
-import ru.yandex.qatools.htmlelements.pagefactory.DefaultElementLocator;
-
-import static ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementUtils.getElementName;
-import static ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementUtils.isHtmlElement;
 
 /**
  * Contains methods for blocks of elements initialization and page objects initialization.
@@ -155,7 +156,7 @@ public class HtmlElementLoader {
         // Create locator that will handle Block annotation
         AnnotationsHandler annotations =
                 annotationsHandlerFactory.getAnnotationsHandler(htmlElementClass);
-        ElementLocator locator = new DefaultElementLocator(driver, annotations);
+        ElementLocator locator = new AjaxElementLocator(driver, annotations);
         ClassLoader htmlElementClassLoader = htmlElement.getClass().getClassLoader();
         // Initialize block with WebElement proxy and set its name
         WebElement elementToWrap = HtmlElementFactory.createProxyForWebElement(htmlElementClassLoader, locator);
