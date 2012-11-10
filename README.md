@@ -10,8 +10,8 @@ Maven dependencies:
 
     <dependency>
         <groupId>ru.yandex.qatools.htmlelements</groupId>
-        <artifactId>htmlelements</artifactId>
-        <version>1.8-SNAPSHOT</version>
+        <artifactId>htmlelements-java</artifactId>
+        <version>1.8</version>
     </dependency>
 
 Create blocks of elements
@@ -44,8 +44,8 @@ For example, let's create a block for the search form on the page http://www.yan
         }
     }
 
-Combine blocks with your page objects
--------------------------------
+Construct page object using created blocks
+------------------------------------------
 You can easily use created blocks in page objects:
 
     import org.openqa.selenium.WebDriver;
