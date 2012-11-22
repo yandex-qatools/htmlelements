@@ -6,6 +6,7 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
+import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.pagefactory.AjaxElementLocator;
 
 /**
@@ -29,6 +30,11 @@ public class HtmlElementLocatorFactory implements ElementLocatorFactory {
      */
     @Override
     public ElementLocator createLocator(Field field) {
-        return new AjaxElementLocator(searchContext, 5, new HtmlElementFieldAnnotationsHandler(field));
+        return new AjaxElementLocator(searchContext, new HtmlElementFieldAnnotationsHandler(field));
+    }
+    
+    public ElementLocator createLocator(Class clazz) {
+    	return new AjaxElementLocator(searchContext, 
+    			new HtmlElementClassAnnotationsHandler<HtmlElement>(clazz));
     }
 }

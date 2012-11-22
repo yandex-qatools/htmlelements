@@ -12,7 +12,7 @@ import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementClassAnnotationsHandler;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementFactory;
-import ru.yandex.qatools.htmlelements.pagefactory.AjaxElementLocator;
+import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementLocatorFactory;
 
 /**
  * Contains methods for blocks of elements initialization and page objects initialization.
@@ -145,9 +145,7 @@ public class HtmlElementLoader {
         @SuppressWarnings("unchecked")
         Class<HtmlElement> htmlElementClass = (Class<HtmlElement>) htmlElement.getClass();
         // Create locator that will handle Block annotation
-        HtmlElementClassAnnotationsHandler<HtmlElement> annotations =
-                new HtmlElementClassAnnotationsHandler<HtmlElement>(htmlElementClass);
-        ElementLocator locator = new AjaxElementLocator(driver, annotations);
+        ElementLocator locator = new HtmlElementLocatorFactory(driver).createLocator(htmlElementClass);
         ClassLoader htmlElementClassLoader = htmlElement.getClass().getClassLoader();
         // Initialize block with WebElement proxy and set its name
         WebElement elementToWrap = HtmlElementFactory.createProxyForWebElement(htmlElementClassLoader, locator);
