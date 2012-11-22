@@ -12,6 +12,7 @@ import org.openqa.selenium.support.FindBy;
 
 import ru.yandex.qatools.htmlelements.annotations.Name;
 import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
+import ru.yandex.qatools.htmlelements.pagefactory.DefaultElementLocator;
 import ru.yandex.qatools.htmlelements.testelements.SearchArrow;
 import ru.yandex.qatools.htmlelements.testelements.SearchArrowData;
 
@@ -34,6 +35,10 @@ public class SearchPage {
 
     public SearchPage() {
         this(mockDriver());
+    }
+    
+    public SearchPage(Class<? extends DefaultElementLocator> elementLocatorClass) {
+    	HtmlElementLoader.populatePageObject(this, elementLocatorClass, mockDriver());
     }
 
     public SearchPage(WebDriver driver) {

@@ -10,8 +10,17 @@ public class CustomElementLocator extends DefaultElementLocator {
 		super(searchContext, annotationsHandler);
 	}
 	
+	@Override
 	public WebElement findElement() {
-		throw new RuntimeException("I'll never find you any elements!");
+		throw new CustomException("I'll never find you any elements!");
+	}
+	
+	public class CustomException extends RuntimeException {
+
+		public CustomException(String string) {
+			super(string);
+		}
+		
 	}
 
 }

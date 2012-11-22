@@ -9,13 +9,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
-import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementClassAnnotationsHandler;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementFactory;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementLocatorFactory;
 import ru.yandex.qatools.htmlelements.pagefactory.AjaxElementLocator;
-import ru.yandex.qatools.htmlelements.pagefactory.CustomElementLocator;
-import ru.yandex.qatools.htmlelements.testelements.Company;
+import ru.yandex.qatools.htmlelements.pagefactory.DefaultElementLocator;
 
 /**
  * Contains methods for blocks of elements initialization and page objects initialization.
@@ -40,7 +38,7 @@ public class HtmlElementLoader {
     }   
 
 	@SuppressWarnings("unchecked")
-	public static <T> T create(Class<T> clazz, Class elementLocatorClass, WebDriver driver) {
+	public static <T> T create(Class<T> clazz, Class<? extends DefaultElementLocator> elementLocatorClass, WebDriver driver) {
         if (isHtmlElement(clazz)) {
             Class<HtmlElement> htmlElementClass = (Class<HtmlElement>) clazz;
             return (T) createHtmlElement(htmlElementClass, elementLocatorClass, driver);
@@ -97,7 +95,7 @@ public class HtmlElementLoader {
     	return createHtmlElement(clazz, AjaxElementLocator.class, driver);
     }
 
-    public static <T extends HtmlElement> T createHtmlElement(Class<T> clazz, Class elementLocatorClass, WebDriver driver) {
+    public static <T extends HtmlElement> T createHtmlElement(Class<T> clazz, Class<? extends DefaultElementLocator> elementLocatorClass, WebDriver driver) {
         T htmlElementInstance = HtmlElementFactory.createHtmlElementInstance(clazz);
         populateHtmlElement(htmlElementInstance, elementLocatorClass, driver);
         return htmlElementInstance;    	
@@ -128,9 +126,9 @@ public class HtmlElementLoader {
         return createPageObject(clazz, AjaxElementLocator.class, driver);
     }
     
-    public static <T> T createPageObject(Class<T> clazz, Class elementLocatorClass, WebDriver driver) {
+    public static <T> T createPageObject(Class<T> clazz, Class<? extends DefaultElementLocator> elementLocatorClass, WebDriver driver) {
         T page = HtmlElementFactory.createPageObjectInstance(clazz, driver);
-        populatePageObject(page, driver);
+        populatePageObject(page, elementLocatorClass, driver);
         return page;
     }    
 
@@ -160,7 +158,7 @@ public class HtmlElementLoader {
     	populateHtmlElement(htmlElement, AjaxElementLocator.class, driver);
     }
     
-    public static void populateHtmlElement(HtmlElement htmlElement, Class elementLocatorClass, WebDriver driver) {
+    public static void populateHtmlElement(HtmlElement htmlElement, Class<? extends DefaultElementLocator> elementLocatorClass, WebDriver driver) {
         @SuppressWarnings("unchecked")
         Class<HtmlElement> htmlElementClass = (Class<HtmlElement>) htmlElement.getClass();
         // Create locator that will handle Block annotation
@@ -196,6 +194,10 @@ public class HtmlElementLoader {
      * @param driver The {@code WebDriver} instance that will be used to look up the elements.
      */
     public static void populatePageObject(Object page, WebDriver driver) {
-        PageFactory.initElements(new HtmlElementDecorator(driver), page);
+        populatePageObject(page, AjaxElementLocator.class, driver);
+    }
+    
+    public static void populatePageObject(Object page, Class<? extends DefaultElementLocator> elementLocatorClass, WebDriver driver) {
+    	PageFactory.initElements(new HtmlElementDecorator(driver, elementLocatorClass), page);
     }
 }

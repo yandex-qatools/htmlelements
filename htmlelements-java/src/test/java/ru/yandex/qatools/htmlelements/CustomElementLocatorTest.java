@@ -1,6 +1,5 @@
 package ru.yandex.qatools.htmlelements;
 
-import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -12,7 +11,9 @@ import org.openqa.selenium.WebElement;
 
 import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
 import ru.yandex.qatools.htmlelements.pagefactory.CustomElementLocator;
+import ru.yandex.qatools.htmlelements.pagefactory.CustomElementLocator.CustomException;
 import ru.yandex.qatools.htmlelements.testelements.Company;
+import ru.yandex.qatools.htmlelements.testpages.SearchPage;
 
 public class CustomElementLocatorTest {
 	private WebDriver webDriver;
@@ -25,14 +26,15 @@ public class CustomElementLocatorTest {
 		when(webDriver.findElement(By.cssSelector(ComplexStructTest.WRAPPER_CSS))).thenReturn(wrapper);
 	}
 	
-	@Test(expected = RuntimeException.class)
+	@Test(expected = CustomException.class)
 	public void forHtmlElement() {
 		Company company = HtmlElementLoader.create(Company.class, CustomElementLocator.class, webDriver);
 		company.getText();
 	}
 	
-	@Test
+	@Test(expected = CustomException.class)
 	public void forPageObject() {
-		fail("There is no implementation");
+		SearchPage searchPage = new SearchPage(CustomElementLocator.class);
+		searchPage.getLogo().getText();
 	}
 }

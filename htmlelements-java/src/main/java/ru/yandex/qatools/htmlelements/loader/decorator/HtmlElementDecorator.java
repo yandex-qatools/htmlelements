@@ -23,6 +23,8 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.element.TypifiedElement;
+import ru.yandex.qatools.htmlelements.pagefactory.AjaxElementLocator;
+import ru.yandex.qatools.htmlelements.pagefactory.DefaultElementLocator;
 
 /**
  * Decorator which is used to decorate fields of blocks and page objects.
@@ -48,8 +50,12 @@ import ru.yandex.qatools.htmlelements.element.TypifiedElement;
  *         Date: 13.08.12
  */
 public class HtmlElementDecorator extends DefaultFieldDecorator {
+	public HtmlElementDecorator(SearchContext context, Class<? extends DefaultElementLocator> elementLocatorClass) {
+		super(new HtmlElementLocatorFactory(context, elementLocatorClass));
+	}
+	
 	public HtmlElementDecorator(SearchContext searchContext) {
-        super(new HtmlElementLocatorFactory(searchContext));
+        this(searchContext, AjaxElementLocator.class);
     }
 
     @Override
