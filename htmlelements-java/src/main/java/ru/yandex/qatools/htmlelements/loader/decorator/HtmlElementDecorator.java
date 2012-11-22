@@ -23,7 +23,6 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.element.TypifiedElement;
-import ru.yandex.qatools.htmlelements.pagefactory.AnnotationsHandlerFactory;
 
 /**
  * Decorator which is used to decorate fields of blocks and page objects.
@@ -50,11 +49,7 @@ import ru.yandex.qatools.htmlelements.pagefactory.AnnotationsHandlerFactory;
  */
 public class HtmlElementDecorator extends DefaultFieldDecorator {
 	public HtmlElementDecorator(SearchContext searchContext) {
-		this(searchContext, new HtmlElementAnnotationsHandlerFactory());
-	}
-	
-    public HtmlElementDecorator(SearchContext searchContext, AnnotationsHandlerFactory annotationsHandlerFactory) {
-        super(new HtmlElementLocatorFactory(searchContext, annotationsHandlerFactory));
+        super(new HtmlElementLocatorFactory(searchContext));
     }
 
     @Override
@@ -129,20 +124,15 @@ public class HtmlElementDecorator extends DefaultFieldDecorator {
     }
 
     private <T extends HtmlElement> T decorateHtmlElement(Class<T> elementClass, ClassLoader loader,
-            ElementLocator locator, AnnotationsHandlerFactory annotationsHandlerFactory, String elementName) {
+            ElementLocator locator, String elementName) {
     	// Create block and initialize it with WebElement proxy
         WebElement elementToWrap = HtmlElementFactory.createProxyForWebElement(loader, locator);
         T htmlElementInstance = HtmlElementFactory.createHtmlElementInstance(elementClass);
         htmlElementInstance.setWrappedElement(elementToWrap);
         htmlElementInstance.setName(elementName);
         // Recursively initialize elements of the block
-        PageFactory.initElements(new HtmlElementDecorator(elementToWrap, annotationsHandlerFactory), htmlElementInstance);
+        PageFactory.initElements(new HtmlElementDecorator(elementToWrap), htmlElementInstance);
         return htmlElementInstance;
-    }
-    
-    private <T extends HtmlElement> T decorateHtmlElement(Class<T> elementClass, ClassLoader loader,
-                                                          ElementLocator locator, String elementName) {
-    	return decorateHtmlElement(elementClass, loader, locator, new HtmlElementAnnotationsHandlerFactory(), elementName);
     }
 
     private WebElement decorateWebElement(ClassLoader loader, ElementLocator locator, String elementName) {

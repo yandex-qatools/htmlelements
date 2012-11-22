@@ -7,7 +7,6 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
 import ru.yandex.qatools.htmlelements.pagefactory.AjaxElementLocator;
-import ru.yandex.qatools.htmlelements.pagefactory.AnnotationsHandlerFactory;
 
 /**
  * A factory for producing locator instances.
@@ -17,11 +16,9 @@ import ru.yandex.qatools.htmlelements.pagefactory.AnnotationsHandlerFactory;
  */
 public class HtmlElementLocatorFactory implements ElementLocatorFactory {
     private final SearchContext searchContext;
-    private final AnnotationsHandlerFactory annotationsHandlerFactory;
 
-    public HtmlElementLocatorFactory(SearchContext searchContext, AnnotationsHandlerFactory annotationsHandlerFactory) {
+    public HtmlElementLocatorFactory(SearchContext searchContext) {
         this.searchContext = searchContext;
-        this.annotationsHandlerFactory = annotationsHandlerFactory;
     }
 
     /**
@@ -32,6 +29,6 @@ public class HtmlElementLocatorFactory implements ElementLocatorFactory {
      */
     @Override
     public ElementLocator createLocator(Field field) {
-        return new AjaxElementLocator(searchContext, 5, annotationsHandlerFactory.getAnnotationsHandler(field));
+        return new AjaxElementLocator(searchContext, 5, new HtmlElementFieldAnnotationsHandler(field));
     }
 }
