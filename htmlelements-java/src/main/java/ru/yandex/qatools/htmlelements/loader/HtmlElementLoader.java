@@ -13,6 +13,9 @@ import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementClassAnnotatio
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementFactory;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementLocatorFactory;
+import ru.yandex.qatools.htmlelements.pagefactory.AjaxElementLocator;
+import ru.yandex.qatools.htmlelements.pagefactory.CustomElementLocator;
+import ru.yandex.qatools.htmlelements.testelements.Company;
 
 /**
  * Contains methods for blocks of elements initialization and page objects initialization.
@@ -33,14 +36,19 @@ public class HtmlElementLoader {
      */
     @SuppressWarnings("unchecked")
     public static <T> T create(Class<T> clazz, WebDriver driver) {
+    	return create(clazz, AjaxElementLocator.class, driver);
+    }   
+
+	@SuppressWarnings("unchecked")
+	public static <T> T create(Class<T> clazz, Class elementLocatorClass, WebDriver driver) {
         if (isHtmlElement(clazz)) {
             Class<HtmlElement> htmlElementClass = (Class<HtmlElement>) clazz;
-            return (T) createHtmlElement(htmlElementClass, driver);
+            return (T) createHtmlElement(htmlElementClass, elementLocatorClass, driver);
         } else {
             // Otherwise consider class as a page object class
-            return createPageObject(clazz, driver);
+            return createPageObject(clazz, elementLocatorClass, driver);
         }
-    }
+	}
 
     /**
      * Initializes {@code instance} as a block of elements it is instance of {@link HtmlElement}
@@ -86,11 +94,14 @@ public class HtmlElementLoader {
      * @return Initialized instance of the specified class.
      */
     public static <T extends HtmlElement> T createHtmlElement(Class<T> clazz, WebDriver driver) {
-        T htmlElementInstance = HtmlElementFactory.createHtmlElementInstance(clazz);
-        populateHtmlElement(htmlElementInstance, driver);
-        return htmlElementInstance;
+    	return createHtmlElement(clazz, AjaxElementLocator.class, driver);
     }
 
+    public static <T extends HtmlElement> T createHtmlElement(Class<T> clazz, Class elementLocatorClass, WebDriver driver) {
+        T htmlElementInstance = HtmlElementFactory.createHtmlElementInstance(clazz);
+        populateHtmlElement(htmlElementInstance, elementLocatorClass, driver);
+        return htmlElementInstance;    	
+    }
 
     /**
      * Creates an instance of the given page object class and initializes its fields with lazy proxies.
@@ -114,10 +125,14 @@ public class HtmlElementLoader {
      * @return Initialized instance of the specified class.
      */
     public static <T> T createPageObject(Class<T> clazz, WebDriver driver) {
+        return createPageObject(clazz, AjaxElementLocator.class, driver);
+    }
+    
+    public static <T> T createPageObject(Class<T> clazz, Class elementLocatorClass, WebDriver driver) {
         T page = HtmlElementFactory.createPageObjectInstance(clazz, driver);
         populatePageObject(page, driver);
         return page;
-    }
+    }    
 
     /**
      * Initializes fields of the given block of elements with lazy proxies.
@@ -142,10 +157,14 @@ public class HtmlElementLoader {
      * @param driver      The {@code WebDriver} instance that will be used to look up the elements.
      */
     public static void populateHtmlElement(HtmlElement htmlElement, WebDriver driver) {
+    	populateHtmlElement(htmlElement, AjaxElementLocator.class, driver);
+    }
+    
+    public static void populateHtmlElement(HtmlElement htmlElement, Class elementLocatorClass, WebDriver driver) {
         @SuppressWarnings("unchecked")
         Class<HtmlElement> htmlElementClass = (Class<HtmlElement>) htmlElement.getClass();
         // Create locator that will handle Block annotation
-        ElementLocator locator = new HtmlElementLocatorFactory(driver).createLocator(htmlElementClass);
+        ElementLocator locator = new HtmlElementLocatorFactory(driver, elementLocatorClass).createLocator(htmlElementClass);
         ClassLoader htmlElementClassLoader = htmlElement.getClass().getClassLoader();
         // Initialize block with WebElement proxy and set its name
         WebElement elementToWrap = HtmlElementFactory.createProxyForWebElement(htmlElementClassLoader, locator);
@@ -153,7 +172,7 @@ public class HtmlElementLoader {
         String elementName = getElementName(htmlElementClass);
         htmlElement.setName(elementName);
         // Initialize elements of the block
-        PageFactory.initElements(new HtmlElementDecorator(elementToWrap), htmlElement);    	
+        PageFactory.initElements(new HtmlElementDecorator(elementToWrap), htmlElement);   	
     }
 
     /**
