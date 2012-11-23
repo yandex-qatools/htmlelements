@@ -10,8 +10,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
-import ru.yandex.qatools.htmlelements.pagefactory.CustomElementLocator;
-import ru.yandex.qatools.htmlelements.pagefactory.CustomElementLocator.CustomException;
+import ru.yandex.qatools.htmlelements.pagefactory.MyElementLocator.MyException;
+import ru.yandex.qatools.htmlelements.pagefactory.MyElementLocatorFactory;
 import ru.yandex.qatools.htmlelements.testelements.Company;
 import ru.yandex.qatools.htmlelements.testpages.SearchPage;
 
@@ -26,15 +26,15 @@ public class CustomElementLocatorTest {
 		when(webDriver.findElement(By.cssSelector(ComplexStructTest.WRAPPER_CSS))).thenReturn(wrapper);
 	}
 	
-	@Test(expected = CustomException.class)
+	@Test(expected = MyException.class)
 	public void forHtmlElement() {
-		Company company = HtmlElementLoader.create(Company.class, CustomElementLocator.class, webDriver);
+		Company company = HtmlElementLoader.create(Company.class, new MyElementLocatorFactory(webDriver), webDriver);
 		company.getText();
 	}
 	
-	@Test(expected = CustomException.class)
+	@Test(expected = MyException.class)
 	public void forPageObject() {
-		SearchPage searchPage = new SearchPage(CustomElementLocator.class);
+		SearchPage searchPage = new SearchPage(new MyElementLocatorFactory(webDriver));
 		searchPage.getLogo().getText();
 	}
 }

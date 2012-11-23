@@ -20,6 +20,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.DefaultFieldDecorator;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
+import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.element.TypifiedElement;
@@ -50,12 +51,12 @@ import ru.yandex.qatools.htmlelements.pagefactory.DefaultElementLocator;
  *         Date: 13.08.12
  */
 public class HtmlElementDecorator extends DefaultFieldDecorator {
-	public HtmlElementDecorator(SearchContext context, Class<? extends DefaultElementLocator> elementLocatorClass) {
-		super(new HtmlElementLocatorFactory(context, elementLocatorClass));
+	public HtmlElementDecorator(ElementLocatorFactory locatorFactory) {
+		super(locatorFactory);
 	}
 	
 	public HtmlElementDecorator(SearchContext searchContext) {
-        this(searchContext, AjaxElementLocator.class);
+        this(new HtmlElementLocatorFactory(searchContext));
     }
 
     @Override
