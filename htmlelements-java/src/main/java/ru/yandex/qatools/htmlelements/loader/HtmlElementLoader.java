@@ -13,7 +13,6 @@ import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementFactory;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementLocatorFactory;
 import ru.yandex.qatools.htmlelements.pagefactory.CustomElementLocatorFactory;
-import ru.yandex.qatools.htmlelements.pagefactory.MyElementLocatorFactory;
 
 /**
  * Contains methods for blocks of elements initialization and page objects initialization.
