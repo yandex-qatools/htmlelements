@@ -24,8 +24,6 @@ import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.element.TypifiedElement;
-import ru.yandex.qatools.htmlelements.pagefactory.AjaxElementLocator;
-import ru.yandex.qatools.htmlelements.pagefactory.DefaultElementLocator;
 
 /**
  * Decorator which is used to decorate fields of blocks and page objects.

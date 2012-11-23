@@ -13,7 +13,6 @@ import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Name;
 import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
 import ru.yandex.qatools.htmlelements.pagefactory.CustomElementLocatorFactory;
-import ru.yandex.qatools.htmlelements.pagefactory.DefaultElementLocator;
 import ru.yandex.qatools.htmlelements.testelements.SearchArrow;
 import ru.yandex.qatools.htmlelements.testelements.SearchArrowData;
 
@@ -39,7 +38,7 @@ public class SearchPage {
     }
     
     public SearchPage(CustomElementLocatorFactory elementLocatorFactory) {
-    	HtmlElementLoader.populatePageObject(this, elementLocatorFactory, mockDriver());
+    	HtmlElementLoader.populatePageObject(this, elementLocatorFactory);
     }
 
     public SearchPage(WebDriver driver) {

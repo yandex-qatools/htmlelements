@@ -28,7 +28,7 @@ public class CustomElementLocatorTest {
 	
 	@Test(expected = MyException.class)
 	public void forHtmlElement() {
-		Company company = HtmlElementLoader.create(Company.class, new MyElementLocatorFactory(webDriver), webDriver);
+		Company company = HtmlElementLoader.create(Company.class, new MyElementLocatorFactory(webDriver));
 		company.getText();
 	}
 	
