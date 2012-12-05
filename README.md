@@ -1,16 +1,28 @@
-HtmlElements library
-====================
+Html Elements framework
+=======================
 
-This library is designed to provide easy-to-use way of interaction with web-page elements in your tests. It may be 
-considered as an extension of WebDriver Page Object.
+This framework is designed to provide easy-to-use way of interaction with web-page elements in your tests. It may be 
+considered as an extension of WebDriver Page Object.<br/>
+With the help of Html Elements framework you can group web-page elements into blocks, encapsulate logic of interaction with them 
+and then easily use created blocks in page objects. It also provides a set of helpful matchers to use with web-page elements 
+and blocks. See <a href="https://oss.sonatype.org/service/local/repositories/releases/archive/ru/yandex/qatools/htmlelements/htmlelements/1.8/htmlelements-1.8-javadoc.jar/!/index.html">JavaDocs</a> 
+for more details.
 
-Include HtmlElements in your project
-------------------------------------
-Maven dependencies:
+Include Html Elements in your project
+-------------------------------------
+Maven dependencies for Html Elements core:
 
     <dependency>
         <groupId>ru.yandex.qatools.htmlelements</groupId>
         <artifactId>htmlelements-java</artifactId>
+        <version>1.8</version>
+    </dependency>
+
+And for Html Elements matchers:
+
+    <dependency>
+        <groupId>ru.yandex.qatools.htmlelements</groupId>
+        <artifactId>htmlelements-matchers</artifactId>
         <version>1.8</version>
     </dependency>
 
@@ -35,12 +47,9 @@ For example, let's create a block for the search form on the page http://www.yan
         @FindBy(className = "b-form-button__input")
         private Button searchButton;
 
-        public TextInput getRequestInput() {
-            return requestInput;
-        }
-
-        public Button getSearchButton() {
-            return searchButton;
+        public void search(String request) {
+            requestInput.sendKeys(request);
+            searchButton.click();
         }
     }
 
@@ -54,20 +63,18 @@ You can easily use created blocks in page objects:
     import ru.yandex.qatools.htmlelements.testelements.SearchArrow;
 
     public class SearchPage {
-
         private SearchArrow searchArrow;
+        // Other blocks and elements here
 
         public SearchPage(WebDriver driver) {
             HtmlElementLoader.populatePageObject(this, driver);
         }
 
-        public void enterSearchRequest(String request) {
-            searchArrow.getRequestInput().sendKeys(request);
+        public void search(String request) {
+            searchArrow.search(request);
         }
-        
-        public void clickSearchButton() {
-            searchArrow.getSearchButton().click();
-        }        
+
+        // Other methods here
     }
 
 Use page objects in your tests
@@ -90,7 +97,12 @@ Created page objects can be used in your tests. That makes tests more comprehens
     
         @Test
         public void sampleTest() {
-            searchPage.enterSearchRequest("yandex");
-            searchPage.clickSearchButton();
+            searchPage.search("yandex");
+            // Some assertion here
+        }
+
+        @After
+        public void closeDriver() {
+            driver.quit();
         }
     }
