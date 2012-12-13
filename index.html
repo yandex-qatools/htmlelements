@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Htmlelements by yandex-qatools</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Htmlelements</h1>
+        <h2>Html Elements is a Java framework providing easy-to-use way of interaction with web-page elements in web-page tests.</h2>
+        <a href="https://github.com/yandex-qatools/htmlelements" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>Html Elements Framework</h1>
+
+<p>This framework is designed to provide easy-to-use way of interaction with web-page elements in your tests. It may be 
+considered as an extension of WebDriver Page Object.<br>
+With the help of Html Elements framework you can group web-page elements into blocks, encapsulate logic of interaction with them 
+and then easily use created blocks in page objects. It also provides a set of helpful matchers to use with web-page elements 
+and blocks. See <a href="https://oss.sonatype.org/service/local/repositories/releases/archive/ru/yandex/qatools/htmlelements/htmlelements/1.8/htmlelements-1.8-javadoc.jar/!/index.html">JavaDocs</a> 
+for more details.</p>
+
+<h2>Include Html Elements in your project</h2>
+
+<p>Maven dependencies for Html Elements core:</p>
+
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;ru.yandex.qatools.htmlelements&lt;/groupId&gt;
+    &lt;artifactId&gt;htmlelements-java&lt;/artifactId&gt;
+    &lt;version&gt;1.8&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<p>And for Html Elements matchers:</p>
+
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;ru.yandex.qatools.htmlelements&lt;/groupId&gt;
+    &lt;artifactId&gt;htmlelements-matchers&lt;/artifactId&gt;
+    &lt;version&gt;1.8&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<h2>Create blocks of elements</h2>
+
+<p>For example, let's create a block for the search form on the page <a href="http://www.yandex.com:">http://www.yandex.com:</a></p>
+
+<pre><code>import org.openqa.selenium.support.FindBy;
+import ru.yandex.qatools.htmlelements.annotations.Block;
+import ru.yandex.qatools.htmlelements.element.Button;
+import ru.yandex.qatools.htmlelements.element.HtmlElement;
+import ru.yandex.qatools.htmlelements.element.TextInput;
+
+@Name("Search form")
+@Block(@FindBy(xpath = "//form"))
+public class SearchArrow extends HtmlElement {
+    @Name("Search request input")
+    @FindBy(id = "searchInput")
+    private TextInput requestInput;
+
+    @Name("Search button")
+    @FindBy(className = "b-form-button__input")
+    private Button searchButton;
+
+    public void search(String request) {
+        requestInput.sendKeys(request);
+        searchButton.click();
+    }
+}
+</code></pre>
+
+<h2>Construct page object using created blocks</h2>
+
+<p>You can easily use created blocks in page objects:</p>
+
+<pre><code>import org.openqa.selenium.WebDriver;
+import ru.yandex.qatools.htmlelements.annotations.Name;
+import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
+import ru.yandex.qatools.htmlelements.testelements.SearchArrow;
+
+public class SearchPage {
+    private SearchArrow searchArrow;
+    // Other blocks and elements here
+
+    public SearchPage(WebDriver driver) {
+        HtmlElementLoader.populatePageObject(this, driver);
+    }
+
+    public void search(String request) {
+        searchArrow.search(request);
+    }
+
+    // Other methods here
+}
+</code></pre>
+
+<h2>Use page objects in your tests</h2>
+
+<p>Created page objects can be used in your tests. That makes tests more comprehensive and easy to write.</p>
+
+<pre><code>import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.WebDriver;
+import ru.yandex.qatools.htmlelements.testpages.SearchPage;
+
+public class SampleTest {
+    private WebDriver driver = new FirefoxDriver();
+    private SearchPage searchPage = new SearchPage(driver);
+
+    @Before
+    public void loadPage() {
+        driver.get("http://www.yandex.com");
+    }
+
+    @Test
+    public void sampleTest() {
+        searchPage.search("yandex");
+        // Some assertion here
+    }
+
+    @After
+    public void closeDriver() {
+        driver.quit();
+    }
+}
+</code></pre>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/yandex-qatools/htmlelements/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/yandex-qatools/htmlelements/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/yandex-qatools/htmlelements"></a> is maintained by <a href="https://github.com/yandex-qatools">yandex-qatools</a>.</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
