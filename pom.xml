@@ -7,7 +7,7 @@
 	<version>1.9-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>QA Tools Html Elements</name>
+	<name>QATools HtmlElements</name>
 	<description>WebDriver PageObject extension</description>
 	<url>http://www.yandex.ru/</url>
 

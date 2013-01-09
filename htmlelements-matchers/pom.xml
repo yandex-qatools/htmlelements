@@ -8,7 +8,7 @@
 	</parent>
 
 	<artifactId>htmlelements-matchers</artifactId>
-	<name>QA Tools Matchers for Html Elements</name>
+	<name>QATools HtmlElements Matchers</name>
 
 	<dependencies>
 		<dependency>
