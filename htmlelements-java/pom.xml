@@ -13,7 +13,7 @@
 	<name>QATools HtmlElements For Java</name>
 
     <properties>
-        <selenium.version>2.24.1</selenium.version>
+        <selenium.version>2.29.0</selenium.version>
     </properties>
 
     <dependencies>
