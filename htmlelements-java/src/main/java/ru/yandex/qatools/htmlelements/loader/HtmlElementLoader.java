@@ -32,11 +32,11 @@ public class HtmlElementLoader {
      * @see #createPageObject(Class, org.openqa.selenium.WebDriver)
      */
     public static <T> T create(Class<T> clazz, WebDriver driver) {
-    	return create(clazz, new HtmlElementLocatorFactory(driver));
-    }   
+        return create(clazz, new HtmlElementLocatorFactory(driver));
+    }
 
-	@SuppressWarnings("unchecked")
-	public static <T> T create(Class<T> clazz, CustomElementLocatorFactory locatorFactory) {
+    @SuppressWarnings("unchecked")
+    public static <T> T create(Class<T> clazz, CustomElementLocatorFactory locatorFactory) {
         if (isHtmlElement(clazz)) {
             Class<HtmlElement> htmlElementClass = (Class<HtmlElement>) clazz;
             return (T) createHtmlElement(htmlElementClass, locatorFactory);
@@ -44,7 +44,7 @@ public class HtmlElementLoader {
             // Otherwise consider class as a page object class
             return createPageObject(clazz, locatorFactory);
         }
-	}
+    }
 
     /**
      * Initializes {@code instance} as a block of elements it is instance of {@link HtmlElement}
@@ -90,13 +90,13 @@ public class HtmlElementLoader {
      * @return Initialized instance of the specified class.
      */
     public static <T extends HtmlElement> T createHtmlElement(Class<T> clazz, WebDriver driver) {
-    	return createHtmlElement(clazz, new HtmlElementLocatorFactory(driver));
+        return createHtmlElement(clazz, new HtmlElementLocatorFactory(driver));
     }
 
     public static <T extends HtmlElement> T createHtmlElement(Class<T> clazz, CustomElementLocatorFactory locatorFactory) {
         T htmlElementInstance = HtmlElementFactory.createHtmlElementInstance(clazz);
         populateHtmlElement(htmlElementInstance, locatorFactory);
-        return htmlElementInstance;    	
+        return htmlElementInstance;
     }
 
     /**
@@ -123,12 +123,12 @@ public class HtmlElementLoader {
     public static <T> T createPageObject(Class<T> clazz, WebDriver driver) {
         return createPageObject(clazz, new HtmlElementLocatorFactory(driver));
     }
-    
+
     public static <T> T createPageObject(Class<T> clazz, CustomElementLocatorFactory locatorFactory) {
-        T page = HtmlElementFactory.createPageObjectInstance(clazz, locatorFactory);
+        T page = HtmlElementFactory.createPageObjectInstance(clazz);
         populatePageObject(page, locatorFactory);
         return page;
-    }    
+    }
 
     /**
      * Initializes fields of the given block of elements with lazy proxies.
@@ -153,9 +153,9 @@ public class HtmlElementLoader {
      * @param driver      The {@code WebDriver} instance that will be used to look up the elements.
      */
     public static void populateHtmlElement(HtmlElement htmlElement, WebDriver driver) {
-    	populateHtmlElement(htmlElement, new HtmlElementLocatorFactory(driver));
+        populateHtmlElement(htmlElement, new HtmlElementLocatorFactory(driver));
     }
-    
+
     public static void populateHtmlElement(HtmlElement htmlElement, CustomElementLocatorFactory locatorFactory) {
         @SuppressWarnings("unchecked")
         Class<HtmlElement> htmlElementClass = (Class<HtmlElement>) htmlElement.getClass();
@@ -168,7 +168,7 @@ public class HtmlElementLoader {
         String elementName = getElementName(htmlElementClass);
         htmlElement.setName(elementName);
         // Initialize elements of the block
-        PageFactory.initElements(new HtmlElementDecorator(elementToWrap), htmlElement);   	
+        PageFactory.initElements(new HtmlElementDecorator(elementToWrap), htmlElement);
     }
 
     /**
@@ -194,8 +194,8 @@ public class HtmlElementLoader {
     public static void populatePageObject(Object page, WebDriver driver) {
         populatePageObject(page, new HtmlElementLocatorFactory(driver));
     }
-    
+
     public static void populatePageObject(Object page, CustomElementLocatorFactory locatorFactory) {
-    	PageFactory.initElements(new HtmlElementDecorator(locatorFactory), page);
+        PageFactory.initElements(new HtmlElementDecorator(locatorFactory), page);
     }
 }
