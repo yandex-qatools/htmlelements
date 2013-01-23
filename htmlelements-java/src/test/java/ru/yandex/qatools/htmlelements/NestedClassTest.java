@@ -35,7 +35,6 @@ public class NestedClassTest {
     }
 
     @Test
-    @Ignore
     public void test() {
         NestedPageObject pageObject = HtmlElementLoader.create(NestedPageObject.class, driver);
         assertThat(pageObject, notNullValue());
