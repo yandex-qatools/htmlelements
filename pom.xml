@@ -38,7 +38,8 @@
 	<modules>
 		<module>htmlelements-java</module>
 		<module>htmlelements-matchers</module>
-	</modules>
+        <module>htmlelements-samples</module>
+    </modules>
 
 	<build>
 		<plugins>
