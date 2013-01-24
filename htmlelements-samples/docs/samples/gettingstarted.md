@@ -9,16 +9,16 @@
 
     <dependency>
         <groupId>ru.yandex.qatools.htmlelements</groupId>
-        <artifactId>htmlelements-matchers</artifactId>
-        <version>1.9</version>
+        <artifactId>htmlelements-java</artifactId>
+        <version>1.9-SNAPSHOT</version>
     </dependency>
 
-Выполните команду mvn clean compile, чтобы проерить, что ваш проект компилируется.
+Выполните команду `mvn clean compile`, чтобы проерить, что ваш проект компилируется.
 
-Подготовка эелемнтов и страниц
+Подготовка элементов и страниц
 ------------------------------
 
-В качестве примера возьмем заглавную страницу википедии (http://www.yandex.ru).
+В качестве примера возьмем заглавную страницу Яндекса (http://www.yandex.ru).
 Давайте опишем для начала простенький элемент, например поисковую строку:
 
     @Block(@FindBy(className = "b-morda-search-form"))
@@ -46,4 +46,4 @@
         }
     }
 
-На этом примере видно, что помимо элементов блок содержит логику взаимодействия с ним 'searchFor(String request)'.
+На этом примере видно, что помимо элементов блок содержит логику взаимодействия с ним `searchFor(String request)`.
