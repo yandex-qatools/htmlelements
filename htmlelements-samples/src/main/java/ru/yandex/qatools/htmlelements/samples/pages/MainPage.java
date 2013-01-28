@@ -16,7 +16,6 @@ public class MainPage {
         HtmlElementLoader.populate(this, driver);
     }
 
-
     public SearchArrow getSearchArrow() {
         return searchArrow;
     }
