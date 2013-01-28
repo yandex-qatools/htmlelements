@@ -1,6 +1,7 @@
 package ru.yandex.qatools.htmlelements.samples.pages;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
 import ru.yandex.qatools.htmlelements.samples.elements.SearchArrow;
 
@@ -10,6 +11,7 @@ import ru.yandex.qatools.htmlelements.samples.elements.SearchArrow;
  */
 public class MainPage {
 
+    @FindBy(className = "b-morda-search-form")
     protected SearchArrow searchArrow;
 
     public MainPage(WebDriver driver) {

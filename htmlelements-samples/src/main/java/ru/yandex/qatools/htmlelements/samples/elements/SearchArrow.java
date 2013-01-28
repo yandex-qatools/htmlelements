@@ -9,7 +9,6 @@ import ru.yandex.qatools.htmlelements.element.HtmlElement;
  * User: eroshenkoam
  * Date: 1/24/13, 4:22 PM
  */
-@Block(@FindBy(className = "b-morda-search-form"))
 public class SearchArrow extends HtmlElement {
 
     @FindBy(xpath = "//input[@class='b-form-input__input']")

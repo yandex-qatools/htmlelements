@@ -4,24 +4,26 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import ru.yandex.qatools.htmlelements.samples.pages.MainPage;
 import ru.yandex.qatools.htmlelements.samples.pages.SearchPage;
 
-import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
-import static ru.yandex.qatools.htmlelements.matchers.WaitForMatcherDecorator.withWaitFor;
 
 /**
  * User: eroshenkoam
- * Date: 1/24/13, 4:21 PM
+ * Date: 1/28/13, 5:17 PM
  */
-public class GettingStarted {
+public class ReuseOfElements {
 
     public WebDriver driver = new HtmlUnitDriver();
 
     public final String REQUEST = "test";
+
+    public final String ANOTHER_REQUEST = "request";
+
+    public final int SEARCH_REQUEST_COUNT = 10;
 
     @Before
     public void loadStartPage() {
@@ -30,9 +32,15 @@ public class GettingStarted {
 
     @Test
     public void testOutput() throws Exception {
+
         MainPage mainPage = new MainPage(driver);
         mainPage.getSearchArrow().searchFor(REQUEST);
-        assertThat(driver.getTitle(), withWaitFor(containsString(REQUEST)));
+
+        SearchPage searchPage = new SearchPage(driver);
+        assertThat(searchPage.getResults(), hasSize(SEARCH_REQUEST_COUNT));
+
+        searchPage.getSearchArrow().searchFor(ANOTHER_REQUEST);
+        assertThat(searchPage.getResults(), hasSize(SEARCH_REQUEST_COUNT));
     }
 
     @After

@@ -77,10 +77,13 @@
 
         public final String REQUEST = "test";
 
+        @Before
+        public void loadStartPage() {
+            driver.get("http://www.yandex.ru");
+        }
+
         @Test
         public void testOutput() throws Exception {
-            driver.get("http://www.yandex.ru");
-
             MainPage mainPage = new MainPage(driver);
             mainPage.getSearchArrow().searchFor(REQUEST);
             assertThat(driver.getTitle(), withWaitFor(containsString(REQUEST)));
