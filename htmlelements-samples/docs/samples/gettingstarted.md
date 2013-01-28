@@ -62,12 +62,13 @@
 
     }
 
-Как видно, в конструкторе вызывается инициализация внутренних эелементов стнаицы MainPage с помощью статического метода:
-> public static <T> void populate(T instance, WebDriver driver);
+Как видно, в конструкторе вызывается инициализация внутренних эелементов стнаицы MainPage с помощью статического метода 
+`public static <T> void populate(T instance, WebDriver driver)`. 
 Так как поле 'searchArrow' является наследником HtmlElements, то его инициализация происходит рекурсивно.
 Таком образом, инициализируются и внутренние элементы поисковой строки:
  -  protected WebElement requestInput;
  -  protected WebElement searchButton;
+
 Для того, чтобы это проверить создадим еще один класс GettingStarted, в котором создим экземляр нашей страницы:
 
     public class GettingStarted {
@@ -93,8 +94,8 @@
 
 В этом примере видно, что после инициализации самой страницы `MainPage` произошла инициализация внутренних элементов.
 
-Ссыли
------
+Полезные ссылки
+---------------
 
 В этом примере использовались следующие классы:
  * [SearchArrow](/yandex-qatools/htmlelements/blob/master/htmlelements-samples/src/main/java/ru/yandex/qatools/htmlelements/samples/elements/SearchArrow.java)
