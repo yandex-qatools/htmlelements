@@ -39,6 +39,7 @@
 		<module>htmlelements-java</module>
 		<module>htmlelements-matchers</module>
         <module>htmlelements-samples</module>
+        <module>htmlelements-all</module>
     </modules>
 
 	<build>
