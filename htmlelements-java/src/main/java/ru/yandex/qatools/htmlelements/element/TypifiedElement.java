@@ -20,21 +20,21 @@ import org.openqa.selenium.internal.WrapsElement;
  * <p/>
  * <pre class="code">
  * public class Link extends TypifiedElement {
- *     public Link(WebElement wrappedElement) {
- *         super(wrappedElement);
- *     }
- *
- *     public String getReference() {
- *         return getWrappedElement().getAttribute("href");
- *     }
- *
- *     public void click() {
- *         getWrappedElement().click();
- *     }
- *
- *     public String getText() {
- *         return getWrappedElement().getText();
- *     }
+ * public Link(WebElement wrappedElement) {
+ * super(wrappedElement);
+ * }
+ * <p/>
+ * public String getReference() {
+ * return getWrappedElement().getAttribute("href");
+ * }
+ * <p/>
+ * public void click() {
+ * getWrappedElement().click();
+ * }
+ * <p/>
+ * public String getText() {
+ * return getWrappedElement().getText();
+ * }
  * }
  * </pre>
  *
@@ -82,5 +82,35 @@ public abstract class TypifiedElement implements WrapsElement, Named {
     @Override
     public String toString() {
         return name;
+    }
+
+    /**
+     * Is this element displayed or not? This method avoids the problem of having to parse an
+     * element's "style" attribute.
+     *
+     * @return Whether or not the element is displayed
+     */
+    public boolean isDisplayed() {
+        return getWrappedElement().isDisplayed();
+    }
+
+    /**
+     * Is the element currently enabled or not? This will generally return true for everything but
+     * disabled input elements.
+     *
+     * @return True if the element is enabled, false otherwise.
+     */
+    public boolean isEnabled() {
+        return getWrappedElement().isEnabled();
+    }
+
+    /**
+     * Determine whether or not this element is selected or not. This operation only applies to input
+     * elements such as checkboxes, options in a select and radio buttons.
+     *
+     * @return True if the element is currently selected or checked, false otherwise.
+     */
+    public boolean isSelected() {
+        return getWrappedElement().isSelected();
     }
 }
