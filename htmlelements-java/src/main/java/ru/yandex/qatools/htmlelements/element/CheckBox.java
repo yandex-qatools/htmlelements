@@ -56,7 +56,7 @@ public class CheckBox extends TypifiedElement {
      * Selects checkbox if it is not already selected.
      */
     public void select() {
-        if (!getWrappedElement().isSelected()) {
+        if (!isSelected()) {
             getWrappedElement().click();
         }
     }
@@ -65,7 +65,7 @@ public class CheckBox extends TypifiedElement {
      * Deselects checkbox if it is not already deselected.
      */
     public void deselect() {
-        if (getWrappedElement().isSelected()) {
+        if (isSelected()) {
             getWrappedElement().click();
         }
     }
