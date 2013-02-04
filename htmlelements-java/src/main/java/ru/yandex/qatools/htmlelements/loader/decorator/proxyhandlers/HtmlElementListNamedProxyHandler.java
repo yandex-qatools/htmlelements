@@ -36,10 +36,11 @@ public class HtmlElementListNamedProxyHandler<T extends HtmlElement> implements 
 
         List<T> htmlElements = new LinkedList<T>();
         List<WebElement> elements = locator.findElements();
-        for (WebElement element : elements) {
+        for (int i = 0; i < elements.size(); i++) {
             T htmlElement = HtmlElementFactory.createHtmlElementInstance(htmlElementClass);
+            WebElement element = elements.get(i);
             htmlElement.setWrappedElement(element);
-            String htmlElementName = String.format("%s [%d]", name, elements.indexOf(element));
+            String htmlElementName = String.format("%s [%d]", name, i);
             htmlElement.setName(htmlElementName);
             PageFactory.initElements(new HtmlElementDecorator(element), htmlElement);
             htmlElements.add(htmlElement);
