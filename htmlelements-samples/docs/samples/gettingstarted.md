@@ -86,7 +86,7 @@
         public void testOutput() throws Exception {
             MainPage mainPage = new MainPage(driver);
             mainPage.getSearchArrow().searchFor(REQUEST);
-            assertThat(driver.getTitle(), withWaitFor(containsString(REQUEST)));
+            assertThat(driver.getTitle(), containsString(REQUEST));
         }
 
         @After

@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
 import ru.yandex.qatools.htmlelements.samples.elements.AuthBlock;
 import ru.yandex.qatools.htmlelements.samples.elements.SearchArrow;
+import ru.yandex.qatools.htmlelements.samples.elements.SearchResult;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class SearchPage {
     protected SearchArrow searchArrow;
 
     @FindBy(xpath = "//div[@class='b-body-items']/ol/li")
-    protected List<WebElement> results;
+    protected List<SearchResult> results;
 
     public SearchPage(WebDriver driver) {
         HtmlElementLoader.populate(this, driver);
@@ -35,7 +36,7 @@ public class SearchPage {
         return searchArrow;
     }
 
-    public List<WebElement> getResults() {
+    public List<SearchResult> getResults() {
         return results;
     }
 

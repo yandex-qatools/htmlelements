@@ -5,16 +5,18 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import ru.yandex.qatools.htmlelements.samples.pages.MainPage;
 
-import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
+import static ru.yandex.qatools.htmlelements.matchers.WaitForMatcherDecorator.withWaitFor;
+import static ru.yandex.qatools.htmlelements.matchers.WebElementMatchers.exists;
 
 /**
  * User: eroshenkoam
- * Date: 1/24/13, 4:21 PM
+ * Date: 2/7/13, 3:07 PM
  */
-public class GettingStarted {
+public class WaitForMatcherUsages {
 
     public WebDriver driver = new FirefoxDriver();
 
@@ -28,12 +30,14 @@ public class GettingStarted {
     @Test
     public void testOutput() throws Exception {
         MainPage mainPage = new MainPage(driver);
-        mainPage.getSearchArrow().searchFor(REQUEST);
-        assertThat(driver.getTitle(), containsString(REQUEST));
+//        mainPage.getSearchArrow().getRequestInput().sendKeys(REQUEST);
+        assertThat(mainPage.getSuggest(), withWaitFor(exists()));
     }
 
     @After
     public void destroyDriver() {
         driver.quit();
     }
+
+
 }

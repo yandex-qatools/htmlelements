@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
 import ru.yandex.qatools.htmlelements.samples.elements.SearchArrow;
+import ru.yandex.qatools.htmlelements.samples.elements.Suggest;
 
 /**
  * User: eroshenkoam
@@ -12,7 +13,10 @@ import ru.yandex.qatools.htmlelements.samples.elements.SearchArrow;
 public class MainPage {
 
     @FindBy(className = "b-morda-search-form")
-    protected SearchArrow searchArrow;
+    private SearchArrow searchArrow;
+
+    @FindBy(xpath = "//div[@class='i-popup__content']//ul")
+    private Suggest suggest;
 
     public MainPage(WebDriver driver) {
         HtmlElementLoader.populate(this, driver);
@@ -20,6 +24,10 @@ public class MainPage {
 
     public SearchArrow getSearchArrow() {
         return searchArrow;
+    }
+
+    public Suggest getSuggest() {
+        return suggest;
     }
 
 }
