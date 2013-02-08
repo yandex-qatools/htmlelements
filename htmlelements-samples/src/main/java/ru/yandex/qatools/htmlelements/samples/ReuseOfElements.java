@@ -19,11 +19,11 @@ public class ReuseOfElements {
 
     public WebDriver driver = new HtmlUnitDriver();
 
-    public final String REQUEST = "test";
+    public static final String REQUEST = "test";
 
-    public final String ANOTHER_REQUEST = "request";
+    public static final String ANOTHER_REQUEST = "request";
 
-    public final int SEARCH_REQUEST_COUNT = 10;
+    public static final int SEARCH_REQUEST_COUNT = 10;
 
     @Before
     public void loadStartPage() {

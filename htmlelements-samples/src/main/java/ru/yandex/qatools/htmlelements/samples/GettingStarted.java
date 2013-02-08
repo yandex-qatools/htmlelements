@@ -18,7 +18,7 @@ public class GettingStarted {
 
     public WebDriver driver = new FirefoxDriver();
 
-    public final String REQUEST = "test";
+    public static final String REQUEST = "test";
 
     @Before
     public void loadStartPage() {
