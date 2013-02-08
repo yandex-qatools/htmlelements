@@ -92,14 +92,18 @@ public class HtmlElementFactory {
 
     @SuppressWarnings("unchecked")
     public static <T extends TypifiedElement> List<T> createNamedProxyForTypifiedElementList(Class<T> elementClass,
-                                                                                             ClassLoader loader, ElementLocator locator, String name) {
+                                                                                             ClassLoader loader,
+                                                                                             ElementLocator locator,
+                                                                                             String name) {
         InvocationHandler handler = new TypifiedElementListNamedProxyHandler<T>(elementClass, locator, name);
         return (List<T>) Proxy.newProxyInstance(loader, new Class[]{List.class}, handler);
     }
 
     @SuppressWarnings("unchecked")
     public static <T extends HtmlElement> List<T> createNamedProxyForHtmlElementList(Class<T> elementClass,
-                                                                                     ClassLoader loader, ElementLocator locator, String name) {
+                                                                                     ClassLoader loader,
+                                                                                     ElementLocator locator,
+                                                                                     String name) {
         InvocationHandler handler = new HtmlElementListNamedProxyHandler<T>(elementClass, locator, name);
         return (List<T>) Proxy.newProxyInstance(loader, new Class[]{List.class}, handler);
     }
