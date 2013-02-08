@@ -9,7 +9,7 @@
 
 	<name>QATools HtmlElements</name>
 	<description>WebDriver PageObject extension</description>
-	<url>http://www.yandex.ru/</url>
+	<url>https://github.com/yandex-qatools/htmlelements/</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
