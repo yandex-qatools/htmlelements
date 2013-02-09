@@ -93,7 +93,8 @@ public class HtmlElementLoader {
         return createHtmlElement(clazz, new HtmlElementLocatorFactory(driver));
     }
 
-    public static <T extends HtmlElement> T createHtmlElement(Class<T> clazz, CustomElementLocatorFactory locatorFactory) {
+    public static <T extends HtmlElement> T createHtmlElement(Class<T> clazz,
+                                                              CustomElementLocatorFactory locatorFactory) {
         T htmlElementInstance = HtmlElementFactory.createHtmlElementInstance(clazz);
         populateHtmlElement(htmlElementInstance, locatorFactory);
         return htmlElementInstance;

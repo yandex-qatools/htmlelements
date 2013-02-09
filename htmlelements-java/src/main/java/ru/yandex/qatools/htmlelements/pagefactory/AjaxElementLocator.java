@@ -52,7 +52,8 @@ public class AjaxElementLocator extends DefaultElementLocator {
 		this(new SystemClock(), context, timeOutInSeconds, annotationsHandler);
 	}
 
-	public AjaxElementLocator(Clock clock, SearchContext context, int timeOutInSeconds, AnnotationsHandler annotationsHandler) {
+	public AjaxElementLocator(Clock clock, SearchContext context, int timeOutInSeconds,
+                              AnnotationsHandler annotationsHandler) {
 		super(context, annotationsHandler);
 		this.timeOutInSeconds = timeOutInSeconds;
 		this.clock = clock;
