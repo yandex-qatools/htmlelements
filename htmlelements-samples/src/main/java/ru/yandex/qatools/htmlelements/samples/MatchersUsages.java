@@ -16,7 +16,7 @@ import static ru.yandex.qatools.htmlelements.matchers.WebElementMatchers.exists;
  * User: eroshenkoam
  * Date: 2/7/13, 3:07 PM
  */
-public class WaitForMatcherUsages {
+public class MatchersUsages {
 
     public WebDriver driver = new FirefoxDriver();
 
@@ -28,9 +28,8 @@ public class WaitForMatcherUsages {
     }
 
     @Test
-    public void testOutput() throws Exception {
+    public void withWaitForMatcher() throws Exception {
         MainPage mainPage = new MainPage(driver);
-//        mainPage.getSearchArrow().getRequestInput().sendKeys(REQUEST);
         assertThat(mainPage.getSuggest(), withWaitFor(exists()));
     }
 
