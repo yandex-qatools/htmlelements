@@ -39,6 +39,16 @@ public class RefreshMatcherUsage {
     }
 
     @Test
+    public void howFailMessageLooksLike() {
+        int timeoutInMilliseconds = 1000;
+
+        MainPage mainPage = new MainPage(driver);
+        String currentText = mainPage.getSearchSample().getText();
+        assertThat(mainPage.getSearchSample(),
+                withWaitFor(withPrerefresh(hasText(currentText), driver), timeoutInMilliseconds));
+    }
+
+    @Test
     public void refreshingAfterMatch() throws Exception {
         MainPage mainPage = new MainPage(driver);
         mainPage.getSearchArrow().getRequestInput().sendKeys(REQUEST);

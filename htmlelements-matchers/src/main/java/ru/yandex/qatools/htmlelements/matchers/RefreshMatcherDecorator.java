@@ -45,7 +45,7 @@ public class RefreshMatcherDecorator<T> extends TypeSafeMatcher<T> {
 
     @Override
     public void describeTo(Description description) {
-        description.appendText(" (after refresh) ").appendDescriptionOf(matcher);
+        description.appendText(isPrerefresh ? "(after refresh) " : "").appendDescriptionOf(matcher);
 
     }
 
