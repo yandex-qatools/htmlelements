@@ -23,8 +23,6 @@ import ru.yandex.qatools.htmlelements.testelements.SearchArrowData;
  *         Date: 13.08.12
  */
 public class SearchPage {
-    public static final String URL = "http://www.yandex.ru/";
-
     private static final String LOGO_CLASS = "b-logo";
 
     private SearchArrow searchArrow;

@@ -12,7 +12,6 @@ import ru.yandex.qatools.htmlelements.testpages.SearchPage;
  *         Date: 13.08.12
  */
 public class LazyInitializationTest {
-    public static final String PAGE_URL = "http://www.yandex.ru/";
     private static final String TEST_TEXT = "Test text";
 
     @Test
