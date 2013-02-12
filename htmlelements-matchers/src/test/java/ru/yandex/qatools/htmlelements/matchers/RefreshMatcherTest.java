@@ -32,9 +32,12 @@ public class RefreshMatcherTest {
     public ExpectedException thrown = ExpectedException.none();
 
 
-    @Mock private WebDriver driver;
-    @Mock private Navigation navigation;
-    @Mock private Matcher<Object> matcher;
+    @Mock
+    private WebDriver driver;
+    @Mock
+    private Navigation navigation;
+    @Mock
+    private Matcher<Object> matcher;
 
     @Test
     public void isPrerefreshingMatching() {

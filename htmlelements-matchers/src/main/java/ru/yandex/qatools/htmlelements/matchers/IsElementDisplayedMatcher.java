@@ -30,7 +30,6 @@ public class IsElementDisplayedMatcher extends TypeSafeMatcher<WebElement> {
 
     /**
      * Creates matcher that checks if element is currently displayed on page.
-     *
      */
     @Factory
     public static Matcher<WebElement> isDisplayed() {

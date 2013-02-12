@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 public class TextInput extends TypifiedElement {
     /**
      * Specifies wrapped {@link WebElement}.
+     *
      * @param wrappedElement {@code WebElement} to wrap.
      */
     public TextInput(WebElement wrappedElement) {
@@ -26,6 +27,7 @@ public class TextInput extends TypifiedElement {
 
     /**
      * Prints specified char sequence into this text input.
+     *
      * @param keys Text to print.
      */
     public void sendKeys(CharSequence... keys) {
@@ -34,6 +36,7 @@ public class TextInput extends TypifiedElement {
 
     /**
      * Retrieves the text entered into this text input.
+     *
      * @return Text entered into the text input.
      */
     public String getEnteredText() {

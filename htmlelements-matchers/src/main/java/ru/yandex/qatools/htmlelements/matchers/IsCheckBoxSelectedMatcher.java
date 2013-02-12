@@ -3,7 +3,6 @@ package ru.yandex.qatools.htmlelements.matchers;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.TypeSafeMatcher;
-
 import ru.yandex.qatools.htmlelements.element.CheckBox;
 
 /**
@@ -22,10 +21,10 @@ public class IsCheckBoxSelectedMatcher extends TypeSafeMatcher<CheckBox> {
         description.appendText(String.format("checkbox '%s' is not checked", checkBox));
     }
 
-	@Override
-	public void describeTo(Description description) {
-		description.appendText("checkbox is checked");
-	}
+    @Override
+    public void describeTo(Description description) {
+        description.appendText("checkbox is checked");
+    }
 
     /**
      * Creates matcher that tests if {@link CheckBox} is checked.

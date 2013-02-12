@@ -37,6 +37,7 @@ public class WrapsElementMatcher extends TypeSafeMatcher<WrapsElement> {
 
     /**
      * Creates matcher that matches wrapped {@link WebElement} of {@link WrapsElement} with given matcher.
+     *
      * @param matcher Matcher to match wrapped element with.
      */
     @Factory

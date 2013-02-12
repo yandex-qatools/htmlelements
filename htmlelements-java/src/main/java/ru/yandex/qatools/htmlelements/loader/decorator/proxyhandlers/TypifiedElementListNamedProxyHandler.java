@@ -35,7 +35,7 @@ public class TypifiedElementListNamedProxyHandler<T extends TypifiedElement> imp
         List<T> typifiedElements = new LinkedList<T>();
         List<WebElement> elements = locator.findElements();
         int elementNumber = 0;
-        for (WebElement element: elements) {
+        for (WebElement element : elements) {
             T typifiedElement = HtmlElementFactory.createTypifiedElementInstance(typifiedElementClass, element);
             String typifiedElementName = String.format("%s [%d]", name, elementNumber);
             typifiedElement.setName(typifiedElementName);

@@ -2,7 +2,6 @@ package ru.yandex.qatools.htmlelements;
 
 import org.junit.Test;
 import org.openqa.selenium.StaleElementReferenceException;
-
 import ru.yandex.qatools.htmlelements.testpages.CachedSearchPage;
 import ru.yandex.qatools.htmlelements.testpages.SearchPage;
 
@@ -26,7 +25,7 @@ public class LazyInitializationTest {
     }
 
     @Test(expected = StaleElementReferenceException.class)
-    public void testCachedInitialization()  {
+    public void testCachedInitialization() {
         CachedSearchPage cachedSearchPage = new CachedSearchPage();
 
         cachedSearchPage.getSearchArrow().getRequestInput().sendKeys(TEST_TEXT);

@@ -14,6 +14,7 @@ public class Link extends TypifiedElement {
 
     /**
      * Retrieves reference from "href" tag.
+     *
      * @return Reference associated with hyperlink.
      */
     public String getReference() {

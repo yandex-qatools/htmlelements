@@ -28,7 +28,7 @@ public class DefaultElementLocator implements ElementLocator {
     /**
      * Creates a new element locator.
      *
-     * @param searchContext The context to use when finding the element
+     * @param searchContext      The context to use when finding the element
      * @param annotationsHandler The annotations handler for locating element
      */
     public DefaultElementLocator(SearchContext searchContext, AnnotationsHandler annotationsHandler) {

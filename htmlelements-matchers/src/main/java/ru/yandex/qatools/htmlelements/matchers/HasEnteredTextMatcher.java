@@ -38,6 +38,7 @@ public class HasEnteredTextMatcher extends TypeSafeMatcher<TextInput> {
 
     /**
      * Creates matcher that matches text entered in {@link TextInput} with specified matcher.
+     *
      * @param textMatcher Matcher to match entered text with.
      */
     @Factory
@@ -47,6 +48,7 @@ public class HasEnteredTextMatcher extends TypeSafeMatcher<TextInput> {
 
     /**
      * Creates matcher that checks if text entered in {@link TextInput} equals to given text.
+     *
      * @param text Expected entered text.
      */
     @Factory

@@ -4,8 +4,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 
-import java.util.List;
-
 /**
  * User: eroshenkoam
  * Date: 1/24/13, 4:53 PM

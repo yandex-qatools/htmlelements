@@ -1,6 +1,9 @@
 package ru.yandex.qatools.htmlelements.matchers;
 
-import org.hamcrest.*;
+import org.hamcrest.Description;
+import org.hamcrest.Factory;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import ru.yandex.qatools.htmlelements.element.Radio;
@@ -41,6 +44,7 @@ public class HasSelectedRadioButtonMatcher extends TypeSafeMatcher<Radio> {
 
     /**
      * Creates matcher that tests if {@link Radio} has selected button matching the specified matcher.
+     *
      * @param buttonMatcher Matcher to match selected radio button with.
      */
     @Factory

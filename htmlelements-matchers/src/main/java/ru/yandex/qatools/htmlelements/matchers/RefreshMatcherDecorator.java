@@ -20,8 +20,8 @@ public class RefreshMatcherDecorator<T> extends TypeSafeMatcher<T> {
 
     @Override
     protected boolean matchesSafely(T item) {
-            driver.navigate().refresh();
-            return matcher.matches(item);
+        driver.navigate().refresh();
+        return matcher.matches(item);
     }
 
     public RefreshMatcherDecorator(Matcher<? extends T> matcher, WebDriver driver) {

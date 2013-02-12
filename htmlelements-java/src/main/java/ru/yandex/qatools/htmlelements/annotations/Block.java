@@ -18,7 +18,7 @@ import java.lang.annotation.Target;
  * <pre class="code">
  * &#64;Block(&#64;FindBy(css = "my_form_css"))
  * public class MyForm extends HtmlElement {
- *     // Your form elements here
+ * // Your form elements here
  * }
  * </pre>
  *

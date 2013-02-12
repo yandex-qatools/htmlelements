@@ -44,6 +44,7 @@ public class HasSelectedOptionMatcher extends TypeSafeMatcher<Select> {
 
     /**
      * Creates matcher that tests if {@link Select} has selected option matching the specified matcher.
+     *
      * @param optionMatcher Matcher to match selected option with.
      */
     @Factory

@@ -1,20 +1,19 @@
 package ru.yandex.qatools.htmlelements.testpages;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import java.util.ArrayList;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
 import ru.yandex.qatools.htmlelements.annotations.Name;
 import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
 import ru.yandex.qatools.htmlelements.pagefactory.CustomElementLocatorFactory;
 import ru.yandex.qatools.htmlelements.testelements.SearchArrow;
 import ru.yandex.qatools.htmlelements.testelements.SearchArrowData;
+
+import java.util.ArrayList;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * @author Artem Eroshenko eroshenkoam@yandex-team.ru
@@ -34,9 +33,9 @@ public class SearchPage {
     public SearchPage() {
         this(mockDriver());
     }
-    
+
     public SearchPage(CustomElementLocatorFactory elementLocatorFactory) {
-    	HtmlElementLoader.populatePageObject(this, elementLocatorFactory);
+        HtmlElementLoader.populatePageObject(this, elementLocatorFactory);
     }
 
     public SearchPage(WebDriver driver) {
@@ -55,13 +54,13 @@ public class SearchPage {
         WebDriver driver = mock(WebDriver.class);
         WebElement logo = mock(WebElement.class);
         WebElement searchArrow = mock(WebElement.class);
-        
+
         WebElement searchInput = mock(WebElement.class);
         WebElement searchInputReloaded = mock(WebElement.class);
-        
+
         WebElement searchButton = mock(WebElement.class);
         WebElement searchButtonReloaded = mock(WebElement.class);
-        
+
         WebElement item1 = mock(WebElement.class);
         WebElement item2 = mock(WebElement.class);
         ArrayList<WebElement> suggestItems = new ArrayList<WebElement>();
@@ -73,11 +72,11 @@ public class SearchPage {
 
         when(searchArrow.findElement(By.className(SearchArrowData.REQUEST_INPUT_CLASS))).thenReturn(searchInput);
         when(searchArrow.findElement(By.className(SearchArrowData.REQUEST_INPUT_CLASS))).thenReturn(searchInputReloaded);
-        
+
         /** non-cached element reloads on page refresh */
         when(searchArrow.findElement(By.className(SearchArrowData.SEARCH_BUTTON_CLASS))).thenReturn(searchButton);
         when(searchArrow.findElement(By.className(SearchArrowData.SEARCH_BUTTON_CLASS))).thenReturn(searchButtonReloaded);
-        
+
         when(searchArrow.findElements(By.className(SearchArrowData.SUGGEST_CLASS))).thenReturn(suggestItems);
         when(item1.getText()).thenReturn("yandex maps");
         when(item2.getText()).thenReturn("yandex");

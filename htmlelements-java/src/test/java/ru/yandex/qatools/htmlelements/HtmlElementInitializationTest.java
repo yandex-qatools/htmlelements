@@ -1,20 +1,19 @@
 package ru.yandex.qatools.htmlelements;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertThat;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
-
 import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
 import ru.yandex.qatools.htmlelements.testelements.SearchArrow;
 import ru.yandex.qatools.htmlelements.testpages.SearchPage;
 
 import java.util.Arrays;
 import java.util.Collection;
+
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertThat;
 
 /**
  * @author Alexander Tolmachev starlight@yandex-team.ru

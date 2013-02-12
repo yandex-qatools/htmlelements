@@ -21,21 +21,21 @@ import java.util.List;
  * &#64;Name("Search Form")
  * &#64;Block(&#64;FindBy(css = "form_css"))
  * public class SearchForm extends HtmlElement {
- *     &#64;Name("Request Input")
- *     &#64;FindBy(css = "request_input_css")
- *     private TextInput requestInput;
- *
- *     &#64;Name("Search Button")
- *     &#64;FindBy(css = "search_button_css")
- *     private Button searchButton;
- *
- *     public TextInput getRequestInput() {
- *         return requestInput;
- *     }
- *
- *     public Button getSearchButton() {
- *         return searchButton;
- *     }
+ * &#64;Name("Request Input")
+ * &#64;FindBy(css = "request_input_css")
+ * private TextInput requestInput;
+ * <p/>
+ * &#64;Name("Search Button")
+ * &#64;FindBy(css = "search_button_css")
+ * private Button searchButton;
+ * <p/>
+ * public TextInput getRequestInput() {
+ * return requestInput;
+ * }
+ * <p/>
+ * public Button getSearchButton() {
+ * return searchButton;
+ * }
  * }
  * </pre>
  * <p/>
@@ -192,7 +192,8 @@ public class HtmlElement implements WebElement, WrapsElement, Named {
      *
      * @param by The locating mechanism.
      * @return The first matching element on the current context.
-     * @throws org.openqa.selenium.NoSuchElementException If no matching elements are found.
+     * @throws org.openqa.selenium.NoSuchElementException
+     *          If no matching elements are found.
      */
     @Override
     public WebElement findElement(By by) {

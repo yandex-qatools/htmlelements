@@ -2,7 +2,6 @@ package ru.yandex.qatools.htmlelements.samples.elements;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import ru.yandex.qatools.htmlelements.annotations.Block;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 
 import java.util.List;

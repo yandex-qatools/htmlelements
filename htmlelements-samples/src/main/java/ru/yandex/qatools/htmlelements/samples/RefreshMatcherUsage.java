@@ -48,6 +48,6 @@ public class RefreshMatcherUsage {
 
     @After
     public void tearDownDriver() throws Exception {
-       driver.quit();
+        driver.quit();
     }
 }

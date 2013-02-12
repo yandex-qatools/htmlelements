@@ -1,15 +1,11 @@
 package ru.yandex.qatools.htmlelements.loader.decorator;
 
-import java.lang.reflect.*;
-import java.util.List;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.Locatable;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler;
-
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.element.TypifiedElement;
 import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
@@ -17,6 +13,11 @@ import ru.yandex.qatools.htmlelements.loader.decorator.proxyhandlers.HtmlElement
 import ru.yandex.qatools.htmlelements.loader.decorator.proxyhandlers.TypifiedElementListNamedProxyHandler;
 import ru.yandex.qatools.htmlelements.loader.decorator.proxyhandlers.WebElementListNamedProxyHandler;
 import ru.yandex.qatools.htmlelements.loader.decorator.proxyhandlers.WebElementNamedProxyHandler;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Proxy;
+import java.util.List;
 
 import static ru.yandex.qatools.htmlelements.utils.ReflectionUtils.newInstance;
 

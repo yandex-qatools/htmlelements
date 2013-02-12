@@ -1,19 +1,18 @@
 package ru.yandex.qatools.htmlelements;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
 import ru.yandex.qatools.htmlelements.pagefactory.MyElementLocator.MyException;
 import ru.yandex.qatools.htmlelements.pagefactory.MyElementLocatorFactory;
 import ru.yandex.qatools.htmlelements.testelements.Company;
 import ru.yandex.qatools.htmlelements.testpages.SearchPage;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class CustomElementLocatorTest {
     private WebDriver webDriver;

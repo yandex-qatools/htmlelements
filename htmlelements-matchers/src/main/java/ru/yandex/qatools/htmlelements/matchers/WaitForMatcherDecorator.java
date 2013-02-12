@@ -1,4 +1,5 @@
 package ru.yandex.qatools.htmlelements.matchers;
+
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
@@ -11,7 +12,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
  * User: lanwen
  * Date: 19.12.12
  * Time: 14:18
- *
+ * <p/>
  * Usage example: assertThat(onHomePage().getAbookTab(), withWaitFor(exists()));
  */
 
@@ -38,7 +39,7 @@ public class WaitForMatcherDecorator<T> extends TypeSafeMatcher<T> {
         long start = System.currentTimeMillis();
         long end = start + timeoutInMilliseconds;
         while (System.currentTimeMillis() < end) {
-            if(matcher.matches(item)) {
+            if (matcher.matches(item)) {
                 return true;
             }
             try {

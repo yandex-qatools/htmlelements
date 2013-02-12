@@ -4,13 +4,10 @@ import org.openqa.selenium.*;
 import ru.yandex.qatools.htmlelements.element.Radio;
 import ru.yandex.qatools.htmlelements.element.Select;
 import ru.yandex.qatools.htmlelements.element.TextInput;
-import ru.yandex.qatools.htmlelements.matchers.testelements.CustomBlock;
 
 import java.util.Arrays;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 

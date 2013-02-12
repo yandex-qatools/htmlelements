@@ -15,11 +15,11 @@ import java.lang.annotation.Target;
  * &#64;Name("My Form")
  * &#64;Block(&#64;FindBy(css = "my_form_css"))
  * public class MyForm extends HtmlElement {
- *     &#64;Name("Text input name")
- *     &#64;FindBy(css = "text_input_css")
- *     private TextInput textInput;
- *
- *     // Other elements and methods here
+ * &#64;Name("Text input name")
+ * &#64;FindBy(css = "text_input_css")
+ * private TextInput textInput;
+ * <p/>
+ * // Other elements and methods here
  * }
  * </pre>
  *
