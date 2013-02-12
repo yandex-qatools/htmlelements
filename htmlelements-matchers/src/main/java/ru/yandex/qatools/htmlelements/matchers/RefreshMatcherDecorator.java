@@ -17,20 +17,11 @@ public class RefreshMatcherDecorator<T> extends TypeSafeMatcher<T> {
     private WebDriver driver;
     private Matcher<? extends T> matcher;
 
-    private boolean isPrerefresh = true;
 
     @Override
     protected boolean matchesSafely(T item) {
-        if (isPrerefresh) {
             driver.navigate().refresh();
-        }
-        try {
             return matcher.matches(item);
-        } finally {
-            if(!isPrerefresh) {
-                driver.navigate().refresh();
-            }
-        }
     }
 
     public RefreshMatcherDecorator(Matcher<? extends T> matcher, WebDriver driver) {
@@ -38,14 +29,10 @@ public class RefreshMatcherDecorator<T> extends TypeSafeMatcher<T> {
         this.matcher = matcher;
     }
 
-    private RefreshMatcherDecorator<T> postrefresh() {
-        isPrerefresh = false;
-        return this;
-    }
 
     @Override
     public void describeTo(Description description) {
-        description.appendText(isPrerefresh ? "(after refresh) " : "").appendDescriptionOf(matcher);
+        description.appendText("(after refresh) ").appendDescriptionOf(matcher);
 
     }
 
@@ -60,12 +47,5 @@ public class RefreshMatcherDecorator<T> extends TypeSafeMatcher<T> {
     public static <T> Matcher<T> withPrerefresh(Matcher<? extends T> matcher, WebDriver driver) {
         return new RefreshMatcherDecorator<T>(matcher, driver);
     }
-
-
-    @Factory
-    public static <T> Matcher<T> withPostrefresh(Matcher<? extends T> matcher, WebDriver driver) {
-        return new RefreshMatcherDecorator<T>(matcher, driver).postrefresh();
-    }
-
 
 }

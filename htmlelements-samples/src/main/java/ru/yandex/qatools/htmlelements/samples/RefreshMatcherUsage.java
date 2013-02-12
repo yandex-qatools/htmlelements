@@ -9,10 +9,8 @@ import ru.yandex.qatools.htmlelements.samples.pages.MainPage;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.not;
-import static ru.yandex.qatools.htmlelements.matchers.RefreshMatcherDecorator.withPostrefresh;
 import static ru.yandex.qatools.htmlelements.matchers.RefreshMatcherDecorator.withPrerefresh;
 import static ru.yandex.qatools.htmlelements.matchers.WaitForMatcherDecorator.withWaitFor;
-import static ru.yandex.qatools.htmlelements.matchers.WebElementMatchers.exists;
 import static ru.yandex.qatools.htmlelements.matchers.WebElementMatchers.hasText;
 
 /**
@@ -46,15 +44,6 @@ public class RefreshMatcherUsage {
         String currentText = mainPage.getSearchSample().getText();
         assertThat(mainPage.getSearchSample(),
                 withWaitFor(withPrerefresh(hasText(currentText), driver), timeoutInMilliseconds));
-    }
-
-    @Test
-    public void refreshingAfterMatch() throws Exception {
-        MainPage mainPage = new MainPage(driver);
-        mainPage.getSearchArrow().getRequestInput().sendKeys(REQUEST);
-        assertThat(mainPage.getSuggest(), withWaitFor(withPostrefresh(exists(), driver)));
-
-        assertThat(mainPage.getSuggest(), not(exists()));
     }
 
     @After
