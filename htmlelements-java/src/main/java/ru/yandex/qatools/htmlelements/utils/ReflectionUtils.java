@@ -8,11 +8,10 @@ import java.lang.reflect.Modifier;
 import static org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor;
 
 /**
- * User: eroshenkoam
- * Date: 1/22/13, 5:53 PM
+ * @author Artem Eroshenko eroshenkoam@yandex-team.ru
+ *         Date: 22.01.13
  */
 public class ReflectionUtils {
-
     public static <T> T newInstance(Class<T> clazz, Object... args) throws IllegalAccessException,
             InstantiationException, NoSuchMethodException, InvocationTargetException {
         if (clazz.isMemberClass() && !Modifier.isStatic(clazz.getModifiers())) {

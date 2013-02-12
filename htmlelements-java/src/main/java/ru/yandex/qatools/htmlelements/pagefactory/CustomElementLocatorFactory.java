@@ -16,7 +16,7 @@ public abstract class CustomElementLocatorFactory implements ElementLocatorFacto
      * When a field on a class needs to be decorated with an {@link ElementLocator} this method will
      * be called.
      *
-     * @param field
+     * @param field Filed to be decorated.
      * @return An ElementLocator object.
      */
     public ElementLocator createLocator(Field field) {

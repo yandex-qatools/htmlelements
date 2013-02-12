@@ -44,9 +44,9 @@ public class AjaxElementLocator extends DefaultElementLocator {
     /**
      * Main constructor.
      *
-     * @param driver           The WebDriver to use when locating elements
-     * @param field            The field representing this element
-     * @param timeOutInSeconds How long to wait for the element to appear. Measured in seconds.
+     * @param context            The context to use when finding the element
+     * @param timeOutInSeconds   How long to wait for the element to appear. Measured in seconds.
+     * @param annotationsHandler The annotations handler for locating element
      */
     public AjaxElementLocator(SearchContext context, int timeOutInSeconds, AnnotationsHandler annotationsHandler) {
         this(new SystemClock(), context, timeOutInSeconds, annotationsHandler);
