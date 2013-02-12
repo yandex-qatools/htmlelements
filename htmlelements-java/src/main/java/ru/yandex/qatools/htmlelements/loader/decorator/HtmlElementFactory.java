@@ -3,6 +3,7 @@ package ru.yandex.qatools.htmlelements.loader.decorator;
 import java.lang.reflect.*;
 import java.util.List;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.Locatable;
 import org.openqa.selenium.internal.WrapsElement;
@@ -57,9 +58,9 @@ public class HtmlElementFactory {
         }
     }
 
-    public static <T> T createPageObjectInstance(Class<T> pageObjectClass) {
+    public static <T> T createPageObjectInstance(Class<T> pageObjectClass, WebDriver driver) {
         try {
-            return newInstance(pageObjectClass);
+            return newInstance(pageObjectClass, driver);
         } catch (NoSuchMethodException e) {
             throw new HtmlElementsException(e);
         } catch (InstantiationException e) {

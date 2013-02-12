@@ -36,13 +36,16 @@ public class NestedClassTest {
 
     @Test
     public void test() {
-        NestedPageObject pageObject = HtmlElementLoader.create(NestedPageObject.class, driver);
+        NestedPageObject pageObject = new NestedPageObject();
+        HtmlElementLoader.populate(pageObject, driver);
+
         assertThat(pageObject, notNullValue());
         assertThat(pageObject.arrow.getName(), notNullValue());
         assertThat(pageObject.arrow.link.getWrappedElement(), notNullValue());
     }
 
     public class NestedPageObject {
+
         @FindBy(className = "arrow")
         public NestedHtmlElement arrow;
     }

@@ -27,6 +27,11 @@ public class PageInitializationTest {
     private WebDriver driver = Page.mockDriver();
 
     public static class Page {
+
+        public Page(WebDriver webDriver) {
+
+        }
+
         private static final String ELEMENT_ID = "element";
         private static final String HTML_ELEMENT_ID = "html-element";
         private static final String TEXT_INPUT_ID = "text-input";
@@ -123,7 +128,7 @@ public class PageInitializationTest {
 
     @Test
     public void testInitializationOfCreatedPage() {
-        Page page = new Page();
+        Page page = new Page(this.driver);
 
         assertThat("'element' field of page object should be null before initialization",
                 page.getElement(), is(nullValue()));

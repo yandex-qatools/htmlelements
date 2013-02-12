@@ -31,18 +31,12 @@ public class HtmlElementLoader {
      * @see #createHtmlElement(Class, org.openqa.selenium.WebDriver)
      * @see #createPageObject(Class, org.openqa.selenium.WebDriver)
      */
-    public static <T> T create(Class<T> clazz, WebDriver driver) {
-        return create(clazz, new HtmlElementLocatorFactory(driver));
-    }
-
     @SuppressWarnings("unchecked")
-    public static <T> T create(Class<T> clazz, CustomElementLocatorFactory locatorFactory) {
+    public static <T> T create(Class<T> clazz, WebDriver driver) {
         if (isHtmlElement(clazz)) {
-            Class<HtmlElement> htmlElementClass = (Class<HtmlElement>) clazz;
-            return (T) createHtmlElement(htmlElementClass, locatorFactory);
+            return (T) createHtmlElement((Class<HtmlElement>) clazz, driver);
         } else {
-            // Otherwise consider class as a page object class
-            return createPageObject(clazz, locatorFactory);
+            return createPageObject(clazz, driver);
         }
     }
 
@@ -90,13 +84,8 @@ public class HtmlElementLoader {
      * @return Initialized instance of the specified class.
      */
     public static <T extends HtmlElement> T createHtmlElement(Class<T> clazz, WebDriver driver) {
-        return createHtmlElement(clazz, new HtmlElementLocatorFactory(driver));
-    }
-
-    public static <T extends HtmlElement> T createHtmlElement(Class<T> clazz,
-                                                              CustomElementLocatorFactory locatorFactory) {
         T htmlElementInstance = HtmlElementFactory.createHtmlElementInstance(clazz);
-        populateHtmlElement(htmlElementInstance, locatorFactory);
+        populateHtmlElement(htmlElementInstance, new HtmlElementLocatorFactory(driver));
         return htmlElementInstance;
     }
 
@@ -122,12 +111,8 @@ public class HtmlElementLoader {
      * @return Initialized instance of the specified class.
      */
     public static <T> T createPageObject(Class<T> clazz, WebDriver driver) {
-        return createPageObject(clazz, new HtmlElementLocatorFactory(driver));
-    }
-
-    public static <T> T createPageObject(Class<T> clazz, CustomElementLocatorFactory locatorFactory) {
-        T page = HtmlElementFactory.createPageObjectInstance(clazz);
-        populatePageObject(page, locatorFactory);
+        T page = HtmlElementFactory.createPageObjectInstance(clazz, driver);
+        populatePageObject(page, new HtmlElementLocatorFactory(driver));
         return page;
     }
 
