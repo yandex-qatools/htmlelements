@@ -5,10 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import ru.yandex.qatools.htmlelements.samples.pages.MainPage;
 
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static ru.yandex.qatools.htmlelements.matchers.WaitForMatcherDecorator.withWaitFor;
 import static ru.yandex.qatools.htmlelements.matchers.WebElementMatchers.exists;
 
@@ -30,6 +29,7 @@ public class MatchersUsages {
     @Test
     public void withWaitForMatcher() throws Exception {
         MainPage mainPage = new MainPage(driver);
+        mainPage.getSearchArrow().getRequestInput().sendKeys(REQUEST);
         assertThat(mainPage.getSuggest(), withWaitFor(exists()));
     }
 

@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
 import ru.yandex.qatools.htmlelements.samples.elements.SearchArrow;
+import ru.yandex.qatools.htmlelements.samples.elements.SearchSample;
 import ru.yandex.qatools.htmlelements.samples.elements.Suggest;
 
 /**
@@ -18,8 +19,15 @@ public class MainPage {
     @FindBy(xpath = "//div[@class='i-popup__content']//ul")
     private Suggest suggest;
 
+    @FindBy(css = ".b-morda-search__sample .b-link__inner")
+    private SearchSample searchSample;
+
     public MainPage(WebDriver driver) {
         HtmlElementLoader.populate(this, driver);
+    }
+
+    public SearchSample getSearchSample() {
+        return searchSample;
     }
 
     public SearchArrow getSearchArrow() {
