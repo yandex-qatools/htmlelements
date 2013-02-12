@@ -23,7 +23,6 @@ import static org.mockito.Mockito.when;
  * Date: 1/22/13, 2:16 PM
  */
 public class NestedClassTest {
-
     public WebDriver driver = mock(WebDriver.class);
     WebElement arrow = mock(WebElement.class);
     WebElement link = mock(WebElement.class);
@@ -55,7 +54,6 @@ public class NestedClassTest {
         public NestedTypifiedElement link;
 
     }
-
 
     public class NestedTypifiedElement extends TypifiedElement {
 

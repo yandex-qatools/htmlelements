@@ -41,6 +41,7 @@ public class PageInitializationTest {
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         AllElementTypesPage cratedPage = HtmlElementLoader.create(AllElementTypesPage.class, driver);
+
         AllElementTypesPage populatedPage = new AllElementTypesPage();
         HtmlElementLoader.populate(populatedPage, driver);
 

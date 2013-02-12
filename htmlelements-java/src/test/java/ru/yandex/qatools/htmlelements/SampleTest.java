@@ -28,7 +28,7 @@ public class SampleTest {
     }
 
     @Test
-    public void htmlElementHtmlElementFieldMustBeNontNull() {
+    public void htmlElementHtmlElementFieldMustBeNotNull() {
         assertThat(searchPage.getSearchArrow().getSearchButton(), notNullValue());
     }
 
