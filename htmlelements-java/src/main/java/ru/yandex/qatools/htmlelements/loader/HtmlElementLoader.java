@@ -1,19 +1,18 @@
 package ru.yandex.qatools.htmlelements.loader;
 
-import static ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementUtils.getElementName;
-import static ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementUtils.isHtmlElement;
-
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
-
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementFactory;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementLocatorFactory;
 import ru.yandex.qatools.htmlelements.pagefactory.CustomElementLocatorFactory;
+
+import static ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementUtils.getElementName;
+import static ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementUtils.isHtmlElement;
 
 /**
  * Contains methods for blocks of elements initialization and page objects initialization.
@@ -80,7 +79,7 @@ public class HtmlElementLoader {
      * <li>List of typified elements</li>
      * </ul>
      *
-     * @param clazz  A class to be instantiated and initialized.
+     * @param clazz         A class to be instantiated and initialized.
      * @param searchContext {@code SearchContext} that will be used to look up the elements.
      * @return Initialized instance of the specified class.
      */
@@ -136,13 +135,19 @@ public class HtmlElementLoader {
      * <li>List of typified elements</li>
      * </ul>
      *
-     * @param htmlElement Block of elements to be initialized.
+     * @param htmlElement   Block of elements to be initialized.
      * @param searchContext {@code SearchContext} that will be used to look up the elements.
      */
     public static void populateHtmlElement(HtmlElement htmlElement, SearchContext searchContext) {
         populateHtmlElement(htmlElement, new HtmlElementLocatorFactory(searchContext));
     }
 
+    /**
+     * Initializes fields of the given block of elements using specified locator factory.
+     *
+     * @param htmlElement    Block of elements to be initialized.
+     * @param locatorFactory Locator factory that will be used to locate block elements.
+     */
     public static void populateHtmlElement(HtmlElement htmlElement, CustomElementLocatorFactory locatorFactory) {
         @SuppressWarnings("unchecked")
         Class<HtmlElement> htmlElementClass = (Class<HtmlElement>) htmlElement.getClass();
@@ -182,6 +187,12 @@ public class HtmlElementLoader {
         populatePageObject(page, new HtmlElementLocatorFactory(driver));
     }
 
+    /**
+     * Initializes fields of the given page object using specified locator factory.
+     *
+     * @param page           Page object to be initialized.
+     * @param locatorFactory Locator factory that will be used to locate elements.
+     */
     public static void populatePageObject(Object page, CustomElementLocatorFactory locatorFactory) {
         PageFactory.initElements(new HtmlElementDecorator(locatorFactory), page);
     }
