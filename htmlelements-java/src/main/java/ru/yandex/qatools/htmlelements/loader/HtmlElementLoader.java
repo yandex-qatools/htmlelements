@@ -3,6 +3,7 @@ package ru.yandex.qatools.htmlelements.loader;
 import static ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementUtils.getElementName;
 import static ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementUtils.isHtmlElement;
 
+import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -28,8 +29,8 @@ public class HtmlElementLoader {
      * @param clazz  A class to be instantiated and initialized.
      * @param driver The {@code WebDriver} instance that will be used to look up the elements.
      * @return Initialized instance of the specified class.
-     * @see #createHtmlElement(Class, org.openqa.selenium.WebDriver)
-     * @see #createPageObject(Class, org.openqa.selenium.WebDriver)
+     * @see #createHtmlElement(Class, SearchContext)
+     * @see #createPageObject(Class, WebDriver)
      */
     @SuppressWarnings("unchecked")
     public static <T> T create(Class<T> clazz, WebDriver driver) {
@@ -46,8 +47,8 @@ public class HtmlElementLoader {
      *
      * @param instance Object to be initialized.
      * @param driver   The {@code WebDriver} instance that will be used to look up the elements.
-     * @see #populateHtmlElement(ru.yandex.qatools.htmlelements.element.HtmlElement, org.openqa.selenium.WebDriver)
-     * @see #createPageObject(Class, org.openqa.selenium.WebDriver)
+     * @see #populateHtmlElement(HtmlElement, SearchContext)
+     * @see #createPageObject(Class, WebDriver)
      */
     public static <T> void populate(T instance, WebDriver driver) {
         if (isHtmlElement(instance)) {
@@ -80,12 +81,12 @@ public class HtmlElementLoader {
      * </ul>
      *
      * @param clazz  A class to be instantiated and initialized.
-     * @param driver The {@code WebDriver} instance that will be used to look up the elements.
+     * @param searchContext {@code SearchContext} that will be used to look up the elements.
      * @return Initialized instance of the specified class.
      */
-    public static <T extends HtmlElement> T createHtmlElement(Class<T> clazz, WebDriver driver) {
+    public static <T extends HtmlElement> T createHtmlElement(Class<T> clazz, SearchContext searchContext) {
         T htmlElementInstance = HtmlElementFactory.createHtmlElementInstance(clazz);
-        populateHtmlElement(htmlElementInstance, new HtmlElementLocatorFactory(driver));
+        populateHtmlElement(htmlElementInstance, new HtmlElementLocatorFactory(searchContext));
         return htmlElementInstance;
     }
 
@@ -136,10 +137,10 @@ public class HtmlElementLoader {
      * </ul>
      *
      * @param htmlElement Block of elements to be initialized.
-     * @param driver      The {@code WebDriver} instance that will be used to look up the elements.
+     * @param searchContext {@code SearchContext} that will be used to look up the elements.
      */
-    public static void populateHtmlElement(HtmlElement htmlElement, WebDriver driver) {
-        populateHtmlElement(htmlElement, new HtmlElementLocatorFactory(driver));
+    public static void populateHtmlElement(HtmlElement htmlElement, SearchContext searchContext) {
+        populateHtmlElement(htmlElement, new HtmlElementLocatorFactory(searchContext));
     }
 
     public static void populateHtmlElement(HtmlElement htmlElement, CustomElementLocatorFactory locatorFactory) {
