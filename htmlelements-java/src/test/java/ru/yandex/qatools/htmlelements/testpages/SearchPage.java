@@ -61,8 +61,11 @@ public class SearchPage {
         WebElement searchButton = mock(WebElement.class);
         WebElement searchButtonReloaded = mock(WebElement.class);
 
+        WebElement searchRequestSample = mock(WebElement.class);
+
         WebElement item1 = mock(WebElement.class);
         WebElement item2 = mock(WebElement.class);
+
         ArrayList<WebElement> suggestItems = new ArrayList<WebElement>();
         suggestItems.add(item1);
         suggestItems.add(item2);
@@ -80,6 +83,8 @@ public class SearchPage {
         when(searchArrow.findElements(By.className(SearchArrowData.SUGGEST_CLASS))).thenReturn(suggestItems);
         when(item1.getText()).thenReturn("yandex maps");
         when(item2.getText()).thenReturn("yandex");
+
+        when(searchArrow.findElement(By.className(SearchArrowData.SEARCH_REQUEST_SAMPLE_CLASS))).thenReturn(searchRequestSample);
 
         return driver;
     }

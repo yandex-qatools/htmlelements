@@ -6,6 +6,7 @@ import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
 import ru.yandex.qatools.htmlelements.testelements.SearchArrow;
+import ru.yandex.qatools.htmlelements.testelements.SearchArrowWithRequestSample;
 import ru.yandex.qatools.htmlelements.testpages.SearchPage;
 
 import java.util.Arrays;
@@ -17,39 +18,41 @@ import static org.junit.Assert.assertThat;
 
 /**
  * @author Alexander Tolmachev starlight@yandex-team.ru
- *         Date: 20.08.12
+ *         Date: 13.02.13
  */
 @RunWith(Parameterized.class)
-public class HtmlElementInitializationTest {
+public class InheritedHtmlElementInitializationTest {
     private static WebDriver driver = SearchPage.mockDriver();
 
-    private SearchArrow searchArrow;
+    private SearchArrowWithRequestSample inheritedSearchArrow;
 
-    public HtmlElementInitializationTest(SearchArrow searchArrow) {
-        this.searchArrow = searchArrow;
+    public InheritedHtmlElementInitializationTest(SearchArrowWithRequestSample inheritedSearchArrow) {
+        this.inheritedSearchArrow = inheritedSearchArrow;
     }
 
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
-        SearchArrow createdSearchArrow = HtmlElementLoader.create(SearchArrow.class, driver);
+        SearchArrowWithRequestSample createdSearchArrow = HtmlElementLoader.create(SearchArrowWithRequestSample.class, driver);
 
-        SearchArrow populatedSearchArrow = new SearchArrow();
+        SearchArrowWithRequestSample populatedSearchArrow = new SearchArrowWithRequestSample();
         HtmlElementLoader.populate(populatedSearchArrow, driver);
 
         return Arrays.asList(new Object[][]{{createdSearchArrow}, {populatedSearchArrow}});
     }
 
     @Test
-    public void wrappedElementOfHtmlElementShouldNotBeNull() {
+    public void wrappedElementOfInheritedHtmlElementShouldNotBeNull() {
         assertThat("Wrapped element of search arrow should not be null",
-                searchArrow.getWrappedElement(), is(notNullValue()));
+                inheritedSearchArrow.getWrappedElement(), is(notNullValue()));
     }
 
     @Test
-    public void innerElementsOfHtmlElementShouldNotBeNull() {
+    public void innerElementsOfInheritedHtmlElementShouldNotBeNull() {
         assertThat("Request input of search arrow should not be null",
-                searchArrow.getRequestInput(), is(notNullValue()));
+                inheritedSearchArrow.getRequestInput(), is(notNullValue()));
         assertThat("Submit button of search arrow should not be null",
-                searchArrow.getSearchButton(), is(notNullValue()));
+                inheritedSearchArrow.getSearchButton(), is(notNullValue()));
+        assertThat("Search request sample of search arrow should not be null",
+                inheritedSearchArrow.getSearchRequestSample(), is(notNullValue()));
     }
 }

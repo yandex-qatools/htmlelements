@@ -14,4 +14,6 @@ public class SearchArrowData {
     public static final String SEARCH_BUTTON_CLASS = "b-form-button__input";
 
     public static final String SUGGEST_CLASS = "b-suggest-elem";
+
+    public static final String SEARCH_REQUEST_SAMPLE_CLASS = "b-search__sample";
 }
