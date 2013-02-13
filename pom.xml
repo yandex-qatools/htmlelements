@@ -73,7 +73,7 @@
                 <version>2.9</version>
                 <executions>
                     <execution>
-                        <id>aggregate</id>
+                        <id>attach-javadocs</id>
                         <goals>
                             <goal>aggregate-jar</goal>
                         </goals>
