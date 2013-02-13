@@ -39,7 +39,7 @@
 
     <groupId>ru.yandex.qatools.htmlelements</groupId>
     <artifactId>htmlelements-matchers</artifactId>
-	<version>1.9-SNAPSHOT</version>
+	<version>1.9</version>
 
 Does Element Exist Matcher
 --------------------------

@@ -15,7 +15,7 @@ Maven dependencies for Html Elements core:
     <dependency>
         <groupId>ru.yandex.qatools.htmlelements</groupId>
         <artifactId>htmlelements-java</artifactId>
-        <version>1.8</version>
+        <version>1.9</version>
     </dependency>
 
 And for Html Elements matchers:
@@ -23,7 +23,7 @@ And for Html Elements matchers:
     <dependency>
         <groupId>ru.yandex.qatools.htmlelements</groupId>
         <artifactId>htmlelements-matchers</artifactId>
-        <version>1.8</version>
+        <version>1.9</version>
     </dependency>
 
 Create blocks of elements

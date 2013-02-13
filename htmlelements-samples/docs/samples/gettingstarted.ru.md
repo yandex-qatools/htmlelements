@@ -10,7 +10,7 @@
     <dependency>
         <groupId>ru.yandex.qatools.htmlelements</groupId>
         <artifactId>htmlelements-java</artifactId>
-        <version>1.9-SNAPSHOT</version>
+        <version>1.9</version>
     </dependency>
 
 Выполните команду `mvn clean compile`, чтобы проерить, что ваш проект компилируется.
