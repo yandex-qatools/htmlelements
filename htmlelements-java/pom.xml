@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>htmlelements-java</artifactId>
-	<name>QATools HtmlElements For Java</name>
+	<name>Yandex QATools HtmlElements For Java</name>
 
     <properties>
         <selenium.version>2.29.0</selenium.version>

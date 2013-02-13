@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>htmlelements-samples</artifactId>
-    <name>QATools HtmlElements Samples</name>
+    <name>Yandex QATools HtmlElements Samples</name>
 
     <dependencies>
         <dependency>

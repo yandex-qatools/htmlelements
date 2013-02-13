@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>htmlelements-all</artifactId>
-    <name>QATools HtmlElements All</name>
+    <name>Yandex QATools HtmlElements All</name>
 
     <dependencies>
         <dependency>

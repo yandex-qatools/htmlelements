@@ -7,7 +7,7 @@
 	<version>1.9-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>QATools HtmlElements</name>
+	<name>Yandex QATools HtmlElements</name>
 	<description>WebDriver PageObject extension</description>
 	<url>https://github.com/yandex-qatools/htmlelements/</url>
 
