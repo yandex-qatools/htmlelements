@@ -77,15 +77,6 @@
                         <goals>
                             <goal>aggregate-jar</goal>
                         </goals>
-                        <configuration>
-                            <additionalDependencies>
-                                <dependency>
-                                    <groupId>org.hamcrest</groupId>
-                                    <artifactId>hamcrest-all</artifactId>
-                                    <version>1.3</version>
-                                </dependency>
-                            </additionalDependencies>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
