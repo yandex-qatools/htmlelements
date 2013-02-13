@@ -5,7 +5,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
-import ru.yandex.qatools.htmlelements.testelements.SearchArrow;
 import ru.yandex.qatools.htmlelements.testelements.SearchArrowWithRequestSample;
 import ru.yandex.qatools.htmlelements.testpages.SearchPage;
 
