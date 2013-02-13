@@ -4,7 +4,7 @@
 
     <groupId>ru.yandex.qatools.htmlelements</groupId>
     <artifactId>htmlelements</artifactId>
-    <version>1.9</version>
+    <version>1.10-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Yandex QATools HtmlElements</name>
