@@ -28,10 +28,6 @@ public class RefreshMatcherTest {
     public static final boolean THE_OBJECT = true;
     public static final boolean NOT_SAME_OBJECT = false;
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
-
     @Mock
     private WebDriver driver;
     @Mock
@@ -39,14 +35,11 @@ public class RefreshMatcherTest {
     @Mock
     private Matcher<Object> matcher;
 
-    @Test
+    @Test(expected = AssertionError.class)
     public void isPrerefreshingMatching() {
-        thrown.expect(AssertionError.class);
-
         when(driver.navigate()).thenReturn(navigation);
         assertThat(THE_OBJECT, withPrerefresh(is(NOT_SAME_OBJECT), driver));
     }
-
 
     @Test
     public void isPrerefreshingRefreshesDriver() {
