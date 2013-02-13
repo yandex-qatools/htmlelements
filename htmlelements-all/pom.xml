@@ -14,16 +14,16 @@
     <name>Yandex QATools HtmlElements All</name>
 
     <dependencies>
-        <dependency>
-            <groupId>ru.yandex.qatools.htmlelements</groupId>
-            <artifactId>htmlelements-java</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>ru.yandex.qatools.htmlelements</groupId>
-            <artifactId>htmlelements-matchers</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>ru.yandex.qatools.htmlelements</groupId>-->
+            <!--<artifactId>htmlelements-java</artifactId>-->
+            <!--<version>${project.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>ru.yandex.qatools.htmlelements</groupId>-->
+            <!--<artifactId>htmlelements-matchers</artifactId>-->
+            <!--<version>${project.version}</version>-->
+        <!--</dependency>-->
     </dependencies>
 
 </project>
