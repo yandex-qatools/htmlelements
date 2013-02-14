@@ -16,7 +16,7 @@ public class MainPage {
     @FindBy(className = "b-morda-search-form")
     private SearchArrow searchArrow;
 
-    @FindBy(xpath = "//div[@class='i-popup__content']//ul")
+    @FindBy(xpath = ".//div[@class='i-popup__content']//ul")
     private Suggest suggest;
 
     @FindBy(css = ".b-morda-search__sample .b-link__inner")

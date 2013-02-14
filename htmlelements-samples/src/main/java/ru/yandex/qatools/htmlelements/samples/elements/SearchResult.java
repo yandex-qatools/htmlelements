@@ -11,6 +11,9 @@ import ru.yandex.qatools.htmlelements.element.HtmlElement;
 public class SearchResult extends HtmlElement {
 
     @FindBy(className = "title")
-    protected WebElement title;
+    private WebElement title;
 
+    public WebElement getTitle() {
+        return title;
+    }
 }

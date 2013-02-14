@@ -15,13 +15,13 @@ import java.util.List;
  */
 public class SearchPage {
 
-    protected AuthBlock authBlock;
+    private AuthBlock authBlock;
 
     @FindBy(className = "b-search__table")
-    protected SearchArrow searchArrow;
+    private SearchArrow searchArrow;
 
-    @FindBy(xpath = "//div[@class='b-body-items']/ol/li")
-    protected List<SearchResult> results;
+    @FindBy(xpath = ".//div[@class='b-body-items']//li")
+    private List<SearchResult> results;
 
     public SearchPage(WebDriver driver) {
         HtmlElementLoader.populate(this, driver);
