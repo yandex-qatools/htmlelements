@@ -1,11 +1,9 @@
-package ru.yandex.qatools.htmlelements.samples.pages;
+package ru.yandex.qatools.htmlelements.samples.reuseofelements;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
-import ru.yandex.qatools.htmlelements.samples.elements.AuthBlock;
-import ru.yandex.qatools.htmlelements.samples.elements.SearchArrow;
-import ru.yandex.qatools.htmlelements.samples.elements.SearchResult;
+import ru.yandex.qatools.htmlelements.samples.gettingstarted.SearchArrow;
 
 import java.util.List;
 

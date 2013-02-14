@@ -1,4 +1,4 @@
-package ru.yandex.qatools.htmlelements.samples.elements;
+package ru.yandex.qatools.htmlelements.samples.matchersusage;
 
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 
