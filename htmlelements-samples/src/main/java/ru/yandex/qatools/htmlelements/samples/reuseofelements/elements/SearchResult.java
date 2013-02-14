@@ -1,4 +1,4 @@
-package ru.yandex.qatools.htmlelements.samples.reuseofelements;
+package ru.yandex.qatools.htmlelements.samples.reuseofelements.elements;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

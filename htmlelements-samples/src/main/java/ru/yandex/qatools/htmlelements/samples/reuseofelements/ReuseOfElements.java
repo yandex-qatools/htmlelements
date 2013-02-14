@@ -5,7 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import ru.yandex.qatools.htmlelements.samples.gettingstarted.MainPage;
+import ru.yandex.qatools.htmlelements.samples.gettingstarted.pages.MainPage;
+import ru.yandex.qatools.htmlelements.samples.reuseofelements.pages.SearchPage;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;

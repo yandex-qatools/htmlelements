@@ -1,9 +1,11 @@
-package ru.yandex.qatools.htmlelements.samples.gettingstarted;
+package ru.yandex.qatools.htmlelements.samples.gettingstarted.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
-import ru.yandex.qatools.htmlelements.samples.matchersusage.SearchSample;
+import ru.yandex.qatools.htmlelements.samples.gettingstarted.elements.SearchArrow;
+import ru.yandex.qatools.htmlelements.samples.gettingstarted.elements.Suggest;
+import ru.yandex.qatools.htmlelements.samples.matchersusage.elements.SearchSample;
 
 /**
  * User: eroshenkoam
