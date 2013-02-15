@@ -1,11 +1,11 @@
-package ru.yandex.qatools.htmlelements.samples.matchersusage;
+package ru.yandex.qatools.htmlelements.samples;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import ru.yandex.qatools.htmlelements.samples.gettingstarted.pages.MainPage;
+import ru.yandex.qatools.htmlelements.samples.pages.MainPage;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static ru.yandex.qatools.htmlelements.matchers.WaitForMatcherDecorator.withWaitFor;

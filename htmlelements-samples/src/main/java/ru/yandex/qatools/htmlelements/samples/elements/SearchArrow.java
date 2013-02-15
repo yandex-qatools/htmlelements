@@ -1,4 +1,4 @@
-package ru.yandex.qatools.htmlelements.samples.typifiedelementsusage;
+package ru.yandex.qatools.htmlelements.samples.elements;
 
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.element.Button;
