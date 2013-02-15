@@ -15,7 +15,7 @@ import org.openqa.selenium.WebDriver;
 public class RefreshMatcherDecorator<T> extends TypeSafeMatcher<T> {
 
     private WebDriver driver;
-    private Matcher<? extends T> matcher;
+    private Matcher<? super T> matcher;
 
 
     @Override
@@ -24,7 +24,7 @@ public class RefreshMatcherDecorator<T> extends TypeSafeMatcher<T> {
         return matcher.matches(item);
     }
 
-    public RefreshMatcherDecorator(Matcher<? extends T> matcher, WebDriver driver) {
+    public RefreshMatcherDecorator(Matcher<? super T> matcher, WebDriver driver) {
         this.driver = driver;
         this.matcher = matcher;
     }
@@ -44,7 +44,7 @@ public class RefreshMatcherDecorator<T> extends TypeSafeMatcher<T> {
 
 
     @Factory
-    public static <T> Matcher<T> withPrerefresh(Matcher<? extends T> matcher, WebDriver driver) {
+    public static <T> Matcher<? super T> withPrerefresh(Matcher<? super T> matcher, WebDriver driver) {
         return new RefreshMatcherDecorator<T>(matcher, driver);
     }
 
