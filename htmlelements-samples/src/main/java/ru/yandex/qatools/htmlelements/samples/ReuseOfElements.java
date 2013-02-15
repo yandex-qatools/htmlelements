@@ -1,12 +1,12 @@
-package ru.yandex.qatools.htmlelements.samples.reuseofelements;
+package ru.yandex.qatools.htmlelements.samples;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import ru.yandex.qatools.htmlelements.samples.gettingstarted.pages.MainPage;
-import ru.yandex.qatools.htmlelements.samples.reuseofelements.pages.SearchPage;
+import ru.yandex.qatools.htmlelements.samples.pages.MainPage;
+import ru.yandex.qatools.htmlelements.samples.pages.SearchPage;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
