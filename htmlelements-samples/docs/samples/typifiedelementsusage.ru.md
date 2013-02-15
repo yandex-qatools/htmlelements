@@ -45,6 +45,29 @@
 Здесь поисковая строка и кнопка поиска описаны с помощью интерфейса `WebElement`. Давайте перепишем этот пример с
 использованием уже имеющихся в фреймворке типизированных элементов `TextInput` и `Button`:
 
+    public class SearchArrow extends HtmlElement {
+
+        @FindBy(xpath = ".//input[@class='b-form-input__input']")
+        private TextInput requestInput;
+
+        @FindBy(xpath = ".//input[@class='b-form-button__input']")
+        private Button searchButton;
+
+        public TextInput getRequestInput() {
+            return requestInput;
+        }
+
+        public Button getSearchButton() {
+            return searchButton;
+        }
+
+        public void searchFor(String request) {
+            getRequestInput().clear();
+            getRequestInput().sendKeys(request);
+            getSearchButton().click();
+        }
+    }
+
 
 Написание собственных типизированных элементов
 ----------------------------------------------
