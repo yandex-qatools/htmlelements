@@ -64,15 +64,28 @@ public class WaitForMatcherDecorator<T> extends TypeSafeMatcher<T> {
         matcher.describeMismatch(item, mismatchDescription);
     }
 
+    /**
+     * Sometimes it needed not to wait, and you know about it only in runtime
+     * @param dontWait - boolean - if true - we don't wait
+     * @return wrapped matcher if don't need to wait or waitFor matcher otherwise
+     */
+    public Matcher<? super T> dontWait(boolean dontWait) {
+        if(dontWait) {
+            return matcher;
+        }
+        return this;
+    }
+
+
     @Factory
     public static <T> Matcher<? super T> withWaitFor(Matcher<? super T> matcher) {
-        return new WaitForMatcherDecorator<T>(matcher, DEFAULT_TIMEOUT, DEFAULT_INTERVAL);
+        return withWaitFor(matcher, DEFAULT_TIMEOUT, DEFAULT_INTERVAL);
     }
 
 
     @Factory
     public static <T> Matcher<? super T> withWaitFor(Matcher<? super T> matcher, long timeoutInMilliseconds) {
-        return new WaitForMatcherDecorator<T>(matcher, timeoutInMilliseconds, DEFAULT_INTERVAL);
+        return withWaitFor(matcher, timeoutInMilliseconds, DEFAULT_INTERVAL);
     }
 
 
@@ -82,4 +95,49 @@ public class WaitForMatcherDecorator<T> extends TypeSafeMatcher<T> {
                                              long intervalInMilliseconds) {
         return new WaitForMatcherDecorator<T>(matcher, timeoutInMilliseconds, intervalInMilliseconds);
     }
+
+
+    /**
+     * Syntax sugar, but it returns `WaitForMatcherDecorator` type instead of `Matcher`
+     * and can be used with `dontWait(boolean)` method
+     * @param matcher - wrapped matcher
+     * @param <T>     - type of matched obj
+     * @return        - WaitForMatcherDecorator instance
+     */
+    @Factory
+    public static <T> WaitForMatcherDecorator<? super T> withWait(Matcher<? super T> matcher) {
+        return withWait(matcher, DEFAULT_TIMEOUT, DEFAULT_INTERVAL);
+    }
+
+    /**
+     * Syntax sugar, but it returns `WaitForMatcherDecorator` type instead of `Matcher`
+     * and can be used with `dontWait(boolean)` method
+     * @param matcher               - wrapped matcher
+     * @param timeoutInMilliseconds - how long should withWait
+     * @param <T>                   - type of matched obj
+     * @return                      - WaitForMatcherDecorator instance
+     */
+    @Factory
+    public static <T> WaitForMatcherDecorator<? super T> withWait(Matcher<? super T> matcher, long timeoutInMilliseconds) {
+        return withWait(matcher, timeoutInMilliseconds, DEFAULT_INTERVAL);
+    }
+
+    /**
+     * Syntax sugar, but it returns `WaitForMatcherDecorator` type instead of `Matcher`
+     * and can be used with `dontWait(boolean)` method
+     * @param matcher                - wrapped matcher
+     * @param timeoutInMilliseconds  - how long should withWait
+     * @param intervalInMilliseconds - how often repeat check
+     * @param <T>                    - type of matched obj
+     * @return                       - WaitForMatcherDecorator instance
+     */
+    @Factory
+    public static <T> WaitForMatcherDecorator<? super T> withWait(Matcher<? super T> matcher,
+                                             long timeoutInMilliseconds,
+                                             long intervalInMilliseconds) {
+        return new WaitForMatcherDecorator<T>(matcher, timeoutInMilliseconds, intervalInMilliseconds);
+    }
+
+
+
 }
