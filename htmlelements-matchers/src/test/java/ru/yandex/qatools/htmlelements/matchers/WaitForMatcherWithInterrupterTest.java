@@ -18,7 +18,7 @@ import static ru.yandex.qatools.htmlelements.matchers.decorators.WaitForMatcherD
  * User: eoff
  * Date: 14.02.13
  */
-public class WaitForMatcherWithInterruptorTest {
+public class WaitForMatcherWithInterrupterTest {
 
     public static final Object ANY_OBJECT = "";
 

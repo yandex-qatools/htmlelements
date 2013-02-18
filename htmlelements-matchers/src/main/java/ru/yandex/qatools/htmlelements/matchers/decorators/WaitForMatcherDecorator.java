@@ -11,8 +11,13 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 /**
  * User: lanwen
  * Date: 19.12.12
- * Time: 14:18
- * <p/>
+ *
+ * @author Kirill Merkushev lanwen@yandex-team.ru
+ * @author Maksim Mukosey eoff@yandex-team.ru
+ *
+ * Decorator for the waiter, when program waits for matching not more that TIMEOUT milliseconds.
+ * May be used when we need to wait for page loading or some other operation, that may take much time.
+ *
  * Usage example: assertThat(onHomePage().getAbookTab(), withWaitFor(exists()));
  */
 

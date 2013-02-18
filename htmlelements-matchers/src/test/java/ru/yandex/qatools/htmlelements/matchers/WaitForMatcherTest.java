@@ -49,6 +49,10 @@ public class WaitForMatcherTest {
         assertThat("Miracle! False now is true!", result, is(false));
     }
 
+    /**
+     * Tests that decorator works with matcher for superclass
+     */
+
     @Test
     public void superclassInMatcherMatchesSubclass() throws Exception {
         Arrow input = mock(Arrow.class);
