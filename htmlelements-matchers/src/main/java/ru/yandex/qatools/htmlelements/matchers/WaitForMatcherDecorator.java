@@ -21,12 +21,12 @@ public class WaitForMatcherDecorator<T> extends TypeSafeMatcher<T> {
     public static final long DEFAULT_INTERVAL = MILLISECONDS.toMillis(500);
     public static final long DEFAULT_TIMEOUT = SECONDS.toMillis(30);
 
-    private Matcher<? extends T> matcher;
+    private Matcher<? super T> matcher;
 
     private long timeoutInMilliseconds;
     private long intervalInMilliseconds;
 
-    public WaitForMatcherDecorator(Matcher<? extends T> matcher,
+    public WaitForMatcherDecorator(Matcher<? super T> matcher,
                                    long timeoutInMilliseconds,
                                    long intervalInMilliseconds) {
         this.matcher = matcher;
@@ -65,19 +65,19 @@ public class WaitForMatcherDecorator<T> extends TypeSafeMatcher<T> {
     }
 
     @Factory
-    public static <T> Matcher<T> withWaitFor(Matcher<? extends T> matcher) {
+    public static <T> Matcher<? super T> withWaitFor(Matcher<? super T> matcher) {
         return new WaitForMatcherDecorator<T>(matcher, DEFAULT_TIMEOUT, DEFAULT_INTERVAL);
     }
 
 
     @Factory
-    public static <T> Matcher<T> withWaitFor(Matcher<? extends T> matcher, long timeoutInMilliseconds) {
+    public static <T> Matcher<? super T> withWaitFor(Matcher<? super T> matcher, long timeoutInMilliseconds) {
         return new WaitForMatcherDecorator<T>(matcher, timeoutInMilliseconds, DEFAULT_INTERVAL);
     }
 
 
     @Factory
-    public static <T> Matcher<T> withWaitFor(Matcher<? extends T> matcher,
+    public static <T> Matcher<? super T> withWaitFor(Matcher<? super T> matcher,
                                              long timeoutInMilliseconds,
                                              long intervalInMilliseconds) {
         return new WaitForMatcherDecorator<T>(matcher, timeoutInMilliseconds, intervalInMilliseconds);
