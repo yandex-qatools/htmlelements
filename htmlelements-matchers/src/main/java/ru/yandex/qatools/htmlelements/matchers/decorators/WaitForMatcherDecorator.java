@@ -116,6 +116,4 @@ public class WaitForMatcherDecorator<T> extends TypeSafeMatcher<T> {
         }
         return new WaitForMatcherDecorator<T>(matcher, timeoutInMilliseconds, intervalInMilliseconds);
     }
-
-
 }
