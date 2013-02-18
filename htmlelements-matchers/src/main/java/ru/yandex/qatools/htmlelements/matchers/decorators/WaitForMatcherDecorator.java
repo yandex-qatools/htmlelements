@@ -1,4 +1,4 @@
-package ru.yandex.qatools.htmlelements.matchers;
+package ru.yandex.qatools.htmlelements.matchers.decorators;
 
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
@@ -11,8 +11,13 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 /**
  * User: lanwen
  * Date: 19.12.12
- * Time: 14:18
- * <p/>
+ *
+ * @author Kirill Merkushev lanwen@yandex-team.ru
+ * @author Maksim Mukosey eoff@yandex-team.ru
+ *
+ * Decorator for the waiter, when program waits for matching not more that TIMEOUT milliseconds.
+ * May be used when we need to wait for page loading or some other operation, that may take much time.
+ *
  * Usage example: assertThat(onHomePage().getAbookTab(), withWaitFor(exists()));
  */
 
@@ -80,6 +85,35 @@ public class WaitForMatcherDecorator<T> extends TypeSafeMatcher<T> {
     public static <T> Matcher<? super T> withWaitFor(Matcher<? super T> matcher,
                                              long timeoutInMilliseconds,
                                              long intervalInMilliseconds) {
+        return new WaitForMatcherDecorator<T>(matcher, timeoutInMilliseconds, intervalInMilliseconds);
+    }
+
+
+    @Factory
+    public static <T> Matcher<? super T> withWaitFor(Matcher<? super T> matcher, Interrupter interrupter) {
+        if (interrupter.isInterrupted()) {
+            return matcher;
+        }
+        return new WaitForMatcherDecorator<T>(matcher, DEFAULT_TIMEOUT, DEFAULT_INTERVAL);
+    }
+
+    @Factory
+    public static <T> Matcher<? super T> withWaitFor(Matcher<? super T> matcher, Interrupter interrupter,
+                                                       long timeoutInMilliseconds) {
+        if (interrupter.isInterrupted()) {
+            return matcher;
+        }
+        return new WaitForMatcherDecorator<T>(matcher, timeoutInMilliseconds, DEFAULT_INTERVAL);
+    }
+
+    @Factory
+    public static <T> Matcher<? super T> withWaitFor(Matcher<? super T> matcher,
+                                                       Interrupter interrupter,
+                                                       long timeoutInMilliseconds,
+                                                       long intervalInMilliseconds) {
+        if (interrupter.isInterrupted()) {
+            return matcher;
+        }
         return new WaitForMatcherDecorator<T>(matcher, timeoutInMilliseconds, intervalInMilliseconds);
     }
 }

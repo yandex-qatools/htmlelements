@@ -1,4 +1,4 @@
-package ru.yandex.qatools.htmlelements.matchers;
+package ru.yandex.qatools.htmlelements.matchers.decorators;
 
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
