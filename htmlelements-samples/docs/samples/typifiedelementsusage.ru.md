@@ -67,6 +67,7 @@ public class SearchArrow extends HtmlElement {
 
 ```java
 public class ExtendedSearchForm extends HtmlElement {
+
     @FindBy(name = "text")
     private WebElement requestInput;
 
@@ -84,7 +85,25 @@ public class ExtendedSearchForm extends HtmlElement {
 
 При этом для таких элементов есть свои характерные действия, которые можно с ними выполнить: выбрать кнопку по номеру или 
 по значению, получить выбранную в данный момент кнопку и т. д. И в случае работы со списками соответствующие мтоды придется 
-реализовывать каждый раз, снова и снова. Это очень неудобно.<br/>
+реализовывать каждый раз, снова и снова. Это очень неудобно. Гораздо удобнее работать с группами radio-button'ов, как с 
+типизированными элементами, у которых все нужные методы уже реализованы:
+
+```java
+public class ExtendedSearchForm extends HtmlElement {
+    @FindBy(name = "text")
+    private TextInput requestInput;
+
+    //...
+
+    @FindBy(name = "zone")
+    private Select wordsPositionSelect;
+
+    @FindBy(name = "wordforms")
+    private Select wordsFormSelect;
+
+    //...
+}
+```
 
 
 
