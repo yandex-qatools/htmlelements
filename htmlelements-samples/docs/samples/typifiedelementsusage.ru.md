@@ -90,21 +90,27 @@ public class ExtendedSearchForm extends HtmlElement {
 
 ```java
 public class ExtendedSearchForm extends HtmlElement {
+
     @FindBy(name = "text")
     private TextInput requestInput;
 
     //...
 
     @FindBy(name = "zone")
-    private Select wordsPositionSelect;
+    private Radio wordsPositionSelect;
 
     @FindBy(name = "wordforms")
-    private Select wordsFormSelect;
+    private Radio wordsFormSelect;
 
     //...
 }
 ```
 
+Та же ситуация возникает и при взаиможействии с другими составными элементами, такими как таблицы, выпадающие списки, 
+календари и т.д.
+
+Кроме этого, даже при работе с простыми элементами вроде `TextInput` и `Button`, ипользование типизированных элементов
+делает код более наглядным, поскольку в этом случае сразу видно, элемент какого типа описан в блоке или page-объекте.
 
 
 Написание собственных типизированных элементов
