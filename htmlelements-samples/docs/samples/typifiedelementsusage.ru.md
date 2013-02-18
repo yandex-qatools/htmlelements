@@ -56,6 +56,36 @@ public class SearchArrow extends HtmlElement {
 * [Radio](https://github.com/yandex-qatools/htmlelements/blob/master/htmlelements-java/src/main/java/ru/yandex/qatools/htmlelements/element/Radio.java)
 * [Select](https://github.com/yandex-qatools/htmlelements/blob/master/htmlelements-java/src/main/java/ru/yandex/qatools/htmlelements/element/Select.java)
 
+Посмотрев на интерфейсы таких типизированных элементов, как `TextInput`, `Button` или `Link`, читатель может подумать: 
+"Зачем использовать типизированные элементы? Ведь это всего лишь урезанные версии интерфейса WebElement, ведь гораздо 
+лучше использовать его". Но все не так просто, как может показаться на первый взгляд.
+
+Давайте взглянем на [страницу расширенного поиска Яндекса](http://yandex.ru/search/advanced?text=test&numdoc=10&lr=2). 
+Помимо прочих элементов, на этой странице есть кнопки-переключатели, которые по факту являются группами radio-button'ов.
+Если описывать форму расширенного поиска без типизированных элементов, то с каждой из таких групп придется работать как 
+с `List<WebElement>`:
+
+```java
+public class ExtendedSearchForm extends HtmlElement {
+    @FindBy(name = "text")
+    private WebElement requestInput;
+
+    //...
+
+    @FindBy(name = "zone")
+    private List<WebElement> wordsPositionSelect;
+
+    @FindBy(name = "wordforms")
+    private List<WebElement> wordsFormSelect;
+
+    //...
+}
+```
+
+При этом для таких элементов есть свои характерные действия, которые можно с ними выполнить: выбрать кнопку по номеру или 
+по значению, получить выбранную в данный момент кнопку и т. д. И в случае работы со списками соответствующие мтоды придется 
+реализовывать каждый раз, снова и снова. Это очень неудобно.<br/>
+
 
 
 Написание собственных типизированных элементов
