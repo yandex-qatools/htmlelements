@@ -122,4 +122,37 @@ public class ExtendedSearchForm extends HtmlElement {
 или от класса типизированного элемента, который вы хотите расширить, и добавить нужную вам функциональность.
 
 
+Давайте для примера напишем типизированный элемент для выпадающего списка подсказок в поисковой форме на 
+[главной странице Яндекса](http://www.yandex.ru):
 
+```java
+public class Suggest extends TypifiedElement {
+
+    public Suggest(WebElement wrappedElement) {
+        super(wrappedElement);
+    }
+
+    private List<WebElement> getItems() {
+        return getWrappedElement().findElements(By.xpath("//li"));
+    }
+
+    public void selectByIndex(int itemIndex) {
+        getItems().get(itemIndex).click();
+    }
+
+    public void selectByValue(String itemValue) {
+        for (WebElement item : getItems()) {
+            if (itemValue.equals(item.getText())) {
+                item.click();
+                return;
+            }
+        }
+        throw new NoSuchElementException();
+    }
+    
+    //...
+}
+```
+
+Как видно из примера, нужную функциональность можно достаточно легко реализовать, используя метод `getWrappedElement()`, 
+который возвращает `WebElement`, оберткой над которым является типизированный элемент.
