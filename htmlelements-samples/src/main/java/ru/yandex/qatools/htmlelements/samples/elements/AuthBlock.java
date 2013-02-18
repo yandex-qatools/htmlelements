@@ -13,13 +13,13 @@ import ru.yandex.qatools.htmlelements.element.HtmlElement;
 public class AuthBlock extends HtmlElement {
 
     @FindBy(className = "b-domik_popup-username")
-    protected WebElement usernameInput;
+    private WebElement usernameInput;
 
     @FindBy(className = "b-domik_popup-password")
-    protected WebElement passwordInput;
+    private WebElement passwordInput;
 
     @FindBy(className = "b-domik__submit")
-    protected WebElement submitButton;
+    private WebElement submitButton;
 
     public WebElement getUsernameInput() {
         return usernameInput;

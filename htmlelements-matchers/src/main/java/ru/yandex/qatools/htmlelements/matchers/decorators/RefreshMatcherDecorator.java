@@ -1,4 +1,4 @@
-package ru.yandex.qatools.htmlelements.matchers.decorators;
+package ru.yandex.qatools.htmlelements.matchers;
 
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
@@ -44,7 +44,7 @@ public class RefreshMatcherDecorator<T> extends TypeSafeMatcher<T> {
 
 
     @Factory
-    public static <T> Matcher<T> withPrerefresh(Matcher<? super T> matcher, WebDriver driver) {
+    public static <T> Matcher<? super T> withPrerefresh(Matcher<? super T> matcher, WebDriver driver) {
         return new RefreshMatcherDecorator<T>(matcher, driver);
     }
 

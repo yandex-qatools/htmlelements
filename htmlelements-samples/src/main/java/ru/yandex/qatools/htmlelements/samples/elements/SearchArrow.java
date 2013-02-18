@@ -1,33 +1,33 @@
 package ru.yandex.qatools.htmlelements.samples.elements;
 
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import ru.yandex.qatools.htmlelements.element.Button;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
+import ru.yandex.qatools.htmlelements.element.TextInput;
 
 /**
- * User: eroshenkoam
- * Date: 1/24/13, 4:22 PM
+ * @author Alexander Tolmachev starlight@yandex-team.ru
+ *         Date: 15.02.13
  */
 public class SearchArrow extends HtmlElement {
 
-    @FindBy(xpath = "//input[@class='b-form-input__input']")
-    protected WebElement requestInput;
+    @FindBy(xpath = ".//input[@class='b-form-input__input']")
+    private TextInput requestInput;
 
-    @FindBy(xpath = "//input[@class='b-form-button__input']")
-    protected WebElement searchButton;
+    @FindBy(xpath = ".//input[@class='b-form-button__input']")
+    private Button searchButton;
 
-    public WebElement getRequestInput() {
-        return this.requestInput;
+    public TextInput getRequestInput() {
+        return requestInput;
     }
 
-    public WebElement getSearchButton() {
-        return this.searchButton;
+    public Button getSearchButton() {
+        return searchButton;
     }
 
     public void searchFor(String request) {
         getRequestInput().clear();
         getRequestInput().sendKeys(request);
-        getSearchButton().submit();
-
+        getSearchButton().click();
     }
 }
