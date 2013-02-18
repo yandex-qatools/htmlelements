@@ -116,6 +116,10 @@ public class ExtendedSearchForm extends HtmlElement {
 Написание собственных типизированных элементов
 ----------------------------------------------
 
+При написании блоков и page-объектов вам может пондобиться добавить свой собственный типизированный элемент или расширить 
+уже существующий. Сделать это очень просто. Для этого нужно, соответственно, отнаследоваться от класса 
+[`TypifiedElement`](https://github.com/yandex-qatools/htmlelements/blob/master/htmlelements-java/src/main/java/ru/yandex/qatools/htmlelements/element/TypifiedElement.java)
+или от класса типизированного элемента, который вы хотите расширить, и добавить нужную вам функциональность.
 
 
 
