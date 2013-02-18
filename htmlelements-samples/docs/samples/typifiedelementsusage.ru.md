@@ -1,3 +1,6 @@
+[&larr; Повторное использование элементов](https://github.com/yandex-qatools/htmlelements/blob/master/htmlelements-samples/docs/samples/reuseofelements.ru.md)
+***
+
 Использование типизированных элементов
 ======================================
 
@@ -168,3 +171,7 @@ public class Suggest extends TypifiedElement {
 комбинировать друг с другом, объединять в более крупные блоки и конструировать из них page-объекты. Это чрезвычайно 
 удобно.
 
+
+***
+
+[Использование матчеров &rarr;](https://github.com/yandex-qatools/htmlelements/blob/master/htmlelements-samples/docs/samples/matchersusage.ru.md)
