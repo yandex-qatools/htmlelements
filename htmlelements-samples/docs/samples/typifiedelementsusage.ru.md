@@ -174,4 +174,8 @@ public class Suggest extends TypifiedElement {
 
 ***
 
-[Использование матчеров &rarr;](https://github.com/yandex-qatools/htmlelements/blob/master/htmlelements-samples/docs/samples/matchersusage.ru.md)
+<p align="right">
+<a href="https://github.com/yandex-qatools/htmlelements/blob/master/htmlelements-samples/docs/samples/matchersusage.ru.md">
+Использование матчеров &rarr;
+</a>
+</p>
