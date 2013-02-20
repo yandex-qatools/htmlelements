@@ -100,11 +100,11 @@ public class WaitForMatcherTest {
     public void allConditionsShouldBeChecked() {
         when(matcher.matches(any())).thenReturn(false);
         
-        TimeoutCondition oneSecondExpired = new TimeoutCondition(SECONDS.toMillis(1));
-        oneSecondExpired.start();
+        TimeoutCondition oneSecondNotExpired = new TimeoutCondition(SECONDS.toMillis(1));
+        oneSecondNotExpired.start();
         twoSecondsNotExpired.start();
         
-        Boolean result = withWaitFor(matcher).andWhile(oneSecondExpired).andWhile(twoSecondsNotExpired).matches(ANY_OBJECT);
+        Boolean result = withWaitFor(matcher).andWhile(oneSecondNotExpired).andWhile(twoSecondsNotExpired).matches(ANY_OBJECT);
         verify(matcher, times(3)).matches(ANY_OBJECT);
         assertThat("Miracle! False now is true!", result, is(false));
     }
