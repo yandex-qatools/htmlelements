@@ -1,4 +1,4 @@
-package ru.yandex.qatools.htmlelements.matchers;
+package ru.yandex.qatools.htmlelements.matchers.decorators;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -7,7 +7,7 @@ import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-import org.mockito.Matchers;
+
 
 /**
  * User: lanwen
@@ -24,7 +24,6 @@ public class WaitForMatcherDecorator<T> extends TypeSafeMatcher<T> {
 
     private Matcher<? super T> matcher;
 
-    private long timeoutInMilliseconds;
     private long intervalInMilliseconds;
     
     private TimeoutCondition timeOutCondition;
@@ -32,6 +31,11 @@ public class WaitForMatcherDecorator<T> extends TypeSafeMatcher<T> {
 		@Override
 		public boolean isTrue() {
 			return true;
+		}
+
+		@Override
+		public void describeTo(Description description) {
+			description.appendText("true");
 		}
 	};
     
@@ -62,8 +66,10 @@ public class WaitForMatcherDecorator<T> extends TypeSafeMatcher<T> {
 
     @Override
     public void describeTo(Description description) {
-        description.appendText("While waiting [").appendValue(timeoutInMilliseconds)
-                .appendText("] millis it should be: ")
+        description.appendDescriptionOf(timeOutCondition)
+        		.appendText(" and ")
+        		.appendDescriptionOf(condition)
+                .appendText(" it should be: ")
                 .appendDescriptionOf(matcher);
     }
 
@@ -74,20 +80,9 @@ public class WaitForMatcherDecorator<T> extends TypeSafeMatcher<T> {
 
     @Factory
     public static <T> WaitForMatcherDecorator<? super T> withWaitFor(Matcher<? super T> matcher) {
-        return withWaitFor(matcher, DEFAULT_TIMEOUT, DEFAULT_INTERVAL);
-    }
-
-    @Factory
-    public static <T> WaitForMatcherDecorator<? super T> withWaitFor(Matcher<? super T> matcher, long timeoutInMilliseconds) {
-        return withWaitFor(matcher, timeoutInMilliseconds, DEFAULT_INTERVAL);
-    }
-
-    @Factory
-    public static <T> WaitForMatcherDecorator<? super T> withWaitFor(Matcher<? super T> matcher,
-                                             final long timeoutInMilliseconds,
-                                             long intervalInMilliseconds) {
-    	TimeoutCondition timeOutCondition = new TimeoutCondition(timeoutInMilliseconds);
-        return new WaitForMatcherDecorator<T>(matcher, timeOutCondition, intervalInMilliseconds);
+    	return new WaitForMatcherDecorator<T>(matcher, 
+    			new TimeoutCondition(DEFAULT_TIMEOUT), 
+    			DEFAULT_INTERVAL);
     }
     
     public WaitForMatcherDecorator<T> orUntil(Condition condition) {

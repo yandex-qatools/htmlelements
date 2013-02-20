@@ -9,9 +9,9 @@ import ru.yandex.qatools.htmlelements.samples.pages.MainPage;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.not;
-import static ru.yandex.qatools.htmlelements.matchers.RefreshMatcherDecorator.withPrerefresh;
-import static ru.yandex.qatools.htmlelements.matchers.WaitForMatcherDecorator.withWaitFor;
 import static ru.yandex.qatools.htmlelements.matchers.WebElementMatchers.hasText;
+import static ru.yandex.qatools.htmlelements.matchers.decorators.RefreshMatcherDecorator.withPrerefresh;
+import static ru.yandex.qatools.htmlelements.matchers.decorators.WaitForMatcherDecorator.withWaitFor;
 
 /**
  * Created with IntelliJ IDEA.
@@ -43,7 +43,7 @@ public class RefreshMatcherUsage {
         MainPage mainPage = new MainPage(driver);
         String currentText = mainPage.getSearchSample().getText();
         assertThat(mainPage.getSearchSample(),
-                withWaitFor(withPrerefresh(hasText(currentText), driver), timeoutInMilliseconds));
+                withWaitFor(withPrerefresh(hasText(currentText), driver)).withTimeout(timeoutInMilliseconds));
     }
 
     @After

@@ -1,4 +1,7 @@
-package ru.yandex.qatools.htmlelements.matchers;
+package ru.yandex.qatools.htmlelements.matchers.decorators;
+
+import org.hamcrest.Description;
+
 
 public class TimeoutCondition implements Condition {
 	private long start;
@@ -16,5 +19,10 @@ public class TimeoutCondition implements Condition {
 	@Override
 	public boolean isTrue() {
 		return System.currentTimeMillis() < start + timeoutInMilliseconds;
+	}
+
+	@Override
+	public void describeTo(Description description) {
+		description.appendText("While waiting [").appendValue(timeoutInMilliseconds).appendText("] millis");
 	}
 }
