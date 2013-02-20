@@ -76,7 +76,7 @@ public class WaitForMatcherDecorator<T> extends TypeSafeMatcher<T> {
 		return new WaitForMatcherDecorator<T>(matcher);
 	}
 
-	public WaitForMatcherDecorator<T> orUntil(final Condition condition) {
+	public WaitForMatcherDecorator<T> andWhile(final Condition condition) {
 		final Condition oldCondition = this.condition;
 		Condition newCondition = new Condition() {
 			

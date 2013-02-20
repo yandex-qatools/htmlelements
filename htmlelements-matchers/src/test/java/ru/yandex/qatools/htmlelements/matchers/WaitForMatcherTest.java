@@ -27,7 +27,7 @@ public class WaitForMatcherTest {
 
     public static final Object ANY_OBJECT = "";
     
-    private TimeoutCondition twoSecondsExpired = new TimeoutCondition(SECONDS.toMillis(2));
+    private TimeoutCondition twoSecondsNotExpired = new TimeoutCondition(SECONDS.toMillis(2));
     private Matcher<Object> matcher = mock(Matcher.class);
 
     @Test(expected = AssertionError.class)
@@ -59,8 +59,8 @@ public class WaitForMatcherTest {
     public void orUntilAddsAdditionalCondition() {
         when(matcher.matches(any())).thenReturn(false);
         
-        twoSecondsExpired.start();
-        Boolean result = withWaitFor(matcher).orUntil(twoSecondsExpired).matches(ANY_OBJECT);
+        twoSecondsNotExpired.start();
+        Boolean result = withWaitFor(matcher).andWhile(twoSecondsNotExpired).matches(ANY_OBJECT);
         
         verify(matcher, times(5)).matches(ANY_OBJECT);
         assertThat("Miracle! False now is true!", result, is(false));
@@ -79,8 +79,8 @@ public class WaitForMatcherTest {
     public void withTimeoutShouldNotOverrideCondition() {
         when(matcher.matches(any())).thenReturn(false);
         
-        twoSecondsExpired.start();
-        Boolean result = withWaitFor(matcher).orUntil(twoSecondsExpired).withTimeout(SECONDS.toMillis(5)).matches(ANY_OBJECT);
+        twoSecondsNotExpired.start();
+        Boolean result = withWaitFor(matcher).andWhile(twoSecondsNotExpired).withTimeout(SECONDS.toMillis(5)).matches(ANY_OBJECT);
         verify(matcher, times(5)).matches(ANY_OBJECT);
         assertThat("Miracle! False now is true!", result, is(false));
     }
@@ -102,9 +102,9 @@ public class WaitForMatcherTest {
         
         TimeoutCondition oneSecondExpired = new TimeoutCondition(SECONDS.toMillis(1));
         oneSecondExpired.start();
-        twoSecondsExpired.start();
+        twoSecondsNotExpired.start();
         
-        Boolean result = withWaitFor(matcher).orUntil(oneSecondExpired).orUntil(twoSecondsExpired).matches(ANY_OBJECT);
+        Boolean result = withWaitFor(matcher).andWhile(oneSecondExpired).andWhile(twoSecondsNotExpired).matches(ANY_OBJECT);
         verify(matcher, times(3)).matches(ANY_OBJECT);
         assertThat("Miracle! False now is true!", result, is(false));
     }
