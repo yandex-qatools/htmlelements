@@ -1,12 +1,13 @@
 package ru.yandex.qatools.htmlelements.matchers;
 
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static java.util.concurrent.TimeUnit.SECONDS;
+
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
-import static java.util.concurrent.TimeUnit.SECONDS;
+import org.mockito.Matchers;
 
 /**
  * User: lanwen
@@ -25,20 +26,27 @@ public class WaitForMatcherDecorator<T> extends TypeSafeMatcher<T> {
 
     private long timeoutInMilliseconds;
     private long intervalInMilliseconds;
-
+    
+    private TimeoutCondition timeOutCondition;
+    private Condition condition = new Condition() {
+		@Override
+		public boolean isTrue() {
+			return true;
+		}
+	};
+    
     public WaitForMatcherDecorator(Matcher<? super T> matcher,
-                                   long timeoutInMilliseconds,
-                                   long intervalInMilliseconds) {
-        this.matcher = matcher;
-        this.timeoutInMilliseconds = timeoutInMilliseconds;
-        this.intervalInMilliseconds = intervalInMilliseconds;
+    								TimeoutCondition timeoutCondition,
+    								long intervalInMilliseconds) {
+    	this.matcher = matcher;
+    	this.timeOutCondition = timeoutCondition;
+    	this.intervalInMilliseconds = intervalInMilliseconds;
     }
 
     @Override
     protected boolean matchesSafely(T item) {
-        long start = System.currentTimeMillis();
-        long end = start + timeoutInMilliseconds;
-        while (System.currentTimeMillis() < end) {
+    	timeOutCondition.start();
+        while (timeOutCondition.isTrue() && condition.isTrue()) {
             if (matcher.matches(item)) {
                 return true;
             }
@@ -65,21 +73,35 @@ public class WaitForMatcherDecorator<T> extends TypeSafeMatcher<T> {
     }
 
     @Factory
-    public static <T> Matcher<? super T> withWaitFor(Matcher<? super T> matcher) {
-        return new WaitForMatcherDecorator<T>(matcher, DEFAULT_TIMEOUT, DEFAULT_INTERVAL);
+    public static <T> WaitForMatcherDecorator<? super T> withWaitFor(Matcher<? super T> matcher) {
+        return withWaitFor(matcher, DEFAULT_TIMEOUT, DEFAULT_INTERVAL);
     }
 
-
     @Factory
-    public static <T> Matcher<? super T> withWaitFor(Matcher<? super T> matcher, long timeoutInMilliseconds) {
-        return new WaitForMatcherDecorator<T>(matcher, timeoutInMilliseconds, DEFAULT_INTERVAL);
+    public static <T> WaitForMatcherDecorator<? super T> withWaitFor(Matcher<? super T> matcher, long timeoutInMilliseconds) {
+        return withWaitFor(matcher, timeoutInMilliseconds, DEFAULT_INTERVAL);
     }
 
-
     @Factory
-    public static <T> Matcher<? super T> withWaitFor(Matcher<? super T> matcher,
-                                             long timeoutInMilliseconds,
+    public static <T> WaitForMatcherDecorator<? super T> withWaitFor(Matcher<? super T> matcher,
+                                             final long timeoutInMilliseconds,
                                              long intervalInMilliseconds) {
-        return new WaitForMatcherDecorator<T>(matcher, timeoutInMilliseconds, intervalInMilliseconds);
+    	TimeoutCondition timeOutCondition = new TimeoutCondition(timeoutInMilliseconds);
+        return new WaitForMatcherDecorator<T>(matcher, timeOutCondition, intervalInMilliseconds);
     }
+    
+    public WaitForMatcherDecorator<T> orUntil(Condition condition) {
+		this.condition = condition;
+		return this;
+    }
+    
+    public WaitForMatcherDecorator<T> withTimeout(final long timeoutInMilliseconds) {
+		this.timeOutCondition = new TimeoutCondition(timeoutInMilliseconds);
+		return this;
+    }
+
+	public WaitForMatcherDecorator<T> withInterval(long intervalInMilliseconds) {
+		this.intervalInMilliseconds = intervalInMilliseconds;
+		return this;
+	}
 }
