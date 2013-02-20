@@ -56,9 +56,10 @@ public class WaitForMatcherTest {
     }
     
     @Test
-    public void untilUsage() {
+    public void orUntilAddsAdditionalCondition() {
         when(matcher.matches(any())).thenReturn(false);
         
+        twoSecondsExpired.start();
         Boolean result = withWaitFor(matcher).orUntil(twoSecondsExpired).matches(ANY_OBJECT);
         
         verify(matcher, times(5)).matches(ANY_OBJECT);
@@ -66,7 +67,7 @@ public class WaitForMatcherTest {
     }
     
     @Test
-    public void withTimeOut() {
+    public void withTimeoutOverridesDefaultTimeout() {
         when(matcher.matches(any())).thenReturn(false);
         
         Boolean result = withWaitFor(matcher).withTimeout(SECONDS.toMillis(1)).matches(ANY_OBJECT);
@@ -96,14 +97,15 @@ public class WaitForMatcherTest {
     }
     
     @Test
-    public void latestConditionsShouldOverrideEarrliest() {
+    public void allConditionsShouldBeChecked() {
         when(matcher.matches(any())).thenReturn(false);
         
         TimeoutCondition oneSecondExpired = new TimeoutCondition(SECONDS.toMillis(1));
         oneSecondExpired.start();
         twoSecondsExpired.start();
+        
         Boolean result = withWaitFor(matcher).orUntil(oneSecondExpired).orUntil(twoSecondsExpired).matches(ANY_OBJECT);
-        verify(matcher, times(5)).matches(ANY_OBJECT);
+        verify(matcher, times(3)).matches(ANY_OBJECT);
         assertThat("Miracle! False now is true!", result, is(false));
     }
 }

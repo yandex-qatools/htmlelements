@@ -9,7 +9,6 @@ public class TimeoutCondition implements Condition {
 	
 	public TimeoutCondition(long timeoutInMilliseconds) {
 		this.timeoutInMilliseconds = timeoutInMilliseconds;
-		start();
 	}
 	
 	public void start() {
