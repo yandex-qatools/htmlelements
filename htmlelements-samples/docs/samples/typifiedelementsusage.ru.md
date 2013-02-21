@@ -1,4 +1,13 @@
-[&larr; Повторное использование элементов](https://github.com/yandex-qatools/htmlelements/blob/master/htmlelements-samples/docs/samples/reuseofelements.ru.md)
+<table width="100%" bordercolor="transparent" border="0">
+  <tr >
+    <td width="50%">
+      <a href="https://github.com/yandex-qatools/htmlelements/blob/master/htmlelements-samples/docs/samples/reuseofelements.ru.md">&larr; Повторное использование элементов<a/>
+    </td>
+    <td width="50%" align="right">
+      <a href="https://github.com/yandex-qatools/htmlelements/blob/master/htmlelements-samples/docs/samples/matchersusage.ru.md">Использование матчеров &rarr;<a/>
+    </td>
+  </tr>
+</table>
 ***
 
 Использование типизированных элементов
@@ -173,5 +182,13 @@ public class Suggest extends TypifiedElement {
 
 
 ***
-
-[Использование матчеров &rarr;](https://github.com/yandex-qatools/htmlelements/blob/master/htmlelements-samples/docs/samples/matchersusage.ru.md)
+<table width="100%" bordercolor="transparent" border="0">
+  <tr >
+    <td width="50%">
+      <a href="https://github.com/yandex-qatools/htmlelements/blob/master/htmlelements-samples/docs/samples/reuseofelements.ru.md">&larr; Повторное использование элементов<a/>
+    </td>
+    <td width="50%" align="right">
+      <a href="https://github.com/yandex-qatools/htmlelements/blob/master/htmlelements-samples/docs/samples/matchersusage.ru.md">Использование матчеров &rarr;<a/>
+    </td>
+  </tr>
+</table>
