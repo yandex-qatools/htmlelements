@@ -43,7 +43,6 @@ public class WaitForMatcherDecorator<T> extends TypeSafeMatcher<T> {
 
 	@Override
 	protected boolean matchesSafely(T item) {
-		timeOutCondition.start();
 		while (timeOutCondition.isTrue() && condition.isTrue()) {
 			if (matcher.matches(item)) {
 				return true;

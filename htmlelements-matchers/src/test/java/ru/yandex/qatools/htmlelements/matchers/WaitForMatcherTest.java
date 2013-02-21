@@ -1,5 +1,18 @@
 package ru.yandex.qatools.htmlelements.matchers;
 
+import static com.google.common.base.Joiner.on;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.startsWith;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static ru.yandex.qatools.htmlelements.matchers.decorators.WaitForMatcherDecorator.withWaitFor;
+
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.StringDescription;
@@ -7,18 +20,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
 import ru.yandex.qatools.htmlelements.matchers.decorators.Condition;
 import ru.yandex.qatools.htmlelements.matchers.decorators.TimeoutCondition;
-
-import static com.google.common.base.Joiner.on;
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
-import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
-import static org.hamcrest.Matchers.startsWith;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.*;
-import static ru.yandex.qatools.htmlelements.matchers.decorators.WaitForMatcherDecorator.withWaitFor;
 
 /**
  * Created with IntelliJ IDEA.
@@ -65,7 +69,6 @@ public class WaitForMatcherTest {
     public void orUntilAddsAdditionalCondition() {
         when(matcher.matches(any())).thenReturn(false);
         
-        twoSecondsNotExpired.start();
         Boolean result = withWaitFor(matcher).andWhile(twoSecondsNotExpired).matches(ANY_OBJECT);
         
         verify(matcher, times(5)).matches(ANY_OBJECT);
@@ -85,7 +88,6 @@ public class WaitForMatcherTest {
     public void withTimeoutShouldNotOverrideCondition() {
         when(matcher.matches(any())).thenReturn(false);
         
-        twoSecondsNotExpired.start();
         Boolean result = withWaitFor(matcher).andWhile(twoSecondsNotExpired).withTimeout(SECONDS.toMillis(5)).matches(ANY_OBJECT);
         verify(matcher, times(5)).matches(ANY_OBJECT);
         assertThat("Miracle! False now is true!", result, is(false));
@@ -107,8 +109,6 @@ public class WaitForMatcherTest {
         when(matcher.matches(any())).thenReturn(false);
         
         TimeoutCondition oneSecondNotExpired = new TimeoutCondition(SECONDS.toMillis(1));
-        oneSecondNotExpired.start();
-        twoSecondsNotExpired.start();
         
         Boolean result = withWaitFor(matcher).andWhile(oneSecondNotExpired).andWhile(twoSecondsNotExpired).matches(ANY_OBJECT);
         verify(matcher, times(3)).matches(ANY_OBJECT);

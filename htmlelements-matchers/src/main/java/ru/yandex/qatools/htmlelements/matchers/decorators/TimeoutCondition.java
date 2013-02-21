@@ -6,17 +6,18 @@ import org.hamcrest.Description;
 public class TimeoutCondition implements Condition {
 	private long start;
 	private long timeoutInMilliseconds;
+	private boolean started = false;
 	
 	public TimeoutCondition(long timeoutInMilliseconds) {
 		this.timeoutInMilliseconds = timeoutInMilliseconds;
 	}
-	
-	public void start() {
-		start = System.currentTimeMillis();
-	}
 
 	@Override
 	public boolean isTrue() {
+		if (!started) {
+			start = System.currentTimeMillis();
+			started = true;
+		}
 		return System.currentTimeMillis() < start + timeoutInMilliseconds;
 	}
 
