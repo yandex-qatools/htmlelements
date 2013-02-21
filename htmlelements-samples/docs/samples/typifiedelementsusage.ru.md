@@ -1,17 +1,17 @@
 <table width="100%" bordercolor="transparent" border="0">
   <tr >
     <td width="50%">
-      <a href="https://github.com/yandex-qatools/htmlelements/blob/master/htmlelements-samples/docs/samples/reuseofelements.ru.md">&larr; Повторное использование элементов<a/>
+      <a href="https://github.com/yandex-qatools/htmlelements/blob/master/htmlelements-samples/docs/samples/reuseofelements.ru.md">&larr; 2. Повторное использование элементов<a/>
     </td>
     <td width="50%" align="right">
-      <a href="https://github.com/yandex-qatools/htmlelements/blob/master/htmlelements-samples/docs/samples/matchersusage.ru.md">Использование матчеров &rarr;<a/>
+      <a href="https://github.com/yandex-qatools/htmlelements/blob/master/htmlelements-samples/docs/samples/matchersusage.ru.md">4. Использование матчеров &rarr;<a/>
     </td>
   </tr>
 </table>
 ***
 
-Использование типизированных элементов
-======================================
+3. Использование типизированных элементов
+=========================================
 
 При тестировании веб-интерфейсов приходится взаимодействовать со множеством различных элементов на страницах.
 В Selenium WebDriver взаимодействие с любым элементом происходит при помощи универсального интерфейса
@@ -185,10 +185,10 @@ public class Suggest extends TypifiedElement {
 <table width="100%" bordercolor="transparent" border="0">
   <tr >
     <td width="50%">
-      <a href="https://github.com/yandex-qatools/htmlelements/blob/master/htmlelements-samples/docs/samples/reuseofelements.ru.md">&larr; Повторное использование элементов<a/>
+      <a href="https://github.com/yandex-qatools/htmlelements/blob/master/htmlelements-samples/docs/samples/reuseofelements.ru.md">&larr; 2. Повторное использование элементов<a/>
     </td>
     <td width="50%" align="right">
-      <a href="https://github.com/yandex-qatools/htmlelements/blob/master/htmlelements-samples/docs/samples/matchersusage.ru.md">Использование матчеров &rarr;<a/>
+      <a href="https://github.com/yandex-qatools/htmlelements/blob/master/htmlelements-samples/docs/samples/matchersusage.ru.md">4. Использование матчеров &rarr;<a/>
     </td>
   </tr>
 </table>
