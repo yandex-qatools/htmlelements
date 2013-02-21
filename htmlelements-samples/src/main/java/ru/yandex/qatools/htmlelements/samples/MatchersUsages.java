@@ -8,8 +8,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.yandex.qatools.htmlelements.samples.pages.MainPage;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static ru.yandex.qatools.htmlelements.matchers.WaitForMatcherDecorator.withWaitFor;
 import static ru.yandex.qatools.htmlelements.matchers.WebElementMatchers.exists;
+import static ru.yandex.qatools.htmlelements.matchers.decorators.WaitForMatcherDecorator.withWaitFor;
 
 /**
  * User: eroshenkoam
