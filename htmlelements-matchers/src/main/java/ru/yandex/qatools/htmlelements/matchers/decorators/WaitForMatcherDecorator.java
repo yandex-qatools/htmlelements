@@ -1,12 +1,12 @@
 package ru.yandex.qatools.htmlelements.matchers.decorators;
 
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
-import static java.util.concurrent.TimeUnit.SECONDS;
-
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 
 /**
@@ -78,22 +78,21 @@ public class WaitForMatcherDecorator<T> extends TypeSafeMatcher<T> {
 
 	public WaitForMatcherDecorator<T> andWhile(final Condition condition) {
 		final Condition oldCondition = this.condition;
-		Condition newCondition = new Condition() {
-			
-			@Override
-			public void describeTo(Description description) {
-				description.appendDescriptionOf(oldCondition)
-								.appendText(" or ")
-								.appendDescriptionOf(condition);
-			}
-			
-			@Override
-			public boolean isTrue() {
-				return oldCondition.isTrue() && condition.isTrue();
-			}
-		};
-		
-		this.condition = newCondition;
+
+        this.condition = new Condition() {
+
+            @Override
+            public void describeTo(Description description) {
+                description.appendDescriptionOf(oldCondition)
+                                .appendText(" or ")
+                                .appendDescriptionOf(condition);
+            }
+
+            @Override
+            public boolean isTrue() {
+                return oldCondition.isTrue() && condition.isTrue();
+            }
+        };
 		return this;
 	}
 
