@@ -24,7 +24,7 @@ public class WaitForMatcherDecorator<T> extends TypeSafeMatcher<T> {
 
 	private long intervalInMilliseconds;
 
-	private TimeoutCondition timeOutCondition;
+	private Condition timeOutCondition;
 	private Condition condition = new Condition() {		
 		@Override
 		public void describeTo(Description description) {}

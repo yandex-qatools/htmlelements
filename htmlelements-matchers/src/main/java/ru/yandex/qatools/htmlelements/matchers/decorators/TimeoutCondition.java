@@ -2,7 +2,6 @@ package ru.yandex.qatools.htmlelements.matchers.decorators;
 
 import org.hamcrest.Description;
 
-
 public class TimeoutCondition implements Condition {
 	private long start;
 	private long timeoutInMilliseconds;
