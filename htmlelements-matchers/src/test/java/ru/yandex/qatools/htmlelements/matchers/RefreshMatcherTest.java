@@ -12,7 +12,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.*;
 import static org.openqa.selenium.WebDriver.Navigation;
-import static ru.yandex.qatools.htmlelements.matchers.decorators.RefreshMatcherDecorator.withPrerefresh;
+import static ru.yandex.qatools.htmlelements.matchers.MatcherDecorators.withPrerefresh;
 
 /**
  * Created with IntelliJ IDEA.

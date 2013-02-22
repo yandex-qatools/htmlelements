@@ -11,7 +11,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static ru.yandex.qatools.htmlelements.matchers.decorators.WaitForMatcherDecorator.withWaitFor;
+import static ru.yandex.qatools.htmlelements.matchers.MatcherDecorators.withWaitFor;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;

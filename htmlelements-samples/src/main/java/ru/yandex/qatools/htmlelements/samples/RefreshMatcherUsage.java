@@ -10,8 +10,8 @@ import ru.yandex.qatools.htmlelements.samples.pages.MainPage;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.not;
 import static ru.yandex.qatools.htmlelements.matchers.WebElementMatchers.hasText;
-import static ru.yandex.qatools.htmlelements.matchers.decorators.RefreshMatcherDecorator.withPrerefresh;
-import static ru.yandex.qatools.htmlelements.matchers.decorators.WaitForMatcherDecorator.withWaitFor;
+import static ru.yandex.qatools.htmlelements.matchers.MatcherDecorators.withPrerefresh;
+import static ru.yandex.qatools.htmlelements.matchers.MatcherDecorators.withWaitFor;
 
 /**
  * Created with IntelliJ IDEA.
