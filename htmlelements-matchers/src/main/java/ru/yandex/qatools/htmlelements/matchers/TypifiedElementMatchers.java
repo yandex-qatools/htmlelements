@@ -6,6 +6,10 @@ import ru.yandex.qatools.htmlelements.element.CheckBox;
 import ru.yandex.qatools.htmlelements.element.Radio;
 import ru.yandex.qatools.htmlelements.element.Select;
 import ru.yandex.qatools.htmlelements.element.TextInput;
+import ru.yandex.qatools.htmlelements.matchers.common.HasEnteredTextMatcher;
+import ru.yandex.qatools.htmlelements.matchers.common.HasSelectedOptionMatcher;
+import ru.yandex.qatools.htmlelements.matchers.common.HasSelectedRadioButtonMatcher;
+import ru.yandex.qatools.htmlelements.matchers.common.IsCheckBoxSelectedMatcher;
 
 /**
  * Contains <a href="http://code.google.com/p/hamcrest/">matchers</a> for typified elements

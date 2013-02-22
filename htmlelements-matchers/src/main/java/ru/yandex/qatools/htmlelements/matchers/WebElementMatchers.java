@@ -4,6 +4,9 @@ import org.hamcrest.Matcher;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.lift.match.AttributeMatcher;
 import org.openqa.selenium.lift.match.TextMatcher;
+import ru.yandex.qatools.htmlelements.matchers.common.DoesElementExistMatcher;
+import ru.yandex.qatools.htmlelements.matchers.common.IsElementDisplayedMatcher;
+import ru.yandex.qatools.htmlelements.matchers.common.IsElementEnabledMatcher;
 
 import static org.hamcrest.Matchers.is;
 

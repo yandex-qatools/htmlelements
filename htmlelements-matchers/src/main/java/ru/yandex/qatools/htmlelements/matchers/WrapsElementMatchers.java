@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.lift.match.AttributeMatcher;
 import org.openqa.selenium.lift.match.TextMatcher;
+import ru.yandex.qatools.htmlelements.matchers.common.WrapsElementMatcher;
 
 import static org.hamcrest.Matchers.is;
 
