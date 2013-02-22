@@ -13,10 +13,8 @@ import org.openqa.selenium.WebDriver;
  * Time: 17:37
  */
 public class RefreshMatcherDecorator<T> extends TypeSafeMatcher<T> {
-
     private WebDriver driver;
     private Matcher<? super T> matcher;
-
 
     @Override
     protected boolean matchesSafely(T item) {
@@ -29,23 +27,19 @@ public class RefreshMatcherDecorator<T> extends TypeSafeMatcher<T> {
         this.matcher = matcher;
     }
 
-
     @Override
     public void describeTo(Description description) {
         description.appendText("(after refresh) ").appendDescriptionOf(matcher);
 
     }
 
-
     @Override
     protected void describeMismatchSafely(T item, Description mismatchDescription) {
         matcher.describeMismatch(item, mismatchDescription);
     }
 
-
     @Factory
     public static <T> Matcher<? super T> withPrerefresh(Matcher<? super T> matcher, WebDriver driver) {
         return new RefreshMatcherDecorator<T>(matcher, driver);
     }
-
 }
