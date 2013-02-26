@@ -19,6 +19,7 @@ public class HtmlElementListItemNamesTest {
         for (int i = 0; i < NamedHtmlElementListPage.getCompaniesNumber(); i++) {
             HtmlElement item = page.getPopularCompaniesList().get(i);
             String expectedName = String.format("%s [%d]", NamedHtmlElementListPage.getPopularCompaniesListName(), i);
+
             assertThat(String.format("Item should have name %s", expectedName),
                     item.getName(), is(expectedName));
         }
