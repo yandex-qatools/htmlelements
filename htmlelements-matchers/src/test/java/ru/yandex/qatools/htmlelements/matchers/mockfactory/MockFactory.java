@@ -59,7 +59,7 @@ public class MockFactory {
 
     public static TextInput mockTextInput(String enteredText) {
         TextInput textInput = mock(TextInput.class);
-        when(textInput.getEnteredText()).thenReturn(enteredText);
+        when(textInput.getText()).thenReturn(enteredText);
         return textInput;
     }
 
