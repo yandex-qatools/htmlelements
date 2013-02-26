@@ -85,7 +85,12 @@ public class HtmlElementDecorator extends DefaultFieldDecorator {
     }
 
     private boolean isDecoratableField(Field field) {
-        return (isWebElement(field) || isWebElementList(field) || isHtmlElement(field) || isHtmlElementList(field) ||
+        // TODO Protecting wrapped element from initialization basing on its name is not good. Think of a better way.
+        if (isWebElement(field) && !field.getName().equals("wrappedElement")) {
+            return true;
+        }
+
+        return (isWebElementList(field) || isHtmlElement(field) || isHtmlElementList(field) ||
                 isTypifiedElement(field) || isTypifiedElementList(field));
     }
 
