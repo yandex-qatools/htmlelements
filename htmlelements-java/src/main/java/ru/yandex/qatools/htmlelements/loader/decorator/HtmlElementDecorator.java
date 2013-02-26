@@ -85,27 +85,8 @@ public class HtmlElementDecorator extends DefaultFieldDecorator {
     }
 
     private boolean isDecoratableField(Field field) {
-        if (isWebElement(field) || isWebElementList(field) || isTypifiedElement(field) ||
-                isTypifiedElementList(field)) {
-            if (hasFindByAnnotation(field) || hasFindBysAnnotation(field)) {
-                return true;
-            }
-        }
-
-        if (isHtmlElement(field)) {
-            if (hasFindByAnnotation(field) || hasFindBysAnnotation(field) || hasBlockAnnotation(field.getType())) {
-                return true;
-            }
-        }
-
-        if (isHtmlElementList(field)) {
-            if (hasFindByAnnotation(field) || hasFindBysAnnotation(field) ||
-                    hasBlockAnnotation(getGenericParameterClass(field))) {
-                return true;
-            }
-        }
-
-        return false;
+        return (isWebElement(field) || isWebElementList(field) || isHtmlElement(field) || isHtmlElementList(field) ||
+                isTypifiedElement(field) || isTypifiedElementList(field));
     }
 
     private <T extends TypifiedElement> T decorateTypifiedElement(Class<T> elementClass, ClassLoader loader,
