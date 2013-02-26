@@ -13,7 +13,7 @@ import ru.yandex.qatools.htmlelements.pagefactory.AnnotationsHandler;
  *         Date: 20.08.12
  */
 public class HtmlElementClassAnnotationsHandler<T extends HtmlElement> extends AnnotationsHandler {
-    Class<T> htmlElementClass;
+    private final Class<T> htmlElementClass;
 
     public HtmlElementClassAnnotationsHandler(Class<T> htmlElementClass) {
         this.htmlElementClass = htmlElementClass;

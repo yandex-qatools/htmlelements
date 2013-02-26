@@ -48,11 +48,21 @@ public class HtmlElementFieldAnnotationsHandler extends DefaultFieldAnnotationsH
             return buildByFromFindBy(findBy);
         }
 
-        if (getField().getType().isAnnotationPresent(Block.class)) {
-            Block block = getField().getType().getAnnotation(Block.class);
-            FindBy findBy = block.value();
-            return buildByFromFindBy(findBy);
+        Class<?> fieldClass = getField().getType();
+        while (fieldClass != Object.class) {
+            if (fieldClass.isAnnotationPresent(Block.class)) {
+                Block block = fieldClass.getAnnotation(Block.class);
+                FindBy findBy = block.value();
+                return buildByFromFindBy(findBy);
+            }
+            fieldClass = fieldClass.getSuperclass();
         }
+
+//        if (getField().getType().isAnnotationPresent(Block.class)) {
+//            Block block = getField().getType().getAnnotation(Block.class);
+//            FindBy findBy = block.value();
+//            return buildByFromFindBy(findBy);
+//        }
 
         return buildByFromDefault();
     }
