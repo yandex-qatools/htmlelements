@@ -5,6 +5,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
+import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
 import ru.yandex.qatools.htmlelements.pagefactory.DefaultFieldAnnotationsHandler;
 
 import java.lang.reflect.Field;
@@ -80,15 +81,25 @@ public class HtmlElementFieldAnnotationsHandler extends DefaultFieldAnnotationsH
             return buildByFromFindBy(findBy);
         }
 
-        @SuppressWarnings("unchecked")
-        Class<HtmlElement> listParameterClass = (Class<HtmlElement>) getGenericParameterClass(getField());
-        if (listParameterClass.isAnnotationPresent(Block.class)) {
-            Block block = listParameterClass.getAnnotation(Block.class);
-            FindBy findBy = block.value();
-            return buildByFromFindBy(findBy);
+        Class<?> listParameterClass = getGenericParameterClass(getField());
+        while (listParameterClass != Object.class) {
+            if (listParameterClass.isAnnotationPresent(Block.class)) {
+                Block block = listParameterClass.getAnnotation(Block.class);
+                FindBy findBy = block.value();
+                return buildByFromFindBy(findBy);
+            }
+            listParameterClass = listParameterClass.getSuperclass();
         }
 
-        throw new IllegalArgumentException("Cannot determine how to locate element " + getField());
+//        @SuppressWarnings("unchecked")
+//        Class<HtmlElement> listParameterClass = (Class<HtmlElement>) getGenericParameterClass(getField());
+//        if (listParameterClass.isAnnotationPresent(Block.class)) {
+//            Block block = listParameterClass.getAnnotation(Block.class);
+//            FindBy findBy = block.value();
+//            return buildByFromFindBy(findBy);
+//        }
+
+        throw new HtmlElementsException(String.format("Cannot determine how to locate element %s", getField()));
     }
 
     private By buildByFromDefaultAnnotations() {

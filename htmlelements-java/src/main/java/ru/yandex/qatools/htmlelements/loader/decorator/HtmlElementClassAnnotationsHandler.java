@@ -31,7 +31,7 @@ public class HtmlElementClassAnnotationsHandler<T extends HtmlElement> extends A
             clazz = clazz.getSuperclass();
         }
 
-        throw new HtmlElementsException("Unable to initialize element, Block annotation is not present");
+        throw new HtmlElementsException(String.format("Cannot determine how to locate instance of %s", htmlElementClass));
 
 //        if (!htmlElementClass.isAnnotationPresent(Block.class)) {
 //            throw new HtmlElementsException("Unable to initialize element, Block annotation is not present");
