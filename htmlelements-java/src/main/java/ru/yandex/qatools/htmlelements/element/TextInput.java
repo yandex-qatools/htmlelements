@@ -50,4 +50,13 @@ public class TextInput extends TypifiedElement {
         }
         return enteredText;
     }
+
+    /**
+     * Same as {@code getEnteredText()}.
+     *
+     * @return Text entered into the text input.
+     */
+    public String getText() {
+        return getEnteredText();
+    }
 }
