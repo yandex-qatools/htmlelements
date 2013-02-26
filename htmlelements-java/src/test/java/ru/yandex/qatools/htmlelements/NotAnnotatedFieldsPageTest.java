@@ -1,6 +1,7 @@
 package ru.yandex.qatools.htmlelements;
 
 import org.junit.Test;
+import org.openqa.selenium.By;
 import ru.yandex.qatools.htmlelements.testpages.NotAnnotatedFieldsPage;
 
 import static org.hamcrest.core.IsNull.nullValue;
@@ -15,23 +16,23 @@ import static org.junit.Assert.assertThat;
 public class NotAnnotatedFieldsPageTest {
     private NotAnnotatedFieldsPage page = new NotAnnotatedFieldsPage();
 
-    @Test
-    public void notAnnotatedWebElementMustBeNull() {
-        assertThat(page.getWebElement(), nullValue());
+    @Test(expected = NullPointerException.class)
+    public void notAnnotatedWebElementShouldThrowExceptionOnAnyMethodCall() {
+        page.getWebElement().getTagName();
     }
 
-    @Test
-    public void notAnnotatedHtmlElementMustBeNull() {
-        assertThat(page.getHtmlElement(), nullValue());
+    @Test(expected = NullPointerException.class)
+    public void notAnnotatedHtmlElementShouldThrowExceptionOnAnyMethodCall() {
+        page.getHtmlElement().getTagName();
     }
 
-    @Test
-    public void notAnnotatedCheckBoxMustBeNull() {
-        assertThat(page.getCheckBox(), nullValue());
+    @Test(expected = NullPointerException.class)
+    public void notAnnotatedCheckBoxShouldThrowExceptionOnAnyMethodCall() {
+        page.getCheckBox().isSelected();
     }
 
-    @Test
-    public void notAnnotatedSelectMustBeNull() {
-        assertThat(page.getSelect(), nullValue());
+    @Test(expected = NullPointerException.class)
+    public void notAnnotatedSelectShouldThrowExceptionOnAnyMethodCall() {
+        page.getSelect().isMultiple();
     }
 }
