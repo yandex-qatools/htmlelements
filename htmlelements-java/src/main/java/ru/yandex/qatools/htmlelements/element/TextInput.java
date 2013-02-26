@@ -35,11 +35,23 @@ public class TextInput extends TypifiedElement {
     }
 
     /**
+     * @deprecated Use getText() instead.
+     *
      * Retrieves the text entered into this text input.
      *
      * @return Text entered into the text input.
      */
+    @Deprecated
     public String getEnteredText() {
+        return getText();
+    }
+
+    /**
+     * Retrieves the text entered into this text input.
+     *
+     * @return Text entered into the text input.
+     */
+    public String getText() {
         if ("textarea".equals(getWrappedElement().getTagName())) {
             return getWrappedElement().getText();
         }
@@ -49,14 +61,5 @@ public class TextInput extends TypifiedElement {
             return "";
         }
         return enteredText;
-    }
-
-    /**
-     * Same as {@code getEnteredText()}.
-     *
-     * @return Text entered into the text input.
-     */
-    public String getText() {
-        return getEnteredText();
     }
 }
