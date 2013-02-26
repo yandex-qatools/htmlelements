@@ -11,7 +11,7 @@ import ru.yandex.qatools.htmlelements.matchers.decorators.WaitForMatcherDecorato
  */
 public class MatcherDecorators {
 
-    public static <T> WaitForMatcherDecorator<? super T> withWaitFor(Matcher<? super T> matcher) {
+    public static <T> WaitForMatcherDecorator<T> withWaitFor(Matcher<? super T> matcher) {
         return new WaitForMatcherDecorator<T>(matcher);
     }
 

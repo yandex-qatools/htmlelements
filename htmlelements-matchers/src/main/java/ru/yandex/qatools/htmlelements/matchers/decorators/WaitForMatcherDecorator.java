@@ -71,7 +71,7 @@ public class WaitForMatcherDecorator<T> extends TypeSafeMatcher<T> {
 	}
 
 	@Factory
-	public static <T> WaitForMatcherDecorator<? super T> withWaitFor(Matcher<? super T> matcher) {
+	public static <T> WaitForMatcherDecorator<T> withWaitFor(Matcher<? super T> matcher) {
 		return new WaitForMatcherDecorator<T>(matcher);
 	}
 
