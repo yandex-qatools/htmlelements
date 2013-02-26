@@ -21,11 +21,23 @@ public class HtmlElementClassAnnotationsHandler<T extends HtmlElement> extends A
 
     @Override
     public By buildBy() {
-        if (!htmlElementClass.isAnnotationPresent(Block.class)) {
-            throw new HtmlElementsException("Unable to initialize element, Block annotation is not present");
+        Class<?> clazz = htmlElementClass;
+
+        while (clazz != Object.class) {
+            if (clazz.isAnnotationPresent(Block.class)) {
+                Block block = clazz.getAnnotation(Block.class);
+                return buildByFromFindBy(block.value());
+            }
+            clazz = clazz.getSuperclass();
         }
-        Block block = htmlElementClass.getAnnotation(Block.class);
-        return buildByFromFindBy(block.value());
+
+        throw new HtmlElementsException("Unable to initialize element, Block annotation is not present");
+
+//        if (!htmlElementClass.isAnnotationPresent(Block.class)) {
+//            throw new HtmlElementsException("Unable to initialize element, Block annotation is not present");
+//        }
+//        Block block = htmlElementClass.getAnnotation(Block.class);
+//        return buildByFromFindBy(block.value());
     }
 
     @Override
