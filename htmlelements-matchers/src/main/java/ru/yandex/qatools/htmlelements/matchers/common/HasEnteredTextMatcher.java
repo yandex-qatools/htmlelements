@@ -23,7 +23,7 @@ public class HasEnteredTextMatcher extends TypeSafeMatcher<TextInput> {
 
     @Override
     protected boolean matchesSafely(TextInput textInput) {
-        return matcher.matches(textInput.getEnteredText());
+        return matcher.matches(textInput.getText());
     }
 
     @Override
