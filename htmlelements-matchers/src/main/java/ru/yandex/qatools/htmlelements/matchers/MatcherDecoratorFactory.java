@@ -7,6 +7,9 @@ import ru.yandex.qatools.htmlelements.matchers.decorators.ActionMatcherDecorator
 import ru.yandex.qatools.htmlelements.matchers.decorators.Condition;
 import ru.yandex.qatools.htmlelements.matchers.decorators.ConditionMatcherDecorator;
 
+import static ru.yandex.qatools.htmlelements.matchers.decorators.ActionMatcherDecorator.decorateMatcherWithAction;
+import static ru.yandex.qatools.htmlelements.matchers.decorators.ConditionMatcherDecorator.decorateMatcherWithCondition;
+
 /**
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 28.02.13
@@ -23,10 +26,10 @@ public class MatcherDecoratorFactory<T> {
     }
 
     public Matcher<T> after(Action action) {
-        return new ActionMatcherDecorator<T>(matcher, action);
+        return decorateMatcherWithAction(matcher, action);
     }
 
     public Matcher<T> inCase(Condition condition) {
-        return new ConditionMatcherDecorator<T>(matcher, condition);
+        return decorateMatcherWithCondition(matcher, condition);
     }
 }

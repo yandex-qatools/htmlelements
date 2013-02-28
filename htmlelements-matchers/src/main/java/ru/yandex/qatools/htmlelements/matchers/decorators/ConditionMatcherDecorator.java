@@ -1,6 +1,7 @@
 package ru.yandex.qatools.htmlelements.matchers.decorators;
 
 import org.hamcrest.Description;
+import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
@@ -12,7 +13,7 @@ public class ConditionMatcherDecorator<T> extends TypeSafeMatcher<T> {
     private final Matcher<? super T> matcher;
     private final Condition condition;
 
-    public ConditionMatcherDecorator(Matcher<? super T> matcher, Condition condition) {
+    private ConditionMatcherDecorator(Matcher<? super T> matcher, Condition condition) {
         this.matcher = matcher;
         this.condition = condition;
     }
@@ -35,5 +36,10 @@ public class ConditionMatcherDecorator<T> extends TypeSafeMatcher<T> {
     protected void describeMismatchSafely(T item, Description mismatchDescription) {
         matcher.describeMismatch(item, mismatchDescription);
         mismatchDescription.appendText(" after ").appendDescriptionOf(condition);
+    }
+
+    @Factory
+    public static <T> Matcher<T> decorateMatcherWithCondition(Matcher<? super T> matcher, Condition condition) {
+        return new ConditionMatcherDecorator<T>(matcher, condition);
     }
 }
