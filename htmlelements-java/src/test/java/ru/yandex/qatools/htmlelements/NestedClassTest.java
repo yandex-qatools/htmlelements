@@ -49,7 +49,6 @@ public class NestedClassTest {
     public class NestedHtmlElement extends HtmlElement {
         @FindBy(className = "link")
         public NestedTypifiedElement link;
-
     }
 
     public class NestedTypifiedElement extends TypifiedElement {

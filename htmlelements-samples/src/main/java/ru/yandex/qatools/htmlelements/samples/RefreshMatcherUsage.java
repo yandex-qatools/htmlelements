@@ -10,8 +10,6 @@ import ru.yandex.qatools.htmlelements.samples.pages.MainPage;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.not;
 import static ru.yandex.qatools.htmlelements.matchers.WebElementMatchers.hasText;
-import static ru.yandex.qatools.htmlelements.matchers.MatcherDecorators.withPrerefresh;
-import static ru.yandex.qatools.htmlelements.matchers.MatcherDecorators.withWaitFor;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,35 +17,35 @@ import static ru.yandex.qatools.htmlelements.matchers.MatcherDecorators.withWait
  * Date: 12.02.13
  * Time: 0:53
  */
-public class RefreshMatcherUsage {
-
-    public static final String REQUEST = "test";
-    private WebDriver driver = new FirefoxDriver();
-
-    @Before
-    public void openingThePage() {
-        driver.get("http://www.yandex.ru");
-    }
-
-    @Test
-    public void refreshingBeforeMatch() {
-        MainPage mainPage = new MainPage(driver);
-        String currentText = mainPage.getSearchSample().getText();
-        assertThat(mainPage.getSearchSample(), withPrerefresh(not(hasText(currentText)), driver));
-    }
-
-    @Test
-    public void howFailMessageLooksLike() {
-        int timeoutInMilliseconds = 1000;
-
-        MainPage mainPage = new MainPage(driver);
-        String currentText = mainPage.getSearchSample().getText();
-        assertThat(mainPage.getSearchSample(),
-                withWaitFor(withPrerefresh(hasText(currentText), driver)).withTimeout(timeoutInMilliseconds));
-    }
-
-    @After
-    public void tearDownDriver() throws Exception {
-        driver.quit();
-    }
-}
+//public class RefreshMatcherUsage {
+//
+//    public static final String REQUEST = "test";
+//    private WebDriver driver = new FirefoxDriver();
+//
+//    @Before
+//    public void openingThePage() {
+//        driver.get("http://www.yandex.ru");
+//    }
+//
+//    @Test
+//    public void refreshingBeforeMatch() {
+//        MainPage mainPage = new MainPage(driver);
+//        String currentText = mainPage.getSearchSample().getText();
+//        assertThat(mainPage.getSearchSample(), withPrerefresh(not(hasText(currentText)), driver));
+//    }
+//
+//    @Test
+//    public void howFailMessageLooksLike() {
+//        int timeoutInMilliseconds = 1000;
+//
+//        MainPage mainPage = new MainPage(driver);
+//        String currentText = mainPage.getSearchSample().getText();
+//        assertThat(mainPage.getSearchSample(),
+//                withWaitFor(withPrerefresh(hasText(currentText), driver)).withTimeout(timeoutInMilliseconds));
+//    }
+//
+//    @After
+//    public void tearDownDriver() throws Exception {
+//        driver.quit();
+//    }
+//}

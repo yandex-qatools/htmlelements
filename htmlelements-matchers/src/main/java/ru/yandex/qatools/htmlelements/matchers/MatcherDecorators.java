@@ -3,7 +3,7 @@ package ru.yandex.qatools.htmlelements.matchers;
 import org.hamcrest.Matcher;
 import org.openqa.selenium.WebDriver;
 import ru.yandex.qatools.htmlelements.matchers.decorators.RefreshMatcherDecorator;
-import ru.yandex.qatools.htmlelements.matchers.decorators.WaitForMatcherDecorator;
+//import ru.yandex.qatools.htmlelements.matchers.decorators.WaitForMatcherDecorator;
 
 /**
  * @author Alexander Tolmachev starlight@yandex-team.ru
@@ -11,11 +11,11 @@ import ru.yandex.qatools.htmlelements.matchers.decorators.WaitForMatcherDecorato
  */
 public class MatcherDecorators {
 
-    public static <T> WaitForMatcherDecorator<T> withWaitFor(Matcher<? super T> matcher) {
-        return new WaitForMatcherDecorator<T>(matcher);
-    }
-
-    public static <T> Matcher<? super T> withPrerefresh(Matcher<? super T> matcher, WebDriver driver) {
-        return new RefreshMatcherDecorator<T>(matcher, driver);
-    }
+//    public static <T> WaitForMatcherDecorator<T> withWaitFor(Matcher<? super T> matcher) {
+//        return new WaitForMatcherDecorator<T>(matcher);
+//    }
+//
+//    public static <T> Matcher<? super T> withPrerefresh(Matcher<? super T> matcher, WebDriver driver) {
+//        return new RefreshMatcherDecorator<T>(matcher, driver);
+//    }
 }
