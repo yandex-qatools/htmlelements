@@ -9,6 +9,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.WebDriver;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.both;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.*;
 import static org.openqa.selenium.WebDriver.Navigation;

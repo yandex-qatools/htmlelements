@@ -36,7 +36,7 @@ public class RefreshMatcherUsage {
     }
 
     /**
-     * This test should fail
+     * This test should fail.
      */
     @Test
     public void showHowFailMessageLooks() {
