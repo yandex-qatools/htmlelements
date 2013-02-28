@@ -1,28 +1,5 @@
 package ru.yandex.qatools.htmlelements.matchers;
 
-import static com.google.common.base.Joiner.on;
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
-import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.startsWith;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
-import org.hamcrest.StringDescription;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-
-import ru.yandex.qatools.htmlelements.matchers.decorators.Condition;
-import ru.yandex.qatools.htmlelements.matchers.decorators.TimeoutCondition;
-
 /**
  * Created with IntelliJ IDEA.
  * User: lanwen
