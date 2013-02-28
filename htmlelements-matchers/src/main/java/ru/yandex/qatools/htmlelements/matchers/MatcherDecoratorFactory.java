@@ -4,6 +4,8 @@ package ru.yandex.qatools.htmlelements.matchers;
 import org.hamcrest.Matcher;
 import ru.yandex.qatools.htmlelements.matchers.decorators.Action;
 import ru.yandex.qatools.htmlelements.matchers.decorators.ActionMatcherDecorator;
+import ru.yandex.qatools.htmlelements.matchers.decorators.Condition;
+import ru.yandex.qatools.htmlelements.matchers.decorators.ConditionMatcherDecorator;
 
 /**
  * @author Alexander Tolmachev starlight@yandex-team.ru
@@ -22,5 +24,9 @@ public class MatcherDecoratorFactory<T> {
 
     public Matcher<T> after(Action action) {
         return new ActionMatcherDecorator<T>(matcher, action);
+    }
+
+    public Matcher<T> inCase(Condition condition) {
+        return new ConditionMatcherDecorator<T>(matcher, condition);
     }
 }
