@@ -9,7 +9,9 @@ import ru.yandex.qatools.htmlelements.samples.pages.MainPage;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.not;
+import static ru.yandex.qatools.htmlelements.matchers.MatcherDecoratorFactory.should;
 import static ru.yandex.qatools.htmlelements.matchers.WebElementMatchers.hasText;
+import static ru.yandex.qatools.htmlelements.matchers.decorators.RefreshPageAction.pageRefresh;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,35 +19,35 @@ import static ru.yandex.qatools.htmlelements.matchers.WebElementMatchers.hasText
  * Date: 12.02.13
  * Time: 0:53
  */
-//public class RefreshMatcherUsage {
-//
-//    public static final String REQUEST = "test";
-//    private WebDriver driver = new FirefoxDriver();
-//
-//    @Before
-//    public void openingThePage() {
-//        driver.get("http://www.yandex.ru");
-//    }
-//
-//    @Test
-//    public void refreshingBeforeMatch() {
-//        MainPage mainPage = new MainPage(driver);
-//        String currentText = mainPage.getSearchSample().getText();
-//        assertThat(mainPage.getSearchSample(), withPrerefresh(not(hasText(currentText)), driver));
-//    }
-//
-//    @Test
-//    public void howFailMessageLooksLike() {
-//        int timeoutInMilliseconds = 1000;
-//
-//        MainPage mainPage = new MainPage(driver);
-//        String currentText = mainPage.getSearchSample().getText();
-//        assertThat(mainPage.getSearchSample(),
-//                withWaitFor(withPrerefresh(hasText(currentText), driver)).withTimeout(timeoutInMilliseconds));
-//    }
-//
-//    @After
-//    public void tearDownDriver() throws Exception {
-//        driver.quit();
-//    }
-//}
+public class RefreshMatcherUsage {
+    private WebDriver driver = new FirefoxDriver();
+
+    @Before
+    public void openYandexHomepage() {
+        driver.get("http://www.yandex.ru");
+    }
+
+    @Test
+    public void refreshBeforeMatching() {
+        MainPage mainPage = new MainPage(driver);
+        String currentText = mainPage.getSearchSample().getText();
+
+        assertThat(mainPage.getSearchSample(), should(not(hasText(currentText))).after(pageRefresh(driver)));
+    }
+
+    /**
+     * This test should fail
+     */
+    @Test
+    public void showHowFailMessageLooks() {
+        MainPage mainPage = new MainPage(driver);
+        String currentText = mainPage.getSearchSample().getText();
+
+        assertThat(mainPage.getSearchSample(), should(hasText(currentText)).after(pageRefresh(driver)));
+    }
+
+    @After
+    public void tearDownDriver() throws Exception {
+        driver.quit();
+    }
+}
