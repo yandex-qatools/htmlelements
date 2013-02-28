@@ -1,7 +1,9 @@
-package ru.yandex.qatools.htmlelements.matchers.decorators;
+package ru.yandex.qatools.htmlelements.matchers;
 
 
 import org.hamcrest.Matcher;
+import ru.yandex.qatools.htmlelements.matchers.decorators.Action;
+import ru.yandex.qatools.htmlelements.matchers.decorators.ActionMatcherDecorator;
 
 /**
  * @author Alexander Tolmachev starlight@yandex-team.ru
