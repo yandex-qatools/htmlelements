@@ -9,6 +9,7 @@ import ru.yandex.qatools.htmlelements.matchers.decorators.TimeoutWaiter;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
@@ -21,6 +22,7 @@ import static ru.yandex.qatools.htmlelements.matchers.decorators.TimeoutWaiter.t
  * Date: 10.01.13
  * Time: 19:39
  */
+// TODO: Refacor this test
 @RunWith(MockitoJUnitRunner.class)
 public class WaitForMatcherTest {
 
@@ -40,22 +42,23 @@ public class WaitForMatcherTest {
     public void decoratorShouldTryWhileGetTrue() throws Exception {
         when(matcher.matches(any())).thenReturn(false, false, true);
 
-        assertThat(new Object(), should(matcher).whileWaitingUntil(TimeoutWaiter.timeoutHasExpired()));
+        assertThat(new Object(), should(matcher).whileWaitingUntil(timeoutHasExpired()));
 
         verify(matcher, times(3)).matches(any());
     }
-//
-//    @Test
-//    public void decShouldTryWhileTimerGoesOut() throws Exception {
-//        when(matcher.matches(any())).thenReturn(false);
-//
-//        Boolean result = withWaitFor(matcher).
-//                withTimeout(SECONDS.toMillis(2)).
-//                withInterval(MILLISECONDS.toMillis(250)).matches(ANY_OBJECT);
-//        // 8 for check + return = 9
-//        verify(matcher, times(9)).matches(ANY_OBJECT);
-//        assertThat("Miracle! False now is true!", result, is(false));
-//    }
+
+    @Test
+    public void decShouldTryWhileTimerGoesOut() throws Exception {
+        when(matcher.matches(any())).thenReturn(false);
+
+        Boolean result = should(matcher).
+                whileWaitingUntil(timeoutHasExpired(SECONDS.toMillis(2)).withPollingInterval(250)).
+                matches(ANY_OBJECT);
+
+        // 8 for check + return = 9
+        verify(matcher, times(9)).matches(ANY_OBJECT);
+        assertThat("Miracle! False now is true!", result, is(false));
+    }
 //
 //    @Test
 //    public void orUntilAddsAdditionalCondition() {
