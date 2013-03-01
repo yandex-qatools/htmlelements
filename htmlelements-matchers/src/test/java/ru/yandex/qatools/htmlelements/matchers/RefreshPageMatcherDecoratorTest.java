@@ -7,13 +7,13 @@ import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.WebDriver;
+import ru.yandex.qatools.htmlelements.matchers.decorators.MatcherDecoratorsBuilder;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.both;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.*;
 import static org.openqa.selenium.WebDriver.Navigation;
-import static ru.yandex.qatools.htmlelements.matchers.MatcherDecoratorFactory.should;
+import static ru.yandex.qatools.htmlelements.matchers.decorators.MatcherDecoratorsBuilder.should;
 import static ru.yandex.qatools.htmlelements.matchers.decorators.RefreshPageAction.pageRefresh;
 
 /**

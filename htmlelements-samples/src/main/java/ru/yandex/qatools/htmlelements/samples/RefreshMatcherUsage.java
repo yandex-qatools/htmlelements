@@ -9,8 +9,8 @@ import ru.yandex.qatools.htmlelements.samples.pages.MainPage;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.not;
-import static ru.yandex.qatools.htmlelements.matchers.MatcherDecoratorFactory.should;
 import static ru.yandex.qatools.htmlelements.matchers.WebElementMatchers.hasText;
+import static ru.yandex.qatools.htmlelements.matchers.decorators.MatcherDecoratorsBuilder.should;
 import static ru.yandex.qatools.htmlelements.matchers.decorators.RefreshPageAction.pageRefresh;
 
 /**
