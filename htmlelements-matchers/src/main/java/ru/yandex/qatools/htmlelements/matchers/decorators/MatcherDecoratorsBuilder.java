@@ -45,7 +45,7 @@ public class MatcherDecoratorsBuilder<T> extends TypeSafeMatcher<T> {
         return this;
     }
 
-    public MatcherDecoratorsBuilder<T> whileWaitingFor(Waiter waiter) {
+    public MatcherDecoratorsBuilder<T> whileWaitingUntil(Waiter waiter) {
         matcher = decorateMatcherWithWaiter(matcher, waiter);
         return this;
     }

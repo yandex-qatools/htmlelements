@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import ru.yandex.qatools.htmlelements.matchers.decorators.TimeoutWaiter;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.hamcrest.Matchers.equalTo;
@@ -12,7 +13,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 import static ru.yandex.qatools.htmlelements.matchers.decorators.MatcherDecoratorsBuilder.should;
-import static ru.yandex.qatools.htmlelements.matchers.decorators.TimeoutWaiter.timeout;
+import static ru.yandex.qatools.htmlelements.matchers.decorators.TimeoutWaiter.timeoutHasExpired;
 
 /**
  * Created with IntelliJ IDEA.
@@ -32,14 +33,14 @@ public class WaitForMatcherTest {
 
     @Test(expected = AssertionError.class)
     public void decoratorShouldThrowAssertionException() {
-        assertThat(true, should(equalTo(false)).whileWaitingFor(timeout(SECONDS.toMillis(2))));
+        assertThat(true, should(equalTo(false)).whileWaitingUntil(timeoutHasExpired(SECONDS.toMillis(2))));
     }
 
     @Test
     public void decoratorShouldTryWhileGetTrue() throws Exception {
         when(matcher.matches(any())).thenReturn(false, false, true);
 
-        assertThat(new Object(), should(matcher).whileWaitingFor(timeout()));
+        assertThat(new Object(), should(matcher).whileWaitingUntil(TimeoutWaiter.timeoutHasExpired()));
 
         verify(matcher, times(3)).matches(any());
     }

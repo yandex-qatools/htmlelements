@@ -13,11 +13,11 @@ public class TimeoutWaiter extends Waiter {
 
     private final long timeout;
 
-    public static TimeoutWaiter timeout() {
+    public static TimeoutWaiter timeoutHasExpired() {
         return new TimeoutWaiter();
     }
 
-    public static TimeoutWaiter timeout(long timeoutInMilliseconds) {
+    public static TimeoutWaiter timeoutHasExpired(long timeoutInMilliseconds) {
         return new TimeoutWaiter(timeoutInMilliseconds);
     }
 
