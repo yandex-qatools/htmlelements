@@ -13,6 +13,14 @@ public class TimeoutWaiter extends Waiter {
 
     private final long timeout;
 
+    public static TimeoutWaiter timeout() {
+        return new TimeoutWaiter();
+    }
+
+    public static TimeoutWaiter timeout(long timeoutInMilliseconds) {
+        return new TimeoutWaiter(timeoutInMilliseconds);
+    }
+
     public TimeoutWaiter() {
         this.timeout = DEFAULT_TIMEOUT;
     }
