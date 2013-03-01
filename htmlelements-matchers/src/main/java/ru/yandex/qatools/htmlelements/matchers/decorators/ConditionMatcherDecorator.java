@@ -35,7 +35,7 @@ public class ConditionMatcherDecorator<T> extends TypeSafeMatcher<T> {
     @Override
     protected void describeMismatchSafely(T item, Description mismatchDescription) {
         matcher.describeMismatch(item, mismatchDescription);
-        mismatchDescription.appendText(" after ").appendDescriptionOf(condition);
+        mismatchDescription.appendText(" if ").appendDescriptionOf(condition);
     }
 
     @Factory

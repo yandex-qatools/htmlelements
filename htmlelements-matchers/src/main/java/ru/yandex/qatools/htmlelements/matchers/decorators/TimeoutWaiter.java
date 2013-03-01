@@ -1,5 +1,7 @@
 package ru.yandex.qatools.htmlelements.matchers.decorators;
 
+import org.hamcrest.Description;
+
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 /**
@@ -23,5 +25,10 @@ public class TimeoutWaiter extends Waiter {
     public boolean shouldStopWaiting() {
         long currentTime = System.currentTimeMillis();
         return currentTime >= getStartTime() + timeout;
+    }
+
+    @Override
+    public void describeTo(Description description) {
+        description.appendValue(timeout).appendText(" milliseconds");
     }
 }
