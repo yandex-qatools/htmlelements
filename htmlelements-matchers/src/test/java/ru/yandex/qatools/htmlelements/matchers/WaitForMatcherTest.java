@@ -26,10 +26,6 @@ import static ru.yandex.qatools.htmlelements.matchers.decorators.TimeoutWaiter.t
 @RunWith(MockitoJUnitRunner.class)
 public class WaitForMatcherTest {
 
-    public static final Object ANY_OBJECT = "";
-
-//    private TimeoutCondition twoSecondsNotExpired = new TimeoutCondition(SECONDS.toMillis(2));
-
     @Mock
     private Matcher<Object> matcher;
 
@@ -49,6 +45,8 @@ public class WaitForMatcherTest {
 
     @Test
     public void decShouldTryWhileTimerGoesOut() throws Exception {
+        Object ANY_OBJECT = "";
+
         when(matcher.matches(any())).thenReturn(false);
 
         Boolean result = should(matcher).
@@ -57,6 +55,7 @@ public class WaitForMatcherTest {
 
         // 8 for check + return = 9
         verify(matcher, times(9)).matches(ANY_OBJECT);
+
         assertThat("Miracle! False now is true!", result, is(false));
     }
 //
