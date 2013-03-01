@@ -1,41 +1,56 @@
 package ru.yandex.qatools.htmlelements.matchers;
 
+import org.hamcrest.Matcher;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.*;
+import static ru.yandex.qatools.htmlelements.matchers.decorators.MatcherDecoratorsBuilder.should;
+import static ru.yandex.qatools.htmlelements.matchers.decorators.TimeoutWaiter.timeout;
+
 /**
  * Created with IntelliJ IDEA.
  * User: lanwen
  * Date: 10.01.13
  * Time: 19:39
  */
-//@RunWith(MockitoJUnitRunner.class)
-//public class WaitForMatcherTest {
-//
-//    public static final Object ANY_OBJECT = "";
-//
+@RunWith(MockitoJUnitRunner.class)
+public class WaitForMatcherTest {
+
+    public static final Object ANY_OBJECT = "";
+
 //    private TimeoutCondition twoSecondsNotExpired = new TimeoutCondition(SECONDS.toMillis(2));
-//
-//    @Mock
-//    private Matcher<Object> matcher;
-//
-//    @Test(expected = AssertionError.class)
-//    public void decoratorShouldThrowAssertionException() {
-//        assertThat(true, withWaitFor(equalTo(false)).withTimeout(SECONDS.toMillis(2)));
-//    }
-//
-//    @Test
-//    public void decoratorShouldTryWhileGetTrue() throws Exception {
-//        when(matcher.matches(any())).thenReturn(false, false, true);
-//
-//        assertThat(new Object(), withWaitFor(matcher));
-//        verify(matcher, times(3)).matches(any());
-//    }
+
+    @Mock
+    private Matcher<Object> matcher;
+
+    @Test(expected = AssertionError.class)
+    public void decoratorShouldThrowAssertionException() {
+        assertThat(true, should(equalTo(false)).whileWaitingFor(timeout(SECONDS.toMillis(2))));
+    }
+
+    @Test
+    public void decoratorShouldTryWhileGetTrue() throws Exception {
+        when(matcher.matches(any())).thenReturn(false, false, true);
+
+        assertThat(new Object(), should(matcher).whileWaitingFor(timeout()));
+
+        verify(matcher, times(3)).matches(any());
+    }
 //
 //    @Test
 //    public void decShouldTryWhileTimerGoesOut() throws Exception {
 //        when(matcher.matches(any())).thenReturn(false);
 //
 //        Boolean result = withWaitFor(matcher).
-//        					withTimeout(SECONDS.toMillis(2)).
-//        					withInterval(MILLISECONDS.toMillis(250)).matches(ANY_OBJECT);
+//                withTimeout(SECONDS.toMillis(2)).
+//                withInterval(MILLISECONDS.toMillis(250)).matches(ANY_OBJECT);
 //        // 8 for check + return = 9
 //        verify(matcher, times(9)).matches(ANY_OBJECT);
 //        assertThat("Miracle! False now is true!", result, is(false));
@@ -126,4 +141,4 @@ package ru.yandex.qatools.htmlelements.matchers;
 //            }
 //        };
 //    }
-//}
+}

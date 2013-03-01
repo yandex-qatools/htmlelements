@@ -1,6 +1,5 @@
 package ru.yandex.qatools.htmlelements.matchers.decorators;
 
-import org.hamcrest.Description;
 import org.hamcrest.SelfDescribing;
 
 import static java.util.concurrent.TimeUnit.SECONDS;

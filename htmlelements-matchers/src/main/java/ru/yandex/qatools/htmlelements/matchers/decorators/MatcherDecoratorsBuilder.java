@@ -7,6 +7,7 @@ import org.hamcrest.TypeSafeMatcher;
 
 import static ru.yandex.qatools.htmlelements.matchers.decorators.ActionMatcherDecorator.decorateMatcherWithAction;
 import static ru.yandex.qatools.htmlelements.matchers.decorators.ConditionMatcherDecorator.decorateMatcherWithCondition;
+import static ru.yandex.qatools.htmlelements.matchers.decorators.WaiterMatcherDecorator.decorateMatcherWithWaiter;
 
 /**
  * @author Alexander Tolmachev starlight@yandex-team.ru
@@ -41,6 +42,11 @@ public class MatcherDecoratorsBuilder<T> extends TypeSafeMatcher<T> {
 
     public MatcherDecoratorsBuilder<T> inCase(Condition condition) {
         matcher = decorateMatcherWithCondition(matcher, condition);
+        return this;
+    }
+
+    public MatcherDecoratorsBuilder<T> whileWaitingFor(Waiter waiter) {
+        matcher = decorateMatcherWithWaiter(matcher, waiter);
         return this;
     }
 
