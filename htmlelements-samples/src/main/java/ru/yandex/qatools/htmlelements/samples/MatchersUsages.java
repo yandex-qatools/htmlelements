@@ -31,6 +31,7 @@ public class MatchersUsages {
     public void timeoutWaiterUsage() throws Exception {
         MainPage mainPage = new MainPage(driver);
         mainPage.getSearchArrow().getRequestInput().sendKeys(REQUEST);
+
         assertThat(mainPage.getSuggest(), should(exists()).whileWaitingUntil(timeoutHasExpired()));
     }
 

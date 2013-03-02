@@ -32,6 +32,7 @@ public class TimeoutWaiter extends Waiter {
     @Override
     public boolean shouldStopWaiting() {
         long currentTime = System.currentTimeMillis();
+
         return currentTime >= getStartTime() + timeout;
     }
 
