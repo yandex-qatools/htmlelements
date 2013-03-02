@@ -45,6 +45,11 @@ public class MatcherDecoratorsBuilder<T> extends TypeSafeMatcher<T> {
         return this;
     }
 
+    public MatcherDecoratorsBuilder<T> inCase(T item, Matcher<? super T> matcher) {
+        Condition condition = new MatcherCondition<T>(matcher, item);
+        return inCase(condition);
+    }
+
     public MatcherDecoratorsBuilder<T> whileWaitingUntil(Waiter waiter) {
         matcher = decorateMatcherWithWaiter(matcher, waiter);
         return this;
