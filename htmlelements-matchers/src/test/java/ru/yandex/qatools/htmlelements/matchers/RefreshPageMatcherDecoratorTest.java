@@ -7,7 +7,6 @@ import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.WebDriver;
-import ru.yandex.qatools.htmlelements.matchers.decorators.MatcherDecoratorsBuilder;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -53,7 +52,7 @@ public class RefreshPageMatcherDecoratorTest {
     @Test
     public void decoratedWithRefreshPageActionMatcherShouldRefreshPageBeforeMatching() {
         when(driver.navigate()).thenReturn(navigation);
-        when(matcher.matches(THE_OBJECT)).thenReturn(THE_OBJECT);
+        when(matcher.matches(THE_OBJECT)).thenReturn(true);
 
         assertThat(THE_OBJECT, should(matcher).after(pageRefresh(driver)));
 

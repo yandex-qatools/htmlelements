@@ -5,8 +5,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import ru.yandex.qatools.htmlelements.matchers.decorators.TimeoutWaiter;
 
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
@@ -50,7 +50,7 @@ public class WaitForMatcherTest {
         when(matcher.matches(any())).thenReturn(false);
 
         Boolean result = should(matcher).
-                whileWaitingUntil(timeoutHasExpired(SECONDS.toMillis(2)).withPollingInterval(250)).
+                whileWaitingUntil(timeoutHasExpired(SECONDS.toMillis(2)).withPollingInterval(MILLISECONDS.toMillis(250))).
                 matches(ANY_OBJECT);
 
         // 8 for check + return = 9
