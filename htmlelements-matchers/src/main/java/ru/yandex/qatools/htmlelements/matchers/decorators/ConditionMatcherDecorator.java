@@ -1,9 +1,7 @@
 package ru.yandex.qatools.htmlelements.matchers.decorators;
 
-import org.hamcrest.Description;
-import org.hamcrest.Factory;
-import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.*;
+import org.junit.internal.AssumptionViolatedException;
 
 /**
  * @author Alexander Tolmachev starlight@yandex-team.ru
@@ -24,7 +22,9 @@ public class ConditionMatcherDecorator<T> extends TypeSafeMatcher<T> {
             return matcher.matches(item);
         }
 
-        return true;
+        Description conditionDescription = new StringDescription();
+        condition.describeTo(conditionDescription);
+        throw new AssumptionViolatedException(String.format("Condition is not satisfied: %s", conditionDescription));
     }
 
     @Override
