@@ -1,18 +1,17 @@
 package ru.yandex.qatools.htmlelements.matchers;
 
-import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.StringDescription;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import ru.yandex.qatools.htmlelements.matchers.decorators.Action;
+import ru.yandex.qatools.htmlelements.matchers.decorators.Condition;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static ru.yandex.qatools.htmlelements.matchers.decorators.MatcherDecoratorsBuilder.should;
 
@@ -21,28 +20,41 @@ import static ru.yandex.qatools.htmlelements.matchers.decorators.MatcherDecorato
  *         Date: 06.03.13
  */
 @RunWith(MockitoJUnitRunner.class)
-public class ActionMatcherDecoratorTest {
+public class ConditionMatcherDecoratorTest {
     @Mock
-    private Action action;
+    private Condition condition;
     @Mock
     private Matcher<Object> matcher;
 
     private final Object arbitraryObject = new Object();
 
     @Test
-    public void actionShouldBePerformedBeforeMatching() {
+    public void conditionShouldBeCheckedWhenDecoratedMatcherIsCalled() {
         when(matcher.matches(arbitraryObject)).thenReturn(true);
+        when(condition.isSatisfied()).thenReturn(true);
 
-        assertThat(arbitraryObject, should(matcher).after(action));
+        assertThat(arbitraryObject, should(matcher).inCase(condition));
 
-        InOrder inOrder = inOrder(action, matcher);
-        inOrder.verify(action).perform();
+        verify(condition).isSatisfied();
+    }
+
+    @Test
+    public void matcherShouldBeCheckedAfterConditionIfConditionIsSatisfied() {
+        when(condition.isSatisfied()).thenReturn(true);
+
+        Matcher<Object> decoratedMatcher = should(matcher).inCase(condition);
+        decoratedMatcher.matches(arbitraryObject);
+
+        InOrder inOrder = inOrder(condition, matcher);
+        inOrder.verify(condition).isSatisfied();
         inOrder.verify(matcher).matches(arbitraryObject);
     }
 
     @Test
-    public void decoratedMatcherShouldNotChangeBehaviour() {
-        Matcher<Object> decoratedMatcher = should(matcher).after(action);
+    public void satisfiedConditionShouldNotChangeMatcherBehaviour() {
+        when(condition.isSatisfied()).thenReturn(true);
+
+        Matcher<Object> decoratedMatcher = should(matcher).inCase(condition);
 
         when(matcher.matches(arbitraryObject)).thenReturn(true);
         assertThat(decoratedMatcher.matches(arbitraryObject), equalTo(matcher.matches(arbitraryObject)));
@@ -50,9 +62,4 @@ public class ActionMatcherDecoratorTest {
         when(matcher.matches(arbitraryObject)).thenReturn(false);
         assertThat(decoratedMatcher.matches(arbitraryObject), equalTo(matcher.matches(arbitraryObject)));
     }
-
-//    @Test
-//    public void decoratedMatcherDescriptionShouldContainActionDescription() {
-//
-//    }
 }
