@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import ru.yandex.qatools.htmlelements.matchers.decorators.TimeoutWaiter;
 import ru.yandex.qatools.htmlelements.samples.pages.MainPage;
 
 import static org.hamcrest.MatcherAssert.assertThat;
