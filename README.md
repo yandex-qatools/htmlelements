@@ -5,7 +5,7 @@ This framework is designed to provide easy-to-use way of interaction with web-pa
 considered as an extension of WebDriver Page Object.<br/>
 With the help of Html Elements framework you can group web-page elements into blocks, encapsulate logic of interaction with them 
 and then easily use created blocks in page objects. It also provides a set of helpful matchers to use with web-page elements 
-and blocks. See <a href="https://oss.sonatype.org/service/local/repositories/releases/archive/ru/yandex/qatools/htmlelements/htmlelements/1.8/htmlelements-1.8-javadoc.jar/!/index.html">JavaDocs</a> 
+and blocks. See [JavaDocs](https://oss.sonatype.org/service/local/repositories/releases/archive/ru/yandex/qatools/htmlelements/htmlelements/1.9/htmlelements-1.9-javadoc.jar/!/index.html) 
 for more details.
 
 Include Html Elements in your project
