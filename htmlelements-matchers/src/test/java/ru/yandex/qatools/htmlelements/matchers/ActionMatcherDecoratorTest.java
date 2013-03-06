@@ -1,8 +1,6 @@
 package ru.yandex.qatools.htmlelements.matchers;
 
-import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.StringDescription;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InOrder;
