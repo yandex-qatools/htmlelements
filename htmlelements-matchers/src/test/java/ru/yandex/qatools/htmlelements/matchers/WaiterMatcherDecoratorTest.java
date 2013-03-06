@@ -10,8 +10,7 @@ import ru.yandex.qatools.htmlelements.matchers.decorators.Waiter;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.inOrder;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static ru.yandex.qatools.htmlelements.matchers.decorators.MatcherDecoratorsBuilder.should;
 
 /**
@@ -51,5 +50,27 @@ public class WaiterMatcherDecoratorTest {
         when(matcher.matches(arbitraryObject)).thenReturn(false);
         when(waiter.shouldStopWaiting()).thenReturn(true, false);
         assertThat(decoratedMatcher.matches(arbitraryObject), equalTo(matcher.matches(arbitraryObject)));
+    }
+
+    @Test
+    public void matcherShouldBeBeingCheckedUntilItPasses() {
+        when(matcher.matches(arbitraryObject)).thenReturn(false, false, true);
+        when(waiter.shouldStopWaiting()).thenReturn(false);
+
+        should(matcher).whileWaitingUntil(waiter).matches(arbitraryObject);
+
+        verify(matcher, times(3)).matches(arbitraryObject);
+        verify(waiter, times(3)).shouldStopWaiting();
+    }
+
+    @Test
+    public void matcherShouldBeBeingCheckedUntilWaiterStops() {
+        when(matcher.matches(arbitraryObject)).thenReturn(false);
+        when(waiter.shouldStopWaiting()).thenReturn(false, false, true);
+
+        should(matcher).whileWaitingUntil(waiter).matches(arbitraryObject);
+
+        verify(waiter, times(3)).shouldStopWaiting();
+        verify(matcher, times(3)).matches(arbitraryObject);
     }
 }

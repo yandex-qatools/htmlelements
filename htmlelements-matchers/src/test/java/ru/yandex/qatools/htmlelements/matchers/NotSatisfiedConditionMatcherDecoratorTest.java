@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import ru.yandex.qatools.htmlelements.matchers.decorators.Condition;
 
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
 import static ru.yandex.qatools.htmlelements.matchers.decorators.MatcherDecoratorsBuilder.should;
@@ -51,6 +52,6 @@ public class NotSatisfiedConditionMatcherDecoratorTest {
     public void notSatisfiedConditionShouldCauseAssumptionViolatedException() {
         when(condition.isSatisfied()).thenReturn(false);
 
-        should(matcher).inCase(condition).matches(arbitraryObject);
+        assertThat(arbitraryObject, should(matcher).inCase(condition));
     }
 }

@@ -24,24 +24,9 @@ import static ru.yandex.qatools.htmlelements.matchers.decorators.TimeoutWaiter.t
  */
 // TODO: Refacor this test
 @RunWith(MockitoJUnitRunner.class)
-public class WaitForMatcherTest {
-
+public class TimeoutWaiterMatcherDecoratorTest {
     @Mock
     private Matcher<Object> matcher;
-
-    @Test(expected = AssertionError.class)
-    public void decoratorShouldThrowAssertionException() {
-        assertThat(true, should(equalTo(false)).whileWaitingUntil(timeoutHasExpired(SECONDS.toMillis(2))));
-    }
-
-    @Test
-    public void decoratorShouldTryWhileGetTrue() throws Exception {
-        when(matcher.matches(any())).thenReturn(false, false, true);
-
-        assertThat(new Object(), should(matcher).whileWaitingUntil(timeoutHasExpired()));
-
-        verify(matcher, times(3)).matches(any());
-    }
 
     @Test
     public void decShouldTryWhileTimerGoesOut() throws Exception {
