@@ -32,7 +32,6 @@ public class WebElementListNamedProxyHandler implements InvocationHandler {
         try {
             return method.invoke(elements, objects);
         } catch (InvocationTargetException e) {
-            // Unwrap the underlying exception
             throw e.getCause();
         }
     }

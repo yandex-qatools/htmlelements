@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import ru.yandex.qatools.htmlelements.annotations.Block;
-import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
 import ru.yandex.qatools.htmlelements.pagefactory.DefaultFieldAnnotationsHandler;
 
@@ -84,14 +83,6 @@ public class HtmlElementFieldAnnotationsHandler extends DefaultFieldAnnotationsH
             }
             listParameterClass = listParameterClass.getSuperclass();
         }
-
-//        @SuppressWarnings("unchecked")
-//        Class<HtmlElement> listParameterClass = (Class<HtmlElement>) getGenericParameterClass(getField());
-//        if (listParameterClass.isAnnotationPresent(Block.class)) {
-//            Block block = listParameterClass.getAnnotation(Block.class);
-//            FindBy findBy = block.value();
-//            return buildByFromFindBy(findBy);
-//        }
 
         throw new HtmlElementsException(String.format("Cannot determine how to locate element %s", getField()));
     }

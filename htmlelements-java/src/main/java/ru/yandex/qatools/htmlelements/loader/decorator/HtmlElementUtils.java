@@ -2,9 +2,6 @@ package ru.yandex.qatools.htmlelements.loader.decorator;
 
 import org.apache.commons.lang.WordUtils;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-import ru.yandex.qatools.htmlelements.annotations.Block;
 import ru.yandex.qatools.htmlelements.annotations.Name;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.element.TypifiedElement;
@@ -91,18 +88,6 @@ public class HtmlElementUtils {
 
     private static boolean hasGenericParameter(Field field) {
         return field.getGenericType() instanceof ParameterizedType;
-    }
-
-    public static boolean hasFindByAnnotation(Field field) {
-        return field.isAnnotationPresent(FindBy.class);
-    }
-
-    public static boolean hasFindBysAnnotation(Field field) {
-        return field.isAnnotationPresent(FindBys.class);
-    }
-
-    public static boolean hasBlockAnnotation(Class<?> clazz) {
-        return clazz.isAnnotationPresent(Block.class);
     }
 
     public static String getElementName(Field field) {
