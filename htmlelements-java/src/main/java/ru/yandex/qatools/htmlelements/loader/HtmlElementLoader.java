@@ -91,33 +91,6 @@ public class HtmlElementLoader {
     }
 
     /**
-     * Creates an instance of the given page object class and initializes its fields with lazy proxies.
-     * <p/>
-     * Processes {@link org.openqa.selenium.support.FindBy} and {@link org.openqa.selenium.support.FindBys}
-     * annotations of the fields for setting the way of locating them.
-     * <p/>
-     * Fields to be proxied:
-     * <p/>
-     * <ul>
-     * <li>{@code WebElement}</li>
-     * <li>List of {@code WebElements}</li>
-     * <li>Block of elements ({@link HtmlElement} and its successors)</li>
-     * <li>List of blocks</li>
-     * <li>Typified element ({@link ru.yandex.qatools.htmlelements.element.TypifiedElement} successors)</li>
-     * <li>List of typified elements</li>
-     * </ul>
-     *
-     * @param clazz  A class to be instantiated and initialized.
-     * @param driver The {@code WebDriver} instance that will be used to look up the elements.
-     * @return Initialized instance of the specified class.
-     */
-    public static <T> T createPageObject(Class<T> clazz, WebDriver driver) {
-        T page = HtmlElementFactory.createPageObjectInstance(clazz, driver);
-        populatePageObject(page, new HtmlElementLocatorFactory(driver));
-        return page;
-    }
-
-    /**
      * Initializes fields of the given block of elements with lazy proxies.
      * <p/>
      * Processes {@link ru.yandex.qatools.htmlelements.annotations.Block} annotation of the class
@@ -162,6 +135,33 @@ public class HtmlElementLoader {
         htmlElement.setName(elementName);
         // Initialize elements of the block
         PageFactory.initElements(new HtmlElementDecorator(elementToWrap), htmlElement);
+    }
+
+    /**
+     * Creates an instance of the given page object class and initializes its fields with lazy proxies.
+     * <p/>
+     * Processes {@link org.openqa.selenium.support.FindBy} and {@link org.openqa.selenium.support.FindBys}
+     * annotations of the fields for setting the way of locating them.
+     * <p/>
+     * Fields to be proxied:
+     * <p/>
+     * <ul>
+     * <li>{@code WebElement}</li>
+     * <li>List of {@code WebElements}</li>
+     * <li>Block of elements ({@link HtmlElement} and its successors)</li>
+     * <li>List of blocks</li>
+     * <li>Typified element ({@link ru.yandex.qatools.htmlelements.element.TypifiedElement} successors)</li>
+     * <li>List of typified elements</li>
+     * </ul>
+     *
+     * @param clazz  A class to be instantiated and initialized.
+     * @param driver The {@code WebDriver} instance that will be used to look up the elements.
+     * @return Initialized instance of the specified class.
+     */
+    public static <T> T createPageObject(Class<T> clazz, WebDriver driver) {
+        T page = HtmlElementFactory.createPageObjectInstance(clazz, driver);
+        populatePageObject(page, new HtmlElementLocatorFactory(driver));
+        return page;
     }
 
     /**
