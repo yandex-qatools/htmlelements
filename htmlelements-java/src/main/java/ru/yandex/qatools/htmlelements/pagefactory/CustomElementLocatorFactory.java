@@ -1,8 +1,8 @@
 package ru.yandex.qatools.htmlelements.pagefactory;
 
 import org.openqa.selenium.support.pagefactory.ElementLocator;
-import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
+import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
 
 /**
@@ -19,11 +19,19 @@ public abstract class CustomElementLocatorFactory implements ElementLocatorFacto
      * @param field Filed to be decorated.
      * @return An ElementLocator object.
      */
-    public ElementLocator createLocator(Field field) {
-        return null;
-    }
+    public abstract ElementLocator createLocator(Field field);
 
-    public ElementLocator createLocator(Class clazz) {
-        return null;
+    public abstract ElementLocator createLocator(Class clazz);
+
+    public ElementLocator createLocator(AnnotatedElement annotated) {
+        if (annotated instanceof Field) {
+            return createLocator((Field) annotated);
+        }
+
+        if (annotated instanceof Class) {
+            return createLocator((Class) annotated);
+        }
+
+        throw new RuntimeException();
     }
 }
