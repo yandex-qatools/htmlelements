@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
+import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementFactory;
@@ -193,7 +194,7 @@ public class HtmlElementLoader {
      * @param page           Page object to be initialized.
      * @param locatorFactory Locator factory that will be used to locate elements.
      */
-    public static void populatePageObject(Object page, CustomElementLocatorFactory locatorFactory) {
+    public static void populatePageObject(Object page, ElementLocatorFactory locatorFactory) {
         PageFactory.initElements(new HtmlElementDecorator(locatorFactory), page);
     }
 }
