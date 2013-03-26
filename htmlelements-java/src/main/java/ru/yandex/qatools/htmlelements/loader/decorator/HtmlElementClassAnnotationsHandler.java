@@ -30,7 +30,8 @@ public class HtmlElementClassAnnotationsHandler<T extends HtmlElement> extends A
             clazz = clazz.getSuperclass();
         }
 
-        throw new HtmlElementsException(String.format("Cannot determine how to locate instance of %s", htmlElementClass));
+        throw new HtmlElementsException(String.format("Cannot determine how to locate instance of %s",
+                htmlElementClass));
     }
 
     @Override
