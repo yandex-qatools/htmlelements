@@ -22,7 +22,6 @@ public class HtmlElementClassAnnotationsHandler<T extends HtmlElement> extends A
     @Override
     public By buildBy() {
         Class<?> clazz = htmlElementClass;
-
         while (clazz != Object.class) {
             if (clazz.isAnnotationPresent(Block.class)) {
                 Block block = clazz.getAnnotation(Block.class);
