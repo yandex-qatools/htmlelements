@@ -3,8 +3,8 @@ package ru.yandex.qatools.htmlelements.element;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Artem Eroshenko eroshenkoam@yandex-team.ru
@@ -16,9 +16,7 @@ import java.util.List;
 public class Form extends TypifiedElement {
     private final static String TEXT_INPUT_TYPE = "text";
     private final static String PASSWORD_INPUT_TYPE = "password";
-    private final static String TEXT_AREA_TYPE = "textarea";
     private final static String CHECKBOX_TYPE = "checkbox";
-    private final static String SELECT_TYPE = "select";
     private final static String RADIO_TYPE = "radio";
 
     /**
@@ -30,18 +28,14 @@ public class Form extends TypifiedElement {
         super(wrappedElement);
     }
 
-    public void fill(HashMap<String, Object> data) {
+    public void fill(Map<String, Object> data) {
         for (String key : data.keySet()) {
             WebElement elementToFill = findElementByKey(key);
-            if (elementToFill != null && isInput(elementToFill)) {
-                fillInput(elementToFill, data.get(key));
+            if (elementToFill != null) {
+                fillElement(elementToFill, data.get(key));
             }
         }
         getWrappedElement().submit();
-    }
-
-    private boolean isInput(WebElement element) {
-        return "input".equals(element.getTagName());
     }
 
     protected WebElement findElementByKey(String key) {
@@ -52,24 +46,39 @@ public class Form extends TypifiedElement {
         return elements.get(0);
     }
 
-    protected void fillInput(WebElement input, Object value) {
+    protected void fillElement(WebElement element, Object value) {
         if (value == null) {
             return;
         }
 
-        String inputType = input.getAttribute("type");
-        if (inputType == null || inputType.equals(TEXT_INPUT_TYPE) || inputType.equals(PASSWORD_INPUT_TYPE) ||
-                inputType.equals(TEXT_AREA_TYPE)) {
-            input.sendKeys(value.toString());
-        } else if (inputType.equals(CHECKBOX_TYPE)) {
-            CheckBox checkBox = new CheckBox(input);
-            checkBox.set(Boolean.parseBoolean(value.toString()));
-        } else if (inputType.equals(SELECT_TYPE)) {
-            Select select = new Select(input);
+        if (isInput(element)) {
+            String inputType = element.getAttribute("type");
+            if (inputType == null || inputType.equals(TEXT_INPUT_TYPE) || inputType.equals(PASSWORD_INPUT_TYPE)) {
+                element.sendKeys(value.toString());
+            } else if (inputType.equals(CHECKBOX_TYPE)) {
+                CheckBox checkBox = new CheckBox(element);
+                checkBox.set(Boolean.parseBoolean(value.toString()));
+            } else if (inputType.equals(RADIO_TYPE)) {
+                Radio radio = new Radio(element);
+                radio.selectByValue(value.toString());
+            }
+        } else if (isSelect(element)) {
+            Select select = new Select(element);
             select.selectByValue(value.toString());
-        } else if (inputType.equals(RADIO_TYPE)) {
-            Radio radio = new Radio(input);
-            radio.selectByValue(value.toString());
+        } else if (isTextArea(element)) {
+            element.sendKeys(value.toString());
         }
+    }
+
+    private boolean isInput(WebElement element) {
+        return "input".equals(element.getTagName());
+    }
+
+    private boolean isSelect(WebElement element) {
+        return "select".equals(element.getTagName());
+    }
+
+    private boolean isTextArea(WebElement element) {
+        return "textarea".equals(element.getTagName());
     }
 }
