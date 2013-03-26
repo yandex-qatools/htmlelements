@@ -71,6 +71,17 @@ public class CheckBox extends TypifiedElement {
     }
 
     /**
+     * Selects checkbox if passed value is {@code true} and deselects otherwise.
+     */
+    public void set(boolean value) {
+        if (value) {
+            select();
+        } else {
+            deselect();
+        }
+    }
+
+    /**
      * Indicates whether checkbox is selected.
      */
     public boolean isSelected() {
