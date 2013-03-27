@@ -3,9 +3,9 @@ package ru.yandex.qatools.htmlelements.element;
 import org.openqa.selenium.WebElement;
 
 /**
- * Represents textBlock on page.
+ * Represents text block on a web page.
  *
- * @author Afzali Behruz xy6er@yandex-team.ru
+ * @author Behruz Afzali xy6er@yandex-team.ru
  */
 public class TextBlock extends TypifiedElement {
     public TextBlock(WebElement wrappedElement) {
@@ -13,7 +13,7 @@ public class TextBlock extends TypifiedElement {
     }
 
     /**
-     * Returns text of the textBlock.
+     * Returns text contained in text block.
      */
     public String getText() {
         return getWrappedElement().getText();
