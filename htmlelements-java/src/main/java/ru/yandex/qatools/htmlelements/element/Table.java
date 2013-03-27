@@ -5,6 +5,10 @@ import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import static ch.lambdaj.Lambda.convert;
+import static ru.yandex.qatools.htmlelements.utils.WebElementToTextConverter.toText;
 
 /**
  * @author Alexander Tolmachev starlight@yandex-team.ru
@@ -18,6 +22,11 @@ public class Table extends TypifiedElement {
      */
     public Table(WebElement wrappedElement) {
         super(wrappedElement);
+    }
+
+    public List<String> getHeadings() {
+        List<WebElement> headingElements = getWrappedElement().findElements(By.xpath(".//th"));
+        return convert(headingElements, toText());
     }
 
     public List<List<WebElement>> getRows() {
@@ -47,5 +56,4 @@ public class Table extends TypifiedElement {
 
         return columns;
     }
-
 }
