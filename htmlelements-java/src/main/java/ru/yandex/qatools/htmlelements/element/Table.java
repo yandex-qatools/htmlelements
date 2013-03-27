@@ -2,8 +2,10 @@ package ru.yandex.qatools.htmlelements.element;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +43,7 @@ public class Table extends TypifiedElement {
     public List<List<WebElement>> getColumns() {
         List<List<WebElement>> columns = new ArrayList<List<WebElement>>();
         List<List<WebElement>> rows = getRows();
+
         if (rows.isEmpty()) {
             return columns;
         }
@@ -56,4 +59,34 @@ public class Table extends TypifiedElement {
 
         return columns;
     }
+
+    public List<Map<String, WebElement>> getRowsMappedToHeadings() {
+        return getRowsMappedToHeadings(getHeadings());
+    }
+
+    public List<Map<String, WebElement>> getRowsMappedToHeadings(List<String> headings) {
+        List<Map<String, WebElement>> rowsMappedToHeadings = new ArrayList<Map<String, WebElement>>();
+        List<List<WebElement>> rows = getRows();
+
+        if (rows.isEmpty()) {
+            return rowsMappedToHeadings;
+        }
+
+        for (List<WebElement> row : rows) {
+            if (row.size() != headings.size()) {
+                throw new HtmlElementsException("Headings count is not equal to number of cells in row");
+            }
+
+            Map<String, WebElement> rowToHeadingsMap = new HashMap<String, WebElement>();
+            int cellNumber = 0;
+            for (String heading : headings) {
+                rowToHeadingsMap.put(heading, row.get(cellNumber));
+                cellNumber++;
+            }
+            rowsMappedToHeadings.add(rowToHeadingsMap);
+        }
+
+        return rowsMappedToHeadings;
+    }
+
 }
