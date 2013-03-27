@@ -21,13 +21,31 @@ public class Table extends TypifiedElement {
     }
 
     public List<List<WebElement>> getRows() {
-        List<List<WebElement>> elements = new ArrayList<List<WebElement>>();
+        List<List<WebElement>> rows = new ArrayList<List<WebElement>>();
         List<WebElement> rowElements = getWrappedElement().findElements(By.xpath(".//tr"));
         for (WebElement rowElement : rowElements) {
-            elements.add(rowElement.findElements(By.xpath(".//td")));
+            rows.add(rowElement.findElements(By.xpath(".//td")));
+        }
+        return rows;
+    }
+
+    public List<List<WebElement>> getColumns() {
+        List<List<WebElement>> columns = new ArrayList<List<WebElement>>();
+        List<List<WebElement>> rows = getRows();
+        if (rows.isEmpty()) {
+            return columns;
         }
 
-        return elements;
+        int columnsNumber = rows.get(0).size();
+        for (int i = 0; i < columnsNumber; i++) {
+            List<WebElement> column = new ArrayList<WebElement>();
+            for (List<WebElement> row : rows) {
+                column.add(row.get(i));
+            }
+            columns.add(column);
+        }
+
+        return columns;
     }
 
 }
