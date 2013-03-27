@@ -42,7 +42,7 @@ import org.openqa.selenium.internal.WrapsElement;
  *         Date: 13.08.12
  */
 public abstract class TypifiedElement implements WrapsElement, Named {
-    private WebElement wrappedElement;
+    private final WebElement wrappedElement;
     private String name;
 
     /**
