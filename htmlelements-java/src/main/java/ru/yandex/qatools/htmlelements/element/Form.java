@@ -15,12 +15,12 @@ import java.util.Map;
 // TODO Add JavaDoc
 public class Form extends TypifiedElement {
     private static final String TEXT_INPUT_TYPE = "text";
-    private static final  String PASSWORD_INPUT_TYPE = "password";
+    private static final String PASSWORD_INPUT_TYPE = "password";
     private static final String CHECKBOX_TYPE = "checkbox";
     private static final String RADIO_TYPE = "radio";
 
     /**
-     * Specifies wrapped {@link org.openqa.selenium.WebElement}.
+     * Specifies {@link org.openqa.selenium.WebElement} representing form tag.
      *
      * @param wrappedElement {@code WebElement} to wrap.
      */

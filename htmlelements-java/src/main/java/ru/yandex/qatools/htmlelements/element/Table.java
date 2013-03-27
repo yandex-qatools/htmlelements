@@ -11,11 +11,16 @@ import java.util.List;
  *         Date: 11.03.13
  */
 public class Table extends TypifiedElement {
+    /**
+     * Specifies {@link org.openqa.selenium.WebElement} representing table tag.
+     *
+     * @param wrappedElement {@code WebElement} to wrap.
+     */
     public Table(WebElement wrappedElement) {
         super(wrappedElement);
     }
 
-    public List<List<WebElement>> getElements() {
+    public List<List<WebElement>> getRows() {
         List<List<WebElement>> elements = new ArrayList<List<WebElement>>();
         List<WebElement> rowElements = getWrappedElement().findElements(By.xpath(".//tr"));
         for (WebElement rowElement : rowElements) {
@@ -24,4 +29,5 @@ public class Table extends TypifiedElement {
 
         return elements;
     }
+
 }
