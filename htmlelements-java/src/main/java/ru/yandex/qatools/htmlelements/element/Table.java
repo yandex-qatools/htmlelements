@@ -3,6 +3,7 @@ package ru.yandex.qatools.htmlelements.element;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
+import ru.yandex.qatools.htmlelements.utils.MapConverter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,9 +27,12 @@ public class Table extends TypifiedElement {
         super(wrappedElement);
     }
 
-    public List<String> getHeadings() {
-        List<WebElement> headingElements = getWrappedElement().findElements(By.xpath(".//th"));
-        return convert(headingElements, toText());
+    public List<WebElement> getHeadings() {
+        return getWrappedElement().findElements(By.xpath(".//th"));
+    }
+
+    public List<String> getHeadingsAsString() {
+        return convert(getHeadings(), toText());
     }
 
     public List<List<WebElement>> getRows() {
@@ -60,8 +64,12 @@ public class Table extends TypifiedElement {
         return columns;
     }
 
+    public WebElement getCellAt(int i, int j) {
+        return getRows().get(i).get(j);
+    }
+
     public List<Map<String, WebElement>> getRowsMappedToHeadings() {
-        return getRowsMappedToHeadings(getHeadings());
+        return getRowsMappedToHeadings(getHeadingsAsString());
     }
 
     public List<Map<String, WebElement>> getRowsMappedToHeadings(List<String> headings) {
@@ -89,5 +97,11 @@ public class Table extends TypifiedElement {
         return rowsMappedToHeadings;
     }
 
+    public List<Map<String, String>> getRowsAsStringMappedToHeadings() {
+        return getRowsAsStringMappedToHeadings(getHeadingsAsString());
+    }
 
+    public List<Map<String, String>> getRowsAsStringMappedToHeadings(List<String> headings) {
+        return convert(getRowsMappedToHeadings(headings), new MapConverter<String, WebElement, String>(toText()));
+    }
 }
