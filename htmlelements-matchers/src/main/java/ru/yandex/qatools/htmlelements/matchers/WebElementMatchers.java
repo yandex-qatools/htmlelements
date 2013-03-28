@@ -16,7 +16,11 @@ import static org.hamcrest.Matchers.is;
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 24.09.12
  */
-public class WebElementMatchers {
+public final class WebElementMatchers {
+
+    private WebElementMatchers() {
+    }
+
     /**
      * Creates matcher that checks if element currently exists on page.
      */

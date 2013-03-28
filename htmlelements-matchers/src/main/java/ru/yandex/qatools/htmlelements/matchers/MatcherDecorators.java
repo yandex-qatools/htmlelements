@@ -12,6 +12,7 @@ import ru.yandex.qatools.htmlelements.matchers.decorators.TimeoutWaiter;
  */
 // TODO Add JavaDoc
 public final class MatcherDecorators {
+
     private MatcherDecorators() {
     }
 
