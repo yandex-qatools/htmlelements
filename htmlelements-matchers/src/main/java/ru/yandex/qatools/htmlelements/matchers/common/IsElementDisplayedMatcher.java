@@ -4,6 +4,7 @@ import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -15,7 +16,11 @@ import org.openqa.selenium.WebElement;
 public class IsElementDisplayedMatcher extends TypeSafeMatcher<WebElement> {
     @Override
     protected boolean matchesSafely(WebElement element) {
-        return element.isDisplayed();
+        try {
+            return element.isDisplayed();
+        } catch (WebDriverException e) {
+            return false;
+        }
     }
 
     @Override
