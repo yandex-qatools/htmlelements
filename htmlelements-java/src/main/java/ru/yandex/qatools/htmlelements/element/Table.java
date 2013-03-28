@@ -89,4 +89,5 @@ public class Table extends TypifiedElement {
         return rowsMappedToHeadings;
     }
 
+
 }

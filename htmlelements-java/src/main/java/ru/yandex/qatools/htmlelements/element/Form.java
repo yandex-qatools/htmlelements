@@ -1,10 +1,13 @@
 package ru.yandex.qatools.htmlelements.element;
 
+import ch.lambdaj.function.convert.Converter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.Map;
+
+import static ch.lambdaj.Lambda.convert;
 
 /**
  * @author Artem Eroshenko eroshenkoam@yandex-team.ru
@@ -36,6 +39,10 @@ public class Form extends TypifiedElement {
             }
         }
         getWrappedElement().submit();
+    }
+
+    public <T> void fill(T bean, Converter<T, Map<String, Object>> beanToMapConverter) {
+        fill(beanToMapConverter.convert(bean));
     }
 
     protected WebElement findElementByKey(String key) {
