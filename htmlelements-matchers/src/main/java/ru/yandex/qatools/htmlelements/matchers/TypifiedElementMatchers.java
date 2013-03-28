@@ -18,7 +18,11 @@ import ru.yandex.qatools.htmlelements.matchers.common.IsCheckBoxSelectedMatcher;
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 25.09.12
  */
-public class TypifiedElementMatchers {
+public final class TypifiedElementMatchers {
+
+    private TypifiedElementMatchers() {
+    }
+
     /**
      * Creates matcher that tests if {@link CheckBox} is checked.
      */

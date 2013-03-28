@@ -16,7 +16,11 @@ import static org.hamcrest.Matchers.is;
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 25.09.12
  */
-public class WrapsElementMatchers {
+public final class WrapsElementMatchers {
+
+    private WrapsElementMatchers() {
+    }
+
     /**
      * Creates matcher that matches wrapped {@link WebElement} of {@link WrapsElement} with given matcher.
      *
