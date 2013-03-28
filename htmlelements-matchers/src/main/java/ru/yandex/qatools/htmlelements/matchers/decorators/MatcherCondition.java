@@ -7,7 +7,7 @@ import org.hamcrest.Matcher;
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 03.03.13
  */
-public class MatcherCondition<T> implements Condition {
+public class MatcherCondition<T> extends Condition {
     private final Matcher<? super T> matcher;
     private final T item;
 
