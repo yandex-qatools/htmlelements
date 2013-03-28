@@ -36,4 +36,13 @@ public class IsElementDisplayedTest {
         assertThat(element, not(isDisplayed()));
         assertThat(page.getBlock(), not(isDisplayed()));
     }
+
+    @Test
+    public void notExistingElementShouldBeNotDisplayed() {
+        WebElement element = MockFactory.mockNotLocatableElement(driver);
+        PageWithCustomBlock page = new PageWithCustomBlock(driver);
+
+        assertThat(element, not(isDisplayed()));
+        assertThat(page.getBlock(), not(isDisplayed()));
+    }
 }
