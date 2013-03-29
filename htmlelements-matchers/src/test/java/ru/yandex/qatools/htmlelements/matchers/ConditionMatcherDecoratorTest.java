@@ -22,8 +22,6 @@ public class ConditionMatcherDecoratorTest {
     @Mock
     private Condition condition;
     @Mock
-    private Condition anotherCondition;
-    @Mock
     private Matcher<Object> matcher;
 
     private final Object arbitraryObject = new Object();
