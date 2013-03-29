@@ -17,7 +17,7 @@ public class TimeoutWaiter extends Waiter {
         return new TimeoutWaiter();
     }
 
-    public static TimeoutWaiter timeoutHasExpired(long timeoutInMilliseconds) {
+    public static TimeoutWaiter timeoutHasExpired(final long timeoutInMilliseconds) {
         return new TimeoutWaiter(timeoutInMilliseconds);
     }
 

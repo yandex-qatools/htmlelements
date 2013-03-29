@@ -39,7 +39,8 @@ public class ConditionMatcherDecorator<T> extends TypeSafeMatcher<T> {
     }
 
     @Factory
-    public static <T> Matcher<T> decorateMatcherWithCondition(Matcher<? super T> matcher, Condition condition) {
+    public static <T> Matcher<T> decorateMatcherWithCondition(final Matcher<? super T> matcher,
+                                                              final Condition condition) {
         return new ConditionMatcherDecorator<T>(matcher, condition);
     }
 }

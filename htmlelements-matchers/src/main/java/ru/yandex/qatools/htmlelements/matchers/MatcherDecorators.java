@@ -20,7 +20,7 @@ public final class MatcherDecorators {
         return MatcherDecoratorsBuilder.should(matcher);
     }
 
-    public static RefreshPageAction pageRefresh(WebDriver driver) {
+    public static RefreshPageAction pageRefresh(final WebDriver driver) {
         return RefreshPageAction.pageRefresh(driver);
     }
 
@@ -28,7 +28,7 @@ public final class MatcherDecorators {
         return TimeoutWaiter.timeoutHasExpired();
     }
 
-    public static TimeoutWaiter timeoutHasExpired(long timeoutInMilliseconds) {
+    public static TimeoutWaiter timeoutHasExpired(final long timeoutInMilliseconds) {
         return TimeoutWaiter.timeoutHasExpired(timeoutInMilliseconds);
     }
 }

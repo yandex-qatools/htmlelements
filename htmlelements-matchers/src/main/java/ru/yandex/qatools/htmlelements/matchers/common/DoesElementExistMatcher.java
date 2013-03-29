@@ -35,7 +35,9 @@ public class DoesElementExistMatcher extends TypeSafeMatcher<WebElement> {
 
     @Override
     public void describeMismatchSafely(WebElement element, Description mismatchDescription) {
-        mismatchDescription.appendText(String.format("element %s not existing on page", element));
+        mismatchDescription.appendText("element ").
+                appendValue(element).
+                appendText(" not existing on page");
     }
 
     /**

@@ -16,16 +16,16 @@ import ru.yandex.qatools.htmlelements.element.Radio;
  *         Date: 26.09.12
  */
 public class HasSelectedRadioButtonMatcher extends TypeSafeMatcher<Radio> {
-    private Matcher<WebElement> matcher;
+    private final Matcher<WebElement> buttonMatcher;
 
-    public HasSelectedRadioButtonMatcher(Matcher<WebElement> matcher) {
-        this.matcher = matcher;
+    public HasSelectedRadioButtonMatcher(Matcher<WebElement> buttonMatcher) {
+        this.buttonMatcher = buttonMatcher;
     }
 
     @Override
     protected boolean matchesSafely(Radio radio) {
         try {
-            return matcher.matches(radio.getSelectedButton());
+            return buttonMatcher.matches(radio.getSelectedButton());
         } catch (NoSuchElementException e) {
             // Process case if radio has not selected button
             return false;
@@ -34,12 +34,14 @@ public class HasSelectedRadioButtonMatcher extends TypeSafeMatcher<Radio> {
 
     @Override
     public void describeTo(Description description) {
-        description.appendText("radio has selected button ");
+        description.appendText("selected radio button ").appendDescriptionOf(buttonMatcher);
     }
 
     @Override
     protected void describeMismatchSafely(Radio radio, Description mismatchDescription) {
-        mismatchDescription.appendText(String.format("radio '%s' has not selected button ", radio));
+        mismatchDescription.appendValue(radio).
+                appendText("selected radio button not ").
+                appendDescriptionOf(buttonMatcher);
     }
 
     /**
@@ -48,7 +50,7 @@ public class HasSelectedRadioButtonMatcher extends TypeSafeMatcher<Radio> {
      * @param buttonMatcher Matcher to match selected radio button with.
      */
     @Factory
-    public static Matcher<Radio> hasSelectedRadioButton(Matcher<WebElement> buttonMatcher) {
+    public static Matcher<Radio> hasSelectedRadioButton(final Matcher<WebElement> buttonMatcher) {
         return new HasSelectedRadioButtonMatcher(buttonMatcher);
     }
 }

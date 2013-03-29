@@ -16,16 +16,16 @@ import ru.yandex.qatools.htmlelements.element.Select;
  *         Date: 26.09.12
  */
 public class HasSelectedOptionMatcher extends TypeSafeMatcher<Select> {
-    private final Matcher<WebElement> matcher;
+    private final Matcher<WebElement> optionMatcher;
 
-    public HasSelectedOptionMatcher(Matcher<WebElement> matcher) {
-        this.matcher = matcher;
+    public HasSelectedOptionMatcher(Matcher<WebElement> optionMatcher) {
+        this.optionMatcher = optionMatcher;
     }
 
     @Override
     protected boolean matchesSafely(Select select) {
         try {
-            return matcher.matches(select.getFirstSelectedOption());
+            return optionMatcher.matches(select.getFirstSelectedOption());
         } catch (NoSuchElementException e) {
             // Process case if no options are selected
             return false;
@@ -34,12 +34,14 @@ public class HasSelectedOptionMatcher extends TypeSafeMatcher<Select> {
 
     @Override
     public void describeTo(Description description) {
-        description.appendText("select has selected option ");
+        description.appendText("selected option ").appendDescriptionOf(optionMatcher);
     }
 
     @Override
     protected void describeMismatchSafely(Select select, Description mismatchDescription) {
-        mismatchDescription.appendText(String.format("select '%s' has not selected option ", select));
+        mismatchDescription.appendValue(select).
+                appendText("selected option not ").
+                appendDescriptionOf(optionMatcher);
     }
 
     /**
@@ -48,7 +50,7 @@ public class HasSelectedOptionMatcher extends TypeSafeMatcher<Select> {
      * @param optionMatcher Matcher to match selected option with.
      */
     @Factory
-    public static Matcher<Select> hasSelectedOption(Matcher<WebElement> optionMatcher) {
+    public static Matcher<Select> hasSelectedOption(final Matcher<WebElement> optionMatcher) {
         return new HasSelectedOptionMatcher(optionMatcher);
     }
 }

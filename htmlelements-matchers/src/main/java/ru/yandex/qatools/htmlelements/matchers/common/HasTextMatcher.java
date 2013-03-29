@@ -27,7 +27,7 @@ public class HasTextMatcher extends TypeSafeMatcher<WebElement> {
     }
 
     public void describeTo(Description description) {
-        description.appendText("element text ").appendDescriptionOf(textMatcher);
+        description.appendText("text ").appendDescriptionOf(textMatcher);
     }
 
     @Override

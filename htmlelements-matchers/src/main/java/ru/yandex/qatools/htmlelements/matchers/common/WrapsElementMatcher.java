@@ -41,7 +41,7 @@ public class WrapsElementMatcher extends TypeSafeMatcher<WrapsElement> {
      * @param matcher Matcher to match wrapped element with.
      */
     @Factory
-    public static Matcher<WrapsElement> element(Matcher<WebElement> matcher) {
+    public static Matcher<WrapsElement> element(final Matcher<WebElement> matcher) {
         return new WrapsElementMatcher(matcher);
     }
 }

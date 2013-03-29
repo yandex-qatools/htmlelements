@@ -41,7 +41,7 @@ public final class WebElementMatchers {
      *
      * @param matcher Matcher to match element text with.
      */
-    public static Matcher<WebElement> hasText(Matcher<String> matcher) {
+    public static Matcher<WebElement> hasText(final Matcher<String> matcher) {
         return HasTextMatcher.hasText(matcher);
     }
 
@@ -50,7 +50,7 @@ public final class WebElementMatchers {
      *
      * @param text Expected text of element.
      */
-    public static Matcher<WebElement> hasText(String text) {
+    public static Matcher<WebElement> hasText(final String text) {
         return HasTextMatcher.hasText(text);
     }
 
@@ -60,7 +60,7 @@ public final class WebElementMatchers {
      * @param attribute    Name of matched attribute.
      * @param valueMatcher Matcher to match attribute value with.
      */
-    public static Matcher<WebElement> hasAttribute(String attribute, Matcher<String> valueMatcher) {
+    public static Matcher<WebElement> hasAttribute(final String attribute, final Matcher<String> valueMatcher) {
         return HasAttributeMatcher.hasAttribute(attribute, valueMatcher);
     }
 
@@ -70,7 +70,7 @@ public final class WebElementMatchers {
      * @param attribute Name of matched attribute.
      * @param value     Expected attribute value.
      */
-    public static Matcher<WebElement> hasAttribute(String attribute, String value) {
+    public static Matcher<WebElement> hasAttribute(final String attribute, final String value) {
         return HasAttributeMatcher.hasAttribute(attribute, value);
     }
 
@@ -79,7 +79,7 @@ public final class WebElementMatchers {
      *
      * @param matcher Matcher to match the 'class' attribute with.
      */
-    public static Matcher<WebElement> hasClass(Matcher<String> matcher) {
+    public static Matcher<WebElement> hasClass(final Matcher<String> matcher) {
         return HasAttributeMatcher.hasAttribute("class", matcher);
     }
 
@@ -88,7 +88,7 @@ public final class WebElementMatchers {
      *
      * @param value Expected value of the 'class' attribute.
      */
-    public static Matcher<WebElement> hasClass(String value) {
+    public static Matcher<WebElement> hasClass(final String value) {
         return HasAttributeMatcher.hasAttribute("class", value);
     }
 
@@ -97,7 +97,7 @@ public final class WebElementMatchers {
      *
      * @param matcher Matcher to match the 'name' attribute with.
      */
-    public static Matcher<WebElement> hasName(Matcher<String> matcher) {
+    public static Matcher<WebElement> hasName(final Matcher<String> matcher) {
         return HasAttributeMatcher.hasAttribute("name", matcher);
     }
 
@@ -106,7 +106,7 @@ public final class WebElementMatchers {
      *
      * @param value Expected value of the 'name' attribute.
      */
-    public static Matcher<WebElement> hasName(String value) {
+    public static Matcher<WebElement> hasName(final String value) {
         return HasAttributeMatcher.hasAttribute("name", value);
     }
 
@@ -115,7 +115,7 @@ public final class WebElementMatchers {
      *
      * @param matcher Matcher to match the 'id' attribute with.
      */
-    public static Matcher<WebElement> hasId(Matcher<String> matcher) {
+    public static Matcher<WebElement> hasId(final Matcher<String> matcher) {
         return HasAttributeMatcher.hasAttribute("id", matcher);
     }
 
@@ -124,7 +124,7 @@ public final class WebElementMatchers {
      *
      * @param value Expected value of the 'id' attribute.
      */
-    public static Matcher<WebElement> hasId(String value) {
+    public static Matcher<WebElement> hasId(final String value) {
         return HasAttributeMatcher.hasAttribute("id", value);
     }
 
@@ -133,7 +133,7 @@ public final class WebElementMatchers {
      *
      * @param matcher Matcher to match the 'value' attribute with.
      */
-    public static Matcher<WebElement> hasValue(Matcher<String> matcher) {
+    public static Matcher<WebElement> hasValue(final Matcher<String> matcher) {
         return HasAttributeMatcher.hasAttribute("value", matcher);
     }
 
@@ -142,7 +142,7 @@ public final class WebElementMatchers {
      *
      * @param value Expected value of the 'value' attribute.
      */
-    public static Matcher<WebElement> hasValue(String value) {
+    public static Matcher<WebElement> hasValue(final String value) {
         return HasAttributeMatcher.hasAttribute("value", value);
     }
 }

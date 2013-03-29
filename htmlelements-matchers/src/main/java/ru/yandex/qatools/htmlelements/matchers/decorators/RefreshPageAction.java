@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 public class RefreshPageAction implements Action {
     private final WebDriver driver;
 
-    public static RefreshPageAction pageRefresh(WebDriver driver) {
+    public static RefreshPageAction pageRefresh(final WebDriver driver) {
         return new RefreshPageAction(driver);
     }
 

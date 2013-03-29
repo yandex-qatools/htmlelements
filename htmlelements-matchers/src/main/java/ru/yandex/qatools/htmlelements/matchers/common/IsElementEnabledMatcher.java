@@ -25,7 +25,7 @@ public class IsElementEnabledMatcher extends TypeSafeMatcher<WebElement> {
 
     @Override
     public void describeMismatchSafely(WebElement element, Description mismatchDescription) {
-        mismatchDescription.appendText(String.format("element '%s' is not enabled", element));
+        mismatchDescription.appendText("element ").appendValue(element).appendText(" is not enabled");
     }
 
     /**

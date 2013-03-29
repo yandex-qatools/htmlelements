@@ -35,7 +35,7 @@ public final class TypifiedElementMatchers {
      *
      * @param optionMatcher Matcher to match selected option with.
      */
-    public static Matcher<Select> hasSelectedOption(Matcher<WebElement> optionMatcher) {
+    public static Matcher<Select> hasSelectedOption(final Matcher<WebElement> optionMatcher) {
         return HasSelectedOptionMatcher.hasSelectedOption(optionMatcher);
     }
 
@@ -44,7 +44,7 @@ public final class TypifiedElementMatchers {
      *
      * @param buttonMatcher Matcher to match selected radio button with.
      */
-    public static Matcher<Radio> hasSelectedRadioButton(Matcher<WebElement> buttonMatcher) {
+    public static Matcher<Radio> hasSelectedRadioButton(final Matcher<WebElement> buttonMatcher) {
         return HasSelectedRadioButtonMatcher.hasSelectedRadioButton(buttonMatcher);
     }
 
@@ -53,7 +53,7 @@ public final class TypifiedElementMatchers {
      *
      * @param textMatcher Matcher to match entered text with.
      */
-    public static Matcher<TextInput> hasEnteredText(Matcher<String> textMatcher) {
+    public static Matcher<TextInput> hasEnteredText(final Matcher<String> textMatcher) {
         return HasEnteredTextMatcher.hasEnteredText(textMatcher);
     }
 
@@ -62,7 +62,7 @@ public final class TypifiedElementMatchers {
      *
      * @param text Expected entered text.
      */
-    public static Matcher<TextInput> hasEnteredText(String text) {
+    public static Matcher<TextInput> hasEnteredText(final String text) {
         return HasEnteredTextMatcher.hasEnteredText(text);
     }
 }

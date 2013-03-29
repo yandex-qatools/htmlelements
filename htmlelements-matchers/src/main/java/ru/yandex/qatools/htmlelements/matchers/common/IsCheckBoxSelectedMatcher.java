@@ -17,13 +17,13 @@ public class IsCheckBoxSelectedMatcher extends TypeSafeMatcher<CheckBox> {
     }
 
     @Override
-    public void describeMismatchSafely(CheckBox checkBox, Description description) {
-        description.appendText(String.format("checkbox '%s' is not checked", checkBox));
+    public void describeTo(Description description) {
+        description.appendText("checkbox is checked");
     }
 
     @Override
-    public void describeTo(Description description) {
-        description.appendText("checkbox is checked");
+    public void describeMismatchSafely(CheckBox checkBox, Description description) {
+        description.appendText("checkbox ").appendValue(checkBox).appendText(" is not checked");
     }
 
     /**

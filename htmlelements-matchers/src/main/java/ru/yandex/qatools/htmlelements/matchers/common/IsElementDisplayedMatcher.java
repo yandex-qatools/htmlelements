@@ -30,7 +30,7 @@ public class IsElementDisplayedMatcher extends TypeSafeMatcher<WebElement> {
 
     @Override
     public void describeMismatchSafely(WebElement element, Description mismatchDescription) {
-        mismatchDescription.appendText(String.format("element '%s' is not displayed on page", element));
+        mismatchDescription.appendText("element ").appendValue(element).appendText(" is not displayed on page");
     }
 
     /**
