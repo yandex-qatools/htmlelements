@@ -97,7 +97,7 @@ public class HtmlElementDecorator extends DefaultFieldDecorator {
     private <T extends TypifiedElement> T decorateTypifiedElement(Class<T> elementClass, ClassLoader loader,
                                                                   ElementLocator locator, String elementName) {
         // Create typified element and initialize it with WebElement proxy
-        WebElement elementToWrap = HtmlElementFactory.createProxyForWebElement(loader, locator);
+        WebElement elementToWrap = HtmlElementFactory.createNamedProxyForWebElement(loader, locator, elementName);
         T typifiedElementInstance = HtmlElementFactory.createTypifiedElementInstance(elementClass, elementToWrap);
         typifiedElementInstance.setName(elementName);
         return typifiedElementInstance;
@@ -106,7 +106,7 @@ public class HtmlElementDecorator extends DefaultFieldDecorator {
     private <T extends HtmlElement> T decorateHtmlElement(Class<T> elementClass, ClassLoader loader,
                                                           ElementLocator locator, String elementName) {
         // Create block and initialize it with WebElement proxy
-        WebElement elementToWrap = HtmlElementFactory.createProxyForWebElement(loader, locator);
+        WebElement elementToWrap = HtmlElementFactory.createNamedProxyForWebElement(loader, locator, elementName);
         T htmlElementInstance = HtmlElementFactory.createHtmlElementInstance(elementClass);
         htmlElementInstance.setWrappedElement(elementToWrap);
         htmlElementInstance.setName(elementName);

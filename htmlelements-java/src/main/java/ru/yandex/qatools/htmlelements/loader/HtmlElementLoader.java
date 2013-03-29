@@ -155,9 +155,10 @@ public class HtmlElementLoader {
         ElementLocator locator = locatorFactory.createLocator(htmlElementClass);
         ClassLoader htmlElementClassLoader = htmlElement.getClass().getClassLoader();
         // Initialize block with WebElement proxy and set its name
-        WebElement elementToWrap = HtmlElementFactory.createProxyForWebElement(htmlElementClassLoader, locator);
-        htmlElement.setWrappedElement(elementToWrap);
         String elementName = getElementName(htmlElementClass);
+        WebElement elementToWrap = HtmlElementFactory.createNamedProxyForWebElement(htmlElementClassLoader,
+                locator, elementName);
+        htmlElement.setWrappedElement(elementToWrap);
         htmlElement.setName(elementName);
         // Initialize elements of the block
         PageFactory.initElements(new HtmlElementDecorator(elementToWrap), htmlElement);
