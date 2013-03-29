@@ -34,7 +34,7 @@ public class SampleTest {
 
     @Test
     public void testLogoName() {
-        assertThat(searchPage.getLogo().toString(), is("Logotype"));
+        assertThat(searchPage.getLogo().toString(), is(SearchPage.LOGO_NAME));
     }
 
     @Test
@@ -44,7 +44,7 @@ public class SampleTest {
 
     @Test
     public void testSearchArrowRequestInputName() {
-        assertThat(searchPage.getSearchArrow().getRequestInput().toString(), is("Request Input"));
+        assertThat(searchPage.getSearchArrow().getRequestInput().toString(), is(SearchArrowData.REQUEST_INPUT_NAME));
     }
 
     @Test

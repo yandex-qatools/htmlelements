@@ -22,11 +22,12 @@ import static org.mockito.Mockito.when;
  *         Date: 13.08.12
  */
 public class SearchPage {
-    private static final String LOGO_CLASS = "b-logo";
+    public static final String LOGO_NAME = "Logotype";
+    public static final String LOGO_CLASS = "b-logo";
 
     private SearchArrow searchArrow;
 
-    @Name("Logotype")
+    @Name(LOGO_NAME)
     @FindBy(className = LOGO_CLASS)
     private WebElement logo;
 

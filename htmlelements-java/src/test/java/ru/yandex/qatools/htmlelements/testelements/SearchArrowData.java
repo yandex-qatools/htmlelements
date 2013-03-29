@@ -9,6 +9,8 @@ public class SearchArrowData {
 
     public static final String SEARCH_ARROW_CLASS = "b-morda-search-form";
 
+    public static final String REQUEST_INPUT_NAME = "Search Request Input";
+
     public static final String REQUEST_INPUT_CLASS = "b-morda-search__input";
 
     public static final String SEARCH_BUTTON_CLASS = "b-form-button__input";

@@ -19,7 +19,7 @@ import java.util.List;
 @Name(SearchArrowData.SEARCH_ARROW_NAME)
 @Block(@FindBy(className = SearchArrowData.SEARCH_ARROW_CLASS))
 public class SearchArrow extends HtmlElement {
-
+    @Name(SearchArrowData.REQUEST_INPUT_NAME)
     @FindBy(className = SearchArrowData.REQUEST_INPUT_CLASS)
     private TextInput requestInput;
 
