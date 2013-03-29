@@ -3,10 +3,7 @@ package ru.yandex.qatools.htmlelements.matchers;
 import org.hamcrest.Matcher;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
-import org.openqa.selenium.lift.match.TextMatcher;
 import ru.yandex.qatools.htmlelements.matchers.common.WrapsElementMatcher;
-
-import static org.hamcrest.Matchers.is;
 
 /**
  * Contains <a href="http://code.google.com/p/hamcrest/">matchers</a> that can be used with any object implementing
@@ -51,12 +48,12 @@ public final class WrapsElementMatchers {
     }
 
     /**
-     * Creates matcher that matches text of element with given matcher.
+     * Creates matcher that matches element text with given matcher.
      *
      * @param matcher Matcher to match element text with.
      */
     public static Matcher<WrapsElement> hasText(Matcher<String> matcher) {
-        return element(TextMatcher.text(matcher));
+        return element(WebElementMatchers.hasText(matcher));
     }
 
     /**
@@ -65,7 +62,7 @@ public final class WrapsElementMatchers {
      * @param text Expected text of element.
      */
     public static Matcher<WrapsElement> hasText(String text) {
-        return element(TextMatcher.text(is(text)));
+        return element(WebElementMatchers.hasText(text));
     }
 
     /**

@@ -2,13 +2,7 @@ package ru.yandex.qatools.htmlelements.matchers;
 
 import org.hamcrest.Matcher;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.lift.match.TextMatcher;
-import ru.yandex.qatools.htmlelements.matchers.common.DoesElementExistMatcher;
-import ru.yandex.qatools.htmlelements.matchers.common.HasAttributeMatcher;
-import ru.yandex.qatools.htmlelements.matchers.common.IsElementDisplayedMatcher;
-import ru.yandex.qatools.htmlelements.matchers.common.IsElementEnabledMatcher;
-
-import static org.hamcrest.Matchers.is;
+import ru.yandex.qatools.htmlelements.matchers.common.*;
 
 /**
  * Contains useful <a href="http://code.google.com/p/hamcrest/">matchers</a> for WebElements.
@@ -43,12 +37,12 @@ public final class WebElementMatchers {
     }
 
     /**
-     * Creates matcher that matches text of element with given matcher.
+     * Creates matcher that matches element text with given matcher.
      *
      * @param matcher Matcher to match element text with.
      */
     public static Matcher<WebElement> hasText(Matcher<String> matcher) {
-        return TextMatcher.text(matcher);
+        return HasTextMatcher.hasText(matcher);
     }
 
     /**
@@ -57,7 +51,7 @@ public final class WebElementMatchers {
      * @param text Expected text of element.
      */
     public static Matcher<WebElement> hasText(String text) {
-        return TextMatcher.text(is(text));
+        return HasTextMatcher.hasText(text);
     }
 
     /**
