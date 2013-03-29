@@ -2,9 +2,9 @@ package ru.yandex.qatools.htmlelements.matchers;
 
 import org.hamcrest.Matcher;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.lift.match.AttributeMatcher;
 import org.openqa.selenium.lift.match.TextMatcher;
 import ru.yandex.qatools.htmlelements.matchers.common.DoesElementExistMatcher;
+import ru.yandex.qatools.htmlelements.matchers.common.HasAttributeMatcher;
 import ru.yandex.qatools.htmlelements.matchers.common.IsElementDisplayedMatcher;
 import ru.yandex.qatools.htmlelements.matchers.common.IsElementEnabledMatcher;
 
@@ -61,13 +61,13 @@ public final class WebElementMatchers {
     }
 
     /**
-     * Creates matcher that matches specified attribute of element with given matcher.
+     * Creates matcher that matches value of specified attribute with the given matcher.
      *
-     * @param attribute Name of matched attribute.
-     * @param matcher   Matcher to match attribute with.
+     * @param attribute    Name of matched attribute.
+     * @param valueMatcher Matcher to match attribute value with.
      */
-    public static Matcher<WebElement> hasAttribute(String attribute, Matcher<String> matcher) {
-        return AttributeMatcher.attribute(attribute, matcher);
+    public static Matcher<WebElement> hasAttribute(String attribute, Matcher<String> valueMatcher) {
+        return HasAttributeMatcher.hasAttribute(attribute, valueMatcher);
     }
 
     /**
@@ -77,78 +77,78 @@ public final class WebElementMatchers {
      * @param value     Expected attribute value.
      */
     public static Matcher<WebElement> hasAttribute(String attribute, String value) {
-        return AttributeMatcher.attribute(attribute, is(value));
+        return HasAttributeMatcher.hasAttribute(attribute, value);
     }
 
     /**
-     * Creates matcher that matches 'class' attribute of specified element with given matcher.
+     * Creates matcher that matches the 'class' attribute of specified element with given matcher.
      *
-     * @param matcher Matcher to match 'class' attribute with.
+     * @param matcher Matcher to match the 'class' attribute with.
      */
     public static Matcher<WebElement> hasClass(Matcher<String> matcher) {
-        return AttributeMatcher.attribute("class", matcher);
+        return HasAttributeMatcher.hasAttribute("class", matcher);
     }
 
     /**
-     * Creates matcher that checks if 'class' attribute of specified element has expected value.
+     * Creates matcher that checks if the 'class' attribute of specified element has expected value.
      *
-     * @param value Expected value of 'class' attribute.
+     * @param value Expected value of the 'class' attribute.
      */
     public static Matcher<WebElement> hasClass(String value) {
-        return AttributeMatcher.attribute("class", is(value));
+        return HasAttributeMatcher.hasAttribute("class", value);
     }
 
     /**
-     * Creates matcher that matches 'name' attribute of specified element with given matcher.
+     * Creates matcher that matches the 'name' attribute of specified element with given matcher.
      *
-     * @param matcher Matcher to match 'name' attribute with.
+     * @param matcher Matcher to match the 'name' attribute with.
      */
     public static Matcher<WebElement> hasName(Matcher<String> matcher) {
-        return AttributeMatcher.attribute("name", matcher);
+        return HasAttributeMatcher.hasAttribute("name", matcher);
     }
 
     /**
-     * Creates matcher that checks if 'name' attribute of specified element has expected value.
+     * Creates matcher that checks if the 'name' attribute of specified element has expected value.
      *
-     * @param value Expected value of 'name' attribute.
+     * @param value Expected value of the 'name' attribute.
      */
     public static Matcher<WebElement> hasName(String value) {
-        return AttributeMatcher.attribute("name", is(value));
+        return HasAttributeMatcher.hasAttribute("name", value);
     }
 
     /**
-     * Creates matcher that matches 'id' attribute of specified element with given matcher.
+     * Creates matcher that matches the 'id' attribute of specified element with given matcher.
      *
-     * @param matcher Matcher to match 'id' attribute with.
+     * @param matcher Matcher to match the 'id' attribute with.
      */
     public static Matcher<WebElement> hasId(Matcher<String> matcher) {
-        return AttributeMatcher.attribute("id", matcher);
+        return HasAttributeMatcher.hasAttribute("id", matcher);
     }
 
     /**
-     * Creates matcher that checks if 'id' attribute of specified element has expected value.
+     * Creates matcher that checks if the 'id' attribute of specified element has expected value.
      *
-     * @param value Expected value of 'id' attribute.
+     * @param value Expected value of the 'id' attribute.
      */
     public static Matcher<WebElement> hasId(String value) {
-        return AttributeMatcher.attribute("id", is(value));
+        return HasAttributeMatcher.hasAttribute("id", value);
     }
 
     /**
-     * Creates matcher that matches 'value' attribute of specified element with given matcher.
+     * Creates matcher that matches the 'value' attribute of specified element with given matcher.
      *
-     * @param matcher Matcher to match 'value' attribute with.
+     * @param matcher Matcher to match the 'value' attribute with.
      */
     public static Matcher<WebElement> hasValue(Matcher<String> matcher) {
-        return AttributeMatcher.attribute("value", matcher);
+        return HasAttributeMatcher.hasAttribute("value", matcher);
     }
 
     /**
-     * Creates matcher that checks if 'value' attribute of specified element has expected value.
+     * Creates matcher that checks if the 'value' attribute of specified element has expected value.
      *
-     * @param value Expected value of 'value' attribute.
+     * @param value Expected value of the 'value' attribute.
      */
     public static Matcher<WebElement> hasValue(String value) {
-        return AttributeMatcher.attribute("value", is(value));
+        return HasAttributeMatcher.hasAttribute("value", value);
     }
 }

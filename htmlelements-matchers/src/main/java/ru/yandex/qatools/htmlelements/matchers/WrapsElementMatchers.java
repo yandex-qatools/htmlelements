@@ -3,7 +3,6 @@ package ru.yandex.qatools.htmlelements.matchers;
 import org.hamcrest.Matcher;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
-import org.openqa.selenium.lift.match.AttributeMatcher;
 import org.openqa.selenium.lift.match.TextMatcher;
 import ru.yandex.qatools.htmlelements.matchers.common.WrapsElementMatcher;
 
@@ -76,7 +75,7 @@ public final class WrapsElementMatchers {
      * @param matcher   Matcher to match attribute with.
      */
     public static Matcher<WrapsElement> hasAttribute(String attribute, Matcher<String> matcher) {
-        return element(AttributeMatcher.attribute(attribute, matcher));
+        return element(WebElementMatchers.hasAttribute(attribute, matcher));
     }
 
     /**
@@ -86,7 +85,7 @@ public final class WrapsElementMatchers {
      * @param value     Expected attribute value.
      */
     public static Matcher<WrapsElement> hasAttribute(String attribute, String value) {
-        return element(AttributeMatcher.attribute(attribute, is(value)));
+        return element(WebElementMatchers.hasAttribute(attribute, value));
     }
 
     /**
@@ -95,7 +94,7 @@ public final class WrapsElementMatchers {
      * @param matcher Matcher to match 'class' attribute with.
      */
     public static Matcher<WrapsElement> hasClass(Matcher<String> matcher) {
-        return element(AttributeMatcher.attribute("class", matcher));
+        return element(WebElementMatchers.hasAttribute("class", matcher));
     }
 
     /**
@@ -104,7 +103,7 @@ public final class WrapsElementMatchers {
      * @param value Expected value of 'class' attribute.
      */
     public static Matcher<WrapsElement> hasClass(String value) {
-        return element(AttributeMatcher.attribute("class", is(value)));
+        return element(WebElementMatchers.hasAttribute("class", value));
     }
 
     /**
@@ -113,7 +112,7 @@ public final class WrapsElementMatchers {
      * @param matcher Matcher to match 'name' attribute with.
      */
     public static Matcher<WrapsElement> hasName(Matcher<String> matcher) {
-        return element(AttributeMatcher.attribute("name", matcher));
+        return element(WebElementMatchers.hasAttribute("name", matcher));
     }
 
     /**
@@ -122,7 +121,7 @@ public final class WrapsElementMatchers {
      * @param value Expected value of 'name' attribute.
      */
     public static Matcher<WrapsElement> hasName(String value) {
-        return element(AttributeMatcher.attribute("name", is(value)));
+        return element(WebElementMatchers.hasAttribute("name", value));
     }
 
     /**
@@ -131,7 +130,7 @@ public final class WrapsElementMatchers {
      * @param matcher Matcher to match 'is' attribute with.
      */
     public static Matcher<WrapsElement> hasId(Matcher<String> matcher) {
-        return element(AttributeMatcher.attribute("id", matcher));
+        return element(WebElementMatchers.hasAttribute("id", matcher));
     }
 
     /**
@@ -140,7 +139,7 @@ public final class WrapsElementMatchers {
      * @param value Expected value of 'id' attribute.
      */
     public static Matcher<WrapsElement> hasId(String value) {
-        return element(AttributeMatcher.attribute("id", is(value)));
+        return element(WebElementMatchers.hasAttribute("id", value));
     }
 
     /**
@@ -149,7 +148,7 @@ public final class WrapsElementMatchers {
      * @param matcher Matcher to match 'value' attribute with.
      */
     public static Matcher<WrapsElement> hasValue(Matcher<String> matcher) {
-        return element(AttributeMatcher.attribute("value", matcher));
+        return element(WebElementMatchers.hasAttribute("value", matcher));
     }
 
     /**
@@ -158,6 +157,6 @@ public final class WrapsElementMatchers {
      * @param value Expected value of 'value' attribute.
      */
     public static Matcher<WrapsElement> hasValue(String value) {
-        return element(AttributeMatcher.attribute("value", is(value)));
+        return element(WebElementMatchers.hasAttribute("value", value));
     }
 }
