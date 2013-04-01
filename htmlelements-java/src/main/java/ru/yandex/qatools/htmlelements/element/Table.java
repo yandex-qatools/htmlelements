@@ -3,6 +3,7 @@ package ru.yandex.qatools.htmlelements.element;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
+import ru.yandex.qatools.htmlelements.utils.ListConverter;
 import ru.yandex.qatools.htmlelements.utils.MapConverter;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import static ru.yandex.qatools.htmlelements.utils.WebElementToTextConverter.toT
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 11.03.13
  */
+// TODO Add JavaDoc
 public class Table extends TypifiedElement {
     /**
      * Specifies {@link org.openqa.selenium.WebElement} representing table tag.
@@ -44,6 +46,10 @@ public class Table extends TypifiedElement {
         return rows;
     }
 
+    public List<List<String>> getRowsAsString() {
+        return convert(getRows(), new ListConverter<WebElement, String>(toText()));
+    }
+
     public List<List<WebElement>> getColumns() {
         List<List<WebElement>> columns = new ArrayList<List<WebElement>>();
         List<List<WebElement>> rows = getRows();
@@ -62,6 +68,10 @@ public class Table extends TypifiedElement {
         }
 
         return columns;
+    }
+
+    public List<List<String>> getColumnsAsString() {
+        return convert(getColumns(), new ListConverter<WebElement, String>(toText()));
     }
 
     public WebElement getCellAt(int i, int j) {
