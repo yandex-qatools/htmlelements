@@ -23,11 +23,11 @@
 
 Соответственно для WebElement-ов необходимо импортить класс:
 
-    @import ru.yandex.qatools.htmlelements.matchers.WebElementMatchers
+    import ru.yandex.qatools.htmlelements.matchers.WebElementMatchers
 
 а для TypifiedElement-ов соответственно:
 
-    @import ru.yandex.qatools.htmlelements.matchers.WrpasElementMatchers
+    import ru.yandex.qatools.htmlelements.matchers.WrapsElementMatchers
 
 Довольно запутанная схема получилась:( У нас есть идеи как это можно расшить, но руки пока недоходят.
 
