@@ -35,12 +35,6 @@ Create blocks of elements
 For example, let's create a block for the search form on the page http://www.yandex.com:
 
 ```java
-import org.openqa.selenium.support.FindBy;
-import ru.yandex.qatools.htmlelements.annotations.Block;
-import ru.yandex.qatools.htmlelements.element.Button;
-import ru.yandex.qatools.htmlelements.element.HtmlElement;
-import ru.yandex.qatools.htmlelements.element.TextInput;
-
 @Name("Search form")
 @Block(@FindBy(xpath = "//form"))
 public class SearchArrow extends HtmlElement {
@@ -64,17 +58,12 @@ Construct page object using created blocks
 You can easily use created blocks in page objects:
 
 ```java
-import org.openqa.selenium.WebDriver;
-import ru.yandex.qatools.htmlelements.annotations.Name;
-import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
-import ru.yandex.qatools.htmlelements.testelements.SearchArrow;
-
 public class SearchPage {
     private SearchArrow searchArrow;
     // Other blocks and elements here
 
     public SearchPage(WebDriver driver) {
-        HtmlElementLoader.populatePageObject(this, driver);
+        PageFactory.initElements(new HtmlElementDecorator(driver), this);
     }
 
     public void search(String request) {
@@ -90,11 +79,6 @@ Use page objects in your tests
 Created page objects can be used in your tests. That makes tests more comprehensive and easy to write.
 
 ```java
-import org.junit.Before;
-import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import ru.yandex.qatools.htmlelements.testpages.SearchPage;
-    
 public class SampleTest {
     private WebDriver driver = new FirefoxDriver();
     private SearchPage searchPage = new SearchPage(driver);
