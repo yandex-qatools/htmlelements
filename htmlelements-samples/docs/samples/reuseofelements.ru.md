@@ -8,39 +8,41 @@
 Предположим, что у нас уже создан элемент поисковой строки и главной страницы Яндекса из примера [Начало работы](gettingstarted.md).
 Давайте создадим тест на проверку количества результатов выдачи по запросу:
 
-    public class ReuseOfElements {
+```java
+public class ReuseOfElements {
 
-        public WebDriver driver = new HtmlUnitDriver();
+    public WebDriver driver = new HtmlUnitDriver();
 
-        public final String REQUEST = "test";
+    public final String REQUEST = "test";
 
-        public final String ANOTHER_REQUEST = "request";
+    public final String ANOTHER_REQUEST = "request";
 
-        public final int SEARCH_REQUEST_COUNT = 10;
+    public final int SEARCH_REQUEST_COUNT = 10;
 
-        @Before
-        public void loadStartPage() {
-            driver.get("http://www.yandex.ru");
-        }
-
-        @Test
-        public void testOutput() throws Exception {
-
-            MainPage mainPage = new MainPage(driver);
-            mainPage.getSearchArrow().searchFor(REQUEST);
-
-            SearchPage searchPage = new SearchPage(driver);
-            assertThat(searchPage.getResults(), hasSize(SEARCH_REQUEST_COUNT));
-
-            searchPage.getSearchArrow().searchFor(ANOTHER_REQUEST);
-            assertThat(searchPage.getResults(), hasSize(SEARCH_REQUEST_COUNT));
-        }
-
-        @After
-        public void destroyDriver() {
-            driver.quit();
-        }
+    @Before
+    public void loadStartPage() {
+        driver.get("http://www.yandex.ru");
     }
+
+    @Test
+    public void testOutput() throws Exception {
+
+        MainPage mainPage = new MainPage(driver);
+        mainPage.getSearchArrow().searchFor(REQUEST);
+
+        SearchPage searchPage = new SearchPage(driver);
+        assertThat(searchPage.getResults(), hasSize(SEARCH_REQUEST_COUNT));
+
+        searchPage.getSearchArrow().searchFor(ANOTHER_REQUEST);
+        assertThat(searchPage.getResults(), hasSize(SEARCH_REQUEST_COUNT));
+    }
+
+    @After
+    public void destroyDriver() {
+        driver.quit();
+    }
+}
+```
 
 В этом случае на страницу `SearchPage` включен элемент 'SearchArrow', причем с переопределенным селектором `@FindBy(className = "b-search__table")`.
 
@@ -50,27 +52,33 @@
 
 Если один и тот же элемент находится на разных страницах по одному и тому же селектору, то его можно определить по дефолту следующим образом:
 
-    @Block(@FindBy(className = "b-domik"))
-    public class AuthBlock extends HtmlElement { ... }
+```java
+@Block(@FindBy(className = "b-domik"))
+public class AuthBlock extends HtmlElement { ... }
+```
 
 При этом совершенно не обязательно задавать селектор при включение элемента на страницу:
 
-    public SearchPage {
+```java
+public SearchPage {
 
-        protected AuthBlock authBlock;
+    protected AuthBlock authBlock;
 
-        ...
-    }
+    ...
+}
+```
 
 Если же селектор все таки указать, то он переопределит дефолтный.
 
-    public SearchPage {
+```java
+public SearchPage {
 
-        @FindBy(className = "some-another-domik")
-        protected AuthBlock authBlock;
+    @FindBy(className = "some-another-domik")
+    protected AuthBlock authBlock;
 
-        ...
-    }
+    ...
+}
+```
 
 Полезные ссылки
 ---------------
