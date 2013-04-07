@@ -7,11 +7,13 @@
 Чтобы использовать библиотеку HtmlElements необходимо создать простой [maven-проект](http://maven.apache.org/guides/getting-started/index.html).
 После этого добавить в зависимости свежую версию библиотеки:
 
-    <dependency>
-        <groupId>ru.yandex.qatools.htmlelements</groupId>
-        <artifactId>htmlelements-java</artifactId>
-        <version>1.9</version>
-    </dependency>
+```xml
+<dependency>
+    <groupId>ru.yandex.qatools.htmlelements</groupId>
+    <artifactId>htmlelements-java</artifactId>
+    <version>1.9</version>
+</dependency>
+```
 
 Выполните команду `mvn clean compile`, чтобы проерить, что ваш проект компилируется.
 
@@ -21,46 +23,50 @@
 В качестве примера возьмем главную страницу Яндекса (http://www.yandex.ru).
 Давайте опишем для начала простенький элемент, например поисковую строку:
 
-    public class SearchArrow extends HtmlElement {
+```java
+public class SearchArrow extends HtmlElement {
 
-        @FindBy(xpath = "//input[@class='b-form-input__input']")
-        protected WebElement requestInput;
+    @FindBy(xpath = "//input[@class='b-form-input__input']")
+    protected WebElement requestInput;
 
-        @FindBy(xpath = "//input[@class='b-form-button__input']")
-        protected WebElement searchButton;
+    @FindBy(xpath = "//input[@class='b-form-button__input']")
+    protected WebElement searchButton;
 
-        public WebElement getRequestInput() {
-            return this.requestInput;
-        }
-
-        public WebElement getSearchButton() {
-            return this.searchButton;
-        }
-
-        public void searchFor(String request) {
-            getRequestInput().clear();
-            getRequestInput().sendKeys(request);
-            getSearchButton().submit();
-        }
+    public WebElement getRequestInput() {
+        return this.requestInput;
     }
+
+    public WebElement getSearchButton() {
+        return this.searchButton;
+    }
+
+    public void searchFor(String request) {
+        getRequestInput().clear();
+        getRequestInput().sendKeys(request);
+        getSearchButton().submit();
+    }
+}
+```
 
 Этот класс описывает структуру поисковой строки и логику взаимодействия с ней.
 Дальше необходимо создать класс MainPage, который содержит поисковую строку:
 
-    public class MainPage {
+```java
+public class MainPage {
 
-        @FindBy(className = "b-morda-search-form")
-        protected SearchArrow searchArrow;
+    @FindBy(className = "b-morda-search-form")
+    protected SearchArrow searchArrow;
 
-        public MainPage(WebDriver driver) {
-            HtmlElementLoader.populate(this, driver);
-        }
-
-        public SearchArrow getSearchArrow() {
-            return searchArrow;
-        }
-
+    public MainPage(WebDriver driver) {
+        HtmlElementLoader.populate(this, driver);
     }
+
+    public SearchArrow getSearchArrow() {
+        return searchArrow;
+    }
+
+}
+```
 
 Как видно, в конструкторе вызывается инициализация внутренних эелементов стнаицы MainPage с помощью статического метода 
 `public static <T> void populate(T instance, WebDriver driver)`. 
@@ -71,29 +77,31 @@
 
 Для того, чтобы это проверить создадим еще один класс GettingStarted, в котором создим экземляр нашей страницы:
 
-    public class GettingStarted {
+```java
+public class GettingStarted {
 
-        public WebDriver driver = new FirefoxDriver();
+    public WebDriver driver = new FirefoxDriver();
 
-        public final String REQUEST = "test";
+    public final String REQUEST = "test";
 
-        @Before
-        public void loadStartPage() {
-            driver.get("http://www.yandex.ru");
-        }
-
-        @Test
-        public void testOutput() throws Exception {
-            MainPage mainPage = new MainPage(driver);
-            mainPage.getSearchArrow().searchFor(REQUEST);
-            assertThat(driver.getTitle(), containsString(REQUEST));
-        }
-
-        @After
-        public void destroyDriver() {
-            driver.quit();
-        }
+    @Before
+    public void loadStartPage() {
+        driver.get("http://www.yandex.ru");
     }
+
+    @Test
+    public void testOutput() throws Exception {
+        MainPage mainPage = new MainPage(driver);
+        mainPage.getSearchArrow().searchFor(REQUEST);
+        assertThat(driver.getTitle(), containsString(REQUEST));
+    }
+
+    @After
+    public void destroyDriver() {
+        driver.quit();
+    }
+}
+```
 
 В этом примере видно, что после инициализации самой страницы `MainPage` произошла инициализация внутренних элементов.
 
