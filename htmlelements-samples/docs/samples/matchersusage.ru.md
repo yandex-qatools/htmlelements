@@ -15,7 +15,9 @@
 не имплементирует интерфейс `WebElement`, но имлементирует полезный интерфейс `WrapsElement` c единственным методом `getWrappedElement()`.
 Чтобы упростить конструкцию:
 
-    assertThat(link.getWrappedElement(), hasText("Some text"))
+```java
+assertThat(link.getWrappedElement(), hasText("Some text"))
+```
 
 Мы сделали матчер-обертку основной задачей которого является получение доступа к `wrappedElement`.
 Так образом появился еще один набор матчеров для типизированных элементов
@@ -23,11 +25,15 @@
 
 Соответственно для WebElement-ов необходимо импортить класс:
 
-    @import ru.yandex.qatools.htmlelements.matchers.WebElementMatchers
+```java
+@import ru.yandex.qatools.htmlelements.matchers.WebElementMatchers
+```
 
 а для TypifiedElement-ов соответственно:
 
-    @import ru.yandex.qatools.htmlelements.matchers.WrpasElementMatchers
+```java
+@import ru.yandex.qatools.htmlelements.matchers.WrpasElementMatchers
+```
 
 Довольно запутанная схема получилась:( У нас есть идеи как это можно расшить, но руки пока недоходят.
 
@@ -37,9 +43,11 @@
 Если у вас в зависимостях использутей `htmlelements-all`, то ничего делать не надо.
 Иначе необходимо подключить зависимости:
 
-    <groupId>ru.yandex.qatools.htmlelements</groupId>
-    <artifactId>htmlelements-matchers</artifactId>
-	<version>1.9</version>
+```xml
+<groupId>ru.yandex.qatools.htmlelements</groupId>
+<artifactId>htmlelements-matchers</artifactId>
+<version>1.9</version>
+```
 
 Does Element Exist Matcher
 --------------------------
@@ -49,11 +57,15 @@ Does Element Exist Matcher
 Один из самых полезных матчеров. Его задача - проверить, что элемент присутствует на странице.
 По сути, происходит обращение к элементу и в случае возникновения эксепшена возвращается `false`, иначе `true`.
 
-    assertThat(element, exist());
+```java
+assertThat(element, exist());
+```
 
 Так как страницы часто содержат ajax-овую логику, то этот матчер удобно использовать в связке с WaitForMatcher:
 
-    assertThat(element, withWaitFor(exist()))
+```java
+assertThat(element, withWaitFor(exist()))
+```
 
 Is Element Displayed Matcher
 ----------------------------
