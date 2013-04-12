@@ -8,6 +8,10 @@ import org.openqa.selenium.remote.RemoteWebElement;
 import java.io.File;
 import java.net.URL;
 
+import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.existsInClasspath;
+import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.getResourceFromClasspath;
+import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.isRemoteWebElement;
+
 /**
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 11.04.13
@@ -57,20 +61,5 @@ public class FileInput extends TypifiedElement {
     private String getPathForSystemFile(final String fileName) {
         File file = new File(fileName);
         return file.getPath();
-    }
-
-    // TODO To utils
-    private static boolean isRemoteWebElement(WebElement element) {
-        return element.getClass().equals(RemoteWebElement.class);
-    }
-
-    // TODO To utils
-    private static boolean existsInClasspath(final String fileName) {
-        return getResourceFromClasspath(fileName) != null;
-    }
-
-    // TODO To utils
-    private static URL getResourceFromClasspath(final String fileName) {
-        return Thread.currentThread().getContextClassLoader().getResource(fileName);
     }
 }

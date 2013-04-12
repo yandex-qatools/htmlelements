@@ -1,7 +1,9 @@
-package ru.yandex.qatools.htmlelements.loader.decorator;
+package ru.yandex.qatools.htmlelements.utils;
 
+import com.google.common.collect.Lists;
 import org.apache.commons.lang.WordUtils;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import ru.yandex.qatools.htmlelements.annotations.Block;
@@ -9,10 +11,11 @@ import ru.yandex.qatools.htmlelements.annotations.Name;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.element.TypifiedElement;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
+import java.lang.reflect.*;
+import java.net.URL;
 import java.util.List;
+
+import static org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor;
 
 /**
  * Contains utility methods that are used by initialization mechanism.
@@ -20,7 +23,22 @@ import java.util.List;
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 21.08.12
  */
-public class HtmlElementUtils {
+public final class HtmlElementUtils {
+
+    private HtmlElementUtils() {
+    }
+
+    public static <T> T newInstance(Class<T> clazz, Object... args) throws IllegalAccessException,
+            InstantiationException, NoSuchMethodException, InvocationTargetException {
+        if (clazz.isMemberClass() && !Modifier.isStatic(clazz.getModifiers())) {
+            Class outerClass = clazz.getDeclaringClass();
+            Object outerObject = outerClass.newInstance();
+            return invokeConstructor(clazz, Lists.asList(outerObject, args).toArray());
+        } else {
+            return invokeConstructor(clazz, args);
+        }
+    }
+
     public static boolean isHtmlElement(Field field) {
         return isHtmlElement(field.getType());
     }
@@ -121,5 +139,17 @@ public class HtmlElementUtils {
                 ),
                 " "
         ));
+    }
+
+    public static boolean isRemoteWebElement(WebElement element) {
+        return element.getClass().equals(RemoteWebElement.class);
+    }
+
+    public static boolean existsInClasspath(final String fileName) {
+        return getResourceFromClasspath(fileName) != null;
+    }
+
+    public static URL getResourceFromClasspath(final String fileName) {
+        return Thread.currentThread().getContextClassLoader().getResource(fileName);
     }
 }

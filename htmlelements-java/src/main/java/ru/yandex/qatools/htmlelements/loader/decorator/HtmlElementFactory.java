@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.Locatable;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
-import org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.element.TypifiedElement;
 import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
@@ -19,7 +18,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Proxy;
 import java.util.List;
 
-import static ru.yandex.qatools.htmlelements.utils.ReflectionUtils.newInstance;
+import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.newInstance;
 
 /**
  * Contains factory methods for creating instances of blocks, typified elements, page objects

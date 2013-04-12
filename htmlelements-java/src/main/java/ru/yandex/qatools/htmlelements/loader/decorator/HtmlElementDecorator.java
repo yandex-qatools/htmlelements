@@ -12,7 +12,7 @@ import ru.yandex.qatools.htmlelements.element.TypifiedElement;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import static ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementUtils.*;
+import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.*;
 
 /**
  * Decorator which is used to decorate fields of blocks and page objects.

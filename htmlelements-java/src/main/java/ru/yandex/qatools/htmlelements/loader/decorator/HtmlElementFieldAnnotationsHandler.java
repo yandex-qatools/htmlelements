@@ -10,7 +10,7 @@ import ru.yandex.qatools.htmlelements.pagefactory.DefaultFieldAnnotationsHandler
 
 import java.lang.reflect.Field;
 
-import static ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementUtils.*;
+import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.*;
 
 /**
  * Extends default field annotations handling mechanism with processing
