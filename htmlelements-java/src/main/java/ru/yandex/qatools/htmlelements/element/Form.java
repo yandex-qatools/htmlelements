@@ -38,11 +38,14 @@ public class Form extends TypifiedElement {
                 fillElement(elementToFill, data.get(key));
             }
         }
-        getWrappedElement().submit();
     }
 
     public <T> void fill(T bean, Converter<T, Map<String, Object>> beanToMapConverter) {
         fill(beanToMapConverter.convert(bean));
+    }
+
+    public void submit() {
+        getWrappedElement().submit();
     }
 
     protected WebElement findElementByKey(String key) {
