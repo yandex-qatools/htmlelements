@@ -73,12 +73,6 @@ public class HtmlElementFactory {
         }
     }
 
-    public static WebElement createProxyForWebElement(ClassLoader loader, ElementLocator locator) {
-        InvocationHandler handler = new LocatingElementHandler(locator);
-        return (WebElement) Proxy.newProxyInstance(loader,
-                new Class[]{WebElement.class, WrapsElement.class, Locatable.class}, handler);
-    }
-
     public static WebElement createNamedProxyForWebElement(ClassLoader loader, ElementLocator locator, String name) {
         InvocationHandler handler = new WebElementNamedProxyHandler(locator, name);
         return (WebElement) Proxy.newProxyInstance(loader,

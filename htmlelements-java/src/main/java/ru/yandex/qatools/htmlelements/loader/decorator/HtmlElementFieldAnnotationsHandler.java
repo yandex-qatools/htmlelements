@@ -85,14 +85,6 @@ public class HtmlElementFieldAnnotationsHandler extends DefaultFieldAnnotationsH
             listParameterClass = listParameterClass.getSuperclass();
         }
 
-//        @SuppressWarnings("unchecked")
-//        Class<HtmlElement> listParameterClass = (Class<HtmlElement>) getGenericParameterClass(getField());
-//        if (listParameterClass.isAnnotationPresent(Block.class)) {
-//            Block block = listParameterClass.getAnnotation(Block.class);
-//            FindBy findBy = block.value();
-//            return buildByFromFindBy(findBy);
-//        }
-
         throw new HtmlElementsException(String.format("Cannot determine how to locate element %s", getField()));
     }
 

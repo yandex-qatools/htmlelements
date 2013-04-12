@@ -31,7 +31,7 @@ public class FileInput extends TypifiedElement {
         fileInputElement.sendKeys(filePath);
     }
 
-    public void submitFile() {
+    public void submit() {
         getWrappedElement().submit();
     }
 

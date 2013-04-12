@@ -93,18 +93,6 @@ public class HtmlElementUtils {
         return field.getGenericType() instanceof ParameterizedType;
     }
 
-    public static boolean hasFindByAnnotation(Field field) {
-        return field.isAnnotationPresent(FindBy.class);
-    }
-
-    public static boolean hasFindBysAnnotation(Field field) {
-        return field.isAnnotationPresent(FindBys.class);
-    }
-
-    public static boolean hasBlockAnnotation(Class<?> clazz) {
-        return clazz.isAnnotationPresent(Block.class);
-    }
-
     public static String getElementName(Field field) {
         if (field.isAnnotationPresent(Name.class)) {
             return field.getAnnotation(Name.class).value();
