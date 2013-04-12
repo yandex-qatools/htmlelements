@@ -1,10 +1,10 @@
 package ru.yandex.qatools.htmlelements.element;
 
+import ch.lambdaj.Lambda;
+import ch.lambdaj.function.convert.Converter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
-import ru.yandex.qatools.htmlelements.utils.ListConverter;
-import ru.yandex.qatools.htmlelements.utils.MapConverter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +12,10 @@ import java.util.List;
 import java.util.Map;
 
 import static ch.lambdaj.Lambda.convert;
-import static ru.yandex.qatools.htmlelements.utils.WebElementToTextConverter.toText;
+import static ch.lambdaj.Lambda.convertMap;
+import static ru.yandex.qatools.htmlelements.element.Table.ListConverter.toListConvertingEachItem;
+import static ru.yandex.qatools.htmlelements.element.Table.MapConverter.toMapConvertingEachValue;
+import static ru.yandex.qatools.htmlelements.element.Table.WebElementToTextConverter.toText;
 
 /**
  * @author Alexander Tolmachev starlight@yandex-team.ru
@@ -47,7 +50,7 @@ public class Table extends TypifiedElement {
     }
 
     public List<List<String>> getRowsAsString() {
-        return convert(getRows(), new ListConverter<WebElement, String>(toText()));
+        return convert(getRows(), toListConvertingEachItem(toText()));
     }
 
     public List<List<WebElement>> getColumns() {
@@ -71,7 +74,7 @@ public class Table extends TypifiedElement {
     }
 
     public List<List<String>> getColumnsAsString() {
-        return convert(getColumns(), new ListConverter<WebElement, String>(toText()));
+        return convert(getColumns(), toListConvertingEachItem(toText()));
     }
 
     public WebElement getCellAt(int i, int j) {
@@ -112,6 +115,68 @@ public class Table extends TypifiedElement {
     }
 
     public List<Map<String, String>> getRowsAsStringMappedToHeadings(List<String> headings) {
-        return convert(getRowsMappedToHeadings(headings), new MapConverter<String, WebElement, String>(toText()));
+        return convert(getRowsMappedToHeadings(headings), toMapConvertingEachValue(toText()));
+    }
+
+
+    /* Inner utility converters */
+
+    /**
+     * Converts {@link WebElement} to text contained in it
+     */
+    static class WebElementToTextConverter implements Converter<WebElement, String> {
+
+        public static Converter<WebElement, String> toText() {
+            return new WebElementToTextConverter();
+        }
+
+        private WebElementToTextConverter() {
+        }
+
+        @Override
+        public String convert(WebElement element) {
+            return element.getText();
+        }
+    }
+
+    /**
+     * Converts {@code List&lt;F&gt;} to {@code List&lt;T&gt;} by applying specified converter to each list element.
+     */
+    static class ListConverter<F, T> implements Converter<List<F>, List<T>> {
+        private final Converter<F, T> itemsConverter;
+
+        public static <F, T> Converter<List<F>, List<T>> toListConvertingEachItem(Converter<F, T> itemsConverter) {
+            return new ListConverter<F, T>(itemsConverter);
+        }
+
+        private ListConverter(Converter<F, T> itemsConverter) {
+            this.itemsConverter = itemsConverter;
+        }
+
+        @Override
+        public List<T> convert(List<F> list) {
+            return Lambda.convert(list, itemsConverter);
+        }
+    }
+
+    /**
+     * Converts {@code Map&lt;K, F&gt;} to {@code Map&lt;K, T&gt;} by applying specified converter to each value
+     * in a map.
+     */
+    static class MapConverter<K, F, T> implements Converter<Map<K, F>, Map<K, T>> {
+        private final Converter<F, T> valueConverter;
+
+        public static <F, T> Converter<Map<String, F>, Map<String, T>> toMapConvertingEachValue(Converter<F, T> valueConverter) {
+            return new MapConverter<String, F, T>(valueConverter);
+        }
+
+        private MapConverter(Converter<F, T> valueConverter) {
+            this.valueConverter = valueConverter;
+        }
+
+        @Override
+        public Map<K, T> convert(Map<K, F> map) {
+            return convertMap(map, valueConverter);
+        }
     }
 }

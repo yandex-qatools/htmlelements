@@ -18,7 +18,7 @@ import java.util.List;
 import static org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor;
 
 /**
- * Contains utility methods that are used by initialization mechanism.
+ * Contains utility methods used in framework.
  *
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 21.08.12
