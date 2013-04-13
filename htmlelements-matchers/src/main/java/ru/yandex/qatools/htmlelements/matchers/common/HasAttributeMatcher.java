@@ -41,8 +41,8 @@ public class HasAttributeMatcher extends TypeSafeMatcher<WebElement> {
                 appendValue(attributeName).
                 appendText(" of element ").
                 appendValue(item).
-                appendText(" not ").
-                appendDescriptionOf(attributeValueMatcher);
+                appendText(" was ").
+                appendValue(item.getAttribute(attributeName));
     }
 
     @Factory
