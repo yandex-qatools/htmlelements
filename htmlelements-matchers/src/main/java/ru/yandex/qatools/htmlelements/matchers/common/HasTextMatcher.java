@@ -27,15 +27,16 @@ public class HasTextMatcher extends TypeSafeMatcher<WebElement> {
     }
 
     public void describeTo(Description description) {
-        description.appendText("text ").appendDescriptionOf(textMatcher);
+        description.appendText("element text ").appendDescriptionOf(textMatcher);
     }
 
     @Override
     protected void describeMismatchSafely(WebElement item, Description mismatchDescription) {
-        mismatchDescription.appendText("text of element ").
+        mismatchDescription.
+                appendText("text of element ").
                 appendValue(item).
-                appendText(" not ").
-                appendDescriptionOf(textMatcher);
+                appendText(" was ").
+                appendValue(item.getText());
     }
 
     @Factory
