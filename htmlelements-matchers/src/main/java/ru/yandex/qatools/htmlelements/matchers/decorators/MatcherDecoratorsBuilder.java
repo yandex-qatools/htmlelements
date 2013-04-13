@@ -40,7 +40,7 @@ public class MatcherDecoratorsBuilder<T> extends TypeSafeMatcher<T> {
         matcher.describeMismatch(item, mismatchDescription);
     }
 
-    public MatcherDecoratorsBuilder after(final Action action) {
+    public MatcherDecoratorsBuilder<T> after(final Action action) {
         matcher = decorateMatcherWithAction(matcher, action);
         return this;
     }
