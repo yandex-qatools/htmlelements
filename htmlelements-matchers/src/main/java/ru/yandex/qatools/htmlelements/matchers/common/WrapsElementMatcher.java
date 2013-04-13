@@ -32,7 +32,7 @@ public class WrapsElementMatcher extends TypeSafeMatcher<WrapsElement> {
 
     @Override
     protected void describeMismatchSafely(WrapsElement element, Description mismatchDescription) {
-        matcher.describeMismatch(element, mismatchDescription);
+        matcher.describeMismatch(element.getWrappedElement(), mismatchDescription);
     }
 
     /**
