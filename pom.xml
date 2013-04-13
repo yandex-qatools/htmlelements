@@ -99,6 +99,10 @@
             <id>leonsabr</id>
             <name>Leonid Rudenko</name>
         </developer>
+        <developer>
+            <id>lanwen</id>
+            <name>Kirill Merkushev</name>
+        </developer>
     </developers>
 
 </project>
