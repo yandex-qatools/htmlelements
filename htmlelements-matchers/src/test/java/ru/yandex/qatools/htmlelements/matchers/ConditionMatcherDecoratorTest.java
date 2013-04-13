@@ -6,7 +6,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import ru.yandex.qatools.htmlelements.matchers.decorators.Condition;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -20,7 +19,10 @@ import static ru.yandex.qatools.htmlelements.matchers.decorators.MatcherDecorato
 @RunWith(MockitoJUnitRunner.class)
 public class ConditionMatcherDecoratorTest {
     @Mock
-    private Condition condition;
+    private Matcher<Object> condition;
+
+    private final Object itemToMatchCondition = new Object();
+
     @Mock
     private Matcher<Object> matcher;
 
@@ -29,30 +31,30 @@ public class ConditionMatcherDecoratorTest {
     @Test
     public void conditionShouldBeCheckedWhenDecoratedMatcherIsCalled() {
         when(matcher.matches(arbitraryObject)).thenReturn(true);
-        when(condition.isSatisfied()).thenReturn(true);
+        when(condition.matches(itemToMatchCondition)).thenReturn(true);
 
-        assertThat(arbitraryObject, should(matcher).inCase(condition));
+        assertThat(arbitraryObject, should(matcher).inCase(itemToMatchCondition, condition));
 
-        verify(condition).isSatisfied();
+        verify(condition).matches(itemToMatchCondition);
     }
 
     @Test
     public void matcherShouldBeCheckedAfterConditionIfConditionIsSatisfied() {
-        when(condition.isSatisfied()).thenReturn(true);
+        when(condition.matches(itemToMatchCondition)).thenReturn(true);
 
-        Matcher<Object> decoratedMatcher = should(matcher).inCase(condition);
+        Matcher<Object> decoratedMatcher = should(matcher).inCase(itemToMatchCondition, condition);
         decoratedMatcher.matches(arbitraryObject);
 
         InOrder inOrder = inOrder(condition, matcher);
-        inOrder.verify(condition).isSatisfied();
+        inOrder.verify(condition).matches(itemToMatchCondition);
         inOrder.verify(matcher).matches(arbitraryObject);
     }
 
     @Test
     public void satisfiedConditionShouldNotChangeMatcherBehaviour() {
-        when(condition.isSatisfied()).thenReturn(true);
+        when(condition.matches(itemToMatchCondition)).thenReturn(true);
 
-        Matcher<Object> decoratedMatcher = should(matcher).inCase(condition);
+        Matcher<Object> decoratedMatcher = should(matcher).inCase(itemToMatchCondition, condition);
 
         when(matcher.matches(arbitraryObject)).thenReturn(true);
         assertThat(decoratedMatcher.matches(arbitraryObject), equalTo(matcher.matches(arbitraryObject)));

@@ -16,6 +16,11 @@ import static ru.yandex.qatools.htmlelements.matchers.decorators.WaiterMatcherDe
 public class MatcherDecoratorsBuilder<T> extends TypeSafeMatcher<T> {
     private Matcher<? super T> matcher;
 
+    @Factory
+    public static <T> MatcherDecoratorsBuilder<T> should(final Matcher<? super T> matcher) {
+        return new MatcherDecoratorsBuilder<T>(matcher);
+    }
+
     private MatcherDecoratorsBuilder(Matcher<? super T> matcher) {
         this.matcher = matcher;
     }
@@ -35,28 +40,18 @@ public class MatcherDecoratorsBuilder<T> extends TypeSafeMatcher<T> {
         matcher.describeMismatch(item, mismatchDescription);
     }
 
-    public MatcherDecoratorsBuilder<T> after(Action action) {
+    public MatcherDecoratorsBuilder after(final Action action) {
         matcher = decorateMatcherWithAction(matcher, action);
         return this;
     }
 
-    public MatcherDecoratorsBuilder<T> inCase(Condition condition) {
-        matcher = decorateMatcherWithCondition(matcher, condition);
+    public <E> MatcherDecoratorsBuilder<T> inCase(final E itemToMatchCondition, final Matcher<? super E> condition) {
+        matcher = decorateMatcherWithCondition(matcher, itemToMatchCondition, condition);
         return this;
     }
 
-    public MatcherDecoratorsBuilder<T> inCase(T item, Matcher<? super T> matcher) {
-        Condition condition = new MatcherCondition<T>(matcher, item);
-        return inCase(condition);
-    }
-
-    public MatcherDecoratorsBuilder<T> whileWaitingUntil(Waiter waiter) {
+    public MatcherDecoratorsBuilder<T> whileWaitingUntil(final Waiter waiter) {
         matcher = decorateMatcherWithWaiter(matcher, waiter);
         return this;
-    }
-
-    @Factory
-    public static <T> MatcherDecoratorsBuilder<T> should(Matcher<? super T> matcher) {
-        return new MatcherDecoratorsBuilder<T>(matcher);
     }
 }

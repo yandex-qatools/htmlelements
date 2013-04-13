@@ -7,23 +7,25 @@ import org.junit.internal.AssumptionViolatedException;
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 28.02.13
  */
-public class ConditionMatcherDecorator<T> extends TypeSafeMatcher<T> {
+public class ConditionMatcherDecorator<T, E> extends TypeSafeMatcher<T> {
     private final Matcher<? super T> matcher;
-    private final Condition condition;
+    private final E itemToMatchCondition;
+    private final Matcher<? super E> condition;
 
-    private ConditionMatcherDecorator(Matcher<? super T> matcher, Condition condition) {
+    public ConditionMatcherDecorator(Matcher<? super T> matcher, E itemToMatchCondition, Matcher<? super E> condition) {
         this.matcher = matcher;
+        this.itemToMatchCondition = itemToMatchCondition;
         this.condition = condition;
     }
 
     @Override
     protected boolean matchesSafely(T item) {
-        if (condition.isSatisfied()) {
+        if (condition.matches(itemToMatchCondition)) {
             return matcher.matches(item);
         }
 
         Description conditionDescription = new StringDescription();
-        condition.describeTo(conditionDescription);
+        conditionDescription.appendValue(itemToMatchCondition).appendDescriptionOf(condition);
         throw new AssumptionViolatedException(String.format("Condition is not satisfied: %s", conditionDescription));
     }
 
@@ -35,12 +37,12 @@ public class ConditionMatcherDecorator<T> extends TypeSafeMatcher<T> {
     @Override
     protected void describeMismatchSafely(T item, Description mismatchDescription) {
         matcher.describeMismatch(item, mismatchDescription);
-        mismatchDescription.appendText(" if ").appendDescriptionOf(condition);
     }
 
     @Factory
-    public static <T> Matcher<T> decorateMatcherWithCondition(final Matcher<? super T> matcher,
-                                                              final Condition condition) {
-        return new ConditionMatcherDecorator<T>(matcher, condition);
+    public static <T, E> Matcher<T> decorateMatcherWithCondition(final Matcher<? super T> matcher,
+                                                                 final E itemToMatchCondition,
+                                                                 final Matcher<? super E> condition) {
+        return new ConditionMatcherDecorator<T, E>(matcher, itemToMatchCondition, condition);
     }
 }

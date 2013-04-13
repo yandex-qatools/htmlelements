@@ -16,7 +16,7 @@ public final class MatcherDecorators {
     private MatcherDecorators() {
     }
 
-    public static <T> MatcherDecoratorsBuilder<T> should(Matcher<? super T> matcher) {
+    public static <T> MatcherDecoratorsBuilder<T> should(final Matcher<? super T> matcher) {
         return MatcherDecoratorsBuilder.should(matcher);
     }
 

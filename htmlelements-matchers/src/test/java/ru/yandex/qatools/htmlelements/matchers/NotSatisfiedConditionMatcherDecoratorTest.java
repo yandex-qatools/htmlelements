@@ -10,7 +10,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.model.Statement;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import ru.yandex.qatools.htmlelements.matchers.decorators.Condition;
 
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -24,7 +23,10 @@ import static ru.yandex.qatools.htmlelements.matchers.decorators.MatcherDecorato
 @RunWith(MockitoJUnitRunner.class)
 public class NotSatisfiedConditionMatcherDecoratorTest {
     @Mock
-    private Condition condition;
+    private Matcher<Object> condition;
+
+    private final Object itemToMatchCondition = new Object();
+
     @Mock
     private Matcher<Object> matcher;
 
@@ -50,8 +52,8 @@ public class NotSatisfiedConditionMatcherDecoratorTest {
 
     @Test
     public void notSatisfiedConditionShouldCauseAssumptionViolatedException() {
-        when(condition.isSatisfied()).thenReturn(false);
+        when(condition.matches(itemToMatchCondition)).thenReturn(false);
 
-        assertThat(arbitraryObject, should(matcher).inCase(condition));
+        assertThat(arbitraryObject, should(matcher).inCase(itemToMatchCondition, condition));
     }
 }
