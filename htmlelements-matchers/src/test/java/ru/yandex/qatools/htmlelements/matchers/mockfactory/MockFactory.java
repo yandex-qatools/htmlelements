@@ -66,17 +66,18 @@ public class MockFactory {
     public static Select mockSelect(String selectedOptionValue) {
         Select select = mock(Select.class);
         WebElement selectedOption = mock(WebElement.class);
-        when(selectedOption.getAttribute("value")).thenReturn(selectedOptionValue);
+        when(select.hasSelectedOption()).thenReturn(true);
         when(select.getFirstSelectedOption()).thenReturn(selectedOption);
-        when(select.getAllSelectedOptions()).thenReturn(Arrays.asList(selectedOption));
+        when(selectedOption.getAttribute("value")).thenReturn(selectedOptionValue);
         return select;
     }
 
     public static Radio mockRadio(String selectedButtonValue) {
         Radio radio = mock(Radio.class);
         WebElement selectedButton = mock(WebElement.class);
-        when(selectedButton.getAttribute("value")).thenReturn(selectedButtonValue);
+        when(radio.hasSelectedButton()).thenReturn(true);
         when(radio.getSelectedButton()).thenReturn(selectedButton);
+        when(selectedButton.getAttribute("value")).thenReturn(selectedButtonValue);
         return radio;
     }
 }
