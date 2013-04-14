@@ -22,17 +22,17 @@ public class WaiterMatcherDecorator<T> extends TypeSafeMatcher<T> {
     protected boolean matchesSafely(T item) {
         waiter.startWaiting();
 
-		while (!waiter.shouldStopWaiting()) {
-			if (matcher.matches(item)) {
-				return true;
-			}
+        while (!waiter.shouldStopWaiting()) {
+            if (matcher.matches(item)) {
+                return true;
+            }
 
-			try {
-				Thread.sleep(waiter.getPollingInterval());
-			} catch (InterruptedException e) {
-				break;
-			}
-		}
+            try {
+                Thread.sleep(waiter.getPollingInterval());
+            } catch (InterruptedException e) {
+                break;
+            }
+        }
 
         return matcher.matches(item);
     }

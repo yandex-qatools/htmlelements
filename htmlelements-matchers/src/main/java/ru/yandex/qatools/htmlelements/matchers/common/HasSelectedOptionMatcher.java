@@ -1,10 +1,11 @@
 package ru.yandex.qatools.htmlelements.matchers.common;
 
-import org.hamcrest.*;
+import org.hamcrest.Description;
+import org.hamcrest.Factory;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 import org.openqa.selenium.WebElement;
 import ru.yandex.qatools.htmlelements.element.Select;
-
-import java.util.List;
 
 /**
  * Checks that {@link Select} has selected option matching the specified matcher.

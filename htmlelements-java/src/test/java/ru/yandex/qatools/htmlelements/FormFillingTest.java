@@ -7,7 +7,6 @@ import ru.yandex.qatools.htmlelements.testelements.MockedForm;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 /**

@@ -1,11 +1,7 @@
 package ru.yandex.qatools.htmlelements;
 
 import org.junit.Test;
-import org.openqa.selenium.By;
 import ru.yandex.qatools.htmlelements.testpages.NotAnnotatedFieldsPage;
-
-import static org.hamcrest.core.IsNull.nullValue;
-import static org.junit.Assert.assertThat;
 
 /**
  * @author Artem Eroshenko eroshenkoam@yandex-team.ru

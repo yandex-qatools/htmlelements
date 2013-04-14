@@ -1,13 +1,10 @@
 package ru.yandex.qatools.htmlelements.element;
 
-import ch.lambdaj.function.convert.Converter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.Map;
-
-import static ch.lambdaj.Lambda.convert;
 
 /**
  * @author Artem Eroshenko eroshenkoam@yandex-team.ru

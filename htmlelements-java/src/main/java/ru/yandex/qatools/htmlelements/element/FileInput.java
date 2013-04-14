@@ -6,11 +6,8 @@ import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebElement;
 
 import java.io.File;
-import java.net.URL;
 
-import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.existsInClasspath;
-import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.getResourceFromClasspath;
-import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.isRemoteWebElement;
+import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.*;
 
 /**
  * @author Alexander Tolmachev starlight@yandex-team.ru
