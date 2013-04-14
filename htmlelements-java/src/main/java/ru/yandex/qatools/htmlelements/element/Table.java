@@ -13,9 +13,10 @@ import java.util.Map;
 
 import static ch.lambdaj.Lambda.convert;
 import static ch.lambdaj.Lambda.convertMap;
-import static ru.yandex.qatools.htmlelements.element.Table.ListConverter.toListConvertingEachItem;
-import static ru.yandex.qatools.htmlelements.element.Table.MapConverter.toMapConvertingEachValue;
+import static ru.yandex.qatools.htmlelements.element.Table.ListConverter.toListsConvertingEachItem;
+import static ru.yandex.qatools.htmlelements.element.Table.MapConverter.toMapsConvertingEachValue;
 import static ru.yandex.qatools.htmlelements.element.Table.WebElementToTextConverter.toText;
+import static ru.yandex.qatools.htmlelements.element.Table.WebElementToTextConverter.toTextValues;
 
 /**
  * @author Alexander Tolmachev starlight@yandex-team.ru
@@ -37,7 +38,7 @@ public class Table extends TypifiedElement {
     }
 
     public List<String> getHeadingsAsString() {
-        return convert(getHeadings(), toText());
+        return convert(getHeadings(), toTextValues());
     }
 
     public List<List<WebElement>> getRows() {
@@ -50,7 +51,7 @@ public class Table extends TypifiedElement {
     }
 
     public List<List<String>> getRowsAsString() {
-        return convert(getRows(), toListConvertingEachItem(toText()));
+        return convert(getRows(), toListsConvertingEachItem(toTextValues()));
     }
 
     public List<List<WebElement>> getColumns() {
@@ -74,7 +75,7 @@ public class Table extends TypifiedElement {
     }
 
     public List<List<String>> getColumnsAsString() {
-        return convert(getColumns(), toListConvertingEachItem(toText()));
+        return convert(getColumns(), toListsConvertingEachItem(toTextValues()));
     }
 
     public WebElement getCellAt(int i, int j) {
@@ -115,7 +116,7 @@ public class Table extends TypifiedElement {
     }
 
     public List<Map<String, String>> getRowsAsStringMappedToHeadings(List<String> headings) {
-        return convert(getRowsMappedToHeadings(headings), toMapConvertingEachValue(toText()));
+        return convert(getRowsMappedToHeadings(headings), toMapsConvertingEachValue(toText()));
     }
 
 
@@ -127,6 +128,10 @@ public class Table extends TypifiedElement {
     static class WebElementToTextConverter implements Converter<WebElement, String> {
 
         public static Converter<WebElement, String> toText() {
+            return new WebElementToTextConverter();
+        }
+
+        public static Converter<WebElement, String> toTextValues() {
             return new WebElementToTextConverter();
         }
 
@@ -145,7 +150,7 @@ public class Table extends TypifiedElement {
     static class ListConverter<F, T> implements Converter<List<F>, List<T>> {
         private final Converter<F, T> itemsConverter;
 
-        public static <F, T> Converter<List<F>, List<T>> toListConvertingEachItem(Converter<F, T> itemsConverter) {
+        public static <F, T> Converter<List<F>, List<T>> toListsConvertingEachItem(Converter<F, T> itemsConverter) {
             return new ListConverter<F, T>(itemsConverter);
         }
 
@@ -166,7 +171,7 @@ public class Table extends TypifiedElement {
     static class MapConverter<K, F, T> implements Converter<Map<K, F>, Map<K, T>> {
         private final Converter<F, T> valueConverter;
 
-        public static <F, T> Converter<Map<String, F>, Map<String, T>> toMapConvertingEachValue(Converter<F, T> valueConverter) {
+        public static <F, T> Converter<Map<String, F>, Map<String, T>> toMapsConvertingEachValue(Converter<F, T> valueConverter) {
             return new MapConverter<String, F, T>(valueConverter);
         }
 
