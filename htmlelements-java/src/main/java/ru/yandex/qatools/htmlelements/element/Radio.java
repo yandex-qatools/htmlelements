@@ -59,6 +59,21 @@ public class Radio extends TypifiedElement {
     }
 
     /**
+     * Indicates if radio has selected button.
+     *
+     * @return {@code true} if radio has selected button and {@code false} otherwise.
+     */
+    public boolean hasSelectedButton() {
+        for (WebElement button : getButtons()) {
+            if (button.isSelected()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Selects radio button that have a value matching the specified argument.
      *
      * @param value The value to match against.
