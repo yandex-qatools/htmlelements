@@ -4,7 +4,6 @@ import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import ru.yandex.qatools.htmlelements.element.Radio;
 
@@ -24,12 +23,10 @@ public class HasSelectedRadioButtonMatcher extends TypeSafeMatcher<Radio> {
 
     @Override
     protected boolean matchesSafely(Radio radio) {
-        try {
+        if (radio.hasSelectedButton()) {
             return buttonMatcher.matches(radio.getSelectedButton());
-        } catch (NoSuchElementException e) {
-            // Process case if radio has not selected button
-            return false;
         }
+        return false;
     }
 
     @Override
@@ -39,9 +36,17 @@ public class HasSelectedRadioButtonMatcher extends TypeSafeMatcher<Radio> {
 
     @Override
     protected void describeMismatchSafely(Radio radio, Description mismatchDescription) {
-        mismatchDescription.appendValue(radio).
-                appendText("selected radio button not ").
-                appendDescriptionOf(buttonMatcher);
+        if (radio.hasSelectedButton()) {
+            mismatchDescription.
+                    appendText("selected button of ").
+                    appendValue(radio).
+                    appendText(" was ");
+            buttonMatcher.describeMismatch(radio.hasSelectedButton(), mismatchDescription);
+        } else {
+            mismatchDescription.
+                    appendValue(radio).
+                    appendText(" had no selected buttons");
+        }
     }
 
     /**

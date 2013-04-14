@@ -1,7 +1,6 @@
 package ru.yandex.qatools.htmlelements.matchers.common;
 
 import org.hamcrest.*;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import ru.yandex.qatools.htmlelements.element.Select;
 
@@ -23,11 +22,10 @@ public class HasSelectedOptionMatcher extends TypeSafeMatcher<Select> {
 
     @Override
     protected boolean matchesSafely(Select select) {
-        List<WebElement> selectedOptions = select.getAllSelectedOptions();
-        if (selectedOptions.isEmpty()) {
-            return false;
+        if (select.hasSelectedOption()) {
+            optionMatcher.matches(select.getFirstSelectedOption());
         }
-        return optionMatcher.matches(selectedOptions.get(0));
+        return false;
     }
 
     @Override
@@ -37,19 +35,16 @@ public class HasSelectedOptionMatcher extends TypeSafeMatcher<Select> {
 
     @Override
     protected void describeMismatchSafely(Select select, Description mismatchDescription) {
-        List<WebElement> selectedOptions = select.getAllSelectedOptions();
-        if (selectedOptions.isEmpty()) {
-            mismatchDescription.
-                    appendValue(select).
-                    appendText(" had no selected options");
-        } else {
-            Description selectedOptionMismatchDescription =  new StringDescription();
-            optionMatcher.describeMismatch(selectedOptions.get(0), selectedOptionMismatchDescription);
+        if (select.hasSelectedOption()) {
             mismatchDescription.
                     appendText("selected option of ").
                     appendValue(select).
-                    appendText(" was ").
-                    appendText(selectedOptionMismatchDescription.toString());
+                    appendText(" was ");
+            optionMatcher.describeMismatch(select.getFirstSelectedOption(), mismatchDescription);
+        } else {
+            mismatchDescription.
+                    appendValue(select).
+                    appendText(" had no selected options");
         }
     }
 
