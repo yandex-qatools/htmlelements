@@ -73,6 +73,21 @@ public class Select extends TypifiedElement {
     }
 
     /**
+     * Indicates if select has at least one selected option.
+     *
+     * @return {@code true} if select has at least one selected option and {@code false} otherwise.
+     */
+    public boolean hasSelectedOption() {
+        for (WebElement option : getOptions()) {
+            if (option.isSelected()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Select all options that display text matching the argument. That is, when given "Bar" this
      * would select an option like:
      * <p/>
