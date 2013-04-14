@@ -1,12 +1,11 @@
 package ru.yandex.qatools.htmlelements.matchers.common;
 
-import org.hamcrest.Description;
-import org.hamcrest.Factory;
-import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.*;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import ru.yandex.qatools.htmlelements.element.Select;
+
+import java.util.List;
 
 /**
  * Checks that {@link Select} has selected option matching the specified matcher.
@@ -24,12 +23,11 @@ public class HasSelectedOptionMatcher extends TypeSafeMatcher<Select> {
 
     @Override
     protected boolean matchesSafely(Select select) {
-        try {
-            return optionMatcher.matches(select.getFirstSelectedOption());
-        } catch (NoSuchElementException e) {
-            // Process case if no options are selected
+        List<WebElement> selectedOptions = select.getAllSelectedOptions();
+        if (selectedOptions.isEmpty()) {
             return false;
         }
+        return optionMatcher.matches(selectedOptions.get(0));
     }
 
     @Override
@@ -39,9 +37,20 @@ public class HasSelectedOptionMatcher extends TypeSafeMatcher<Select> {
 
     @Override
     protected void describeMismatchSafely(Select select, Description mismatchDescription) {
-        mismatchDescription.appendValue(select).
-                appendText("selected option not ").
-                appendDescriptionOf(optionMatcher);
+        List<WebElement> selectedOptions = select.getAllSelectedOptions();
+        if (selectedOptions.isEmpty()) {
+            mismatchDescription.
+                    appendValue(select).
+                    appendText(" had no selected options");
+        } else {
+            Description selectedOptionMismatchDescription =  new StringDescription();
+            optionMatcher.describeMismatch(selectedOptions.get(0), selectedOptionMismatchDescription);
+            mismatchDescription.
+                    appendText("selected option of ").
+                    appendValue(select).
+                    appendText(" was ").
+                    appendText(selectedOptionMismatchDescription.toString());
+        }
     }
 
     /**
