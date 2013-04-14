@@ -35,8 +35,8 @@ public class HasEnteredTextMatcher extends TypeSafeMatcher<TextInput> {
     protected void describeMismatchSafely(TextInput textInput, Description mismatchDescription) {
         mismatchDescription.appendText("text entered in text input ").
                 appendValue(textInput).
-                appendText(" not ").
-                appendDescriptionOf(textMatcher);
+                appendText(" was ").
+                appendValue(textInput.getText());
     }
 
     /**
