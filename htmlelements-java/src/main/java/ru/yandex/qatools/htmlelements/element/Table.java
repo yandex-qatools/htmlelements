@@ -19,10 +19,11 @@ import static ru.yandex.qatools.htmlelements.element.Table.WebElementToTextConve
 import static ru.yandex.qatools.htmlelements.element.Table.WebElementToTextConverter.toTextValues;
 
 /**
+ * Represents web page table element. Provides convenient ways of retrieving data stored in it.
+ *
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 11.03.13
  */
-// TODO Add JavaDoc
 public class Table extends TypifiedElement {
     /**
      * Specifies {@link org.openqa.selenium.WebElement} representing table tag.
@@ -33,14 +34,29 @@ public class Table extends TypifiedElement {
         super(wrappedElement);
     }
 
+    /**
+     * Returns table heading elements (contained in "th" tags).
+     *
+     * @return List with table heading elements.
+     */
     public List<WebElement> getHeadings() {
         return getWrappedElement().findElements(By.xpath(".//th"));
     }
 
+    /**
+     * Returns text values of table heading elements (contained in "th" tags).
+     *
+     * @return List with text values of table heading elements.
+     */
     public List<String> getHeadingsAsString() {
         return convert(getHeadings(), toTextValues());
     }
 
+    /**
+     * Returns table cell elements grouped by rows.
+     *
+     * @return List where each item is a table row.
+     */
     public List<List<WebElement>> getRows() {
         List<List<WebElement>> rows = new ArrayList<List<WebElement>>();
         List<WebElement> rowElements = getWrappedElement().findElements(By.xpath(".//tr"));
@@ -50,10 +66,20 @@ public class Table extends TypifiedElement {
         return rows;
     }
 
+    /**
+     * Returns text values of table cell elements grouped by rows.
+     *
+     * @return List where each item is text values of a table row.
+     */
     public List<List<String>> getRowsAsString() {
         return convert(getRows(), toListsConvertingEachItem(toTextValues()));
     }
 
+    /**
+     * Returns table cell elements grouped by columns.
+     *
+     * @return List where each item is a table column.
+     */
     public List<List<WebElement>> getColumns() {
         List<List<WebElement>> columns = new ArrayList<List<WebElement>>();
         List<List<WebElement>> rows = getRows();
@@ -74,18 +100,37 @@ public class Table extends TypifiedElement {
         return columns;
     }
 
+    /**
+     * Returns text values of table cell elements grouped by columns.
+     *
+     * @return List where each item is text values of a table column.
+     */
     public List<List<String>> getColumnsAsString() {
         return convert(getColumns(), toListsConvertingEachItem(toTextValues()));
     }
 
+    /**
+     * Returns table cell element at i-th row and j-th column.
+     *
+     * @param i Row number
+     * @param j Column number
+     * @return Cell element at i-th row and j-th column.
+     */
     public WebElement getCellAt(int i, int j) {
         return getRows().get(i).get(j);
     }
 
+    /**
+     * Returns list of maps where keys are table headings and values are table row elements.
+     */
     public List<Map<String, WebElement>> getRowsMappedToHeadings() {
         return getRowsMappedToHeadings(getHeadingsAsString());
     }
 
+    /**
+     * Returns list of maps where keys are passed headings and values are table row elements.
+     * @param headings List containing strings to be used as table headings.
+     */
     public List<Map<String, WebElement>> getRowsMappedToHeadings(List<String> headings) {
         List<Map<String, WebElement>> rowsMappedToHeadings = new ArrayList<Map<String, WebElement>>();
         List<List<WebElement>> rows = getRows();
@@ -111,10 +156,16 @@ public class Table extends TypifiedElement {
         return rowsMappedToHeadings;
     }
 
+    /**
+     * Same as {@link #getRowsMappedToHeadings()} but retrieves text from row elements.
+     */
     public List<Map<String, String>> getRowsAsStringMappedToHeadings() {
         return getRowsAsStringMappedToHeadings(getHeadingsAsString());
     }
 
+    /**
+     * Same as {@link #getRowsMappedToHeadings(java.util.List)} but retrieves text from row elements.
+     */
     public List<Map<String, String>> getRowsAsStringMappedToHeadings(List<String> headings) {
         return convert(getRowsMappedToHeadings(headings), toMapsConvertingEachValue(toText()));
     }

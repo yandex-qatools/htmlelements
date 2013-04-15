@@ -7,12 +7,13 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Represents web page form tag. Provides handy way of filling form with data and submitting it.
+ *
  * @author Artem Eroshenko eroshenkoam@yandex-team.ru
  *         3/14/13, 4:38 PM
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 26.03.13
  */
-// TODO Add JavaDoc
 public class Form extends TypifiedElement {
     private static final String TEXT_INPUT_TYPE = "text";
     private static final String PASSWORD_INPUT_TYPE = "password";
@@ -28,6 +29,14 @@ public class Form extends TypifiedElement {
         super(wrappedElement);
     }
 
+    /**
+     * Fills form with data contained in passed map.
+     * For each map entry an input with a name coincident with entry key is searched and then found input
+     * is filled with string representation of entry value (toString() method is called). If input with such a name
+     * is not found corresponding entry is skipped.
+     *
+     * @param data Map containing data to fill form inputs with.
+     */
     public void fill(Map<String, Object> data) {
         for (String key : data.keySet()) {
             WebElement elementToFill = findElementByKey(key);
@@ -37,6 +46,9 @@ public class Form extends TypifiedElement {
         }
     }
 
+    /**
+     * Submits represented form.
+     */
     public void submit() {
         getWrappedElement().submit();
     }

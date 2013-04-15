@@ -10,16 +10,28 @@ import java.io.File;
 import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.*;
 
 /**
+ * Represents web page file upload element.
+ *
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 11.04.13
  */
-// TODO Add JavaDoc
 public class FileInput extends TypifiedElement {
-
+    /**
+     * Specifies wrapped {@link WebElement}.
+     *
+     * @param wrappedElement {@code WebElement} to wrap.
+     */
     public FileInput(WebElement wrappedElement) {
         super(wrappedElement);
     }
 
+    /**
+     * Sets a file to be uploaded.
+     * File is searched in the following way: if a resource with a specified name exists in classpath,
+     * then this resource will be used, otherwise file will be searched on file system.
+     *
+     * @param fileName Name of a file or a resource to be uploaded.
+     */
     public void setFileToUpload(final String fileName) {
         // Proxy can't be used to check the element class, so find real WebElement
         WebElement fileInputElement = getNotProxiedInputElement();
@@ -32,6 +44,9 @@ public class FileInput extends TypifiedElement {
         fileInputElement.sendKeys(filePath);
     }
 
+    /**
+     * Submits selected file by simply submitting the whole form, which contains this file input.
+     */
     public void submit() {
         getWrappedElement().submit();
     }
