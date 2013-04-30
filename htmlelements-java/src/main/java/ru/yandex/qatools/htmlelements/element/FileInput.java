@@ -36,7 +36,7 @@ public class FileInput extends TypifiedElement {
         // Proxy can't be used to check the element class, so find real WebElement
         WebElement fileInputElement = getNotProxiedInputElement();
         // Set local file detector in case of remote driver usage
-        if (isRemoteWebElement(fileInputElement)) {
+        if (isOnRemoteWebDriver(fileInputElement)) {
             setLocalFileDetector((RemoteWebElement) fileInputElement);
         }
 
