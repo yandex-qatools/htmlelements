@@ -40,6 +40,11 @@
         <developerConnection>scm:git:git@github.com:yandex-qatools/htmlelements.git</developerConnection>
     </scm>
 
+    <issueManagement>
+        <system>GitHub Issue Tracker</system>
+        <url>https://github.com/yandex-qatools/htmlelements/issues</url>
+    </issueManagement>
+
     <modules>
         <module>htmlelements-java</module>
         <module>htmlelements-matchers</module>
