@@ -129,6 +129,7 @@ public class Table extends TypifiedElement {
 
     /**
      * Returns list of maps where keys are passed headings and values are table row elements.
+     *
      * @param headings List containing strings to be used as table headings.
      */
     public List<Map<String, WebElement>> getRowsMappedToHeadings(List<String> headings) {

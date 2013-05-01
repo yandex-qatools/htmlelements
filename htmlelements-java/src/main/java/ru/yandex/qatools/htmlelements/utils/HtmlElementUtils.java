@@ -162,7 +162,7 @@ public final class HtmlElementUtils {
             Field elementParentFiled = RemoteWebElement.class.getDeclaredField("parent");
             elementParentFiled.setAccessible(true);
             WebDriver elementParent = (WebDriver) elementParentFiled.get(remoteWebElement);
-            return  elementParent.getClass().equals(RemoteWebDriver.class);
+            return elementParent.getClass().equals(RemoteWebDriver.class);
         } catch (NoSuchFieldException e) {
             throw new HtmlElementsException("Unable to find out if WebElement is on remote driver", e);
         } catch (IllegalAccessException e) {
