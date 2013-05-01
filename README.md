@@ -5,8 +5,8 @@ This framework is designed to provide easy-to-use way of interaction with web-pa
 considered as an extension of WebDriver Page Object.<br/>
 With the help of Html Elements framework you can group web-page elements into blocks, encapsulate logic of interaction with them 
 and then easily use created blocks in page objects. It also provides a set of helpful matchers to use with web-page elements 
-and blocks. See [JavaDocs](https://oss.sonatype.org/service/local/repositories/releases/archive/ru/yandex/qatools/htmlelements/htmlelements/1.9/htmlelements-1.9-javadoc.jar/!/index.html) 
-for more details.
+and blocks. See [JavaDocs](https://oss.sonatype.org/service/local/repositories/releases/archive/ru/yandex/qatools/htmlelements/htmlelements/1.10/htmlelements-1.10-javadoc.jar/!/index.html) 
+and [Samples](https://github.com/yandex-qatools/htmlelements-junit-example) for more details.
 
 Include Html Elements in your project
 -------------------------------------
@@ -16,7 +16,7 @@ Maven dependencies for Html Elements core:
 <dependency>
     <groupId>ru.yandex.qatools.htmlelements</groupId>
     <artifactId>htmlelements-java</artifactId>
-    <version>1.9</version>
+    <version>1.10</version>
 </dependency>
 ```
 
@@ -26,7 +26,17 @@ And for Html Elements matchers:
 <dependency>
     <groupId>ru.yandex.qatools.htmlelements</groupId>
     <artifactId>htmlelements-matchers</artifactId>
-    <version>1.9</version>
+    <version>1.10</version>
+</dependency>
+```
+
+Or you can include both modules at once if needed:
+
+```xml
+<dependency>
+    <groupId>ru.yandex.qatools.htmlelements</groupId>
+    <artifactId>htmlelements-all</artifactId>
+    <version>1.10</version>
 </dependency>
 ```
 
