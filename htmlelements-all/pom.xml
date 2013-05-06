@@ -23,6 +23,11 @@
             <artifactId>htmlelements-matchers</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>ru.yandex.qatools.htmlelements</groupId>
+            <artifactId>htmlelements-thucydides</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
 </project>
