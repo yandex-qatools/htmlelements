@@ -8,6 +8,12 @@ and then easily use created blocks in page objects. It also provides a set of he
 and blocks. See [JavaDocs](https://oss.sonatype.org/service/local/repositories/releases/archive/ru/yandex/qatools/htmlelements/htmlelements/1.10/htmlelements-1.10-javadoc.jar/!/index.html) 
 and [Samples](https://github.com/yandex-qatools/htmlelements-junit-example) for more details.
 
+Release Notes
+-------------
+* [Version 1.11 Release Notes](https://github.com/yandex-qatools/htmlelements/blob/master/releasenotes/1.11-releasenotes.ru.md)
+* [Version 1.10 Release Notes](https://github.com/yandex-qatools/htmlelements/blob/master/releasenotes/1.10-releasenotes.ru.md)
+* [Version 1.9 Release Notes](https://github.com/yandex-qatools/htmlelements/blob/master/releasenotes/1.9-releasenotes.ru.md)
+
 Include Html Elements in your project
 -------------------------------------
 Maven dependencies for Html Elements core:
@@ -49,13 +55,6 @@ Or you can include both modules at once if needed:
     <version>1.11</version>
 </dependency>
 ```
-
-Release Notes
--------------
-
-[Version 1.11][https://github.com/yandex-qatools/htmlelements/blob/master/releasenotes/1.11-releasenotes.ru.md]
-[Version 1.10][https://github.com/yandex-qatools/htmlelements/blob/master/releasenotes/1.10-releasenotes.ru.md]
-[Version 1.9][https://github.com/yandex-qatools/htmlelements/blob/master/releasenotes/1.9-releasenotes.ru.md]
 
 Create blocks of elements
 -------------------------
