@@ -16,7 +16,7 @@ Maven dependencies for Html Elements core:
 <dependency>
     <groupId>ru.yandex.qatools.htmlelements</groupId>
     <artifactId>htmlelements-java</artifactId>
-    <version>1.10</version>
+    <version>1.11</version>
 </dependency>
 ```
 
@@ -26,7 +26,17 @@ And for Html Elements matchers:
 <dependency>
     <groupId>ru.yandex.qatools.htmlelements</groupId>
     <artifactId>htmlelements-matchers</artifactId>
-    <version>1.10</version>
+    <version>1.11</version>
+</dependency>
+```
+
+And for Thucydides integration:
+
+```xml
+<dependency>
+    <groupId>ru.yandex.qatools.htmlelements</groupId>
+    <artifactId>htmlelements-matchers</artifactId>
+    <version>1.11</version>
 </dependency>
 ```
 
@@ -36,9 +46,16 @@ Or you can include both modules at once if needed:
 <dependency>
     <groupId>ru.yandex.qatools.htmlelements</groupId>
     <artifactId>htmlelements-all</artifactId>
-    <version>1.10</version>
+    <version>1.11</version>
 </dependency>
 ```
+
+Release Notes
+-------------
+
+[Version 1.11][https://github.com/yandex-qatools/htmlelements/blob/master/releasenotes/1.11-releasenotes.ru.md]
+[Version 1.10][https://github.com/yandex-qatools/htmlelements/blob/master/releasenotes/1.10-releasenotes.ru.md]
+[Version 1.9][https://github.com/yandex-qatools/htmlelements/blob/master/releasenotes/1.9-releasenotes.ru.md]
 
 Create blocks of elements
 -------------------------
