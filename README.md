@@ -41,7 +41,7 @@ And for Thucydides integration:
 ```xml
 <dependency>
     <groupId>ru.yandex.qatools.htmlelements</groupId>
-    <artifactId>htmlelements-matchers</artifactId>
+    <artifactId>htmlelements-thucydides</artifactId>
     <version>1.11</version>
 </dependency>
 ```
