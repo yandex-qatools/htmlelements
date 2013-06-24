@@ -12,7 +12,7 @@ import java.util.List;
  * @author Artem Koshelev artkoshelev@yandex-team.ru
  */
 @Name(ComplexStructTest.WRAPPER_NAME)
-@Block(@FindBy(css = ComplexStructTest.WRAPPER_CSS))
+@FindBy(css = ComplexStructTest.WRAPPER_CSS)
 public class PopularCompanies extends HtmlElement {
 
     @Name(ComplexStructTest.COMPANIES_LIST_NAME)

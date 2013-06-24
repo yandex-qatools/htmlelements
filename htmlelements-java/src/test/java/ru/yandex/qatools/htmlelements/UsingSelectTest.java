@@ -32,7 +32,7 @@ public class UsingSelectTest {
         form.country.deselectAll();
     }
 
-    @Block(@FindBy(className = "regform"))
+    @FindBy(className = "regform")
     public class RegisterForm extends HtmlElement {
         public RegisterForm(WebDriver driver) {
             HtmlElementLoader.populate(this, driver);

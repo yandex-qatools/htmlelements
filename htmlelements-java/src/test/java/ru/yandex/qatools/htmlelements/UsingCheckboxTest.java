@@ -62,7 +62,7 @@ public class UsingCheckboxTest {
         verify(checkBoxInput).click();
     }
 
-    @Block(@FindBy(className = "loginform"))
+    @FindBy(className = "loginform")
     public class LoginForm extends HtmlElement {
         public LoginForm(WebDriver driver) {
             HtmlElementLoader.populate(this, driver);

@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author Artem Koshelev artkoshelev@yandex-team.ru
  */
-@Block(@FindBy(css = ComplexStructTest.COMPANY_CSS))
+@FindBy(css = ComplexStructTest.COMPANY_CSS)
 public class Company extends HtmlElement {
 
     @Name(ComplexStructTest.VACANCY_LIST_NAME)

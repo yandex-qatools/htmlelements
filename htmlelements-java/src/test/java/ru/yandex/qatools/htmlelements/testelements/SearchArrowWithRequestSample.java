@@ -10,7 +10,7 @@ import ru.yandex.qatools.htmlelements.element.Link;
  *         Date: 13.02.13
  */
 @Name(SearchArrowData.SEARCH_ARROW_NAME)
-@Block(@FindBy(className = SearchArrowData.SEARCH_ARROW_CLASS))
+@FindBy(className = SearchArrowData.SEARCH_ARROW_CLASS)
 public class SearchArrowWithRequestSample extends SearchArrow {
 
     @FindBy(className = SearchArrowData.SEARCH_REQUEST_SAMPLE_CLASS)
