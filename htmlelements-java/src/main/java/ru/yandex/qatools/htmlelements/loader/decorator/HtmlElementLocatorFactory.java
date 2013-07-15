@@ -4,9 +4,9 @@ import java.lang.reflect.Field;
 
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocator;
+import org.openqa.selenium.support.pagefactory.ClassElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
-import ru.yandex.qatools.htmlelements.pagefactory.CustomElementLocatorFactory;
 
 /**
  * A factory for producing locator instances.
@@ -14,7 +14,7 @@ import ru.yandex.qatools.htmlelements.pagefactory.CustomElementLocatorFactory;
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 15.08.12
  */
-public class HtmlElementLocatorFactory implements CustomElementLocatorFactory {
+public class HtmlElementLocatorFactory implements ClassElementLocatorFactory {
     private final SearchContext searchContext;
 
     public HtmlElementLocatorFactory(SearchContext searchContext) {

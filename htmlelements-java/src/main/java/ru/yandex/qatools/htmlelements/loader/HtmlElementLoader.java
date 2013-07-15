@@ -4,12 +4,12 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.ClassElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementFactory;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementLocatorFactory;
-import ru.yandex.qatools.htmlelements.pagefactory.CustomElementLocatorFactory;
 
 import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.getElementName;
 import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.isHtmlElement;
@@ -148,7 +148,7 @@ public class HtmlElementLoader {
      * @param htmlElement    Block of elements to be initialized.
      * @param locatorFactory Locator factory that will be used to locate block elements.
      */
-    public static void populateHtmlElement(HtmlElement htmlElement, CustomElementLocatorFactory locatorFactory) {
+    public static void populateHtmlElement(HtmlElement htmlElement, ClassElementLocatorFactory locatorFactory) {
         @SuppressWarnings("unchecked")
         Class<HtmlElement> htmlElementClass = (Class<HtmlElement>) htmlElement.getClass();
         // Create locator that will handle Block annotation
@@ -194,7 +194,7 @@ public class HtmlElementLoader {
      * @param page           Page object to be initialized.
      * @param locatorFactory Locator factory that will be used to locate elements.
      */
-    public static void populatePageObject(Object page, CustomElementLocatorFactory locatorFactory) {
+    public static void populatePageObject(Object page, ClassElementLocatorFactory locatorFactory) {
         PageFactory.initElements(new HtmlElementDecorator(locatorFactory), page);
     }
 }
