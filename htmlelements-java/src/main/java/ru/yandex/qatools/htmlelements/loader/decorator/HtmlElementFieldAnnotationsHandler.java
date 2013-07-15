@@ -3,7 +3,6 @@ package ru.yandex.qatools.htmlelements.loader.decorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
-import ru.yandex.qatools.htmlelements.annotations.Block;
 import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
 import ru.yandex.qatools.htmlelements.pagefactory.DefaultFieldAnnotationsHandler;
 
@@ -50,9 +49,8 @@ public class HtmlElementFieldAnnotationsHandler extends DefaultFieldAnnotationsH
 
         Class<?> fieldClass = getField().getType();
         while (fieldClass != Object.class) {
-            if (fieldClass.isAnnotationPresent(Block.class)) {
-                Block block = fieldClass.getAnnotation(Block.class);
-                FindBy findBy = block.value();
+            if (fieldClass.isAnnotationPresent(FindBy.class)) {
+                FindBy findBy = fieldClass.getAnnotation(FindBy.class);
                 return buildByFromFindBy(findBy);
             }
             fieldClass = fieldClass.getSuperclass();
@@ -76,9 +74,8 @@ public class HtmlElementFieldAnnotationsHandler extends DefaultFieldAnnotationsH
 
         Class<?> listParameterClass = getGenericParameterClass(getField());
         while (listParameterClass != Object.class) {
-            if (listParameterClass.isAnnotationPresent(Block.class)) {
-                Block block = listParameterClass.getAnnotation(Block.class);
-                FindBy findBy = block.value();
+            if (listParameterClass.isAnnotationPresent(FindBy.class)) {
+                FindBy findBy = listParameterClass.getAnnotation(FindBy.class);;
                 return buildByFromFindBy(findBy);
             }
             listParameterClass = listParameterClass.getSuperclass();
