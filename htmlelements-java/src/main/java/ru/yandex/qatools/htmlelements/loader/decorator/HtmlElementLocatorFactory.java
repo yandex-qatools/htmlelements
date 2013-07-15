@@ -1,11 +1,12 @@
 package ru.yandex.qatools.htmlelements.loader.decorator;
 
-import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.support.pagefactory.ElementLocator;
-import ru.yandex.qatools.htmlelements.pagefactory.AjaxElementLocator;
-import ru.yandex.qatools.htmlelements.pagefactory.CustomElementLocatorFactory;
-
 import java.lang.reflect.Field;
+
+import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.support.pagefactory.AjaxElementLocator;
+import org.openqa.selenium.support.pagefactory.ElementLocator;
+
+import ru.yandex.qatools.htmlelements.pagefactory.CustomElementLocatorFactory;
 
 /**
  * A factory for producing locator instances.
