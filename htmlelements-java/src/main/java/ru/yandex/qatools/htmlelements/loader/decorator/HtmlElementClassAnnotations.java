@@ -13,10 +13,10 @@ import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 20.08.12
  */
-public class HtmlElementClassAnnotationsHandler<T extends HtmlElement> extends AnnotationsHandler {
+public class HtmlElementClassAnnotations<T extends HtmlElement> extends AnnotationsHandler {
     private final Class<T> htmlElementClass;
 
-    public HtmlElementClassAnnotationsHandler(Class<T> htmlElementClass) {
+    public HtmlElementClassAnnotations(Class<T> htmlElementClass) {
         this.htmlElementClass = htmlElementClass;
     }
 
