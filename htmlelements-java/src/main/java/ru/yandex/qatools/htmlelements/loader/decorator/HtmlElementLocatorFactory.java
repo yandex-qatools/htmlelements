@@ -14,7 +14,7 @@ import ru.yandex.qatools.htmlelements.pagefactory.CustomElementLocatorFactory;
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 15.08.12
  */
-public class HtmlElementLocatorFactory extends CustomElementLocatorFactory {
+public class HtmlElementLocatorFactory implements CustomElementLocatorFactory {
     private final SearchContext searchContext;
 
     public HtmlElementLocatorFactory(SearchContext searchContext) {
