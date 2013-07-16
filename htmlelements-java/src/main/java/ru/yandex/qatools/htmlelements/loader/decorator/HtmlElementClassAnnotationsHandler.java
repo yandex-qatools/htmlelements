@@ -2,7 +2,7 @@ package ru.yandex.qatools.htmlelements.loader.decorator;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.pagefactory.AnnotationsHandler;
+import org.openqa.selenium.support.pagefactory.Annotations;
 
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
@@ -13,7 +13,7 @@ import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 20.08.12
  */
-public class HtmlElementClassAnnotationsHandler<T extends HtmlElement> extends AnnotationsHandler {
+public class HtmlElementClassAnnotationsHandler<T extends HtmlElement> extends Annotations {
     private final Class<T> htmlElementClass;
 
     public HtmlElementClassAnnotationsHandler(Class<T> htmlElementClass) {
@@ -35,7 +35,7 @@ public class HtmlElementClassAnnotationsHandler<T extends HtmlElement> extends A
     }
 
     @Override
-    public boolean shouldCache() {
+    public boolean isLookupCached() {
         return false;
     }
 }

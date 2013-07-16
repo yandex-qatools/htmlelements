@@ -3,7 +3,7 @@ package ru.yandex.qatools.htmlelements.loader.decorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
-import org.openqa.selenium.support.pagefactory.DefaultFieldAnnotationsHandler;
+import org.openqa.selenium.support.pagefactory.DefaultFieldAnnotations;
 
 import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
 
@@ -18,7 +18,7 @@ import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.*;
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 15.08.12
  */
-public class HtmlElementFieldAnnotationsHandler extends DefaultFieldAnnotationsHandler {
+public class HtmlElementFieldAnnotationsHandler extends DefaultFieldAnnotations {
     public HtmlElementFieldAnnotationsHandler(Field field) {
         super(field);
     }
