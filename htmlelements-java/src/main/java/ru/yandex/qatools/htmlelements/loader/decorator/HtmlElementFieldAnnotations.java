@@ -18,8 +18,8 @@ import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.*;
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 15.08.12
  */
-public class HtmlElementFieldAnnotationsHandler extends DefaultFieldAnnotations {
-    public HtmlElementFieldAnnotationsHandler(Field field) {
+public class HtmlElementFieldAnnotations extends DefaultFieldAnnotations {
+    public HtmlElementFieldAnnotations(Field field) {
         super(field);
     }
 

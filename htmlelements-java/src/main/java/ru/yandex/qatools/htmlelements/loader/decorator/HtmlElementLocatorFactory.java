@@ -30,7 +30,7 @@ public class HtmlElementLocatorFactory implements ClassElementLocatorFactory {
      */
     @Override
     public ElementLocator createLocator(Field field) {
-        return new AjaxElementLocator(searchContext, new HtmlElementFieldAnnotationsHandler(field));
+        return new AjaxElementLocator(searchContext, new HtmlElementFieldAnnotations(field));
     }
 
     /**
@@ -41,6 +41,6 @@ public class HtmlElementLocatorFactory implements ClassElementLocatorFactory {
      * @param clazz Class for which locator will be created.
      */
     public ElementLocator createLocator(Class clazz) {
-        return new AjaxElementLocator(searchContext, new HtmlElementClassAnnotationsHandler(clazz));
+        return new AjaxElementLocator(searchContext, new HtmlElementClassAnnotations(clazz));
     }
 }
