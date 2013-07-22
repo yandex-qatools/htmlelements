@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocator;
-import org.openqa.selenium.support.pagefactory.ClassElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 
