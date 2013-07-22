@@ -16,6 +16,7 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
  */
 public class HtmlElementLocatorFactory implements ClassElementLocatorFactory {
     private final SearchContext searchContext;
+    private static final int DEFAULT_TIMEOUT = 5;
 
     public HtmlElementLocatorFactory(SearchContext searchContext) {
         this.searchContext = searchContext;
@@ -30,7 +31,7 @@ public class HtmlElementLocatorFactory implements ClassElementLocatorFactory {
      */
     @Override
     public ElementLocator createLocator(Field field) {
-        return new AjaxElementLocator(searchContext, new HtmlElementFieldAnnotations(field));
+        return new AjaxElementLocator(searchContext, DEFAULT_TIMEOUT, new HtmlElementFieldAnnotations(field));
     }
 
     /**
@@ -41,6 +42,6 @@ public class HtmlElementLocatorFactory implements ClassElementLocatorFactory {
      * @param clazz Class for which locator will be created.
      */
     public ElementLocator createLocator(Class clazz) {
-        return new AjaxElementLocator(searchContext, new HtmlElementClassAnnotations(clazz));
+        return new AjaxElementLocator(searchContext, DEFAULT_TIMEOUT, new HtmlElementClassAnnotations(clazz));
     }
 }
