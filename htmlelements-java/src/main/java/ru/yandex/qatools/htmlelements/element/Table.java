@@ -177,7 +177,7 @@ public class Table extends TypifiedElement {
     /**
      * Converts {@link WebElement} to text contained in it
      */
-    static class WebElementToTextConverter implements Converter<WebElement, String> {
+    static final class WebElementToTextConverter implements Converter<WebElement, String> {
 
         public static Converter<WebElement, String> toText() {
             return new WebElementToTextConverter();
@@ -199,7 +199,7 @@ public class Table extends TypifiedElement {
     /**
      * Converts {@code List&lt;F&gt;} to {@code List&lt;T&gt;} by applying specified converter to each list element.
      */
-    static class ListConverter<F, T> implements Converter<List<F>, List<T>> {
+    static final class ListConverter<F, T> implements Converter<List<F>, List<T>> {
         private final Converter<F, T> itemsConverter;
 
         public static <F, T> Converter<List<F>, List<T>> toListsConvertingEachItem(Converter<F, T> itemsConverter) {
@@ -220,7 +220,7 @@ public class Table extends TypifiedElement {
      * Converts {@code Map&lt;K, F&gt;} to {@code Map&lt;K, T&gt;} by applying specified converter to each value
      * in a map.
      */
-    static class MapConverter<K, F, T> implements Converter<Map<K, F>, Map<K, T>> {
+    static final class MapConverter<K, F, T> implements Converter<Map<K, F>, Map<K, T>> {
         private final Converter<F, T> valueConverter;
 
         public static <F, T> Converter<Map<String, F>, Map<String, T>> toMapsConvertingEachValue(Converter<F, T> valueConverter) {
