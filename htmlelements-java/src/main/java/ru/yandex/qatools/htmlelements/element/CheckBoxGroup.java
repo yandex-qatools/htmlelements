@@ -9,7 +9,6 @@ import org.openqa.selenium.WebElement;
 
 /**
  * Represents a group of checkBox buttons.
- * Обязательно!!! указать через xpath элемент содержащий всю группу чекбоксов
  *
  * @author yuriy.shakhov  (shakhovyura@gmail.com)
  */
@@ -34,8 +33,12 @@ public class CheckBoxGroup extends TypifiedElement{
 		List<WebElement> checkBoxList = this.getWrappedElement().findElements(By.xpath(xpath));
 		return checkBoxList;
 	}
-	
-	
+
+    /**
+     * Selects checkBox button by the given text.
+     *
+     * @param text Index of a checkBox button to be selected.
+     */
 	public void selectByText(String text) {
 		String xpath = ".//*[normalize-space()='"+text+"']/input[@type='checkbox']";
                 WebElement e = this.getWrappedElement();
@@ -86,24 +89,60 @@ public class CheckBoxGroup extends TypifiedElement{
     
     /**
      * Selects checkBox button if it's not already selected.
-     * @param check если true, то проверяем выбран ли, иначе не проверям 
-     * @param button {@code WebElement} representing checkBox button to be selected.
-     */
-    private void selectCheckBox(WebElement button, boolean check) {
-        if (check){
-        	if (!button.isSelected()) {
-        		button.click();
-        	}
-        }
-        else button.click();
-    }
-    
-    /**
-     * Selects checkBox button.
-     *
      * @param button {@code WebElement} representing checkBox button to be selected.
      */
     private void selectCheckBox(WebElement button) {
+        	if (!button.isSelected()) {
+        		button.click();
+        	}
+    }
+    
+    /**
+     * Deselects checkBox button if it's not already deselected.
+     *
+     * @param button {@code WebElement} representing checkBox button to be deselected.
+     */
+    private void deselectCheckBox(WebElement button) {
+        if (button.isSelected()) {
             button.click();
+        }
+    }
+
+    /**
+     * Deselects checkBox button that have a value matching the specified argument.
+     *
+     * @param value The value to match against.
+     */
+    public void deselectByValue(String value) {
+        String xpath = ".//input[@type='checkbox' and @value='"+value+"']";
+        WebElement checkBox = this.getWrappedElement().findElement(By.xpath(xpath));
+        deselectCheckBox(checkBox);
+    }
+
+    /**
+     * Deselects checkBox button by the given index.
+     *
+     * @param index Index of a checkBox button to be selected.
+     */
+    public void deselectByIndex(int index) {
+        List<WebElement> buttons = getCheckBoxes();
+
+        if (index < 0 || index >= buttons.size()) {
+            throw new NoSuchElementException(String.format("Cannot locate checkBox button with index: %d", index));
+        }
+
+        deselectCheckBox(buttons.get(index));
+    }
+
+    /**
+     * Deselects checkBox button by the given text.
+     *
+     * @param text Index of a checkBox button to be selected.
+     */
+    public void deselectByText(String text) {
+        String xpath = ".//*[normalize-space()='"+text+"']/input[@type='checkbox']";
+        WebElement e = this.getWrappedElement();
+        WebElement checkBox = e.findElement(By.xpath(xpath));
+        deselectCheckBox(checkBox);
     }
 }
