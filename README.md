@@ -8,6 +8,14 @@ and then easily use created blocks in page objects. It also provides a set of he
 and blocks. See [JavaDocs](https://oss.sonatype.org/service/local/repositories/releases/archive/ru/yandex/qatools/htmlelements/htmlelements/1.10/htmlelements-1.10-javadoc.jar/!/index.html) 
 and [Samples](https://github.com/yandex-qatools/htmlelements-junit-example) for more details.
 
+Other Languages
+-------------
+In case you are non-java guy, don't panic, there are still few options for you:
+
+* [htmlelements .NET implementation](https://github.com/yandex-qatools/htmlelements-dotnet) - .NET port made by [Vadzim Hushchanskou](https://github.com/HardNorth)
+* [htmlelements PHP implementation](https://github.com/aik099/qa-tools) - PHP port made by [Alexander Obuhovich](https://github.com/aik099)
+* [bumblebee framework (C#)](https://github.com/patrickherrmann/Bumblebee) - same idea, nice implementation
+
 Release Notes
 -------------
 * [Version 1.11 Release Notes](https://github.com/yandex-qatools/htmlelements/blob/master/releasenotes/1.11-releasenotes.ru.md)
