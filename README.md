@@ -10,7 +10,7 @@ and [Samples](https://github.com/yandex-qatools/htmlelements-junit-example) for 
 
 Other Languages
 -------------
-In case you are non-java guy, don't panic, there are still few options for you:
+In case you are non-java guy, don't panic, there are still few options:
 
 * [Html Elements .NET implementation](https://github.com/yandex-qatools/htmlelements-dotnet) - .NET port made by [Vadzim Hushchanskou](https://github.com/HardNorth)
 * [Html Elements PHP implementation](https://github.com/aik099/qa-tools) - PHP port made by [Alexander Obuhovich](https://github.com/aik099)
