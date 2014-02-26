@@ -54,7 +54,7 @@ And for Thucydides integration:
 </dependency>
 ```
 
-Or you can include both modules at once if needed:
+Or you can include all modules at once if needed:
 
 ```xml
 <dependency>
