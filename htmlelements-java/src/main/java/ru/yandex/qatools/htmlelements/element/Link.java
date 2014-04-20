@@ -13,7 +13,7 @@ public class Link extends TypifiedElement {
     }
 
     /**
-     * Retrieves reference from "href" tag.
+     * Retrieves reference from "href" attribute.
      *
      * @return Reference associated with hyperlink.
      */
