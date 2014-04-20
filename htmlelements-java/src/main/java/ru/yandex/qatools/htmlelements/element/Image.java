@@ -38,6 +38,4 @@ public class Image extends TypifiedElement {
         getWrappedElement().click();
     }
 
-
-
 }
