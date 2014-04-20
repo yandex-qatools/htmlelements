@@ -1,6 +1,7 @@
 package ru.yandex.qatools.htmlelements.loader.decorator;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import ru.yandex.qatools.htmlelements.annotations.Block;
@@ -43,6 +44,11 @@ public class HtmlElementFieldAnnotationsHandler extends DefaultFieldAnnotationsH
             return buildByFromFindBys(findBys);
         }
 
+        if (getField().isAnnotationPresent(FindAll.class)) {
+            FindAll findBys = getField().getAnnotation(FindAll.class);
+            return buildBysFromFindAll(findBys);
+        }
+
         if (getField().isAnnotationPresent(FindBy.class)) {
             FindBy findBy = getField().getAnnotation(FindBy.class);
             return buildByFromFindBy(findBy);
@@ -67,6 +73,11 @@ public class HtmlElementFieldAnnotationsHandler extends DefaultFieldAnnotationsH
         if (getField().isAnnotationPresent(FindBys.class)) {
             FindBys findBys = getField().getAnnotation(FindBys.class);
             return buildByFromFindBys(findBys);
+        }
+
+        if (getField().isAnnotationPresent(FindAll.class)) {
+            FindAll findBys = getField().getAnnotation(FindAll.class);
+            return buildBysFromFindAll(findBys);
         }
 
         if (getField().isAnnotationPresent(FindBy.class)) {
