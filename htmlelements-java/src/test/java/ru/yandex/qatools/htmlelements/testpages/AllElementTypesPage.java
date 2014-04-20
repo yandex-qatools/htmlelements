@@ -3,7 +3,9 @@ package ru.yandex.qatools.htmlelements.testpages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.pagefactory.ByAll;
 import ru.yandex.qatools.htmlelements.element.Button;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.element.Radio;
@@ -56,6 +58,15 @@ public class AllElementTypesPage {
     @FindBy(id = ELEMENT_ID)
     private List<WebElement> webElementList;
 
+    @FindAll({@FindBy(id = ELEMENT_ID)})
+    private WebElement findAllElement;
+
+    @FindAll({@FindBy(id = HTML_ELEMENT_ID)})
+    private HtmlElement findAllHtmlElement;
+
+    @FindAll({@FindBy(id = ELEMENT_ID)})
+    private List<WebElement> findAllWebElementList;
+
     public WebElement getElement() {
         return element;
     }
@@ -88,6 +99,18 @@ public class AllElementTypesPage {
         return webElementList;
     }
 
+    public WebElement getFindAllElement() {
+        return findAllElement;
+    }
+
+    public HtmlElement getFindAllHtmlElement() {
+        return findAllHtmlElement;
+    }
+
+    public List<WebElement> getFindAllWebElementList() {
+        return findAllWebElementList;
+    }
+
     public static WebDriver mockDriver() {
         WebDriver driver = mock(WebDriver.class);
         WebElement element = mock(WebElement.class);
@@ -110,6 +133,10 @@ public class AllElementTypesPage {
         when(driver.findElements(By.id(TEXT_INPUT_ID))).thenReturn(textInputList);
         when(driver.findElements(By.id(HTML_ELEMENT_ID))).thenReturn(htmlElementList);
         when(driver.findElements(By.id(ELEMENT_ID))).thenReturn(webElementList);
+
+        when(driver.findElements(new ByAll(By.id(ELEMENT_ID)))).thenReturn(webElementList);
+        when(driver.findElement(new ByAll(By.id(ELEMENT_ID)))).thenReturn(element);
+        when(driver.findElement(new ByAll(By.id(HTML_ELEMENT_ID)))).thenReturn(htmlElement);
 
         when(radioButton.getAttribute("name")).thenReturn(RADIO_NAME);
         String xpath = String.format("self::* | following::input[@type = 'radio' and @name = '%s'] | " +

@@ -108,4 +108,22 @@ public class PageInitializationTest {
         assertThat("List<WebElement> should have 3 items",
                 page.getHtmlElementList().size(), is(equalTo(3)));
     }
+
+    @Test
+    public void webElementFieldShouldNotBeNullWhenUsingFindAll() {
+        assertThat("WebElement field should be not null after initialization when using FindAll",
+                page.getFindAllElement(), is(notNullValue()));
+    }
+
+    @Test
+    public void htmlElementFieldShouldNotBeNullWhenUsingFindAll() {
+        assertThat("HtmlElement field should be not null after initialization when using FindAll",
+                page.getFindAllHtmlElement(), is(notNullValue()));
+    }
+
+    @Test
+    public void webElementListShouldHaveCorrectSizeWhenUsingFindAll() {
+        assertThat("List<WebElement> should have 3 items when using FindAll",
+                page.getFindAllWebElementList().size(), is(equalTo(3)));
+    }
 }
