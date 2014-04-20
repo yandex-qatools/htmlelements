@@ -64,8 +64,8 @@ public class HtmlElementLoader {
      * with lazy proxies.
      * <p/>
      * Processes {@link ru.yandex.qatools.htmlelements.annotations.Block} annotation of the given class
-     * to set the way of locating the block itself and {@link org.openqa.selenium.support.FindBy} and
-     * {@link org.openqa.selenium.support.FindBys} annotations of its fields for setting the way
+     * to set the way of locating the block itself and {@link org.openqa.selenium.support.FindBy},
+     * {@link org.openqa.selenium.support.FindBys} and {@link org.openqa.selenium.support.FindAll} annotations of its fields for setting the way
      * of locating elements of the block.
      * <p/>
      * Fields to be proxied:
@@ -92,7 +92,8 @@ public class HtmlElementLoader {
     /**
      * Creates an instance of the given page object class and initializes its fields with lazy proxies.
      * <p/>
-     * Processes {@link org.openqa.selenium.support.FindBy} and {@link org.openqa.selenium.support.FindBys}
+     * Processes {@link org.openqa.selenium.support.FindBy},
+     * {@link org.openqa.selenium.support.FindBys} and {@link org.openqa.selenium.support.FindAll}
      * annotations of the fields for setting the way of locating them.
      * <p/>
      * Fields to be proxied:
@@ -120,8 +121,8 @@ public class HtmlElementLoader {
      * Initializes fields of the given block of elements with lazy proxies.
      * <p/>
      * Processes {@link ru.yandex.qatools.htmlelements.annotations.Block} annotation of the class
-     * of the given block to set the way of locating the block itself and {@link org.openqa.selenium.support.FindBy}
-     * and {@link org.openqa.selenium.support.FindBys} annotations of its fields for setting the way
+     * of the given block to set the way of locating the block itself and {@link org.openqa.selenium.support.FindBy},
+     * {@link org.openqa.selenium.support.FindBys} and {@link org.openqa.selenium.support.FindAll} annotations of its fields for setting the way
      * of locating elements of the block.
      * <p/>
      * Fields to be proxied:
@@ -167,7 +168,8 @@ public class HtmlElementLoader {
     /**
      * Initializes fields of the given page object with lazy proxies.
      * <p/>
-     * Processes {@link org.openqa.selenium.support.FindBy} and {@link org.openqa.selenium.support.FindBys}
+     * Processes {@link org.openqa.selenium.support.FindBy},
+     * {@link org.openqa.selenium.support.FindBys} and {@link org.openqa.selenium.support.FindAll}
      * annotations of the fields for setting the way of locating them.
      * <p/>
      * Fields to be proxied:
