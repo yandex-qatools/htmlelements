@@ -22,8 +22,8 @@ public class HtmlElementLocatorFactory extends CustomElementLocatorFactory {
 
     /**
      * Creates locator for the given field. Created locator will process {@link org.openqa.selenium.support.FindBy},
-     * {@link org.openqa.selenium.support.FindBy}, {@link org.openqa.selenium.support.FindBys}, {@link org.openqa.selenium.support.FindAll}
-     * and {@link org.openqa.selenium.support.CacheLookup} annotations.
+     * {@link org.openqa.selenium.support.FindBy}, {@link org.openqa.selenium.support.FindBys},
+     * {@link org.openqa.selenium.support.FindAll} and {@link org.openqa.selenium.support.CacheLookup} annotations.
      *
      * @param field Field for which locator will be created.
      */
@@ -34,8 +34,8 @@ public class HtmlElementLocatorFactory extends CustomElementLocatorFactory {
 
     /**
      * Creates locator for the given field. Created locator will process {@link org.openqa.selenium.support.FindBy},
-     * {@link org.openqa.selenium.support.FindBy}, {@link org.openqa.selenium.support.FindBys}, {@link org.openqa.selenium.support.FindAll}
-     * and {@link org.openqa.selenium.support.CacheLookup} annotations.
+     * {@link org.openqa.selenium.support.FindBy}, {@link org.openqa.selenium.support.FindBys},
+     * {@link org.openqa.selenium.support.FindAll} and {@link org.openqa.selenium.support.CacheLookup} annotations.
      *
      * @param clazz Class for which locator will be created.
      */

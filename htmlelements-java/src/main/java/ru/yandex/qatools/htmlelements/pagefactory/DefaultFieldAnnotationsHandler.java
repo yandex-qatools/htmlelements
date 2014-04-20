@@ -13,9 +13,9 @@ import java.lang.reflect.Field;
  * A patch for {@code WebDriver} {@link org.openqa.selenium.support.pagefactory.Annotations} class.
  * <p/>
  * The need for creating it is that the original {@code WebDriver} source code provides no possibility for
- * handling different field and class annotations (only field annotations {@link FindBy}, {@link FindBys}, {@link FindAll} and
- * {@link org.openqa.selenium.support.CacheLookup}) and for using different ways of annotations handling in
- * {@link org.openqa.selenium.support.pagefactory.DefaultElementLocator}.
+ * handling different field and class annotations (only field annotations {@link FindBy}, {@link FindBys},
+ * {@link FindAll} and {@link org.openqa.selenium.support.CacheLookup}) and for using different ways of
+ * annotations handling in {@link org.openqa.selenium.support.pagefactory.DefaultElementLocator}.
  * <p/>
  * We need to process {@link ru.yandex.qatools.htmlelements.annotations.Block} annotation to locate blocks,
  * so we divided {@link org.openqa.selenium.support.pagefactory.Annotations} class into {@link AnnotationsHandler}

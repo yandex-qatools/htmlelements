@@ -65,8 +65,8 @@ public class HtmlElementLoader {
      * <p/>
      * Processes {@link ru.yandex.qatools.htmlelements.annotations.Block} annotation of the given class
      * to set the way of locating the block itself and {@link org.openqa.selenium.support.FindBy},
-     * {@link org.openqa.selenium.support.FindBys} and {@link org.openqa.selenium.support.FindAll} annotations of its fields for setting the way
-     * of locating elements of the block.
+     * {@link org.openqa.selenium.support.FindBys} and {@link org.openqa.selenium.support.FindAll}
+     * annotations of its fields for setting the way of locating elements of the block.
      * <p/>
      * Fields to be proxied:
      * <p/>
@@ -122,8 +122,8 @@ public class HtmlElementLoader {
      * <p/>
      * Processes {@link ru.yandex.qatools.htmlelements.annotations.Block} annotation of the class
      * of the given block to set the way of locating the block itself and {@link org.openqa.selenium.support.FindBy},
-     * {@link org.openqa.selenium.support.FindBys} and {@link org.openqa.selenium.support.FindAll} annotations of its fields for setting the way
-     * of locating elements of the block.
+     * {@link org.openqa.selenium.support.FindBys} and {@link org.openqa.selenium.support.FindAll} annotations of its
+     * fields for setting the way of locating elements of the block.
      * <p/>
      * Fields to be proxied:
      * <p/>
