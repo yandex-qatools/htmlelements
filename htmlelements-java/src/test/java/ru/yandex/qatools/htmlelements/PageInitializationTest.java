@@ -122,8 +122,20 @@ public class PageInitializationTest {
     }
 
     @Test
+    public void htmlElementFieldShouldNotBeNullWhenUsingFindAllWithMultipleFindBy() {
+        assertThat("HtmlElement field should be not null after initialization when using FindAll with multiple FindBy's",
+                page.getFindAllMultipleByHtmlElement(), is(notNullValue()));
+    }
+
+    @Test
     public void webElementListShouldHaveCorrectSizeWhenUsingFindAll() {
         assertThat("List<WebElement> should have 3 items when using FindAll",
                 page.getFindAllWebElementList().size(), is(equalTo(3)));
+    }
+
+    @Test
+    public void webElementListShouldHaveCorrectSizeWhenUsingFindAllWithMultipleBy() {
+        assertThat("List<WebElement> should have 6 items when using FindAll with two FindBy's",
+                page.getFindAllMultipleByWebElementList().size(), is(equalTo(6)));
     }
 }

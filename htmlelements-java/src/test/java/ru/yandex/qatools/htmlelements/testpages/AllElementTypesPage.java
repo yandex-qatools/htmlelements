@@ -67,6 +67,14 @@ public class AllElementTypesPage {
     @FindAll({@FindBy(id = ELEMENT_ID)})
     private List<WebElement> findAllWebElementList;
 
+    @FindAll({@FindBy(id = ELEMENT_ID),
+            @FindBy(id = HTML_ELEMENT_ID),
+            @FindBy(id = BUTTON_ID)})
+    private HtmlElement findAllMultipleByHtmlElement;
+
+    @FindAll({@FindBy(id = ELEMENT_ID), @FindBy(id = HTML_ELEMENT_ID)})
+    private List<WebElement> findAllMultipleByWebElementList;
+
     public WebElement getElement() {
         return element;
     }
@@ -111,6 +119,14 @@ public class AllElementTypesPage {
         return findAllWebElementList;
     }
 
+    public HtmlElement getFindAllMultipleByHtmlElement() {
+        return findAllMultipleByHtmlElement;
+    }
+
+    public List<WebElement> getFindAllMultipleByWebElementList() {
+        return findAllMultipleByWebElementList;
+    }
+
     public static WebDriver mockDriver() {
         WebDriver driver = mock(WebDriver.class);
         WebElement element = mock(WebElement.class);
@@ -135,8 +151,13 @@ public class AllElementTypesPage {
         when(driver.findElements(By.id(ELEMENT_ID))).thenReturn(webElementList);
 
         when(driver.findElements(new ByAll(By.id(ELEMENT_ID)))).thenReturn(webElementList);
+        when(driver.findElements(new ByAll(By.id(ELEMENT_ID), By.id(HTML_ELEMENT_ID))))
+                .thenReturn(Arrays.asList(element, element, element, htmlElement, htmlElement, htmlElement));
         when(driver.findElement(new ByAll(By.id(ELEMENT_ID)))).thenReturn(element);
         when(driver.findElement(new ByAll(By.id(HTML_ELEMENT_ID)))).thenReturn(htmlElement);
+        when(driver.findElement(new ByAll(By.id(ELEMENT_ID), By.id(HTML_ELEMENT_ID), By.id(BUTTON_ID))))
+                .thenReturn(htmlElement);
+
 
         when(radioButton.getAttribute("name")).thenReturn(RADIO_NAME);
         String xpath = String.format("self::* | following::input[@type = 'radio' and @name = '%s'] | " +
