@@ -74,6 +74,18 @@ public class PageInitializationTest {
     }
 
     @Test
+    public void imageFieldShouldNotBeNull() {
+        assertThat("Image field should be not null after initialization",
+                page.getImage(), is(notNullValue()));
+    }
+
+    @Test
+    public void imageSourceShouldNotBeNull() {
+        assertThat("Image source attribute should be not empty after initialization",
+                page.getImage().getSource(), is(not(isEmptyString())));
+    }
+
+    @Test
     public void textInputListFiledShouldNotBeNull() {
         assertThat("List<TextInput> field should be not null after initialization",
                 page.getTextInputList(), is(notNullValue()));
