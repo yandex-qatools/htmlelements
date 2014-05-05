@@ -29,10 +29,11 @@ import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.*;
  * </ul>
  * <p/>
  * {@code WebElements}, lists of {@code WebElements}, typified elements and lists of typified elements
- * have to be marked with {@link org.openqa.selenium.support.FindBy} or {@link org.openqa.selenium.support.FindBys}
- * annotation. For blocks and lists of blocks it is not obligatory: corresponding
- * {@link ru.yandex.qatools.htmlelements.annotations.Block} annotation will be processed if there are no
- * {@link org.openqa.selenium.support.FindBy} or {@link org.openqa.selenium.support.FindBys} annotation.
+ * have to be marked with {@link org.openqa.selenium.support.FindBy}, {@link org.openqa.selenium.support.FindBys}
+ * or {@link org.openqa.selenium.support.FindAll}  annotation. For blocks and lists of blocks it is not
+ * obligatory: corresponding {@link ru.yandex.qatools.htmlelements.annotations.Block} annotation will be
+ * processed if there are no {@link org.openqa.selenium.support.FindBy}, {@link org.openqa.selenium.support.FindBys}
+ * or {@link org.openqa.selenium.support.FindAll} annotation.
  *
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 13.08.12

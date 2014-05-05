@@ -5,6 +5,7 @@ import org.openqa.selenium.support.ByIdOrName;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
+import org.openqa.selenium.support.FindAll;
 
 import java.lang.reflect.Field;
 
@@ -12,9 +13,9 @@ import java.lang.reflect.Field;
  * A patch for {@code WebDriver} {@link org.openqa.selenium.support.pagefactory.Annotations} class.
  * <p/>
  * The need for creating it is that the original {@code WebDriver} source code provides no possibility for
- * handling different field and class annotations (only field annotations {@link FindBy}, {@link FindBys} and
- * {@link org.openqa.selenium.support.CacheLookup}) and for using different ways of annotations handling in
- * {@link org.openqa.selenium.support.pagefactory.DefaultElementLocator}.
+ * handling different field and class annotations (only field annotations {@link FindBy}, {@link FindBys},
+ * {@link FindAll} and {@link org.openqa.selenium.support.CacheLookup}) and for using different ways of
+ * annotations handling in {@link org.openqa.selenium.support.pagefactory.DefaultElementLocator}.
  * <p/>
  * We need to process {@link ru.yandex.qatools.htmlelements.annotations.Block} annotation to locate blocks,
  * so we divided {@link org.openqa.selenium.support.pagefactory.Annotations} class into {@link AnnotationsHandler}
@@ -48,6 +49,11 @@ public class DefaultFieldAnnotationsHandler extends AnnotationsHandler {
             ans = buildByFromFindBys(findBys);
         }
 
+        FindAll findAll = field.getAnnotation(FindAll.class);
+        if (ans == null && findAll != null) {
+            ans = buildBysFromFindAll(findAll);
+        }
+
         FindBy findBy = field.getAnnotation(FindBy.class);
         if (ans == null && findBy != null) {
             ans = buildByFromFindBy(findBy);
@@ -70,10 +76,19 @@ public class DefaultFieldAnnotationsHandler extends AnnotationsHandler {
 
     protected void assertValidAnnotations() {
         FindBys findBys = field.getAnnotation(FindBys.class);
+        FindAll findAll = field.getAnnotation(FindAll.class);
         FindBy findBy = field.getAnnotation(FindBy.class);
         if (findBys != null && findBy != null) {
-            throw new IllegalArgumentException("If you use a '@FindBys' annotation, "
-                    + "you must not also use a '@FindBy' annotation");
+            throw new IllegalArgumentException("If you use a '@FindBys' annotation, " +
+                    "you must not also use a '@FindBy' annotation");
+        }
+        if (findAll != null && findBy != null) {
+            throw new IllegalArgumentException("If you use a '@FindAll' annotation, " +
+                    "you must not also use a '@FindBy' annotation");
+        }
+        if (findAll != null && findBys != null) {
+            throw new IllegalArgumentException("If you use a '@FindAll' annotation, " +
+                    "you must not also use a '@FindBys' annotation");
         }
     }
 }

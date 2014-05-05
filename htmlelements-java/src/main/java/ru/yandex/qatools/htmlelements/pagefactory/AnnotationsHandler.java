@@ -4,8 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ByIdOrName;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.pagefactory.ByChained;
+import org.openqa.selenium.support.pagefactory.ByAll;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,9 +16,9 @@ import java.util.Set;
  * A patch for {@code WebDriver} {@link org.openqa.selenium.support.pagefactory.Annotations} class.
  * <p/>
  * The need for creating it is that the original {@code WebDriver} source code provides no possibility for
- * handling different field and class annotations (only field annotations {@link FindBy}, {@link FindBys} and
- * {@link org.openqa.selenium.support.CacheLookup}) and for using different ways of annotations handling in
- * {@link org.openqa.selenium.support.pagefactory.DefaultElementLocator}.
+ * handling different field and class annotations (only field annotations {@link FindBy}, {@link FindBys},
+ * {@link FindAll} and {@link org.openqa.selenium.support.CacheLookup}) and for using different ways of
+ * annotations handling in {@link org.openqa.selenium.support.pagefactory.DefaultElementLocator}.
  * <p/>
  * We need to process {@link ru.yandex.qatools.htmlelements.annotations.Block} annotation to locate blocks,
  * so we divided {@link org.openqa.selenium.support.pagefactory.Annotations} class into {@link AnnotationsHandler}
@@ -136,6 +138,18 @@ public abstract class AnnotationsHandler {
         }
     }
 
+    protected By buildBysFromFindAll(FindAll findAll) {
+        assertValidFindAll(findAll);
+
+        FindBy[] findByArray = findAll.value();
+        By[] byArray = new By[findByArray.length];
+        for (int i = 0; i < findByArray.length; i++) {
+            byArray[i] = buildByFromFindBy(findByArray[i]);
+        }
+
+        return new ByAll(byArray);
+    }
+
     private void assertValidFindBy(FindBy findBy) {
         if (findBy.how() != null) {
             if (findBy.using() == null) {
@@ -178,6 +192,12 @@ public abstract class AnnotationsHandler {
             throw new IllegalArgumentException(
                     String.format("You must specify at most one location strategy. Number found: %d (%s)",
                             finders.size(), finders.toString()));
+        }
+    }
+
+    private void assertValidFindAll(FindAll findAll) {
+        for (FindBy findBy : findAll.value()) {
+            assertValidFindBy(findBy);
         }
     }
 }
