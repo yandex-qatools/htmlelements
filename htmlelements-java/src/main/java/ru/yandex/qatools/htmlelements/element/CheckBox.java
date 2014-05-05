@@ -43,7 +43,7 @@ public class CheckBox extends TypifiedElement {
         if (id != null) {
             // Label with matching "for" attribute
             // Trying to find element from !ROOT! node
-            String xpath = String.format("//descendant-or-self::label[@for = %s]", id);
+            String xpath = String.format("(//label[@for = %s])[1]", id);
             label = findLabel(By.xpath(xpath));
         }
 
@@ -54,7 +54,7 @@ public class CheckBox extends TypifiedElement {
 
         if (label == null) {
             // Label right next to checkbox
-            label = findLabel(By.xpath("following-sibling::*[1][self::label]"));
+            label = findLabel(By.xpath("following-sibling::label"));
         }
 
         return label;
