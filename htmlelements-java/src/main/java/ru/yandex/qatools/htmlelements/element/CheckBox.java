@@ -31,7 +31,14 @@ public class CheckBox extends TypifiedElement {
      */
     public WebElement getLabel() {
         WebElement label = null;
-        String id = HtmlElementUtils.xpathLiteral(getWrappedElement().getAttribute("id"));
+        String id = null;
+
+        // Trying to find id attibute in element
+        try {
+            id = HtmlElementUtils.xpathLiteral(getWrappedElement().getAttribute("id"));
+        } catch (NullPointerException | NoSuchElementException ex) {
+            // Do nothing. Element doesn't have id attribute
+        }
 
         if (id != null) {
             // Label with matching "for" attribute
