@@ -3,6 +3,10 @@ package ru.yandex.qatools.htmlelements.element;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import ru.yandex.qatools.htmlelements.utils.HtmlElementUtils;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Represents web page checkbox control.
@@ -21,14 +25,45 @@ public class CheckBox extends TypifiedElement {
     }
 
     /**
-     * Finds label corresponding to this checkbox using "following-sibling::label" xpath.
+     * Finds label corresponding to checkbox element
      *
      * @return {@code WebElement} representing label or {@code null} if no label has been found.
      */
     public WebElement getLabel() {
+        WebElement label = null;
+        String id = HtmlElementUtils.xpathLiteral(getWrappedElement().getAttribute("id"));
+
+        if (id != null) {
+            // Label with matching "for" attribute
+            // Trying to find element from !ROOT! node
+            String xpath = String.format("//descendant-or-self::label[@for = %s]", id);
+            label = findLabel(By.xpath(xpath));
+        }
+
+        if (label == null) {
+            // Label wrapped around checkbox
+            label = findLabel(By.xpath("parent::label"));
+        }
+
+        if (label == null) {
+            // Label right next to checkbox
+            label = findLabel(By.xpath("following-sibling::*[1][self::label]"));
+        }
+
+        return label;
+    }
+
+    /**
+     * Finds label in checkbox element
+     *
+     * @param by path to label
+     * @return {@code WebElement} representing label or {@code null} if label not found
+     */
+    private WebElement findLabel(By by) {
         try {
-            return getWrappedElement().findElement(By.xpath("following-sibling::label"));
-        } catch (NoSuchElementException e) {
+            return getWrappedElement().findElement(by);
+
+        } catch (NoSuchElementException ex) {
             return null;
         }
     }
