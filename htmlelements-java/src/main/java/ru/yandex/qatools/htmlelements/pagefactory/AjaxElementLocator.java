@@ -35,11 +35,6 @@ import org.openqa.selenium.support.ui.SystemClock;
 public class AjaxElementLocator extends DefaultElementLocator {
     protected final int timeOutInSeconds;
     private final Clock clock;
-    private static final int DEFAULT_TIMEOUT = 5;
-
-    public AjaxElementLocator(SearchContext context, AnnotationsHandler annotationsHandler) {
-        this(context, DEFAULT_TIMEOUT, annotationsHandler);
-    }
 
     /**
      * Main constructor.
