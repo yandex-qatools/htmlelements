@@ -33,7 +33,7 @@ public class HtmlElementLoader {
      */
     @SuppressWarnings("unchecked")
     public static <T> T create(Class<T> clazz, WebDriver driver) {
-        return create(clazz, driver, getTimeOut());
+        return create(clazz, driver, getImplicitlyWaitTimeOut());
     }
 
     /**
@@ -66,7 +66,7 @@ public class HtmlElementLoader {
      * @see #createPageObject(Class, WebDriver)
      */
     public static <T> void populate(T instance, WebDriver driver) {
-        populate(instance, driver, getTimeOut());
+        populate(instance, driver, getImplicitlyWaitTimeOut());
     }
 
     /**
@@ -114,7 +114,7 @@ public class HtmlElementLoader {
      * @return Initialized instance of the specified class.
      */
     public static <T extends HtmlElement> T createHtmlElement(Class<T> clazz, SearchContext searchContext) {
-        return createHtmlElement(clazz, searchContext, getTimeOut());
+        return createHtmlElement(clazz, searchContext, getImplicitlyWaitTimeOut());
     }
 
     /**
@@ -173,7 +173,7 @@ public class HtmlElementLoader {
      * @return Initialized instance of the specified class.
      */
     public static <T> T createPageObject(Class<T> clazz, WebDriver driver) {
-        return createPageObject(clazz, driver, getTimeOut());
+        return createPageObject(clazz, driver, getImplicitlyWaitTimeOut());
     }
 
     /**
@@ -228,7 +228,7 @@ public class HtmlElementLoader {
      * @param searchContext {@code SearchContext} that will be used to look up the elements.
      */
     public static void populateHtmlElement(HtmlElement htmlElement, SearchContext searchContext) {
-        populateHtmlElement(htmlElement, searchContext, getTimeOut());
+        populateHtmlElement(htmlElement, searchContext, getImplicitlyWaitTimeOut());
     }
 
     /**
@@ -266,7 +266,7 @@ public class HtmlElementLoader {
      * @param locatorFactory Locator factory that will be used to locate block elements.
      */
     public static void populateHtmlElement(HtmlElement htmlElement, CustomElementLocatorFactory locatorFactory) {
-        populateHtmlElement(htmlElement, locatorFactory, getTimeOut());
+        populateHtmlElement(htmlElement, locatorFactory, getImplicitlyWaitTimeOut());
     }
 
     /**
@@ -274,6 +274,7 @@ public class HtmlElementLoader {
      *
      * @param htmlElement    Block of elements to be initialized.
      * @param locatorFactory Locator factory that will be used to locate block elements.
+     * @param timeOutInSeconds How long to wait for the element to appear. Measured in seconds.
      */
     public static void populateHtmlElement(HtmlElement htmlElement, CustomElementLocatorFactory locatorFactory,
                                            int timeOutInSeconds) {
@@ -314,7 +315,7 @@ public class HtmlElementLoader {
      * @param driver The {@code WebDriver} instance that will be used to look up the elements.
      */
     public static void populatePageObject(Object page, WebDriver driver) {
-        populatePageObject(page, driver, getTimeOut());
+        populatePageObject(page, driver, getImplicitlyWaitTimeOut());
     }
 
     /**
@@ -350,7 +351,7 @@ public class HtmlElementLoader {
      * @param locatorFactory Locator factory that will be used to locate elements.
      */
     public static void populatePageObject(Object page, CustomElementLocatorFactory locatorFactory) {
-        populatePageObject(page, locatorFactory, getTimeOut());
+        populatePageObject(page, locatorFactory, getImplicitlyWaitTimeOut());
     }
 
     /**
@@ -358,6 +359,7 @@ public class HtmlElementLoader {
      *
      * @param page           Page object to be initialized.
      * @param locatorFactory Locator factory that will be used to locate elements.
+     * @param timeOutInSeconds How long to wait for the element to appear. Measured in seconds.
      */
     public static void populatePageObject(Object page, CustomElementLocatorFactory locatorFactory,
                                           int timeOutInSeconds) {
@@ -365,7 +367,7 @@ public class HtmlElementLoader {
     }
 
 
-    private static int getTimeOut() {
+    private static int getImplicitlyWaitTimeOut() {
         try {
             return Integer.valueOf(System.getProperty("webdriver.timeouts.implicitlywait"));
         } catch (NumberFormatException ex){
