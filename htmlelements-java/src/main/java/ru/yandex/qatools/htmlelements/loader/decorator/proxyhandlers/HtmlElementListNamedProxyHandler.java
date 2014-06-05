@@ -21,11 +21,14 @@ public class HtmlElementListNamedProxyHandler<T extends HtmlElement> implements 
     private final Class<T> htmlElementClass;
     private final ElementLocator locator;
     private final String name;
+    private final int timeOutInSeconds;
 
-    public HtmlElementListNamedProxyHandler(Class<T> htmlElementClass, ElementLocator locator, String name) {
+    public HtmlElementListNamedProxyHandler(Class<T> htmlElementClass, ElementLocator locator,
+                                            String name, int timeOutInSeconds) {
         this.htmlElementClass = htmlElementClass;
         this.locator = locator;
         this.name = name;
+        this.timeOutInSeconds = timeOutInSeconds;
     }
 
     @Override
@@ -42,7 +45,7 @@ public class HtmlElementListNamedProxyHandler<T extends HtmlElement> implements 
             htmlElement.setWrappedElement(element);
             String htmlElementName = String.format("%s [%d]", name, elementNumber);
             htmlElement.setName(htmlElementName);
-            PageFactory.initElements(new HtmlElementDecorator(element), htmlElement);
+            PageFactory.initElements(new HtmlElementDecorator(element, timeOutInSeconds), htmlElement);
             htmlElements.add(htmlElement);
             elementNumber++;
         }

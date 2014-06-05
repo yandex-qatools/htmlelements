@@ -145,7 +145,8 @@ public class HtmlElementLoader {
     public static <T extends HtmlElement> T createHtmlElement(Class<T> clazz, SearchContext searchContext,
                                                               int timeOutInSeconds) {
         T htmlElementInstance = HtmlElementFactory.createHtmlElementInstance(clazz);
-        populateHtmlElement(htmlElementInstance, new HtmlElementLocatorFactory(searchContext, timeOutInSeconds));
+        populateHtmlElement(htmlElementInstance,
+                new HtmlElementLocatorFactory(searchContext, timeOutInSeconds), timeOutInSeconds);
         return htmlElementInstance;
     }
 
@@ -254,7 +255,8 @@ public class HtmlElementLoader {
      * @param timeOutInSeconds How long to wait for the element to appear. Measured in seconds.
      */
     public static void populateHtmlElement(HtmlElement htmlElement, SearchContext searchContext, int timeOutInSeconds) {
-        populateHtmlElement(htmlElement, new HtmlElementLocatorFactory(searchContext, timeOutInSeconds));
+        populateHtmlElement(htmlElement,
+                new HtmlElementLocatorFactory(searchContext, timeOutInSeconds), timeOutInSeconds);
     }
 
     /**
@@ -264,6 +266,17 @@ public class HtmlElementLoader {
      * @param locatorFactory Locator factory that will be used to locate block elements.
      */
     public static void populateHtmlElement(HtmlElement htmlElement, CustomElementLocatorFactory locatorFactory) {
+        populateHtmlElement(htmlElement, locatorFactory, getTimeOut());
+    }
+
+    /**
+     * Initializes fields of the given block of elements using specified locator factory.
+     *
+     * @param htmlElement    Block of elements to be initialized.
+     * @param locatorFactory Locator factory that will be used to locate block elements.
+     */
+    public static void populateHtmlElement(HtmlElement htmlElement, CustomElementLocatorFactory locatorFactory,
+                                           int timeOutInSeconds) {
         @SuppressWarnings("unchecked")
         Class<HtmlElement> htmlElementClass = (Class<HtmlElement>) htmlElement.getClass();
         // Create locator that will handle Block annotation
@@ -276,7 +289,7 @@ public class HtmlElementLoader {
         htmlElement.setWrappedElement(elementToWrap);
         htmlElement.setName(elementName);
         // Initialize elements of the block
-        PageFactory.initElements(new HtmlElementDecorator(elementToWrap), htmlElement);
+        PageFactory.initElements(new HtmlElementDecorator(elementToWrap, timeOutInSeconds), htmlElement);
     }
 
     /**
@@ -337,8 +350,20 @@ public class HtmlElementLoader {
      * @param locatorFactory Locator factory that will be used to locate elements.
      */
     public static void populatePageObject(Object page, CustomElementLocatorFactory locatorFactory) {
-        PageFactory.initElements(new HtmlElementDecorator(locatorFactory), page);
+        populatePageObject(page, locatorFactory, getTimeOut());
     }
+
+    /**
+     * Initializes fields of the given page object using specified locator factory.
+     *
+     * @param page           Page object to be initialized.
+     * @param locatorFactory Locator factory that will be used to locate elements.
+     */
+    public static void populatePageObject(Object page, CustomElementLocatorFactory locatorFactory,
+                                          int timeOutInSeconds) {
+        PageFactory.initElements(new HtmlElementDecorator(locatorFactory, timeOutInSeconds), page);
+    }
+
 
     private static int getTimeOut() {
         try {
