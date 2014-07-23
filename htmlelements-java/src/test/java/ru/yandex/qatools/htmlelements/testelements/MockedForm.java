@@ -47,6 +47,7 @@ public class MockedForm extends Form {
         when(element.getTagName()).thenReturn("input");
         when(element.getAttribute("name")).thenReturn(name);
         when(element.getAttribute("type")).thenReturn(type);
+        when(element.getText()).thenReturn("");
         return element;
     }
 
