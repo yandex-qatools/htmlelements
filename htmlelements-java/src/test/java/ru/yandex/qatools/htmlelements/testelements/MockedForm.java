@@ -90,6 +90,7 @@ public class MockedForm extends Form {
         when(getWrappedElement().findElements(By.name(TEXT_AREA_NAME))).thenReturn(Arrays.asList(textArea));
         when(textArea.getTagName()).thenReturn("textarea");
         when(textArea.getAttribute("name")).thenReturn(TEXT_AREA_NAME);
+        when(textArea.getText()).thenReturn("");
         return textArea;
     }
 
