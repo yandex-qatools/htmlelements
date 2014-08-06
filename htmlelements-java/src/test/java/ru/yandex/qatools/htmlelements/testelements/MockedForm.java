@@ -47,13 +47,13 @@ public class MockedForm extends Form {
         when(element.getTagName()).thenReturn("input");
         when(element.getAttribute("name")).thenReturn(name);
         when(element.getAttribute("type")).thenReturn(type);
-        when(element.getText()).thenReturn("");
         return element;
     }
 
     private WebElement mockTextInput() {
         WebElement textInput = mockInputWithNameAndType(TEXT_INPUT_NAME, "text");
         when(getWrappedElement().findElements(By.name(TEXT_INPUT_NAME))).thenReturn(Arrays.asList(textInput));
+        when(textInput.getText()).thenReturn("a");
         return textInput;
     }
 
@@ -90,7 +90,7 @@ public class MockedForm extends Form {
         when(getWrappedElement().findElements(By.name(TEXT_AREA_NAME))).thenReturn(Arrays.asList(textArea));
         when(textArea.getTagName()).thenReturn("textarea");
         when(textArea.getAttribute("name")).thenReturn(TEXT_AREA_NAME);
-        when(textArea.getText()).thenReturn("");
+        when(textArea.getText()).thenReturn("a");
         return textArea;
     }
 

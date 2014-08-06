@@ -2,6 +2,7 @@ package ru.yandex.qatools.htmlelements;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.Keys;
 import ru.yandex.qatools.htmlelements.testelements.MockedForm;
 
 import java.util.HashMap;
@@ -15,6 +16,7 @@ import static org.mockito.Mockito.verify;
  */
 public class FormFillingTest {
     private static final String INPUT_TEXT_TO_SEND = "text";
+    private static final String INPUT_KEYS_TO_SEND = Keys.DELETE.toString() + Keys.BACK_SPACE.toString() + "text";
     private static final boolean CHECKBOX_VALUE_TO_SET = true;
 
     private final MockedForm form = new MockedForm();
@@ -35,10 +37,10 @@ public class FormFillingTest {
 
     @Test
     public void formFieldsShouldBeFilledCorrectly() {
-        verify(form.getTextInput()).sendKeys(INPUT_TEXT_TO_SEND);
+        verify(form.getTextInput()).sendKeys(INPUT_KEYS_TO_SEND);
         verify(form.getCheckBox()).click();
         verify(form.getRadioButton()).click();
         verify(form.getSelectOption()).click();
-        verify(form.getTextArea()).sendKeys(INPUT_TEXT_TO_SEND);
+        verify(form.getTextArea()).sendKeys(INPUT_KEYS_TO_SEND);
     }
 }
