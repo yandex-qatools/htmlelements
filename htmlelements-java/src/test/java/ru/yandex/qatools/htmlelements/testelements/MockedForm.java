@@ -15,19 +15,23 @@ import static org.mockito.Mockito.when;
  */
 public class MockedForm extends Form {
     public static final String TEXT_INPUT_NAME = "textinput";
+    public static final String TEXT_INPUT_WITH_TEXT_NAME = "textinput_with_text";
     public static final String CHECKBOX_NAME = "checkbox";
     public static final String SELECT_NAME = "select";
     public static final String RADIO_NAME = "radio";
     public static final String TEXT_AREA_NAME = "textarea";
+    public static final String TEXT_AREA_WITH_TEXT_NAME = "textarea_with_text";
 
     public static final String RADIO_BUTTON_VALUE = "value";
     public static final String SELECT_OPTION_VALUE = "value";
 
     private final WebElement textInput;
+    private final WebElement textInputWithText;
     private final WebElement checkBox;
     private final WebElement selectOption;
     private final WebElement radioButton;
     private final WebElement textArea;
+    private final WebElement textAreaWithText;
 
     public MockedForm() {
         this(mock(WebElement.class));
@@ -35,11 +39,13 @@ public class MockedForm extends Form {
 
     private MockedForm(WebElement wrappedElement) {
         super(wrappedElement);
-        textInput = mockTextInput();
+        textInput = mockTextInput(TEXT_INPUT_NAME, "");
+        textInputWithText = mockTextInput(TEXT_INPUT_WITH_TEXT_NAME, "a");
         checkBox = mockCheckBox();
         selectOption = mockSelectOption();
         radioButton = mockRadioButton();
-        textArea = mockTextArea();
+        textArea = mockTextArea(TEXT_AREA_NAME, "");
+        textAreaWithText = mockTextArea(TEXT_AREA_WITH_TEXT_NAME, "a");
     }
 
     private WebElement mockInputWithNameAndType(String name, String type) {
@@ -50,10 +56,10 @@ public class MockedForm extends Form {
         return element;
     }
 
-    private WebElement mockTextInput() {
-        WebElement textInput = mockInputWithNameAndType(TEXT_INPUT_NAME, "text");
-        when(getWrappedElement().findElements(By.name(TEXT_INPUT_NAME))).thenReturn(Arrays.asList(textInput));
-        when(textInput.getText()).thenReturn("a");
+    private WebElement mockTextInput(String name, String text) {
+        WebElement textInput = mockInputWithNameAndType(name, "text");
+        when(getWrappedElement().findElements(By.name(name))).thenReturn(Arrays.asList(textInput));
+        when(textInput.getText()).thenReturn(text);
         return textInput;
     }
 
@@ -85,17 +91,21 @@ public class MockedForm extends Form {
         return selectOption;
     }
 
-    private WebElement mockTextArea() {
+    private WebElement mockTextArea(String name, String text) {
         WebElement textArea = mock(WebElement.class);
-        when(getWrappedElement().findElements(By.name(TEXT_AREA_NAME))).thenReturn(Arrays.asList(textArea));
+        when(getWrappedElement().findElements(By.name(name))).thenReturn(Arrays.asList(textArea));
         when(textArea.getTagName()).thenReturn("textarea");
-        when(textArea.getAttribute("name")).thenReturn(TEXT_AREA_NAME);
-        when(textArea.getText()).thenReturn("a");
+        when(textArea.getAttribute("name")).thenReturn(name);
+        when(textArea.getText()).thenReturn(text);
         return textArea;
     }
 
     public WebElement getTextInput() {
         return textInput;
+    }
+
+    public WebElement getTextInputWithText() {
+        return textInputWithText;
     }
 
     public WebElement getCheckBox() {
@@ -112,5 +122,9 @@ public class MockedForm extends Form {
 
     public WebElement getTextArea() {
         return textArea;
+    }
+
+    public WebElement getTextAreaWithText() {
+        return textAreaWithText;
     }
 }
