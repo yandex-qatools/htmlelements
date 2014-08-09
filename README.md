@@ -1,12 +1,12 @@
 Html Elements framework
 =======================
 
-This framework is designed to provide easy-to-use way of interaction with web-page elements in your tests. It may be 
-considered as an extension of WebDriver Page Object.<br/>
-With the help of Html Elements framework you can group web-page elements into blocks, encapsulate logic of interaction with them 
+This framework is designed to provide an easy-to-use way of interacting with web-page elements in your tests. It can be 
+considered to be an extension of WebDriver Page Object.<br/>
+With the help of the Html Elements framework you can group web-page elements into blocks, encapsulate logic of interaction within them 
 and then easily use created blocks in page objects. It also provides a set of helpful matchers to use with web-page elements 
 and blocks. See [JavaDocs](https://oss.sonatype.org/service/local/repositories/releases/archive/ru/yandex/qatools/htmlelements/htmlelements/1.10/htmlelements-1.10-javadoc.jar/!/index.html) 
-and [Samples](https://github.com/yandex-qatools/htmlelements-junit-example) for more details.
+and [Samples](https://github.com/yandex-qatools/htmlelements-examples) for more details.
 
 Other Languages
 -------------
@@ -110,7 +110,7 @@ public class SearchPage {
 
 Use page objects in your tests
 ------------------------------
-Created page objects can be used in your tests. That makes tests more comprehensive and easy to write.
+Created page objects can be used in your tests. This makes tests more concise and easy to write.
 
 ```java
 public class SampleTest {
