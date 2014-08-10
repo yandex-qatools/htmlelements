@@ -1,6 +1,8 @@
 package ru.yandex.qatools.htmlelements.element;
 
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -68,21 +70,29 @@ public class Form extends TypifiedElement {
 
         if (isInput(element)) {
             String inputType = element.getAttribute("type");
-            if (inputType == null || inputType.equals(TEXT_INPUT_TYPE) || inputType.equals(PASSWORD_INPUT_TYPE)) {
-                element.sendKeys(value.toString());
-            } else if (inputType.equals(CHECKBOX_TYPE)) {
+            if (inputType.equals(CHECKBOX_TYPE)) {
                 CheckBox checkBox = new CheckBox(element);
                 checkBox.set(Boolean.parseBoolean(value.toString()));
             } else if (inputType.equals(RADIO_TYPE)) {
                 Radio radio = new Radio(element);
                 radio.selectByValue(value.toString());
+            } else {
+                element.sendKeys(getClearTextInputElementCharSequence(element) + value.toString());
             }
         } else if (isSelect(element)) {
             Select select = new Select(element);
             select.selectByValue(value.toString());
         } else if (isTextArea(element)) {
-            element.sendKeys(value.toString());
+            element.sendKeys(getClearTextInputElementCharSequence(element) + value.toString());
         }
+    }
+
+    // Returns sequence of backspaces and deletes that will clear element
+    // element.clear() can't be used because clear() generates separate onchange event
+    // element must be <textarea> or <input> with type text, password, email etc
+    // See https://github.com/yandex-qatools/htmlelements/issues/65
+    private static String getClearTextInputElementCharSequence(WebElement element) {
+        return StringUtils.repeat(Keys.DELETE.toString() + Keys.BACK_SPACE, element.getText().length());
     }
 
     private boolean isInput(WebElement element) {
