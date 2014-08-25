@@ -22,7 +22,8 @@ public class WrapsElementMatcher extends TypeSafeMatcher<WrapsElement> {
 
     @Override
     protected boolean matchesSafely(WrapsElement element) {
-        return matcher.matches(element.getWrappedElement());
+        return matcher.matches(element.getWrappedElement()) ||
+                matcher.matches(element);
     }
 
     @Override
