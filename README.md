@@ -31,17 +31,7 @@ Maven dependencies for Html Elements core:
 <dependency>
     <groupId>ru.yandex.qatools.htmlelements</groupId>
     <artifactId>htmlelements-java</artifactId>
-    <version>1.11</version>
-</dependency>
-```
-
-And for Html Elements matchers:
-
-```xml
-<dependency>
-    <groupId>ru.yandex.qatools.htmlelements</groupId>
-    <artifactId>htmlelements-matchers</artifactId>
-    <version>1.11</version>
+    <version>1.12</version>
 </dependency>
 ```
 
@@ -51,7 +41,7 @@ And for Thucydides integration:
 <dependency>
     <groupId>ru.yandex.qatools.htmlelements</groupId>
     <artifactId>htmlelements-thucydides</artifactId>
-    <version>1.11</version>
+    <version>1.12</version>
 </dependency>
 ```
 
@@ -61,7 +51,7 @@ Or you can include all modules at once if needed:
 <dependency>
     <groupId>ru.yandex.qatools.htmlelements</groupId>
     <artifactId>htmlelements-all</artifactId>
-    <version>1.11</version>
+    <version>1.12</version>
 </dependency>
 ```
 
