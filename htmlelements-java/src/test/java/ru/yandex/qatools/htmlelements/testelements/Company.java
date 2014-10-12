@@ -1,17 +1,18 @@
 package ru.yandex.qatools.htmlelements.testelements;
 
+import java.util.List;
+
 import org.openqa.selenium.support.FindBy;
+
 import ru.yandex.qatools.htmlelements.ComplexStructTest;
-import ru.yandex.qatools.htmlelements.annotations.Block;
 import ru.yandex.qatools.htmlelements.annotations.Name;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 
-import java.util.List;
-
 /**
  * @author Artem Koshelev artkoshelev@yandex-team.ru
+ *         Date: 12.10.14
  */
-@Block(@FindBy(css = ComplexStructTest.COMPANY_CSS))
+@FindBy(css = ComplexStructTest.COMPANY_CSS)
 public class Company extends HtmlElement {
 
     @Name(ComplexStructTest.VACANCY_LIST_NAME)
