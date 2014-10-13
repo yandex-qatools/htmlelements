@@ -8,6 +8,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * Since 1.13 version you can use @FindBy annotation on classes
+ * Since 1.14 version @Block annotation will be removed
+ * 
  * Annotation that is used to mark a block of elements to specify the way of locating it.
  * <p/>
  * Use this annotation to mark a descendant of {@link ru.yandex.qatools.htmlelements.element.HtmlElement} class
@@ -27,6 +30,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
+@Deprecated
 public @interface Block {
     public FindBy value();
 }

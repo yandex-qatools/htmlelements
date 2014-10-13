@@ -69,6 +69,9 @@ public class HtmlElementFieldAnnotationsHandler extends DefaultFieldAnnotationsH
                 FindBy findBy = block.value();
                 return buildByFromFindBy(findBy);
             }
+            if (fieldClass.isAnnotationPresent(FindBy.class)) {
+                return buildByFromFindBy(fieldClass.getAnnotation(FindBy.class));
+            }
             fieldClass = fieldClass.getSuperclass();
         }
 
@@ -89,6 +92,9 @@ public class HtmlElementFieldAnnotationsHandler extends DefaultFieldAnnotationsH
                 Block block = listParameterClass.getAnnotation(Block.class);
                 FindBy findBy = block.value();
                 return buildByFromFindBy(findBy);
+            }
+            if (listParameterClass.isAnnotationPresent(FindBy.class)) {
+                return buildByFromFindBy(listParameterClass.getAnnotation(FindBy.class));
             }
             listParameterClass = listParameterClass.getSuperclass();
         }

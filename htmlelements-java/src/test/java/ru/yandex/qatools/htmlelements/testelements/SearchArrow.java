@@ -1,23 +1,25 @@
 package ru.yandex.qatools.htmlelements.testelements;
 
+import java.util.List;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import ru.yandex.qatools.htmlelements.annotations.Block;
+
 import ru.yandex.qatools.htmlelements.annotations.Name;
 import ru.yandex.qatools.htmlelements.element.Button;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.element.TextInput;
-
-import java.util.List;
 
 /**
  * @author Artem Eroshenko eroshenkoam@yandex-team.ru
  *         Date: 30.06.12
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 13.08.12
+ * @author Artem Koshelev artkoshelev@yandex-team.ru
+ *         Date: 12.10.14
  */
 @Name(SearchArrowData.SEARCH_ARROW_NAME)
-@Block(@FindBy(className = SearchArrowData.SEARCH_ARROW_CLASS))
+@FindBy(className = SearchArrowData.SEARCH_ARROW_CLASS)
 public class SearchArrow extends HtmlElement {
     @Name(SearchArrowData.REQUEST_INPUT_NAME)
     @FindBy(className = SearchArrowData.REQUEST_INPUT_CLASS)

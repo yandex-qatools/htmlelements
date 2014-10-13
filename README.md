@@ -5,7 +5,7 @@ This framework is designed to provide an easy-to-use way of interacting with web
 considered to be an extension of WebDriver Page Object.<br/>
 With the help of the Html Elements framework you can group web-page elements into blocks, encapsulate logic of interaction within them 
 and then easily use created blocks in page objects. It also provides a set of helpful matchers to use with web-page elements 
-and blocks. See [JavaDocs](https://oss.sonatype.org/service/local/repositories/releases/archive/ru/yandex/qatools/htmlelements/htmlelements/1.10/htmlelements-1.10-javadoc.jar/!/index.html) 
+and blocks. See [JavaDocs](https://oss.sonatype.org/service/local/repositories/releases/archive/ru/yandex/qatools/htmlelements/htmlelements-java/1.12/htmlelements-java-1.12-javadoc.jar/!/index.html) 
 and [Samples](https://github.com/yandex-qatools/htmlelements-examples) for more details.
 
 Other Languages
@@ -61,7 +61,7 @@ For example, let's create a block for the search form on the page http://www.yan
 
 ```java
 @Name("Search form")
-@Block(@FindBy(xpath = "//form"))
+@FindBy(xpath = "//form")
 public class SearchArrow extends HtmlElement {
     @Name("Search request input")
     @FindBy(id = "searchInput")
