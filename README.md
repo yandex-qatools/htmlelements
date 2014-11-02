@@ -61,7 +61,7 @@ For example, let's create a block for the search form on the page http://www.yan
 
 ```java
 @Name("Search form")
-@FindBy(xpath = "//form")
+@Block(@FindBy(xpath = "//form"))
 public class SearchArrow extends HtmlElement {
     @Name("Search request input")
     @FindBy(id = "searchInput")
