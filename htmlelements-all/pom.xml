@@ -5,7 +5,7 @@
     <parent>
         <artifactId>htmlelements</artifactId>
         <groupId>ru.yandex.qatools.htmlelements</groupId>
-        <version>1.13-SNAPSHOT</version>
+        <version>1.13</version>
     </parent>
 
     <artifactId>htmlelements-all</artifactId>
