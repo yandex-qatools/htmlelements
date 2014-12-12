@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>ru.yandex.qatools.htmlelements</groupId>
 		<artifactId>htmlelements</artifactId>
-		<version>1.13</version>
+		<version>1.14-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>htmlelements-matchers</artifactId>
