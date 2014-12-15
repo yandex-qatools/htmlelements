@@ -1,5 +1,8 @@
 Html Elements framework
 =======================
+[![release](http://github-release-version.herokuapp.com/github/yandex-qatools/htmlelements/release.svg?style=flat)](https://github.com/yandex-qatools/htmlelements/releases/latest) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/ru.yandex.qatools.htmlelements/htmlelements-java/badge.svg?style=flat)](https://maven-badges.herokuapp.com/maven-central/ru.yandex.qatools.htmlelements/htmlelements-java)
+
+
 
 This framework is designed to provide an easy-to-use way of interacting with web-page elements in your tests. It can be 
 considered to be an extension of WebDriver Page Object.<br/>
