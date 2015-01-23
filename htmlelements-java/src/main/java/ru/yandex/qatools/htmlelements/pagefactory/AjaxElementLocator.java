@@ -71,7 +71,10 @@ public class AjaxElementLocator extends DefaultElementLocator {
             return loadingElement.get().getElement();
         } catch (NoSuchElementError e) {
             throw new NoSuchElementException(
-                    String.format("Timed out after %d seconds. %s", timeOutInSeconds, e.getMessage()),
+                    String.format("Timed out after %d seconds. %s (%s)",
+                            timeOutInSeconds,
+                            e.getMessage(),
+                            e.getCause().getMessage()),
                     e.getCause());
         }
     }
