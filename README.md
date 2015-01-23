@@ -11,7 +11,7 @@ and then easily use created blocks in page objects. It also provides a set of he
 and blocks. See [JavaDocs](https://oss.sonatype.org/service/local/repositories/releases/archive/ru/yandex/qatools/htmlelements/htmlelements-java/1.12/htmlelements-java-1.12-javadoc.jar/!/index.html) 
 and [Samples](https://github.com/yandex-qatools/htmlelements-examples) for more details.
 
-You can ask your questions on StackOverflow with [htmlelements](http://stackoverflow.com/questions/tagged/htmlelements) tag.
+You can ask your questions on StackOverflow with [![htmlelements](https://img.shields.io/badge/stackoverflow-htmlelements-orange.svg?style=flat)](http://stackoverflow.com/questions/tagged/htmlelements) tag.
 
 Other Languages
 -------------
@@ -134,4 +134,4 @@ public class SampleTest {
 
 Questions?
 ----------
-In case you can't find an answer in documentation and examples provided above, you can ask it on StackOverflow with [htmlelements](http://stackoverflow.com/questions/tagged/htmlelements) tag.
+In case you can't find an answer in documentation and examples provided above, you can ask it on StackOverflow with [![htmlelements](https://img.shields.io/badge/stackoverflow-htmlelements-orange.svg?style=flat)](http://stackoverflow.com/questions/tagged/htmlelements) tag.
