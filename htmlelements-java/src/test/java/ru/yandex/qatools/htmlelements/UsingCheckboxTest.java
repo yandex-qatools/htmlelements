@@ -1,19 +1,21 @@
 package ru.yandex.qatools.htmlelements;
 
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import ru.yandex.qatools.htmlelements.annotations.Block;
+
 import ru.yandex.qatools.htmlelements.element.CheckBox;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
-
-import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.*;
 
 /**
  * @author Artem Koshelev artkoshelev@yandex-team.ru
@@ -62,7 +64,7 @@ public class UsingCheckboxTest {
         verify(checkBoxInput).click();
     }
 
-    @Block(@FindBy(className = "loginform"))
+    @FindBy(className = "loginform")
     public class LoginForm extends HtmlElement {
         public LoginForm(WebDriver driver) {
             HtmlElementLoader.populate(this, driver);
