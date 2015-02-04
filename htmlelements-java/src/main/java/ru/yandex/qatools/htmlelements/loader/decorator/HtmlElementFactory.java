@@ -98,8 +98,10 @@ public class HtmlElementFactory {
     public static <T extends HtmlElement> List<T> createNamedProxyForHtmlElementList(Class<T> elementClass,
                                                                                      ClassLoader loader,
                                                                                      ElementLocator locator,
-                                                                                     String name) {
-        InvocationHandler handler = new HtmlElementListNamedProxyHandler<T>(elementClass, locator, name);
+                                                                                     String name,
+                                                                                     int timeOutInSeconds) {
+        InvocationHandler handler =
+                new HtmlElementListNamedProxyHandler<T>(elementClass, locator, name, timeOutInSeconds);
         return (List<T>) Proxy.newProxyInstance(loader, new Class[]{List.class}, handler);
     }
 }

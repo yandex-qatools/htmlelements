@@ -15,9 +15,11 @@ import java.lang.reflect.Field;
  */
 public class HtmlElementLocatorFactory extends CustomElementLocatorFactory {
     private final SearchContext searchContext;
+    private final int timeOutInSeconds;
 
-    public HtmlElementLocatorFactory(SearchContext searchContext) {
+    public HtmlElementLocatorFactory(SearchContext searchContext, int timeOutInSeconds) {
         this.searchContext = searchContext;
+        this.timeOutInSeconds = timeOutInSeconds;
     }
 
     /**
@@ -29,7 +31,7 @@ public class HtmlElementLocatorFactory extends CustomElementLocatorFactory {
      */
     @Override
     public ElementLocator createLocator(Field field) {
-        return new AjaxElementLocator(searchContext, new HtmlElementFieldAnnotationsHandler(field));
+        return new AjaxElementLocator(searchContext, timeOutInSeconds, new HtmlElementFieldAnnotationsHandler(field));
     }
 
     /**
@@ -40,6 +42,6 @@ public class HtmlElementLocatorFactory extends CustomElementLocatorFactory {
      * @param clazz Class for which locator will be created.
      */
     public ElementLocator createLocator(Class clazz) {
-        return new AjaxElementLocator(searchContext, new HtmlElementClassAnnotationsHandler(clazz));
+        return new AjaxElementLocator(searchContext, timeOutInSeconds, new HtmlElementClassAnnotationsHandler(clazz));
     }
 }

@@ -39,12 +39,15 @@ import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.*;
  *         Date: 13.08.12
  */
 public class HtmlElementDecorator extends DefaultFieldDecorator {
-    public HtmlElementDecorator(ElementLocatorFactory locatorFactory) {
+    private final int timeOutInSeconds;
+
+    public HtmlElementDecorator(ElementLocatorFactory locatorFactory, int timeOutInSeconds) {
         super(locatorFactory);
+        this.timeOutInSeconds = timeOutInSeconds;
     }
 
-    public HtmlElementDecorator(SearchContext searchContext) {
-        this(new HtmlElementLocatorFactory(searchContext));
+    public HtmlElementDecorator(SearchContext searchContext, int timeOutInSeconds) {
+        this(new HtmlElementLocatorFactory(searchContext, timeOutInSeconds), timeOutInSeconds);
     }
 
     @Override
@@ -67,7 +70,7 @@ public class HtmlElementDecorator extends DefaultFieldDecorator {
         } else if (isHtmlElement(field)) {
             @SuppressWarnings("unchecked")
             Class<HtmlElement> htmlElementClass = (Class<HtmlElement>) field.getType();
-            return decorateHtmlElement(htmlElementClass, loader, locator, elementName);
+            return decorateHtmlElement(htmlElementClass, loader, locator, elementName, timeOutInSeconds);
         } else if (isWebElement(field)) {
             return decorateWebElement(loader, locator, elementName);
         } else if (isTypifiedElementList(field)) {
@@ -77,7 +80,7 @@ public class HtmlElementDecorator extends DefaultFieldDecorator {
         } else if (isHtmlElementList(field)) {
             @SuppressWarnings("unchecked")
             Class<HtmlElement> htmlElementClass = (Class<HtmlElement>) getGenericParameterClass(field);
-            return decorateHtmlElementList(htmlElementClass, loader, locator, elementName);
+            return decorateHtmlElementList(htmlElementClass, loader, locator, elementName, timeOutInSeconds);
         } else if (isWebElementList(field)) {
             return decorateWebElementList(loader, locator, elementName);
         }
@@ -105,14 +108,15 @@ public class HtmlElementDecorator extends DefaultFieldDecorator {
     }
 
     private <T extends HtmlElement> T decorateHtmlElement(Class<T> elementClass, ClassLoader loader,
-                                                          ElementLocator locator, String elementName) {
+                                                          ElementLocator locator, String elementName,
+                                                          int timeOutInSeconds) {
         // Create block and initialize it with WebElement proxy
         WebElement elementToWrap = HtmlElementFactory.createNamedProxyForWebElement(loader, locator, elementName);
         T htmlElementInstance = HtmlElementFactory.createHtmlElementInstance(elementClass);
         htmlElementInstance.setWrappedElement(elementToWrap);
         htmlElementInstance.setName(elementName);
         // Recursively initialize elements of the block
-        PageFactory.initElements(new HtmlElementDecorator(elementToWrap), htmlElementInstance);
+        PageFactory.initElements(new HtmlElementDecorator(elementToWrap, timeOutInSeconds), htmlElementInstance);
         return htmlElementInstance;
     }
 
@@ -126,8 +130,10 @@ public class HtmlElementDecorator extends DefaultFieldDecorator {
     }
 
     private <T extends HtmlElement> List<T> decorateHtmlElementList(Class<T> elementClass, ClassLoader loader,
-                                                                    ElementLocator locator, String listName) {
-        return HtmlElementFactory.createNamedProxyForHtmlElementList(elementClass, loader, locator, listName);
+                                                                    ElementLocator locator, String listName,
+                                                                    int timeOutInSeconds) {
+        return HtmlElementFactory
+                .createNamedProxyForHtmlElementList(elementClass, loader, locator, listName, timeOutInSeconds);
     }
 
     private List<WebElement> decorateWebElementList(ClassLoader loader, ElementLocator locator, String listName) {
