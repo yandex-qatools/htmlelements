@@ -208,7 +208,12 @@ public class HtmlElement implements WebElement, WrapsElement, Named {
      */
     @Override
     public boolean isDisplayed() {
-        return wrappedElement.isDisplayed();
+        try{
+            return getWrappedElement().isDisplayed();
+        } catch (Exception e) {
+            //ignore and return false to indicate element is not visible.
+        }
+        return false;
     }
 
     /**
