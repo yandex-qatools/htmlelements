@@ -21,5 +21,4 @@ public class MyElementLocatorFactory extends CustomElementLocatorFactory {
     public ElementLocator createLocator(Class clazz) {
         return new MyElementLocator(searchContext, new HtmlElementClassAnnotationsHandler(clazz));
     }
-
 }
