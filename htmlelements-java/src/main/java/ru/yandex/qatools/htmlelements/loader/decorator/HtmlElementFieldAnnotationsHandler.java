@@ -25,10 +25,10 @@ public class HtmlElementFieldAnnotationsHandler extends DefaultFieldAnnotationsH
 
     @Override
     public By buildBy() {
-        if (isHtmlElement(getField())) {
+        if (isHtmlElement(getField()) || isTypifiedElement(getField())) {
             return buildByFromHtmlElementAnnotations();
         }
-        if (isHtmlElementList(getField())) {
+        if (isHtmlElementList(getField()) || isTypifiedElementList(getField())) {
             return buildByFromHtmlElementListAnnotations();
         } else {
             return buildByFromDefaultAnnotations();

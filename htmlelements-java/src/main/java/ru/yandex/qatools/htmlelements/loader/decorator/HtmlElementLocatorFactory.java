@@ -2,10 +2,14 @@ package ru.yandex.qatools.htmlelements.loader.decorator;
 
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
+import ru.yandex.qatools.htmlelements.annotations.Timeout;
 import ru.yandex.qatools.htmlelements.pagefactory.AjaxElementLocator;
 import ru.yandex.qatools.htmlelements.pagefactory.CustomElementLocatorFactory;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
 
 /**
  * A factory for producing locator instances.
@@ -29,7 +33,7 @@ public class HtmlElementLocatorFactory extends CustomElementLocatorFactory {
      */
     @Override
     public ElementLocator createLocator(Field field) {
-        return new AjaxElementLocator(searchContext, new HtmlElementFieldAnnotationsHandler(field));
+        return new AjaxElementLocator(searchContext, getTimeOut(field), new HtmlElementFieldAnnotationsHandler(field));
     }
 
     /**
@@ -40,6 +44,31 @@ public class HtmlElementLocatorFactory extends CustomElementLocatorFactory {
      * @param clazz Class for which locator will be created.
      */
     public ElementLocator createLocator(Class clazz) {
-        return new AjaxElementLocator(searchContext, new HtmlElementClassAnnotationsHandler(clazz));
+        return new AjaxElementLocator(searchContext, getTimeOut(clazz), new HtmlElementClassAnnotationsHandler(clazz));
+    }
+
+    public int getTimeOut(Field field) {
+        if (field.isAnnotationPresent(Timeout.class)) {
+            return field.getAnnotation(Timeout.class).value();
+        }
+        if (field.getGenericType() instanceof Class) {
+            return getTimeOut((Class) field.getGenericType());
+        }
+        return getTimeOut((Class) ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0]);
+    }
+
+    public int getTimeOut(Class clazz) {
+        try {
+            Method method = Timeout.class.getMethod("value");
+            do {
+                if (clazz.isAnnotationPresent(Timeout.class)) {
+                    return (Integer) method.invoke(clazz.getAnnotation(Timeout.class));
+                }
+                clazz = clazz.getSuperclass();
+            } while (clazz != Object.class && clazz != null);
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+        }
+
+        return Integer.getInteger("webdriver.timeouts.implicitlywait", 5);
     }
 }

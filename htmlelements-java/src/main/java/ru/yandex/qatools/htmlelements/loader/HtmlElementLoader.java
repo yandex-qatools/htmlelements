@@ -33,11 +33,14 @@ public class HtmlElementLoader {
      */
     @SuppressWarnings("unchecked")
     public static <T> T create(Class<T> clazz, WebDriver driver) {
+        T instance;
         if (isHtmlElement(clazz)) {
-            return (T) createHtmlElement((Class<HtmlElement>) clazz, driver);
+            instance = (T) createHtmlElement((Class<HtmlElement>) clazz, driver);
         } else {
-            return createPageObject(clazz, driver);
+            instance = createPageObject(clazz, driver);
         }
+        populate(instance, driver);
+        return instance;
     }
 
     /**
@@ -51,8 +54,7 @@ public class HtmlElementLoader {
      */
     public static <T> void populate(T instance, WebDriver driver) {
         if (isHtmlElement(instance)) {
-            HtmlElement htmlElement = (HtmlElement) instance;
-            populateHtmlElement(htmlElement, driver);
+            populateHtmlElement((HtmlElement) instance, driver);
         } else {
             // Otherwise consider instance as a page object
             populatePageObject(instance, driver);
@@ -84,9 +86,7 @@ public class HtmlElementLoader {
      * @return Initialized instance of the specified class.
      */
     public static <T extends HtmlElement> T createHtmlElement(Class<T> clazz, SearchContext searchContext) {
-        T htmlElementInstance = HtmlElementFactory.createHtmlElementInstance(clazz);
-        populateHtmlElement(htmlElementInstance, new HtmlElementLocatorFactory(searchContext));
-        return htmlElementInstance;
+        return HtmlElementFactory.createHtmlElementInstance(clazz);
     }
 
     /**
@@ -112,9 +112,7 @@ public class HtmlElementLoader {
      * @return Initialized instance of the specified class.
      */
     public static <T> T createPageObject(Class<T> clazz, WebDriver driver) {
-        T page = HtmlElementFactory.createPageObjectInstance(clazz, driver);
-        populatePageObject(page, new HtmlElementLocatorFactory(driver));
-        return page;
+        return HtmlElementFactory.createPageObjectInstance(clazz, driver);
     }
 
     /**

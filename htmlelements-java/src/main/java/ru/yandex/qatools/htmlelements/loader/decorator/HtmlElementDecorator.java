@@ -5,9 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.DefaultFieldDecorator;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
-import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.element.TypifiedElement;
+import ru.yandex.qatools.htmlelements.pagefactory.CustomElementLocatorFactory;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -39,7 +39,7 @@ import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.*;
  *         Date: 13.08.12
  */
 public class HtmlElementDecorator extends DefaultFieldDecorator {
-    public HtmlElementDecorator(ElementLocatorFactory locatorFactory) {
+    public HtmlElementDecorator(CustomElementLocatorFactory locatorFactory) {
         super(locatorFactory);
     }
 
@@ -85,7 +85,7 @@ public class HtmlElementDecorator extends DefaultFieldDecorator {
         return null;
     }
 
-    private boolean isDecoratableField(Field field) {
+    protected boolean isDecoratableField(Field field) {
         // TODO Protecting wrapped element from initialization basing on its name is unsafe. Think of a better way.
         if (isWebElement(field) && !field.getName().equals("wrappedElement")) {
             return true;
@@ -95,7 +95,7 @@ public class HtmlElementDecorator extends DefaultFieldDecorator {
                 isTypifiedElement(field) || isTypifiedElementList(field));
     }
 
-    private <T extends TypifiedElement> T decorateTypifiedElement(Class<T> elementClass, ClassLoader loader,
+    protected <T extends TypifiedElement> T decorateTypifiedElement(Class<T> elementClass, ClassLoader loader,
                                                                   ElementLocator locator, String elementName) {
         // Create typified element and initialize it with WebElement proxy
         WebElement elementToWrap = HtmlElementFactory.createNamedProxyForWebElement(loader, locator, elementName);
@@ -104,7 +104,7 @@ public class HtmlElementDecorator extends DefaultFieldDecorator {
         return typifiedElementInstance;
     }
 
-    private <T extends HtmlElement> T decorateHtmlElement(Class<T> elementClass, ClassLoader loader,
+    protected <T extends HtmlElement> T decorateHtmlElement(Class<T> elementClass, ClassLoader loader,
                                                           ElementLocator locator, String elementName) {
         // Create block and initialize it with WebElement proxy
         WebElement elementToWrap = HtmlElementFactory.createNamedProxyForWebElement(loader, locator, elementName);
@@ -116,21 +116,21 @@ public class HtmlElementDecorator extends DefaultFieldDecorator {
         return htmlElementInstance;
     }
 
-    private WebElement decorateWebElement(ClassLoader loader, ElementLocator locator, String elementName) {
+    protected WebElement decorateWebElement(ClassLoader loader, ElementLocator locator, String elementName) {
         return HtmlElementFactory.createNamedProxyForWebElement(loader, locator, elementName);
     }
 
-    private <T extends TypifiedElement> List<T> decorateTypifiedElementList(Class<T> elementClass, ClassLoader loader,
+    protected <T extends TypifiedElement> List<T> decorateTypifiedElementList(Class<T> elementClass, ClassLoader loader,
                                                                             ElementLocator locator, String listName) {
         return HtmlElementFactory.createNamedProxyForTypifiedElementList(elementClass, loader, locator, listName);
     }
 
-    private <T extends HtmlElement> List<T> decorateHtmlElementList(Class<T> elementClass, ClassLoader loader,
+    protected <T extends HtmlElement> List<T> decorateHtmlElementList(Class<T> elementClass, ClassLoader loader,
                                                                     ElementLocator locator, String listName) {
         return HtmlElementFactory.createNamedProxyForHtmlElementList(elementClass, loader, locator, listName);
     }
 
-    private List<WebElement> decorateWebElementList(ClassLoader loader, ElementLocator locator, String listName) {
+    protected List<WebElement> decorateWebElementList(ClassLoader loader, ElementLocator locator, String listName) {
         return HtmlElementFactory.createNamedProxyForWebElementList(loader, locator, listName);
     }
 }

@@ -19,11 +19,7 @@ public abstract class CustomElementLocatorFactory implements ElementLocatorFacto
      * @param field Filed to be decorated.
      * @return An ElementLocator object.
      */
-    public ElementLocator createLocator(Field field) {
-        return null;
-    }
+    public abstract ElementLocator createLocator(Field field);
 
-    public ElementLocator createLocator(Class clazz) {
-        return null;
-    }
+    public abstract ElementLocator createLocator(Class clazz);
 }
