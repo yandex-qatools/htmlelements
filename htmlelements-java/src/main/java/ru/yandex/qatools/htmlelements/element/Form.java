@@ -1,12 +1,11 @@
 package ru.yandex.qatools.htmlelements.element;
 
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Represents web page form tag. Provides handy way of filling form with data and submitting it.
@@ -17,10 +16,11 @@ import java.util.Map;
  *         Date: 26.03.13
  */
 public class Form extends TypifiedElement {
-    private static final String TEXT_INPUT_TYPE = "text";
-    private static final String PASSWORD_INPUT_TYPE = "password";
-    private static final String CHECKBOX_TYPE = "checkbox";
-    private static final String RADIO_TYPE = "radio";
+    private static final String CHECKBOX_FIELD = "checkbox";
+    private static final String RADIO_FIELD = "radio";
+    private static final String SELECT_FIELD = "select";
+    private static final String INPUT_FIELD = "input";
+    private static final String FILE_FIELD = "file";
 
     /**
      * Specifies {@link org.openqa.selenium.WebElement} representing form tag.
@@ -43,7 +43,7 @@ public class Form extends TypifiedElement {
         for (String key : data.keySet()) {
             WebElement elementToFill = findElementByKey(key);
             if (elementToFill != null) {
-                fillElement(elementToFill, data.get(key));
+                fillElement(elementToFill, Objects.toString(data.get(key), ""));
             }
         }
     }
@@ -63,47 +63,68 @@ public class Form extends TypifiedElement {
         return elements.get(0);
     }
 
-    protected void fillElement(WebElement element, Object value) {
-        if (value == null) {
-            return;
-        }
+    protected void fillElement(WebElement element, String value) {
+        String elementType = getElementType(element);
 
-        if (isInput(element)) {
-            String inputType = element.getAttribute("type");
-            if (inputType.equals(CHECKBOX_TYPE)) {
-                CheckBox checkBox = new CheckBox(element);
-                checkBox.set(Boolean.parseBoolean(value.toString()));
-            } else if (inputType.equals(RADIO_TYPE)) {
-                Radio radio = new Radio(element);
-                radio.selectByValue(value.toString());
-            } else {
-                element.sendKeys(getClearTextInputElementCharSequence(element) + value.toString());
+        if (CHECKBOX_FIELD.equals(elementType)) {
+            fillCheckBox(element, value);
+        } else if (RADIO_FIELD.equals(elementType)) {
+            fillRadio(element, value);
+        } else if (INPUT_FIELD.equals(elementType)) {
+            fillInput(element, value);
+        } else if (SELECT_FIELD.equals(elementType)) {
+            fillSelect(element, value);
+        } else if (FILE_FIELD.equals(elementType)) {
+            fillFile(element, value);
+        }
+    }
+
+    protected String getElementType(WebElement element) {
+        String tagName = element.getTagName();
+        if ("input".equals(tagName)) {
+            String type = element.getAttribute("type");
+            if ("checkbox".equals(type)) {
+                return CHECKBOX_FIELD;
             }
-        } else if (isSelect(element)) {
-            Select select = new Select(element);
-            select.selectByValue(value.toString());
-        } else if (isTextArea(element)) {
-            element.sendKeys(getClearTextInputElementCharSequence(element) + value.toString());
+            if ("radio".equals(type)) {
+                return RADIO_FIELD;
+            }
+            if ("file".equals(type)) {
+                return FILE_FIELD;
+            }
+            return INPUT_FIELD;
         }
+        if ("select".equals(tagName)) {
+            return SELECT_FIELD;
+        }
+        if ("textarea".equals(tagName)) {
+            return INPUT_FIELD;
+        }
+        return null;
     }
 
-    // Returns sequence of backspaces and deletes that will clear element
-    // element.clear() can't be used because clear() generates separate onchange event
-    // element must be <textarea> or <input> with type text, password, email etc
-    // See https://github.com/yandex-qatools/htmlelements/issues/65
-    private static String getClearTextInputElementCharSequence(WebElement element) {
-        return StringUtils.repeat(Keys.DELETE.toString() + Keys.BACK_SPACE, element.getText().length());
+    protected void fillCheckBox(WebElement element, String value) {
+        CheckBox checkBox = new CheckBox(element);
+        checkBox.set(Boolean.parseBoolean(value));
     }
 
-    private boolean isInput(WebElement element) {
-        return "input".equals(element.getTagName());
+    protected void fillRadio(WebElement element, String value) {
+        Radio radio = new Radio(element);
+        radio.selectByValue(value);
     }
 
-    private boolean isSelect(WebElement element) {
-        return "select".equals(element.getTagName());
+    protected void fillInput(WebElement element, String value) {
+        TextInput input = new TextInput(element);
+        input.sendKeys(input.getClearCharSequence() + value);
     }
 
-    private boolean isTextArea(WebElement element) {
-        return "textarea".equals(element.getTagName());
+    protected void fillSelect(WebElement element, String value) {
+        Select select = new Select(element);
+        select.selectByValue(value);
+    }
+
+    protected void fillFile(WebElement element, String value) {
+        FileInput fileInput = new FileInput(element);
+        fileInput.setFileToUpload(value);
     }
 }

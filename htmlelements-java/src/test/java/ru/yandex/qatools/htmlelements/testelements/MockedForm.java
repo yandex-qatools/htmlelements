@@ -59,7 +59,7 @@ public class MockedForm extends Form {
     private WebElement mockTextInput(String name, String text) {
         WebElement textInput = mockInputWithNameAndType(name, "text");
         when(getWrappedElement().findElements(By.name(name))).thenReturn(Arrays.asList(textInput));
-        when(textInput.getText()).thenReturn(text);
+        when(textInput.getAttribute("value")).thenReturn(text);
         return textInput;
     }
 

@@ -1,5 +1,7 @@
 package ru.yandex.qatools.htmlelements.element;
 
+import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -37,8 +39,8 @@ public class TextInput extends TypifiedElement {
     /**
      * @return Text entered into the text input.
      * @deprecated Use getText() instead.
-     *             <p/>
-     *             Retrieves the text entered into this text input.
+     * <p/>
+     * Retrieves the text entered into this text input.
      */
     @Deprecated
     public String getEnteredText() {
@@ -60,5 +62,14 @@ public class TextInput extends TypifiedElement {
             return "";
         }
         return enteredText;
+    }
+
+    /**
+     * Returns sequence of backspaces and deletes that will clear element.
+     * clear() can't be used because generates separate onchange event
+     * See https://github.com/yandex-qatools/htmlelements/issues/65
+     */
+    public String getClearCharSequence() {
+        return StringUtils.repeat(Keys.DELETE.toString() + Keys.BACK_SPACE, getText().length());
     }
 }

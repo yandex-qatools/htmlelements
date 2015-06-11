@@ -1,6 +1,5 @@
 package ru.yandex.qatools.htmlelements;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.Keys;
 import ru.yandex.qatools.htmlelements.testelements.MockedForm;
@@ -21,7 +20,6 @@ public class FormFillingTest {
 
     private final MockedForm form = new MockedForm();
 
-    @Before
     public void fillForm() {
         // Prepare data to fill form with
         Map<String, Object> data = new HashMap<String, Object>();
@@ -39,6 +37,7 @@ public class FormFillingTest {
 
     @Test
     public void formFieldsShouldBeFilledCorrectly() {
+        fillForm();
         verify(form.getTextInput()).sendKeys(INPUT_TEXT_TO_SEND);
         verify(form.getTextInputWithText()).sendKeys(INPUT_WITH_TEXT_KEYS_TO_SEND);
         verify(form.getCheckBox()).click();
@@ -46,5 +45,13 @@ public class FormFillingTest {
         verify(form.getSelectOption()).click();
         verify(form.getTextArea()).sendKeys(INPUT_TEXT_TO_SEND);
         verify(form.getTextAreaWithText()).sendKeys(INPUT_WITH_TEXT_KEYS_TO_SEND);
+    }
+
+    @Test
+    public void clearingFieldWhenNullIsPassed() {
+        Map<String, Object> data = new HashMap<String, Object>();
+        data.put(MockedForm.TEXT_INPUT_WITH_TEXT_NAME, null);
+        form.fill(data);
+        verify(form.getTextInputWithText()).sendKeys(Keys.DELETE.toString() + Keys.BACK_SPACE.toString());
     }
 }
