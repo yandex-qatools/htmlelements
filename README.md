@@ -23,6 +23,7 @@ In case you are non-java guy, don't panic, there are still few options:
 
 Release Notes
 -------------
+* [Version 1.14 Release Notes](https://github.com/yandex-qatools/htmlelements/releases/tag/htmlelements-1.14)
 * [Version 1.13 Release Notes](https://github.com/yandex-qatools/htmlelements/releases/tag/htmlelements-1.13)
 * [Version 1.12 Release Notes](https://github.com/yandex-qatools/htmlelements/releases/tag/htmlelements-1.12)
 * [Version 1.11 Release Notes](https://github.com/yandex-qatools/htmlelements/blob/master/releasenotes/1.11-releasenotes.ru.md)
@@ -37,7 +38,7 @@ Maven dependencies for Html Elements core:
 <dependency>
     <groupId>ru.yandex.qatools.htmlelements</groupId>
     <artifactId>htmlelements-java</artifactId>
-    <version>1.13</version>
+    <version>1.14</version>
 </dependency>
 ```
 
@@ -47,7 +48,7 @@ And for Thucydides integration:
 <dependency>
     <groupId>ru.yandex.qatools.htmlelements</groupId>
     <artifactId>htmlelements-thucydides</artifactId>
-    <version>1.13</version>
+    <version>1.14</version>
 </dependency>
 ```
 
@@ -57,7 +58,7 @@ Or you can include all modules at once if needed:
 <dependency>
     <groupId>ru.yandex.qatools.htmlelements</groupId>
     <artifactId>htmlelements-all</artifactId>
-    <version>1.13</version>
+    <version>1.14</version>
 </dependency>
 ```
 
