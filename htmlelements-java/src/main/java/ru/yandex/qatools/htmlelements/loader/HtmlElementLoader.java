@@ -6,13 +6,18 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
+import ru.yandex.qatools.htmlelements.element.TypifiedElement;
+import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
-import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementFactory;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementLocatorFactory;
+import ru.yandex.qatools.htmlelements.loader.decorator.proxyhandlers.WebElementNamedProxyHandler;
 import ru.yandex.qatools.htmlelements.pagefactory.CustomElementLocatorFactory;
 
-import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.getElementName;
-import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.isHtmlElement;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+
+import static ru.yandex.qatools.htmlelements.loader.decorator.ProxyFactory.createWebElementProxy;
+import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.*;
 
 /**
  * Contains methods for blocks of elements initialization and page objects initialization.
@@ -33,14 +38,13 @@ public class HtmlElementLoader {
      */
     @SuppressWarnings("unchecked")
     public static <T> T create(Class<T> clazz, WebDriver driver) {
-        T instance;
         if (isHtmlElement(clazz)) {
-            instance = (T) createHtmlElement((Class<HtmlElement>) clazz, driver);
-        } else {
-            instance = createPageObject(clazz, driver);
+            return (T) createHtmlElement((Class<HtmlElement>) clazz, driver);
         }
-        populate(instance, driver);
-        return instance;
+        if (isTypifiedElement(clazz)) {
+            return (T) createTypifiedElement((Class<TypifiedElement>) clazz, driver);
+        }
+        return createPageObject(clazz, driver);
     }
 
     /**
@@ -65,7 +69,7 @@ public class HtmlElementLoader {
      * Creates an instance of the given class representing a block of elements and initializes its fields
      * with lazy proxies.
      * <p/>
-     * Processes {@link ru.yandex.qatools.htmlelements.annotations.Block} annotation of the given class
+     * Processes annotation of the given class
      * to set the way of locating the block itself and {@link org.openqa.selenium.support.FindBy},
      * {@link org.openqa.selenium.support.FindBys} and {@link org.openqa.selenium.support.FindAll}
      * annotations of its fields for setting the way of locating elements of the block.
@@ -86,7 +90,49 @@ public class HtmlElementLoader {
      * @return Initialized instance of the specified class.
      */
     public static <T extends HtmlElement> T createHtmlElement(Class<T> clazz, SearchContext searchContext) {
-        return HtmlElementFactory.createHtmlElementInstance(clazz);
+        ElementLocator locator = new HtmlElementLocatorFactory(searchContext).createLocator(clazz);
+        String elementName = getElementName(clazz);
+
+        InvocationHandler handler = new WebElementNamedProxyHandler(locator, elementName);
+        WebElement elementToWrap = createWebElementProxy(clazz.getClassLoader(), handler);
+        return createHtmlElement(clazz, elementToWrap, elementName);
+    }
+
+    public static <T extends HtmlElement> T createHtmlElement(Class<T> elementClass, WebElement elementToWrap,
+                                                              String name) {
+        try {
+            T instance = newInstance(elementClass);
+            instance.setWrappedElement(elementToWrap);
+            instance.setName(name);
+            // Recursively initialize elements of the block
+            populatePageObject(instance, elementToWrap);
+            return instance;
+        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException
+                | InvocationTargetException e) {
+            throw new HtmlElementsException(e);
+        }
+    }
+
+    public static <T extends TypifiedElement> T createTypifiedElement(Class<T> clazz, SearchContext searchContext) {
+        ElementLocator locator = new HtmlElementLocatorFactory(searchContext).createLocator(clazz);
+        String elementName = getElementName(clazz);
+
+        InvocationHandler handler = new WebElementNamedProxyHandler(locator, elementName);
+        WebElement elementToWrap = createWebElementProxy(clazz.getClassLoader(), handler);
+
+        return createTypifiedElement(clazz, elementToWrap, elementName);
+    }
+
+    public static <T extends TypifiedElement> T createTypifiedElement(Class<T> elementClass, WebElement elementToWrap,
+                                                                      String name) {
+        try {
+            T instance = newInstance(elementClass, elementToWrap);
+            instance.setName(name);
+            return instance;
+        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException
+                | InvocationTargetException e) {
+            throw new HtmlElementsException(e);
+        }
     }
 
     /**
@@ -112,13 +158,20 @@ public class HtmlElementLoader {
      * @return Initialized instance of the specified class.
      */
     public static <T> T createPageObject(Class<T> clazz, WebDriver driver) {
-        return HtmlElementFactory.createPageObjectInstance(clazz, driver);
+        try {
+            T instance = newInstance(clazz, driver);
+            populatePageObject(instance, driver);
+            return instance;
+        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException
+                | InvocationTargetException e) {
+            throw new HtmlElementsException(e);
+        }
     }
 
     /**
      * Initializes fields of the given block of elements with lazy proxies.
      * <p/>
-     * Processes {@link ru.yandex.qatools.htmlelements.annotations.Block} annotation of the class
+     * Processes annotation of the class
      * of the given block to set the way of locating the block itself and {@link org.openqa.selenium.support.FindBy},
      * {@link org.openqa.selenium.support.FindBys} and {@link org.openqa.selenium.support.FindAll} annotations of its
      * fields for setting the way of locating elements of the block.
@@ -149,18 +202,18 @@ public class HtmlElementLoader {
      */
     public static void populateHtmlElement(HtmlElement htmlElement, CustomElementLocatorFactory locatorFactory) {
         @SuppressWarnings("unchecked")
-        Class<HtmlElement> htmlElementClass = (Class<HtmlElement>) htmlElement.getClass();
+        Class<HtmlElement> elementClass = (Class<HtmlElement>) htmlElement.getClass();
         // Create locator that will handle Block annotation
-        ElementLocator locator = locatorFactory.createLocator(htmlElementClass);
-        ClassLoader htmlElementClassLoader = htmlElement.getClass().getClassLoader();
+        ElementLocator locator = locatorFactory.createLocator(elementClass);
+        ClassLoader elementClassLoader = htmlElement.getClass().getClassLoader();
         // Initialize block with WebElement proxy and set its name
-        String elementName = getElementName(htmlElementClass);
-        WebElement elementToWrap = HtmlElementFactory.createNamedProxyForWebElement(htmlElementClassLoader,
-                locator, elementName);
+        String elementName = getElementName(elementClass);
+        InvocationHandler handler = new WebElementNamedProxyHandler(locator, elementName);
+        WebElement elementToWrap = createWebElementProxy(elementClassLoader, handler);
         htmlElement.setWrappedElement(elementToWrap);
         htmlElement.setName(elementName);
         // Initialize elements of the block
-        PageFactory.initElements(new HtmlElementDecorator(elementToWrap), htmlElement);
+        populatePageObject(htmlElement, elementToWrap);
     }
 
     /**
@@ -181,11 +234,11 @@ public class HtmlElementLoader {
      * <li>List of typified elements</li>
      * </ul>
      *
-     * @param page   Page object to be initialized.
-     * @param driver The {@code WebDriver} instance that will be used to look up the elements.
+     * @param page          Page object to be initialized.
+     * @param searchContext The {@code WebDriver} instance that will be used to look up the elements.
      */
-    public static void populatePageObject(Object page, WebDriver driver) {
-        populatePageObject(page, new HtmlElementLocatorFactory(driver));
+    public static void populatePageObject(Object page, SearchContext searchContext) {
+        populatePageObject(page, new HtmlElementLocatorFactory(searchContext));
     }
 
     /**

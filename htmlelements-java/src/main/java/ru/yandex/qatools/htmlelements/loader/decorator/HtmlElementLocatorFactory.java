@@ -1,9 +1,9 @@
 package ru.yandex.qatools.htmlelements.loader.decorator;
 
 import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.support.pagefactory.AjaxElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import ru.yandex.qatools.htmlelements.annotations.Timeout;
-import ru.yandex.qatools.htmlelements.pagefactory.AjaxElementLocator;
 import ru.yandex.qatools.htmlelements.pagefactory.CustomElementLocatorFactory;
 
 import java.lang.reflect.Field;
@@ -17,7 +17,7 @@ import java.lang.reflect.ParameterizedType;
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 15.08.12
  */
-public class HtmlElementLocatorFactory extends CustomElementLocatorFactory {
+public class HtmlElementLocatorFactory implements CustomElementLocatorFactory {
     private final SearchContext searchContext;
 
     public HtmlElementLocatorFactory(SearchContext searchContext) {
@@ -31,7 +31,6 @@ public class HtmlElementLocatorFactory extends CustomElementLocatorFactory {
      *
      * @param field Field for which locator will be created.
      */
-    @Override
     public ElementLocator createLocator(Field field) {
         return new AjaxElementLocator(searchContext, getTimeOut(field), new HtmlElementFieldAnnotationsHandler(field));
     }
@@ -44,6 +43,7 @@ public class HtmlElementLocatorFactory extends CustomElementLocatorFactory {
      * @param clazz Class for which locator will be created.
      */
     public ElementLocator createLocator(Class clazz) {
+        //noinspection unchecked
         return new AjaxElementLocator(searchContext, getTimeOut(clazz), new HtmlElementClassAnnotationsHandler(clazz));
     }
 
@@ -58,6 +58,7 @@ public class HtmlElementLocatorFactory extends CustomElementLocatorFactory {
     }
 
     public int getTimeOut(Class clazz) {
+        //noinspection EmptyCatchBlock
         try {
             Method method = Timeout.class.getMethod("value");
             do {

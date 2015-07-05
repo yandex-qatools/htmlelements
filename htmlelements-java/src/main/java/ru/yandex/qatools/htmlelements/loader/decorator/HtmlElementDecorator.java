@@ -1,17 +1,24 @@
 package ru.yandex.qatools.htmlelements.loader.decorator;
 
-import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.DefaultFieldDecorator;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
+import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
+import org.openqa.selenium.support.pagefactory.FieldDecorator;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.element.TypifiedElement;
+import ru.yandex.qatools.htmlelements.loader.decorator.proxyhandlers.HtmlElementListNamedProxyHandler;
+import ru.yandex.qatools.htmlelements.loader.decorator.proxyhandlers.TypifiedElementListNamedProxyHandler;
+import ru.yandex.qatools.htmlelements.loader.decorator.proxyhandlers.WebElementListNamedProxyHandler;
+import ru.yandex.qatools.htmlelements.loader.decorator.proxyhandlers.WebElementNamedProxyHandler;
 import ru.yandex.qatools.htmlelements.pagefactory.CustomElementLocatorFactory;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationHandler;
 import java.util.List;
 
+import static ru.yandex.qatools.htmlelements.loader.HtmlElementLoader.createHtmlElement;
+import static ru.yandex.qatools.htmlelements.loader.HtmlElementLoader.createTypifiedElement;
+import static ru.yandex.qatools.htmlelements.loader.decorator.ProxyFactory.*;
 import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.*;
 
 /**
@@ -30,107 +37,88 @@ import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.*;
  * <p/>
  * {@code WebElements}, lists of {@code WebElements}, typified elements and lists of typified elements
  * have to be marked with {@link org.openqa.selenium.support.FindBy}, {@link org.openqa.selenium.support.FindBys}
- * or {@link org.openqa.selenium.support.FindAll}  annotation. For blocks and lists of blocks it is not
- * obligatory: corresponding {@link ru.yandex.qatools.htmlelements.annotations.Block} annotation will be
- * processed if there are no {@link org.openqa.selenium.support.FindBy}, {@link org.openqa.selenium.support.FindBys}
  * or {@link org.openqa.selenium.support.FindAll} annotation.
  *
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 13.08.12
  */
-public class HtmlElementDecorator extends DefaultFieldDecorator {
-    public HtmlElementDecorator(CustomElementLocatorFactory locatorFactory) {
-        super(locatorFactory);
+public class HtmlElementDecorator implements FieldDecorator {
+    protected ElementLocatorFactory factory;
+
+    public HtmlElementDecorator(CustomElementLocatorFactory factory) {
+        this.factory = factory;
     }
 
-    public HtmlElementDecorator(SearchContext searchContext) {
-        this(new HtmlElementLocatorFactory(searchContext));
-    }
-
-    @Override
     public Object decorate(ClassLoader loader, Field field) {
-        if (!isDecoratableField(field)) {
-            return null;
-        }
-
-        ElementLocator locator = factory.createLocator(field);
-        if (locator == null) {
-            return null;
-        }
-
-        String elementName = getElementName(field);
-
         if (isTypifiedElement(field)) {
-            @SuppressWarnings("unchecked")
-            Class<TypifiedElement> typifiedElementClass = (Class<TypifiedElement>) field.getType();
-            return decorateTypifiedElement(typifiedElementClass, loader, locator, elementName);
-        } else if (isHtmlElement(field)) {
-            @SuppressWarnings("unchecked")
-            Class<HtmlElement> htmlElementClass = (Class<HtmlElement>) field.getType();
-            return decorateHtmlElement(htmlElementClass, loader, locator, elementName);
-        } else if (isWebElement(field)) {
-            return decorateWebElement(loader, locator, elementName);
-        } else if (isTypifiedElementList(field)) {
-            @SuppressWarnings("unchecked")
-            Class<TypifiedElement> typifiedElementClass = (Class<TypifiedElement>) getGenericParameterClass(field);
-            return decorateTypifiedElementList(typifiedElementClass, loader, locator, elementName);
-        } else if (isHtmlElementList(field)) {
-            @SuppressWarnings("unchecked")
-            Class<HtmlElement> htmlElementClass = (Class<HtmlElement>) getGenericParameterClass(field);
-            return decorateHtmlElementList(htmlElementClass, loader, locator, elementName);
-        } else if (isWebElementList(field)) {
-            return decorateWebElementList(loader, locator, elementName);
+            return decorateTypifiedElement(loader, field);
+        }
+        if (isHtmlElement(field)) {
+            return decorateHtmlElement(loader, field);
+        }
+        if (isWebElement(field) && !field.getName().equals("wrappedElement")) {
+            return decorateWebElement(loader, field);
+        }
+        if (isTypifiedElementList(field)) {
+            return decorateTypifiedElementList(loader, field);
+        }
+        if (isHtmlElementList(field)) {
+            return decorateHtmlElementList(loader, field);
+        }
+        if (isWebElementList(field)) {
+            return decorateWebElementList(loader, field);
         }
 
         return null;
     }
 
-    protected boolean isDecoratableField(Field field) {
-        // TODO Protecting wrapped element from initialization basing on its name is unsafe. Think of a better way.
-        if (isWebElement(field) && !field.getName().equals("wrappedElement")) {
-            return true;
-        }
+    protected <T extends TypifiedElement> T decorateTypifiedElement(ClassLoader loader, Field field) {
+        WebElement elementToWrap = decorateWebElement(loader, field);
 
-        return (isWebElementList(field) || isHtmlElement(field) || isHtmlElementList(field) ||
-                isTypifiedElement(field) || isTypifiedElementList(field));
+        //noinspection unchecked
+        return createTypifiedElement((Class<T>) field.getType(), elementToWrap, getElementName(field));
     }
 
-    protected <T extends TypifiedElement> T decorateTypifiedElement(Class<T> elementClass, ClassLoader loader,
-                                                                  ElementLocator locator, String elementName) {
-        // Create typified element and initialize it with WebElement proxy
-        WebElement elementToWrap = HtmlElementFactory.createNamedProxyForWebElement(loader, locator, elementName);
-        T typifiedElementInstance = HtmlElementFactory.createTypifiedElementInstance(elementClass, elementToWrap);
-        typifiedElementInstance.setName(elementName);
-        return typifiedElementInstance;
+    protected <T extends HtmlElement> T decorateHtmlElement(ClassLoader loader, Field field) {
+        WebElement elementToWrap = decorateWebElement(loader, field);
+
+        //noinspection unchecked
+        return createHtmlElement((Class<T>) field.getType(), elementToWrap, getElementName(field));
     }
 
-    protected <T extends HtmlElement> T decorateHtmlElement(Class<T> elementClass, ClassLoader loader,
-                                                          ElementLocator locator, String elementName) {
-        // Create block and initialize it with WebElement proxy
-        WebElement elementToWrap = HtmlElementFactory.createNamedProxyForWebElement(loader, locator, elementName);
-        T htmlElementInstance = HtmlElementFactory.createHtmlElementInstance(elementClass);
-        htmlElementInstance.setWrappedElement(elementToWrap);
-        htmlElementInstance.setName(elementName);
-        // Recursively initialize elements of the block
-        PageFactory.initElements(new HtmlElementDecorator(elementToWrap), htmlElementInstance);
-        return htmlElementInstance;
+    protected WebElement decorateWebElement(ClassLoader loader, Field field) {
+        ElementLocator locator = factory.createLocator(field);
+        InvocationHandler handler = new WebElementNamedProxyHandler(locator, getElementName(field));
+
+        return createWebElementProxy(loader, handler);
     }
 
-    protected WebElement decorateWebElement(ClassLoader loader, ElementLocator locator, String elementName) {
-        return HtmlElementFactory.createNamedProxyForWebElement(loader, locator, elementName);
+    protected <T extends TypifiedElement> List<T> decorateTypifiedElementList(ClassLoader loader, Field field) {
+        @SuppressWarnings("unchecked")
+        Class<T> elementClass = (Class<T>) getGenericParameterClass(field);
+        ElementLocator locator = factory.createLocator(field);
+        String name = getElementName(field);
+
+        InvocationHandler handler = new TypifiedElementListNamedProxyHandler<>(elementClass, locator, name);
+
+        return createTypifiedElementListProxy(loader, handler);
     }
 
-    protected <T extends TypifiedElement> List<T> decorateTypifiedElementList(Class<T> elementClass, ClassLoader loader,
-                                                                            ElementLocator locator, String listName) {
-        return HtmlElementFactory.createNamedProxyForTypifiedElementList(elementClass, loader, locator, listName);
+    protected <T extends HtmlElement> List<T> decorateHtmlElementList(ClassLoader loader, Field field) {
+        @SuppressWarnings("unchecked")
+        Class<T> elementClass = (Class<T>) getGenericParameterClass(field);
+        ElementLocator locator = factory.createLocator(field);
+        String name = getElementName(field);
+
+        InvocationHandler handler = new HtmlElementListNamedProxyHandler<>(elementClass, locator, name);
+
+        return createHtmlElementListProxy(loader, handler);
     }
 
-    protected <T extends HtmlElement> List<T> decorateHtmlElementList(Class<T> elementClass, ClassLoader loader,
-                                                                    ElementLocator locator, String listName) {
-        return HtmlElementFactory.createNamedProxyForHtmlElementList(elementClass, loader, locator, listName);
-    }
+    protected List<WebElement> decorateWebElementList(ClassLoader loader, Field field) {
+        ElementLocator locator = factory.createLocator(field);
+        InvocationHandler handler = new WebElementListNamedProxyHandler(locator, getElementName(field));
 
-    protected List<WebElement> decorateWebElementList(ClassLoader loader, ElementLocator locator, String listName) {
-        return HtmlElementFactory.createNamedProxyForWebElementList(loader, locator, listName);
+        return createWebElementListProxy(loader, handler);
     }
 }

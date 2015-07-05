@@ -12,8 +12,8 @@ import java.util.List;
  * The base class to be used for making blocks of elements.
  * <p/>
  * To make a class that will represent a block of elements (e.g. web form) create a descendant of this class,
- * annotate it with {@link ru.yandex.qatools.htmlelements.annotations.Block} and
- * {@link ru.yandex.qatools.htmlelements.annotations.Name} annotations if necessary and fill it with elements.
+ * annotate it with {@link ru.yandex.qatools.htmlelements.annotations.Name} annotation if necessary
+ * and fill it with elements.
  * <p/>
  * For example:
  * <p/>
@@ -58,11 +58,6 @@ public class HtmlElement implements WebElement, WrapsElement, Named {
         return wrappedElement;
     }
 
-    @Override
-    public String getName() {
-        return name;
-    }
-
     /**
      * Sets the wrapped {@code WebElement}. This method is used by initialization mechanism and is not intended
      * to be used directly.
@@ -71,6 +66,11 @@ public class HtmlElement implements WebElement, WrapsElement, Named {
      */
     public void setWrappedElement(WebElement wrappedElement) {
         this.wrappedElement = wrappedElement;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
     /**
@@ -192,8 +192,7 @@ public class HtmlElement implements WebElement, WrapsElement, Named {
      *
      * @param by The locating mechanism.
      * @return The first matching element on the current context.
-     * @throws org.openqa.selenium.NoSuchElementException
-     *          If no matching elements are found.
+     * @throws org.openqa.selenium.NoSuchElementException If no matching elements are found.
      */
     @Override
     public WebElement findElement(By by) {

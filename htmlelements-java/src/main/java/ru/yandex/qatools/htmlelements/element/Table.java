@@ -58,7 +58,7 @@ public class Table extends TypifiedElement {
      * @return List where each item is a table row.
      */
     public List<List<WebElement>> getRows() {
-        List<List<WebElement>> rows = new ArrayList<List<WebElement>>();
+        List<List<WebElement>> rows = new ArrayList<>();
         List<WebElement> rowElements = getWrappedElement().findElements(By.xpath(".//tr"));
         for (WebElement rowElement : rowElements) {
             rows.add(rowElement.findElements(By.xpath(".//td")));
@@ -81,7 +81,7 @@ public class Table extends TypifiedElement {
      * @return List where each item is a table column.
      */
     public List<List<WebElement>> getColumns() {
-        List<List<WebElement>> columns = new ArrayList<List<WebElement>>();
+        List<List<WebElement>> columns = new ArrayList<>();
         List<List<WebElement>> rows = getRows();
 
         if (rows.isEmpty()) {
@@ -90,7 +90,7 @@ public class Table extends TypifiedElement {
 
         int columnsNumber = rows.get(0).size();
         for (int i = 0; i < columnsNumber; i++) {
-            List<WebElement> column = new ArrayList<WebElement>();
+            List<WebElement> column = new ArrayList<>();
             for (List<WebElement> row : rows) {
                 column.add(row.get(i));
             }
@@ -133,7 +133,7 @@ public class Table extends TypifiedElement {
      * @param headings List containing strings to be used as table headings.
      */
     public List<Map<String, WebElement>> getRowsMappedToHeadings(List<String> headings) {
-        List<Map<String, WebElement>> rowsMappedToHeadings = new ArrayList<Map<String, WebElement>>();
+        List<Map<String, WebElement>> rowsMappedToHeadings = new ArrayList<>();
         List<List<WebElement>> rows = getRows();
 
         if (rows.isEmpty()) {
@@ -145,7 +145,7 @@ public class Table extends TypifiedElement {
                 throw new HtmlElementsException("Headings count is not equal to number of cells in row");
             }
 
-            Map<String, WebElement> rowToHeadingsMap = new HashMap<String, WebElement>();
+            Map<String, WebElement> rowToHeadingsMap = new HashMap<>();
             int cellNumber = 0;
             for (String heading : headings) {
                 rowToHeadingsMap.put(heading, row.get(cellNumber));
@@ -171,7 +171,6 @@ public class Table extends TypifiedElement {
         return convert(getRowsMappedToHeadings(headings), toMapsConvertingEachValue(toText()));
     }
 
-
     /* Inner utility converters */
 
     /**
@@ -179,15 +178,15 @@ public class Table extends TypifiedElement {
      */
     static final class WebElementToTextConverter implements Converter<WebElement, String> {
 
+        private WebElementToTextConverter() {
+        }
+
         public static Converter<WebElement, String> toText() {
             return new WebElementToTextConverter();
         }
 
         public static Converter<WebElement, String> toTextValues() {
             return new WebElementToTextConverter();
-        }
-
-        private WebElementToTextConverter() {
         }
 
         @Override
@@ -202,12 +201,12 @@ public class Table extends TypifiedElement {
     static final class ListConverter<F, T> implements Converter<List<F>, List<T>> {
         private final Converter<F, T> itemsConverter;
 
-        public static <F, T> Converter<List<F>, List<T>> toListsConvertingEachItem(Converter<F, T> itemsConverter) {
-            return new ListConverter<F, T>(itemsConverter);
-        }
-
         private ListConverter(Converter<F, T> itemsConverter) {
             this.itemsConverter = itemsConverter;
+        }
+
+        public static <F, T> Converter<List<F>, List<T>> toListsConvertingEachItem(Converter<F, T> itemsConverter) {
+            return new ListConverter<>(itemsConverter);
         }
 
         @Override
@@ -223,12 +222,12 @@ public class Table extends TypifiedElement {
     static final class MapConverter<K, F, T> implements Converter<Map<K, F>, Map<K, T>> {
         private final Converter<F, T> valueConverter;
 
-        public static <F, T> Converter<Map<String, F>, Map<String, T>> toMapsConvertingEachValue(Converter<F, T> valueConverter) {
-            return new MapConverter<String, F, T>(valueConverter);
-        }
-
         private MapConverter(Converter<F, T> valueConverter) {
             this.valueConverter = valueConverter;
+        }
+
+        public static <F, T> Converter<Map<String, F>, Map<String, T>> toMapsConvertingEachValue(Converter<F, T> valueConverter) {
+            return new MapConverter<>(valueConverter);
         }
 
         @Override
