@@ -35,8 +35,3 @@ public class Link extends TypifiedElement {
         return getWrappedElement().getText();
     }
 }
-
-
-
-
-

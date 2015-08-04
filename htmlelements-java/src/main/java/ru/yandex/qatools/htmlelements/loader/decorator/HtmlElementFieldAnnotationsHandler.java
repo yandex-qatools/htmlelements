@@ -4,21 +4,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
+import org.openqa.selenium.support.pagefactory.Annotations;
 import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
-import ru.yandex.qatools.htmlelements.pagefactory.DefaultFieldAnnotationsHandler;
 
 import java.lang.reflect.Field;
 
 import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.*;
 
 /**
- * Extends default field annotations handling mechanism with processing
- * {@link Block} annotation for blocks and lists of blocks.
+ * Extends default field annotations handling mechanism with processing annotation for blocks and lists of blocks.
  *
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 15.08.12
  */
-public class HtmlElementFieldAnnotationsHandler extends DefaultFieldAnnotationsHandler {
+public class HtmlElementFieldAnnotationsHandler extends Annotations {
     public HtmlElementFieldAnnotationsHandler(Field field) {
         super(field);
     }
@@ -30,9 +29,8 @@ public class HtmlElementFieldAnnotationsHandler extends DefaultFieldAnnotationsH
         }
         if (isHtmlElementList(getField()) || isTypifiedElementList(getField())) {
             return buildByFromHtmlElementListAnnotations();
-        } else {
-            return buildByFromDefaultAnnotations();
         }
+        return super.buildBy();
     }
 
     private By buildByFromFindAnnotations() {
@@ -43,7 +41,7 @@ public class HtmlElementFieldAnnotationsHandler extends DefaultFieldAnnotationsH
 
         if (getField().isAnnotationPresent(FindAll.class)) {
             FindAll findBys = getField().getAnnotation(FindAll.class);
-            return buildBysFromFindAll(findBys);
+            return buildBysFromFindByOneOf(findBys);
         }
 
         if (getField().isAnnotationPresent(FindBy.class)) {
@@ -89,9 +87,5 @@ public class HtmlElementFieldAnnotationsHandler extends DefaultFieldAnnotationsH
         }
 
         throw new HtmlElementsException(String.format("Cannot determine how to locate element %s", getField()));
-    }
-
-    private By buildByFromDefaultAnnotations() {
-        return super.buildBy();
     }
 }

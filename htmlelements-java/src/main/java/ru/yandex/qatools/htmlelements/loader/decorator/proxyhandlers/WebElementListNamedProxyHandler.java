@@ -1,23 +1,19 @@
 package ru.yandex.qatools.htmlelements.loader.decorator.proxyhandlers;
 
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
+import org.openqa.selenium.support.pagefactory.internal.LocatingElementListHandler;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.List;
 
 /**
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 21.08.12
  */
-public class WebElementListNamedProxyHandler implements InvocationHandler {
-    private final ElementLocator locator;
+public class WebElementListNamedProxyHandler extends LocatingElementListHandler {
     private final String name;
 
     public WebElementListNamedProxyHandler(ElementLocator locator, String name) {
-        this.locator = locator;
+        super(locator);
         this.name = name;
     }
 
@@ -26,14 +22,6 @@ public class WebElementListNamedProxyHandler implements InvocationHandler {
         if ("toString".equals(method.getName())) {
             return name;
         }
-
-        List<WebElement> elements = locator.findElements();
-
-        try {
-            return method.invoke(elements, objects);
-        } catch (InvocationTargetException e) {
-            // Unwrap the underlying exception
-            throw e.getCause();
-        }
+        return super.invoke(o, method, objects);
     }
 }

@@ -7,7 +7,7 @@ import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementFieldAnnotatio
 
 import java.lang.reflect.Field;
 
-public class MyElementLocatorFactory extends CustomElementLocatorFactory {
+public class MyElementLocatorFactory implements CustomElementLocatorFactory {
     private final SearchContext searchContext;
 
     public MyElementLocatorFactory(SearchContext searchContext) {

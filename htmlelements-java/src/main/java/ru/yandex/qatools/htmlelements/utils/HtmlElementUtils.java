@@ -34,9 +34,8 @@ public final class HtmlElementUtils {
             Class outerClass = clazz.getDeclaringClass();
             Object outerObject = outerClass.newInstance();
             return invokeConstructor(clazz, Lists.asList(outerObject, args).toArray());
-        } else {
-            return invokeConstructor(clazz, args);
         }
+        return invokeConstructor(clazz, args);
     }
 
     public static boolean isHtmlElement(Field field) {
@@ -68,7 +67,7 @@ public final class HtmlElementUtils {
     }
 
     public static boolean isHtmlElementList(Field field) {
-        if (!isParameterizedList(field)) {
+        if (!isParametrizedList(field)) {
             return false;
         }
         Class listParameterClass = getGenericParameterClass(field);
@@ -76,7 +75,7 @@ public final class HtmlElementUtils {
     }
 
     public static boolean isTypifiedElementList(Field field) {
-        if (!isParameterizedList(field)) {
+        if (!isParametrizedList(field)) {
             return false;
         }
         Class listParameterClass = getGenericParameterClass(field);
@@ -84,7 +83,7 @@ public final class HtmlElementUtils {
     }
 
     public static boolean isWebElementList(Field field) {
-        if (!isParameterizedList(field)) {
+        if (!isParametrizedList(field)) {
             return false;
         }
         Class listParameterClass = getGenericParameterClass(field);
@@ -92,14 +91,11 @@ public final class HtmlElementUtils {
     }
 
     public static Class getGenericParameterClass(Field field) {
-        if (!hasGenericParameter(field)) {
-            return null;
-        }
         Type genericType = field.getGenericType();
         return (Class) ((ParameterizedType) genericType).getActualTypeArguments()[0];
     }
 
-    private static boolean isParameterizedList(Field field) {
+    private static boolean isParametrizedList(Field field) {
         return isList(field) && hasGenericParameter(field);
     }
 
@@ -117,17 +113,15 @@ public final class HtmlElementUtils {
         }
         if (field.getType().isAnnotationPresent(Name.class)) {
             return field.getType().getAnnotation(Name.class).value();
-        } else {
-            return splitCamelCase(field.getName());
         }
+        return splitCamelCase(field.getName());
     }
 
     public static <T> String getElementName(Class<T> clazz) {
         if (clazz.isAnnotationPresent(Name.class)) {
             return clazz.getAnnotation(Name.class).value();
-        } else {
-            return splitCamelCase(clazz.getSimpleName());
         }
+        return splitCamelCase(clazz.getSimpleName());
     }
 
     private static String splitCamelCase(String camel) {
@@ -144,7 +138,6 @@ public final class HtmlElementUtils {
     public static boolean isRemoteWebElement(WebElement element) {
         return element.getClass().equals(RemoteWebElement.class);
     }
-
 
     public static boolean isOnRemoteWebDriver(WebElement element) {
         if (!isRemoteWebElement(element)) {
@@ -163,9 +156,7 @@ public final class HtmlElementUtils {
             elementParentFiled.setAccessible(true);
             WebDriver elementParent = (WebDriver) elementParentFiled.get(remoteWebElement);
             return elementParent.getClass().equals(RemoteWebDriver.class);
-        } catch (NoSuchFieldException e) {
-            throw new HtmlElementsException("Unable to find out if WebElement is on remote driver", e);
-        } catch (IllegalAccessException e) {
+        } catch (NoSuchFieldException | IllegalAccessException e) {
             throw new HtmlElementsException("Unable to find out if WebElement is on remote driver", e);
         }
     }

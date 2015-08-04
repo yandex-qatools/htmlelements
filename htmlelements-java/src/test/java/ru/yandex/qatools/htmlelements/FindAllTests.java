@@ -5,7 +5,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
-import ru.yandex.qatools.htmlelements.testpages.AllElementTypesPage;
 import ru.yandex.qatools.htmlelements.testpages.FindAllPage;
 
 import java.util.Arrays;

@@ -5,6 +5,7 @@ import net.thucydides.core.pages.PageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
+import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementLocatorFactory;
 
 /**
  * @author Artem Eroshenko eroshenkoam
@@ -16,7 +17,7 @@ public class BlockPageObject extends PageObject {
         super(driver, new Predicate<PageObject>() {
             @Override
             public boolean apply(PageObject pageObject) {
-                PageFactory.initElements(new HtmlElementDecorator(driver), pageObject);
+                PageFactory.initElements(new HtmlElementDecorator(new HtmlElementLocatorFactory(driver)), pageObject);
                 return true;
             }
         });
