@@ -24,7 +24,6 @@ public class FormFillingTest {
         // Prepare data to fill form with
         Map<String, Object> data = new HashMap<String, Object>();
         data.put(MockedForm.TEXT_INPUT_NAME, INPUT_TEXT_TO_SEND);
-        data.put(MockedForm.TEXT_INPUT_WITH_TEXT_NAME, INPUT_TEXT_TO_SEND);
         data.put(MockedForm.CHECKBOX_NAME, CHECKBOX_VALUE_TO_SET);
         data.put(MockedForm.RADIO_NAME, MockedForm.RADIO_BUTTON_VALUE);
         data.put(MockedForm.SELECT_NAME, MockedForm.SELECT_OPTION_VALUE);
@@ -39,7 +38,6 @@ public class FormFillingTest {
     public void formFieldsShouldBeFilledCorrectly() {
         fillForm();
         verify(form.getTextInput()).sendKeys(INPUT_TEXT_TO_SEND);
-        verify(form.getTextInputWithText()).sendKeys(INPUT_WITH_TEXT_KEYS_TO_SEND);
         verify(form.getCheckBox()).click();
         verify(form.getRadioButton()).click();
         verify(form.getSelectOption()).click();
