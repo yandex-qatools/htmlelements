@@ -2,6 +2,7 @@ package ru.yandex.qatools.htmlelements.element;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
@@ -81,6 +82,21 @@ public class HtmlElement implements WebElement, WrapsElement, Named {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * Determines whether or not this element exists on page.
+     *
+     * @return True if the element exists on page, false otherwise.
+     */
+    @SuppressWarnings("squid:S1166")  // Sonar "Exception handlers should preserve the original exception" rule
+    public boolean exists() {
+        try {
+            getWrappedElement().isDisplayed();
+        } catch (NoSuchElementException ignored) {
+            return false;
+        }
+        return true;
     }
 
     /**
