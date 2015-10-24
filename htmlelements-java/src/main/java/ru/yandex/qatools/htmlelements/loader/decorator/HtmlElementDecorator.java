@@ -50,26 +50,29 @@ public class HtmlElementDecorator implements FieldDecorator {
     }
 
     public Object decorate(ClassLoader loader, Field field) {
-        if (isTypifiedElement(field)) {
-            return decorateTypifiedElement(loader, field);
+        try {
+            if (isTypifiedElement(field)) {
+                return decorateTypifiedElement(loader, field);
+            }
+            if (isHtmlElement(field)) {
+                return decorateHtmlElement(loader, field);
+            }
+            if (isWebElement(field) && !field.getName().equals("wrappedElement")) {
+                return decorateWebElement(loader, field);
+            }
+            if (isTypifiedElementList(field)) {
+                return decorateTypifiedElementList(loader, field);
+            }
+            if (isHtmlElementList(field)) {
+                return decorateHtmlElementList(loader, field);
+            }
+            if (isWebElementList(field)) {
+                return decorateWebElementList(loader, field);
+            }
+            return null;
+        } catch (ClassCastException ignore) {
+            return null; // See bug #94 and NonElementFieldsTest
         }
-        if (isHtmlElement(field)) {
-            return decorateHtmlElement(loader, field);
-        }
-        if (isWebElement(field) && !field.getName().equals("wrappedElement")) {
-            return decorateWebElement(loader, field);
-        }
-        if (isTypifiedElementList(field)) {
-            return decorateTypifiedElementList(loader, field);
-        }
-        if (isHtmlElementList(field)) {
-            return decorateHtmlElementList(loader, field);
-        }
-        if (isWebElementList(field)) {
-            return decorateWebElementList(loader, field);
-        }
-
-        return null;
     }
 
     protected <T extends TypifiedElement> T decorateTypifiedElement(ClassLoader loader, Field field) {
