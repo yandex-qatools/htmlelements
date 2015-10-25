@@ -1,22 +1,13 @@
 package ru.yandex.qatools.htmlelements.element;
 
-import ch.lambdaj.Lambda;
-import ch.lambdaj.function.convert.Converter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static ch.lambdaj.Lambda.convert;
-import static ch.lambdaj.Lambda.convertMap;
-import static ru.yandex.qatools.htmlelements.element.Table.ListConverter.toListsConvertingEachItem;
-import static ru.yandex.qatools.htmlelements.element.Table.MapConverter.toMapsConvertingEachValue;
-import static ru.yandex.qatools.htmlelements.element.Table.WebElementToTextConverter.toText;
-import static ru.yandex.qatools.htmlelements.element.Table.WebElementToTextConverter.toTextValues;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
 
 /**
  * Represents web page table element. Provides convenient ways of retrieving data stored in it.
@@ -35,12 +26,16 @@ public class Table extends TypifiedElement {
     }
 
     /**
-     * Returns table heading elements (contained in "th" tags).
+     * Returns a list of table heading elements ({@code <th>}).
+     *
+     * Multiple rows of heading elements, ({@code <tr>}), are flattened
+     * i.e. the second row, ({@code <tr>}), will follow the first, which can be
+     * misleading when the table uses {@code colspan} and {@code rowspan}.
      *
      * @return List with table heading elements.
      */
     public List<WebElement> getHeadings() {
-        return getWrappedElement().findElements(By.xpath(".//th"));
+        return getWrappedElement().findElements(By.cssSelector("th"));
     }
 
     /**
@@ -49,68 +44,70 @@ public class Table extends TypifiedElement {
      * @return List with text values of table heading elements.
      */
     public List<String> getHeadingsAsString() {
-        return convert(getHeadings(), toTextValues());
+        return getHeadings().stream()
+                .map(WebElement::getText)
+                .collect(toList());
     }
 
     /**
-     * Returns table cell elements grouped by rows.
+     * Returns table cell elements ({@code <td>}), grouped by rows.
      *
      * @return List where each item is a table row.
      */
     public List<List<WebElement>> getRows() {
-        List<List<WebElement>> rows = new ArrayList<>();
-        List<WebElement> rowElements = getWrappedElement().findElements(By.xpath(".//tr"));
-        for (WebElement rowElement : rowElements) {
-            rows.add(rowElement.findElements(By.xpath(".//td")));
-        }
-        return rows;
+        return getWrappedElement()
+                .findElements(By.cssSelector("tr"))
+                .stream()
+                .map(rowElement -> rowElement.findElements(By.cssSelector("td")))
+                .filter(row -> row.size() > 0) // ignore rows with no <td> tags
+                .collect(toList());
     }
 
     /**
-     * Returns text values of table cell elements grouped by rows.
+     * Returns text values of table cell elements ({@code <td>}), grouped by rows.
      *
      * @return List where each item is text values of a table row.
      */
     public List<List<String>> getRowsAsString() {
-        return convert(getRows(), toListsConvertingEachItem(toTextValues()));
+        return getRows().stream()
+                .map(row -> row.stream()
+                        .map(WebElement::getText)
+                        .collect(toList()))
+                .collect(toList());
     }
 
     /**
-     * Returns table cell elements grouped by columns.
+     * Returns table cell elements ({@code <td>}), grouped by columns.
      *
      * @return List where each item is a table column.
      */
     public List<List<WebElement>> getColumns() {
-        List<List<WebElement>> columns = new ArrayList<>();
-        List<List<WebElement>> rows = getRows();
+        // assumes subsequent rows have same number of columns as
+        // this first row which contains <td>
+        List<WebElement> firstRow = getWrappedElement().findElements(
+                By.cssSelector("tr:nth-of-type(1) > td"));
 
-        if (rows.isEmpty()) {
-            return columns;
-        }
-
-        int columnsNumber = rows.get(0).size();
-        for (int i = 0; i < columnsNumber; i++) {
-            List<WebElement> column = new ArrayList<>();
-            for (List<WebElement> row : rows) {
-                column.add(row.get(i));
-            }
-            columns.add(column);
-        }
-
-        return columns;
+        return firstRow.stream()
+                .map(e -> getWrappedElement().findElements(
+                        By.cssSelector("tr > td:nth-of-type(" + firstRow.indexOf(e) + ")")))
+                .collect(toList());
     }
 
     /**
-     * Returns text values of table cell elements grouped by columns.
+     * Returns text values of table cell elements ({@code <td>}), grouped by columns.
      *
      * @return List where each item is text values of a table column.
      */
     public List<List<String>> getColumnsAsString() {
-        return convert(getColumns(), toListsConvertingEachItem(toTextValues()));
+        return getColumns().stream()
+                .map(row -> row.stream()
+                        .map(WebElement::getText)
+                        .collect(toList()))
+                .collect(toList());
     }
 
     /**
-     * Returns table cell element at i-th row and j-th column.
+     * Returns table cell element ({@code <td>}), at i-th row and j-th column.
      *
      * @param i Row number
      * @param j Column number
@@ -121,118 +118,38 @@ public class Table extends TypifiedElement {
     }
 
     /**
-     * Returns list of maps where keys are table headings and values are table row elements.
+     * Returns list of maps where keys are table headings and values are table row elements ({@code <td>}).
      */
     public List<Map<String, WebElement>> getRowsMappedToHeadings() {
         return getRowsMappedToHeadings(getHeadingsAsString());
     }
 
     /**
-     * Returns list of maps where keys are passed headings and values are table row elements.
+     * Returns list of maps where keys are passed headings and values are table row elements ({@code <td>}),.
      *
      * @param headings List containing strings to be used as table headings.
      */
     public List<Map<String, WebElement>> getRowsMappedToHeadings(List<String> headings) {
-        List<Map<String, WebElement>> rowsMappedToHeadings = new ArrayList<>();
         List<List<WebElement>> rows = getRows();
-
-        if (rows.isEmpty()) {
-            return rowsMappedToHeadings;
-        }
-
-        for (List<WebElement> row : rows) {
-            if (row.size() != headings.size()) {
-                throw new HtmlElementsException("Headings count is not equal to number of cells in row");
-            }
-
-            Map<String, WebElement> rowToHeadingsMap = new HashMap<>();
-            int cellNumber = 0;
-            for (String heading : headings) {
-                rowToHeadingsMap.put(heading, row.get(cellNumber));
-                cellNumber++;
-            }
-            rowsMappedToHeadings.add(rowToHeadingsMap);
-        }
-
-        return rowsMappedToHeadings;
+        return rows.stream()
+                .map(row -> row.stream().collect(toMap(e -> headings.get(row.indexOf(e)), e -> e)))
+                .collect(toList());
     }
 
     /**
-     * Same as {@link #getRowsMappedToHeadings()} but retrieves text from row elements.
+     * Same as {@link #getRowsMappedToHeadings()} but retrieves text from row elements ({@code <td>}).
      */
     public List<Map<String, String>> getRowsAsStringMappedToHeadings() {
         return getRowsAsStringMappedToHeadings(getHeadingsAsString());
     }
 
     /**
-     * Same as {@link #getRowsMappedToHeadings(java.util.List)} but retrieves text from row elements.
+     * Same as {@link #getRowsMappedToHeadings(java.util.List)} but retrieves text from row elements ({@code <td>}).
      */
     public List<Map<String, String>> getRowsAsStringMappedToHeadings(List<String> headings) {
-        return convert(getRowsMappedToHeadings(headings), toMapsConvertingEachValue(toText()));
-    }
-
-    /* Inner utility converters */
-
-    /**
-     * Converts {@link WebElement} to text contained in it
-     */
-    static final class WebElementToTextConverter implements Converter<WebElement, String> {
-
-        private WebElementToTextConverter() {
-        }
-
-        public static Converter<WebElement, String> toText() {
-            return new WebElementToTextConverter();
-        }
-
-        public static Converter<WebElement, String> toTextValues() {
-            return new WebElementToTextConverter();
-        }
-
-        @Override
-        public String convert(WebElement element) {
-            return element.getText();
-        }
-    }
-
-    /**
-     * Converts {@code List&lt;F&gt;} to {@code List&lt;T&gt;} by applying specified converter to each list element.
-     */
-    static final class ListConverter<F, T> implements Converter<List<F>, List<T>> {
-        private final Converter<F, T> itemsConverter;
-
-        private ListConverter(Converter<F, T> itemsConverter) {
-            this.itemsConverter = itemsConverter;
-        }
-
-        public static <F, T> Converter<List<F>, List<T>> toListsConvertingEachItem(Converter<F, T> itemsConverter) {
-            return new ListConverter<>(itemsConverter);
-        }
-
-        @Override
-        public List<T> convert(List<F> list) {
-            return Lambda.convert(list, itemsConverter);
-        }
-    }
-
-    /**
-     * Converts {@code Map&lt;K, F&gt;} to {@code Map&lt;K, T&gt;} by applying specified converter to each value
-     * in a map.
-     */
-    static final class MapConverter<K, F, T> implements Converter<Map<K, F>, Map<K, T>> {
-        private final Converter<F, T> valueConverter;
-
-        private MapConverter(Converter<F, T> valueConverter) {
-            this.valueConverter = valueConverter;
-        }
-
-        public static <F, T> Converter<Map<String, F>, Map<String, T>> toMapsConvertingEachValue(Converter<F, T> valueConverter) {
-            return new MapConverter<>(valueConverter);
-        }
-
-        @Override
-        public Map<K, T> convert(Map<K, F> map) {
-            return convertMap(map, valueConverter);
-        }
+        return getRowsMappedToHeadings(headings).stream()
+                .map(m -> m.entrySet().stream()
+                        .collect(toMap(Map.Entry::getKey, e -> e.getValue().getText())))
+                .collect(toList());
     }
 }
