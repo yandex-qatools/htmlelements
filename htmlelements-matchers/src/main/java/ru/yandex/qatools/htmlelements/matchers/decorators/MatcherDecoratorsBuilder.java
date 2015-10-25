@@ -18,7 +18,7 @@ public class MatcherDecoratorsBuilder<T> extends TypeSafeMatcher<T> {
 
     @Factory
     public static <T> MatcherDecoratorsBuilder<T> should(final Matcher<? super T> matcher) {
-        return new MatcherDecoratorsBuilder<T>(matcher);
+        return new MatcherDecoratorsBuilder<>(matcher);
     }
 
     private MatcherDecoratorsBuilder(Matcher<? super T> matcher) {

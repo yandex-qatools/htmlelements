@@ -37,6 +37,6 @@ public class ActionMatcherDecorator<T> extends TypeSafeMatcher<T> {
 
     @Factory
     public static <T> Matcher<T> decorateMatcherWithAction(final Matcher<? super T> matcher, final Action action) {
-        return new ActionMatcherDecorator<T>(matcher, action);
+        return new ActionMatcherDecorator<>(matcher, action);
     }
 }

@@ -67,7 +67,7 @@ public class SearchPage {
         WebElement item1 = mock(WebElement.class);
         WebElement item2 = mock(WebElement.class);
 
-        ArrayList<WebElement> suggestItems = new ArrayList<WebElement>();
+        ArrayList<WebElement> suggestItems = new ArrayList<>();
         suggestItems.add(item1);
         suggestItems.add(item2);
 

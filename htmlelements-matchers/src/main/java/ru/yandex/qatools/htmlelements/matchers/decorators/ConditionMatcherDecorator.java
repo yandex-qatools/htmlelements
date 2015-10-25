@@ -43,6 +43,6 @@ public class ConditionMatcherDecorator<T, E> extends TypeSafeMatcher<T> {
     public static <T, E> Matcher<T> decorateMatcherWithCondition(final Matcher<? super T> matcher,
                                                                  final E itemToMatchCondition,
                                                                  final Matcher<? super E> condition) {
-        return new ConditionMatcherDecorator<T, E>(matcher, itemToMatchCondition, condition);
+        return new ConditionMatcherDecorator<>(matcher, itemToMatchCondition, condition);
     }
 }

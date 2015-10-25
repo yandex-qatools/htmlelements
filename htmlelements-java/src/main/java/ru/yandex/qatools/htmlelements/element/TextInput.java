@@ -4,6 +4,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
+import java.util.Optional;
+
 /**
  * Represents text input control (such as &lt;input type="text"/&gt; or &lt;textarea/&gt;).
  *
@@ -57,11 +59,7 @@ public class TextInput extends TypifiedElement {
             return getWrappedElement().getText();
         }
 
-        String enteredText = getWrappedElement().getAttribute("value");
-        if (enteredText == null) {
-            return "";
-        }
-        return enteredText;
+        return Optional.of(getWrappedElement().getAttribute("value")).orElse("");
     }
 
     /**

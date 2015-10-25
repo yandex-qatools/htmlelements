@@ -50,6 +50,6 @@ public class WaiterMatcherDecorator<T> extends TypeSafeMatcher<T> {
 
     @Factory
     public static <T> Matcher<T> decorateMatcherWithWaiter(final Matcher<? super T> matcher, final Waiter waiter) {
-        return new WaiterMatcherDecorator<T>(matcher, waiter);
+        return new WaiterMatcherDecorator<>(matcher, waiter);
     }
 }

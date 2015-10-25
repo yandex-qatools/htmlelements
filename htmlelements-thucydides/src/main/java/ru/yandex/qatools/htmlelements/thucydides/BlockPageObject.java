@@ -1,6 +1,5 @@
 package ru.yandex.qatools.htmlelements.thucydides;
 
-import com.google.common.base.Predicate;
 import net.thucydides.core.pages.PageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -14,12 +13,11 @@ import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementLocatorFactory
 public class BlockPageObject extends PageObject {
 
     public BlockPageObject(final WebDriver driver) {
-        super(driver, new Predicate<PageObject>() {
-            @Override
-            public boolean apply(PageObject pageObject) {
-                PageFactory.initElements(new HtmlElementDecorator(new HtmlElementLocatorFactory(driver)), pageObject);
-                return true;
-            }
+        super(driver, pageObject -> {
+            PageFactory.initElements(
+                    new HtmlElementDecorator(
+                            new HtmlElementLocatorFactory(driver)), pageObject);
+            return true;
         });
     }
 }

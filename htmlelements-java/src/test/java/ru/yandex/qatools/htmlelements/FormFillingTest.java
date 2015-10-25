@@ -22,7 +22,7 @@ public class FormFillingTest {
 
     public void fillForm() {
         // Prepare data to fill form with
-        Map<String, Object> data = new HashMap<String, Object>();
+        Map<String, Object> data = new HashMap<>();
         data.put(MockedForm.TEXT_INPUT_NAME, INPUT_TEXT_TO_SEND);
         data.put(MockedForm.TEXT_INPUT_WITH_TEXT_NAME, INPUT_TEXT_TO_SEND);
         data.put(MockedForm.CHECKBOX_NAME, CHECKBOX_VALUE_TO_SET);
@@ -49,7 +49,7 @@ public class FormFillingTest {
 
     @Test
     public void clearingFieldWhenNullIsPassed() {
-        Map<String, Object> data = new HashMap<String, Object>();
+        Map<String, Object> data = new HashMap<>();
         data.put(MockedForm.TEXT_INPUT_WITH_TEXT_NAME, null);
         form.fill(data);
         verify(form.getTextInputWithText()).sendKeys(Keys.DELETE.toString() + Keys.BACK_SPACE.toString());

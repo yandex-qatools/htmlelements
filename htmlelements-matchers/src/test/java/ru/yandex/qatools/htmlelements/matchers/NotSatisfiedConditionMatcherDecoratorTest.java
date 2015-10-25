@@ -5,7 +5,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.internal.AssumptionViolatedException;
 import org.junit.rules.TestRule;
-import org.junit.runner.Description;
 import org.junit.runner.RunWith;
 import org.junit.runners.model.Statement;
 import org.mockito.Mock;
@@ -33,20 +32,15 @@ public class NotSatisfiedConditionMatcherDecoratorTest {
     private final Object arbitraryObject = new Object();
 
     @Rule
-    public TestRule testRule = new TestRule() {
+    public TestRule testRule = (base, description) -> new Statement() {
         @Override
-        public Statement apply(final Statement base, Description description) {
-            return new Statement() {
-                @Override
-                public void evaluate() throws Throwable {
-                    try {
-                        base.evaluate();
-                        fail();
-                    } catch (AssumptionViolatedException e) {
-                        // Skip
-                    }
-                }
-            };
+        public void evaluate() throws Throwable {
+            try {
+                base.evaluate();
+                fail();
+            } catch (AssumptionViolatedException e) {
+                // Skip
+            }
         }
     };
 

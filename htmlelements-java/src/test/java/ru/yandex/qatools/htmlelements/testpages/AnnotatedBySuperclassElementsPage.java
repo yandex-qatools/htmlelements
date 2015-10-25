@@ -48,7 +48,7 @@ public class AnnotatedBySuperclassElementsPage {
 
         when(driver.findElement(By.className(SearchArrowData.SEARCH_ARROW_CLASS))).thenReturn(searchArrowElement);
 
-        List<WebElement> companyElements = new ArrayList<WebElement>(COMPANIES_NUMBER);
+        List<WebElement> companyElements = new ArrayList<>(COMPANIES_NUMBER);
         for (int i = 0; i < COMPANIES_NUMBER; i++) {
             companyElements.add(mock(WebElement.class));
         }
