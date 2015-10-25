@@ -2,6 +2,7 @@ package ru.yandex.qatools.htmlelements.element;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
 
 import java.util.List;
 import java.util.Map;
@@ -66,16 +67,24 @@ public class Form extends TypifiedElement {
     protected void fillElement(WebElement element, String value) {
         String elementType = getElementType(element);
 
-        if (CHECKBOX_FIELD.equals(elementType)) {
+        switch (elementType) {
+        case CHECKBOX_FIELD:
             fillCheckBox(element, value);
-        } else if (RADIO_FIELD.equals(elementType)) {
+            break;
+        case RADIO_FIELD:
             fillRadio(element, value);
-        } else if (INPUT_FIELD.equals(elementType)) {
+            break;
+        case INPUT_FIELD:
             fillInput(element, value);
-        } else if (SELECT_FIELD.equals(elementType)) {
+            break;
+        case SELECT_FIELD:
             fillSelect(element, value);
-        } else if (FILE_FIELD.equals(elementType)) {
+            break;
+        case FILE_FIELD:
             fillFile(element, value);
+            break;
+        default:
+            throw new HtmlElementsException("Invalid type supplied.");
         }
     }
 
