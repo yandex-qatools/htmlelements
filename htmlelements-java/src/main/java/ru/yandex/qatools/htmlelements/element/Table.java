@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
@@ -87,9 +88,9 @@ public class Table extends TypifiedElement {
         List<WebElement> firstRow = getWrappedElement().findElements(
                 By.cssSelector("tr:nth-of-type(1) > td"));
 
-        return firstRow.stream()
-                .map(e -> getWrappedElement().findElements(
-                        By.cssSelector("tr > td:nth-of-type(" + firstRow.indexOf(e) + ")")))
+        return IntStream.range(0, firstRow.size())
+                .mapToObj(i -> getWrappedElement().findElements(
+                        By.cssSelector("tr > td:nth-of-type(" + i + ")")))
                 .collect(toList());
     }
 
