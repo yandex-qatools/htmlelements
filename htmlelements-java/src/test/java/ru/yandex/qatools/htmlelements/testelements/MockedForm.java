@@ -5,7 +5,9 @@ import org.openqa.selenium.WebElement;
 import ru.yandex.qatools.htmlelements.element.Form;
 
 import java.util.Arrays;
+import java.util.Collections;
 
+import static java.util.Collections.singletonList;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -58,24 +60,24 @@ public class MockedForm extends Form {
 
     private WebElement mockTextInput(String name, String text) {
         WebElement textInput = mockInputWithNameAndType(name, "text");
-        when(getWrappedElement().findElements(By.name(name))).thenReturn(Arrays.asList(textInput));
+        when(getWrappedElement().findElements(By.name(name))).thenReturn(singletonList(textInput));
         when(textInput.getAttribute("value")).thenReturn(text);
         return textInput;
     }
 
     private WebElement mockCheckBox() {
         WebElement checkBox = mockInputWithNameAndType(CHECKBOX_NAME, "checkbox");
-        when(getWrappedElement().findElements(By.name(CHECKBOX_NAME))).thenReturn(Arrays.asList(checkBox));
+        when(getWrappedElement().findElements(By.name(CHECKBOX_NAME))).thenReturn(singletonList(checkBox));
         when(checkBox.isSelected()).thenReturn(false);
         return checkBox;
     }
 
     private WebElement mockRadioButton() {
         WebElement radioButton = mockInputWithNameAndType(RADIO_NAME, "radio");
-        when(getWrappedElement().findElements(By.name(RADIO_NAME))).thenReturn(Arrays.asList(radioButton));
+        when(getWrappedElement().findElements(By.name(RADIO_NAME))).thenReturn(singletonList(radioButton));
         when(radioButton.findElements(By.xpath(String.format("self::* | following::input[@type = 'radio' " +
                 "and @name = '%s'] | preceding::input[@type = 'radio' and @name = '%s']",
-                RADIO_NAME, RADIO_NAME)))).thenReturn(Arrays.asList(radioButton));
+                RADIO_NAME, RADIO_NAME)))).thenReturn(singletonList(radioButton));
         when(radioButton.getAttribute("value")).thenReturn(RADIO_BUTTON_VALUE);
         return radioButton;
     }
@@ -85,15 +87,15 @@ public class MockedForm extends Form {
         WebElement selectOption = mock(WebElement.class);
         when(select.getTagName()).thenReturn("select");
         when(select.getAttribute("name")).thenReturn(SELECT_NAME);
-        when(getWrappedElement().findElements(By.name(SELECT_NAME))).thenReturn(Arrays.asList(select));
+        when(getWrappedElement().findElements(By.name(SELECT_NAME))).thenReturn(singletonList(select));
         when(select.findElements(By.xpath(String.format(".//option[@value = \"%s\"]", SELECT_OPTION_VALUE)))).
-                thenReturn(Arrays.asList(selectOption));
+                thenReturn(singletonList(selectOption));
         return selectOption;
     }
 
     private WebElement mockTextArea(String name, String text) {
         WebElement textArea = mock(WebElement.class);
-        when(getWrappedElement().findElements(By.name(name))).thenReturn(Arrays.asList(textArea));
+        when(getWrappedElement().findElements(By.name(name))).thenReturn(singletonList(textArea));
         when(textArea.getTagName()).thenReturn("textarea");
         when(textArea.getAttribute("name")).thenReturn(name);
         when(textArea.getText()).thenReturn(text);

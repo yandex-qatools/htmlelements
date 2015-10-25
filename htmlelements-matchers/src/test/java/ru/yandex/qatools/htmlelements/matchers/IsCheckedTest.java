@@ -25,7 +25,7 @@ public class IsCheckedTest {
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void exceptionIfMisssed() {
+    public void exceptionIfMissed() {
         PageWithCheckBox page = new PageWithCheckBox();
         assertThat(page.allOfThis, isSelected());
     }

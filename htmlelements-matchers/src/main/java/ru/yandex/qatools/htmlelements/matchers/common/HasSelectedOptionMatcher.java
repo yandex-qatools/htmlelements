@@ -23,10 +23,7 @@ public class HasSelectedOptionMatcher extends TypeSafeMatcher<Select> {
 
     @Override
     protected boolean matchesSafely(Select select) {
-        if (select.hasSelectedOption()) {
-            return optionMatcher.matches(select.getFirstSelectedOption());
-        }
-        return false;
+        return select.hasSelectedOption() && optionMatcher.matches(select.getFirstSelectedOption());
     }
 
     @Override
