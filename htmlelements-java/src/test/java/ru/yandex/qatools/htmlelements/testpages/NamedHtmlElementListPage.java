@@ -50,7 +50,7 @@ public class NamedHtmlElementListPage {
     private static WebDriver mockDriver() {
         WebDriver driver = mock(WebDriver.class);
 
-        List<WebElement> companyWebElements = new ArrayList<WebElement>(COMPANIES_NUMBER);
+        List<WebElement> companyWebElements = new ArrayList<>(COMPANIES_NUMBER);
         for (int i = 0; i < COMPANIES_NUMBER; i++) {
             companyWebElements.add(mock(WebElement.class));
         }

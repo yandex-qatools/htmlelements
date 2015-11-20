@@ -78,13 +78,7 @@ public class Select extends TypifiedElement {
      * @return {@code true} if select has at least one selected option and {@code false} otherwise.
      */
     public boolean hasSelectedOption() {
-        for (WebElement option : getOptions()) {
-            if (option.isSelected()) {
-                return true;
-            }
-        }
-
-        return false;
+        return getOptions().stream().anyMatch(WebElement::isSelected);
     }
 
     /**
