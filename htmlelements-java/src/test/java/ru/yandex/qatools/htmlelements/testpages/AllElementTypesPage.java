@@ -6,9 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.element.*;
 
-import java.util.Arrays;
 import java.util.List;
 
+import static java.util.Arrays.asList;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -21,6 +21,7 @@ public class AllElementTypesPage {
     }
 
     public AllElementTypesPage(WebDriver webDriver) {
+        /* required for PageInitializationTest */
     }
 
     private static final String ELEMENT_ID = "element";
@@ -101,10 +102,10 @@ public class AllElementTypesPage {
         WebElement button = mock(WebElement.class);
         WebElement radioButton = mock(WebElement.class);
         WebElement image = mock(WebElement.class);
-        List<WebElement> radioGroup = Arrays.asList(radioButton, radioButton, radioButton);
-        List<WebElement> textInputList = Arrays.asList(textInput, textInput, textInput);
-        List<WebElement> htmlElementList = Arrays.asList(htmlElement, htmlElement, htmlElement);
-        List<WebElement> webElementList = Arrays.asList(element, element, element);
+        List<WebElement> radioGroup = asList(radioButton, radioButton, radioButton);
+        List<WebElement> textInputList = asList(textInput, textInput, textInput);
+        List<WebElement> htmlElementList = asList(htmlElement, htmlElement, htmlElement);
+        List<WebElement> webElementList = asList(element, element, element);
 
         when(driver.findElement(By.id(ELEMENT_ID))).thenReturn(element);
         when(driver.findElement(By.id(HTML_ELEMENT_ID))).thenReturn(htmlElement);

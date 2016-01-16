@@ -23,6 +23,7 @@ public class FindAllPage {
     }
 
     public FindAllPage(WebDriver webDriver) {
+        /* required for PageInitializationTest */
     }
 
     private static final String ELEMENT_ID = "element";

@@ -23,10 +23,7 @@ public class HasSelectedRadioButtonMatcher extends TypeSafeMatcher<Radio> {
 
     @Override
     protected boolean matchesSafely(Radio radio) {
-        if (radio.hasSelectedButton()) {
-            return buttonMatcher.matches(radio.getSelectedButton());
-        }
-        return false;
+        return radio.hasSelectedButton() && buttonMatcher.matches(radio.getSelectedButton());
     }
 
     @Override

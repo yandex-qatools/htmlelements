@@ -34,7 +34,7 @@ public class UsingCheckboxTest {
     }
 
     @Test
-    /** CheckBox element returns it's label text */
+    /** CheckBox element returns its label text */
     public void getText() {
         when(checkBoxLabel.getText()).thenReturn("foreign PC");
 
