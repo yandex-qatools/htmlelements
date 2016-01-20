@@ -1,5 +1,6 @@
 package ru.yandex.qatools.htmlelements.element;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 
@@ -82,6 +83,21 @@ public abstract class TypifiedElement implements WrapsElement, Named {
     @Override
     public String toString() {
         return name;
+    }
+
+    /**
+     * Determines whether or not this element exists on page.
+     *
+     * @return True if the element exists on page, false otherwise.
+     */
+    @SuppressWarnings("squid:S1166")  // Sonar "Exception handlers should preserve the original exception" rule
+    public boolean exists() {
+        try {
+            getWrappedElement().isDisplayed();
+        } catch (NoSuchElementException ignored) {
+            return false;
+        }
+        return true;
     }
 
     /**
