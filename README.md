@@ -99,7 +99,7 @@ public class SearchPage {
     // Other blocks and elements here
 
     public SearchPage(WebDriver driver) {
-        PageFactory.initElements(new HtmlElementDecorator(driver), this);
+        PageFactory.initElements(new HtmlElementDecorator(new HtmlElementLocatorFactory(driver)), this);
     }
 
     public void search(String request) {
