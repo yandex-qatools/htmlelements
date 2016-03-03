@@ -137,6 +137,27 @@ public class SampleTest {
 }
 ```
 
+Need access to the WebDriver in your HtmlElement?
+-------------------------------------------------
+Use WebDriverAwareDecorator in your page objects
+
+```java
+PageFactory.initElements(new WebDriverAwareDecorator(new HtmlElementLocatorFactory(driver), driver), this);
+```
+
+Implement WebDriverAware on your HtmlElement
+
+```
+public class MyComponent extends HtmlElement implements WebDriverAware {
+	WebDriver driver = null;
+
+	@Override
+	public void setWebDriver(WebDriver driver) {
+		this.driver = driver;
+	}
+}
+```
+
 Questions?
 ----------
 In case you can't find an answer in documentation and examples provided above, you can ask it on StackOverflow with [![htmlelements](https://img.shields.io/badge/stackoverflow-htmlelements-orange.svg?style=flat)](http://stackoverflow.com/questions/tagged/htmlelements) tag.
