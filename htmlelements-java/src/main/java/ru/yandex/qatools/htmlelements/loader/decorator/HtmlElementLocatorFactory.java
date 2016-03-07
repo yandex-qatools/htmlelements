@@ -70,6 +70,6 @@ public class HtmlElementLocatorFactory implements CustomElementLocatorFactory {
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
         }
 
-        return Integer.getInteger("webdriver.timeouts.implicitlywait", 5);
+        return Integer.getInteger("webdriver.timeouts.implicitlywait", 0);
     }
 }

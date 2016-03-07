@@ -31,7 +31,7 @@ public class HtmlElementLocatorTimeoutTest {
 
     @Test
     public void classWithoutTimeout() {
-        Assert.assertEquals(5, factory.getTimeOut(HtmlElement.class));
+        Assert.assertEquals(0, factory.getTimeOut(HtmlElement.class));
     }
 
     @Test
@@ -39,7 +39,7 @@ public class HtmlElementLocatorTimeoutTest {
         Assert.assertEquals(2, factory.getTimeOut(ParentTimeoutClass.class.getDeclaredField("listElement")));
         Assert.assertEquals(2, factory.getTimeOut(ParentTimeoutClass.class.getDeclaredField("element")));
         Assert.assertEquals(2, factory.getTimeOut(ParentTimeoutClass.class.getDeclaredField("classElement")));
-        Assert.assertEquals(5, factory.getTimeOut(ParentTimeoutClass.class.getDeclaredField("noTimeout")));
+        Assert.assertEquals(0, factory.getTimeOut(ParentTimeoutClass.class.getDeclaredField("noTimeout")));
     }
 
     @Test
