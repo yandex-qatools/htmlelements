@@ -8,6 +8,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.internal.WrapsElement;
+import org.openqa.selenium.Rectangle;
 
 import java.util.List;
 
@@ -248,6 +249,14 @@ public class HtmlElement implements WebElement, WrapsElement, Named {
     @Override
     public Dimension getSize() {
         return wrappedElement.getSize();
+    }
+
+    /**
+     * @return The location and size of the rendered element
+     */
+    @Override
+    public Rectangle getRect() {
+        return wrappedElement.getRect();
     }
 
     /**
