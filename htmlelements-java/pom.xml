@@ -12,7 +12,7 @@
     <name>Yandex QATools HtmlElements For Java</name>
 
     <properties>
-        <selenium.version>2.48.2</selenium.version>
+        <selenium.version>2.53.0</selenium.version>
         <phantomjs-maven-plugin.version>0.7</phantomjs-maven-plugin.version>
         <phantomjs.binary.version>1.9.8</phantomjs.binary.version>
     </properties>
@@ -27,6 +27,11 @@
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
         </dependency>
         <dependency>
             <groupId>com.googlecode.lambdaj</groupId>
