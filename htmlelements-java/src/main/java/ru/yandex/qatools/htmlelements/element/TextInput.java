@@ -23,22 +23,6 @@ public class TextInput extends TypifiedElement {
     }
 
     /**
-     * Clears all the text entered into this text input.
-     */
-    public void clear() {
-        getWrappedElement().clear();
-    }
-
-    /**
-     * Prints specified char sequence into this text input.
-     *
-     * @param keys Text to print.
-     */
-    public void sendKeys(CharSequence... keys) {
-        getWrappedElement().sendKeys(keys);
-    }
-
-    /**
      * @return Text entered into the text input.
      * @deprecated Use getText() instead.
      * <p/>
@@ -54,6 +38,7 @@ public class TextInput extends TypifiedElement {
      *
      * @return Text entered into the text input.
      */
+    @Override
     public String getText() {
         if ("textarea".equals(getWrappedElement().getTagName())) {
             return getWrappedElement().getText();

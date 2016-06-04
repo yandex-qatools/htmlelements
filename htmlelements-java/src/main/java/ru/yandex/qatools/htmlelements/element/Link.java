@@ -20,18 +20,4 @@ public class Link extends TypifiedElement {
     public String getReference() {
         return getWrappedElement().getAttribute("href");
     }
-
-    /**
-     * Clicks the link.
-     */
-    public void click() {
-        getWrappedElement().click();
-    }
-
-    /**
-     * Returns text of the link.
-     */
-    public String getText() {
-        return getWrappedElement().getText();
-    }
 }

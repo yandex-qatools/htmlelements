@@ -3,12 +3,16 @@ package ru.yandex.qatools.htmlelements.element;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.util.AbstractMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import static java.util.Objects.isNull;
+
 /**
- * Represents web page form tag. Provides handy way of filling form with data and submitting it.
+ * Represents web page form tag.
+ * Provides handy way of filling form with data and submitting it.
  *
  * @author Artem Eroshenko eroshenkoam@yandex-team.ru
  *         3/14/13, 4:38 PM
@@ -33,34 +37,28 @@ public class Form extends TypifiedElement {
 
     /**
      * Fills form with data contained in passed map.
-     * For each map entry an input with a name coincident with entry key is searched and then found input
-     * is filled with string representation of entry value (toString() method is called). If input with such a name
-     * is not found corresponding entry is skipped.
+     * For each map entry if an input with a name coincident with entry key exists
+     * it is filled with string representation of entry value.
+     * If an input with such a name is not found the corresponding entry is skipped.
      *
      * @param data Map containing data to fill form inputs with.
      */
     public void fill(Map<String, Object> data) {
-        for (String key : data.keySet()) {
-            WebElement elementToFill = findElementByKey(key);
-            if (elementToFill != null) {
-                fillElement(elementToFill, Objects.toString(data.get(key), ""));
-            }
-        }
-    }
-
-    /**
-     * Submits represented form.
-     */
-    public void submit() {
-        getWrappedElement().submit();
+        data.entrySet().stream()
+                .map(e -> new AbstractMap.SimpleEntry<>(
+                        findElementByKey(e.getKey()),
+                        Objects.toString(e.getValue(), "")))
+                .filter(e -> !isNull(e.getKey()))
+                .forEach(e -> fillElement(e.getKey(), e.getValue()));
     }
 
     protected WebElement findElementByKey(String key) {
         List<WebElement> elements = getWrappedElement().findElements(By.name(key));
         if (elements.isEmpty()) {
             return null;
+        } else {
+            return elements.get(0);
         }
-        return elements.get(0);
     }
 
     protected void fillElement(WebElement element, String value) {
@@ -85,32 +83,28 @@ public class Form extends TypifiedElement {
             String type = element.getAttribute("type");
             if ("checkbox".equals(type)) {
                 return CHECKBOX_FIELD;
-            }
-            if ("radio".equals(type)) {
+            } else if ("radio".equals(type)) {
                 return RADIO_FIELD;
-            }
-            if ("file".equals(type)) {
+            } else if ("file".equals(type)) {
                 return FILE_FIELD;
+            } else {
+                return INPUT_FIELD;
             }
-            return INPUT_FIELD;
-        }
-        if ("select".equals(tagName)) {
+        } else if ("select".equals(tagName)) {
             return SELECT_FIELD;
-        }
-        if ("textarea".equals(tagName)) {
+        } else if ("textarea".equals(tagName)) {
             return INPUT_FIELD;
+        } else {
+            return null;
         }
-        return null;
     }
 
     protected void fillCheckBox(WebElement element, String value) {
-        CheckBox checkBox = new CheckBox(element);
-        checkBox.set(Boolean.parseBoolean(value));
+        new CheckBox(element).set(Boolean.parseBoolean(value));
     }
 
     protected void fillRadio(WebElement element, String value) {
-        Radio radio = new Radio(element);
-        radio.selectByValue(value);
+        new Radio(element).selectByValue(value);
     }
 
     protected void fillInput(WebElement element, String value) {
@@ -119,12 +113,10 @@ public class Form extends TypifiedElement {
     }
 
     protected void fillSelect(WebElement element, String value) {
-        Select select = new Select(element);
-        select.selectByValue(value);
+        new Select(element).selectByValue(value);
     }
 
     protected void fillFile(WebElement element, String value) {
-        FileInput fileInput = new FileInput(element);
-        fileInput.setFileToUpload(value);
+        new FileInput(element).setFileToUpload(value);
     }
 }

@@ -11,11 +11,4 @@ public class TextBlock extends TypifiedElement {
     public TextBlock(WebElement wrappedElement) {
         super(wrappedElement);
     }
-
-    /**
-     * Returns text contained in text block.
-     */
-    public String getText() {
-        return getWrappedElement().getText();
-    }
 }
