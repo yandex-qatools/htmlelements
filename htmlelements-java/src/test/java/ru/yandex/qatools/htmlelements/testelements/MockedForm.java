@@ -4,9 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import ru.yandex.qatools.htmlelements.element.Form;
 
-import java.util.Arrays;
-import java.util.Collections;
-
 import static java.util.Collections.singletonList;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
