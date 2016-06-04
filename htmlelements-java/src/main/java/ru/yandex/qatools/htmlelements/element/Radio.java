@@ -5,7 +5,6 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Represents a group of radio buttons.
@@ -72,13 +71,13 @@ public class Radio extends TypifiedElement {
      * @param value The value to match against.
      */
     public void selectByValue(String value) {
-        Optional<WebElement> matchingButton = getButtons().stream()
+        WebElement matchingButton = getButtons().stream()
                 .filter(b -> value.equals(b.getAttribute("value")))
-                .findFirst();
-
-        selectButton(matchingButton
+                .findFirst()
                 .orElseThrow(() -> new NoSuchElementException(
-                        String.format("Cannot locate radio button with value: %s", value))));
+                        String.format("Cannot locate radio button with value: %s", value)));
+
+        selectButton(matchingButton);
     }
 
     /**
@@ -90,7 +89,8 @@ public class Radio extends TypifiedElement {
         List<WebElement> buttons = getButtons();
 
         if (index < 0 || index >= buttons.size()) {
-            throw new NoSuchElementException(String.format("Cannot locate radio button with index: %d", index));
+            throw new NoSuchElementException(
+                    String.format("Cannot locate radio button with index: %d", index));
         }
 
         selectButton(buttons.get(index));

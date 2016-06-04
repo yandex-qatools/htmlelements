@@ -17,11 +17,4 @@ public class Button extends TypifiedElement {
     public Button(WebElement wrappedElement) {
         super(wrappedElement);
     }
-
-    /**
-     * Clicks the button.
-     */
-    public void click() {
-        getWrappedElement().click();
-    }
 }
