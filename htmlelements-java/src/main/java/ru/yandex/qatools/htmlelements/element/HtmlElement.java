@@ -23,7 +23,7 @@ import java.util.List;
  * <p/>
  * <pre class="code">
  * &#64;Name("Search Form")
- * &#64;Block(&#64;FindBy(css = "form_css"))
+ * &#64;FindBy(css = "form_css")
  * public class SearchForm extends HtmlElement {
  * &#64;Name("Request Input")
  * &#64;FindBy(css = "request_input_css")

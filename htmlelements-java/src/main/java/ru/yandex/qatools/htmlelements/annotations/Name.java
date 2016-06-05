@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
  * <p/>
  * <pre class="code">
  * &#64;Name("My Form")
- * &#64;Block(&#64;FindBy(css = "my_form_css"))
+ * &#64;FindBy(css = "my_form_css")
  * public class MyForm extends HtmlElement {
  * &#64;Name("Text input name")
  * &#64;FindBy(css = "text_input_css")
