@@ -39,6 +39,15 @@ public class TextInput extends TypifiedElement {
     }
 
     /**
+     * Sets this text input's value.
+     *
+     * @param newValue New value for this text input.
+     */
+    public void setText(String newValue) {
+        getWrappedElement().sendKeys(getClearCharSequence() + newValue);
+    }
+
+    /**
      * @return Text entered into the text input.
      * @deprecated Use getText() instead.
      * <p/>

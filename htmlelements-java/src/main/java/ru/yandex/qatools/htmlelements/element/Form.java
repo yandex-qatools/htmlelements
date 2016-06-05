@@ -115,7 +115,7 @@ public class Form extends TypifiedElement {
 
     protected void fillInput(WebElement element, String value) {
         TextInput input = new TextInput(element);
-        input.sendKeys(input.getClearCharSequence() + value);
+        input.setText(value);
     }
 
     protected void fillSelect(WebElement element, String value) {
