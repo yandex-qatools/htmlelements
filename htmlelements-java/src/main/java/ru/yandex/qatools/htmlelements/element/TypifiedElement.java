@@ -107,8 +107,14 @@ public abstract class TypifiedElement implements WrapsElement, Named {
      * @return Whether or not the element is displayed
      */
     public boolean isDisplayed() {
-        return getWrappedElement().isDisplayed();
+        try{
+            return getWrappedElement().isDisplayed();
+        } catch (Exception e) {
+            //ignore and return false to indicate element is not visible.
+        }
+        return false;
     }
+
 
     /**
      * Is the element currently enabled or not? This will generally return true for everything but
