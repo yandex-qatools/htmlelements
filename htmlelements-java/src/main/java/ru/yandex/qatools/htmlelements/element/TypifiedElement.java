@@ -1,8 +1,15 @@
 package ru.yandex.qatools.htmlelements.element;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
+
+import java.util.List;
 
 /**
  * The base class to be used for making classes representing typified elements (i.e web page controls such as
@@ -10,17 +17,23 @@ import org.openqa.selenium.internal.WrapsElement;
  * <p/>
  * There are several already written classes representing standard web page controls:
  * <ul>
+ * <li>{@link Table}</li>
  * <li>{@link TextInput}</li>
- * <li>{@link Button}</li>
  * <li>{@link CheckBox}</li>
- * <li>{@link Radio}</li>
  * <li>{@link Select}</li>
+ * <li>{@link Link}</li>
+ * <li>{@link Button}</li>
+ * <li>{@link Radio}</li>
+ * <li>{@link TextBlock}</li>
+ * <li>{@link Image}</li>
+ * <li>{@link Form}</li>
+ * <li>{@link FileInput}</li>
  * </ul>
  * <p/>
- * But you can also write your own typified elements if it's needed. For example, like this:
+ * But you can also write your own typified elements if needed. For example:
  * <p/>
- * <pre class="code">
- * public class Link extends TypifiedElement {
+ * <pre>
+ * <code>public class Link extends TypifiedElement {
  * public Link(WebElement wrappedElement) {
  * super(wrappedElement);
  * }
@@ -28,21 +41,14 @@ import org.openqa.selenium.internal.WrapsElement;
  * public String getReference() {
  * return getWrappedElement().getAttribute("href");
  * }
- * <p/>
- * public void click() {
- * getWrappedElement().click();
  * }
- * <p/>
- * public String getText() {
- * return getWrappedElement().getText();
- * }
- * }
+ * </code>
  * </pre>
  *
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 13.08.12
  */
-public abstract class TypifiedElement implements WrapsElement, Named {
+public abstract class TypifiedElement implements WrapsElement, Named, WebElement {
     private final WebElement wrappedElement;
     private String name;
 
@@ -53,11 +59,6 @@ public abstract class TypifiedElement implements WrapsElement, Named {
      */
     protected TypifiedElement(WebElement wrappedElement) {
         this.wrappedElement = wrappedElement;
-    }
-
-    @Override
-    public WebElement getWrappedElement() {
-        return wrappedElement;
     }
 
     @Override
@@ -90,7 +91,8 @@ public abstract class TypifiedElement implements WrapsElement, Named {
      *
      * @return True if the element exists on page, false otherwise.
      */
-    @SuppressWarnings("squid:S1166")  // Sonar "Exception handlers should preserve the original exception" rule
+    @SuppressWarnings("squid:S1166")
+    // Sonar "Exception handlers should preserve the original exception" rule
     public boolean exists() {
         try {
             getWrappedElement().isDisplayed();
@@ -100,33 +102,93 @@ public abstract class TypifiedElement implements WrapsElement, Named {
         return true;
     }
 
-    /**
-     * Is this element displayed or not? This method avoids the problem of having to parse an
-     * element's "style" attribute.
-     *
-     * @return Whether or not the element is displayed
-     */
-    public boolean isDisplayed() {
-        return getWrappedElement().isDisplayed();
+    @Override
+    public WebElement getWrappedElement() {
+        return wrappedElement;
     }
 
-    /**
-     * Is the element currently enabled or not? This will generally return true for everything but
-     * disabled input elements.
-     *
-     * @return True if the element is enabled, false otherwise.
-     */
+    @Override
+    public void click() {
+        getWrappedElement().click();
+    }
+
+    @Override
+    public void submit() {
+        getWrappedElement().submit();
+    }
+
+    @Override
+    public void sendKeys(CharSequence... keysToSend) {
+        getWrappedElement().sendKeys(keysToSend);
+    }
+
+    @Override
+    public void clear() {
+        getWrappedElement().clear();
+    }
+
+    @Override
+    public String getTagName() {
+        return getWrappedElement().getTagName();
+    }
+
+    @Override
+    public String getAttribute(String name) {
+        return getWrappedElement().getAttribute(name);
+    }
+
+    @Override
+    public boolean isSelected() {
+        return getWrappedElement().isSelected();
+    }
+
+    @Override
     public boolean isEnabled() {
         return getWrappedElement().isEnabled();
     }
 
-    /**
-     * Determine whether or not this element is selected or not. This operation only applies to input
-     * elements such as checkboxes, options in a select and radio buttons.
-     *
-     * @return True if the element is currently selected or checked, false otherwise.
-     */
-    public boolean isSelected() {
-        return getWrappedElement().isSelected();
+    @Override
+    public String getText() {
+        return getWrappedElement().getText();
+    }
+
+    @Override
+    public List<WebElement> findElements(By by) {
+        return getWrappedElement().findElements(by);
+    }
+
+    @Override
+    public WebElement findElement(By by) {
+        return getWrappedElement().findElement(by);
+    }
+
+    @Override
+    public boolean isDisplayed() {
+        return getWrappedElement().isDisplayed();
+    }
+
+    @Override
+    public Point getLocation() {
+        return getWrappedElement().getLocation();
+    }
+
+    @Override
+    public Dimension getSize() {
+        return getWrappedElement().getSize();
+    }
+
+    @Override
+    public Rectangle getRect() {
+        return getWrappedElement().getRect();
+    }
+
+    @Override
+    public String getCssValue(String propertyName) {
+        return getWrappedElement().getCssValue(propertyName);
+    }
+
+    @Override
+    public <X> X getScreenshotAs(OutputType<X> target) {
+        return getWrappedElement().getScreenshotAs(target);
     }
 }

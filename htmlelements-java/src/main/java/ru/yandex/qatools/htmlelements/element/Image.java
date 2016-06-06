@@ -31,11 +31,4 @@ public class Image extends TypifiedElement {
         return getWrappedElement().getAttribute("alt");
     }
 
-    /**
-     * Click on image
-     */
-    public void click() {
-        getWrappedElement().click();
-    }
-
 }
