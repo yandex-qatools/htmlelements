@@ -47,7 +47,6 @@
 
     <modules>
         <module>htmlelements-java</module>
-        <module>htmlelements-matchers</module>
         <module>htmlelements-thucydides</module>
         <module>htmlelements-all</module>
     </modules>
