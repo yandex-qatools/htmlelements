@@ -1,7 +1,7 @@
 package ru.yandex.qatools.htmlelements.utils;
 
 import com.google.common.collect.Lists;
-import org.apache.commons.lang.WordUtils;
+import org.apache.commons.lang3.text.WordUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
