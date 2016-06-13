@@ -31,7 +31,7 @@ public class ComplexStructTest {
     public static final String VACANCY_LIST_NAME = "List of vacancies";
 
     private static final int COMPANIES_NUMBER = 3;
-    private static final int VACANCIES_NUMBER = 3;
+    private static final int VACANCIES_NUMBER = 4;
 
     private WebDriver webDriver;
 
@@ -47,7 +47,7 @@ public class ComplexStructTest {
         WebElement pager = mock(WebElement.class);
 
         List<WebElement> companies = Arrays.asList(company1, company2, company3);
-        List<WebElement> vacancies = Arrays.asList(vacancy, vacancy, vacancy);
+        List<WebElement> vacancies = Arrays.asList(vacancy, vacancy, vacancy, vacancy);
 
         when(webDriver.findElement(By.cssSelector(WRAPPER_CSS))).thenReturn(wrapper);
         when(wrapper.findElement(By.cssSelector(PAGER_CSS))).thenReturn(pager);

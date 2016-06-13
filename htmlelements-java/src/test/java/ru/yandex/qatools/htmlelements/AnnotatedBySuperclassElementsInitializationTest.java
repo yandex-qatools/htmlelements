@@ -36,7 +36,7 @@ public class AnnotatedBySuperclassElementsInitializationTest {
     public void annotatedBySuperclassElementsPageShouldBeInitialized() {
         AnnotatedBySuperclassElementsPage page = new AnnotatedBySuperclassElementsPage(driver);
 
-        assertThat("Htmlelement annotated by superclass should be not null",
+        assertThat("HtmlElement annotated by superclass should be not null",
                 page.getSearchArrow(), is(notNullValue()));
         assertThat("List annotated by parameter superclass  should be not null",
                 page.getCompanyList(), is(notNullValue()));
