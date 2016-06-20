@@ -44,7 +44,7 @@ public class TextInput extends TypifiedElement {
             return getWrappedElement().getText();
         }
 
-        return Optional.of(getWrappedElement().getAttribute("value")).orElse("");
+        return Optional.ofNullable(getWrappedElement().getAttribute("value")).orElse("");
     }
 
     /**
