@@ -13,6 +13,7 @@ import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
 
 import java.lang.reflect.*;
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor;
@@ -168,4 +169,40 @@ public final class HtmlElementUtils {
     public static URL getResourceFromClasspath(final String fileName) {
         return Thread.currentThread().getContextClassLoader().getResource(fileName);
     }
+
+    public static String xpathLiteral(String s) {
+        if (s.indexOf("'") == -1) {
+            return String.format("'%s'", s);
+        }
+
+        if (s.indexOf("\"") == -1) {
+            return String.format("\"%s\"", s);
+        }
+
+        String string = s;
+        List<String> parts = new LinkedList<>();
+
+        while (true) {
+            int pos;
+            if ((pos = string.indexOf("'")) != -1) {
+                parts.add(string.substring(0, pos));
+                parts.add("\"'\"");
+
+                string = string.substring(pos + 1);
+            } else {
+                parts.add(String.format("'%s'", string));
+                break;
+            }
+        }
+
+        StringBuilder result = new StringBuilder();
+        for (String part: parts) {
+            result.append(part);
+            result.append(",");
+        }
+        result.deleteCharAt(result.length() - 1);
+
+        return result.toString();
+    }
+
 }
