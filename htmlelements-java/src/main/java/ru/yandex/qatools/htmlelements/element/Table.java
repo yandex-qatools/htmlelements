@@ -142,9 +142,10 @@ public class Table extends TypifiedElement {
      * Returns list of maps where keys are table headings and values are table row elements ({@code <td>}).
      */
     public List<Map<String, WebElement>> getRowsMappedToHeadings() {
+        List<String> headingsAsString = getHeadingsAsString();
         return getRows().stream()
                 .map(row -> row.stream()
-                        .collect(toMap(e -> getHeadingsAsString().get(row.indexOf(e)), identity())))
+                        .collect(toMap(e -> headingsAsString.get(row.indexOf(e)), identity())))
                 .collect(toList());
     }
 
