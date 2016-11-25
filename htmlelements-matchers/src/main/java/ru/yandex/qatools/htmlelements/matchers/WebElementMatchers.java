@@ -145,4 +145,25 @@ public final class WebElementMatchers {
     public static Matcher<WebElement> hasValue(final String value) {
         return HasAttributeMatcher.hasAttribute("value", value);
     }
+
+    /**
+     * Creates matcher checking if the value of 'checked' attribute is 'true'
+     */
+    public static Matcher<WebElement> checked() {
+        return HasAttributeMatcher.hasAttribute("checked", "true");
+    }
+
+    /**
+     * Creates matcher checking if the value of 'selected' attribute is 'true'
+     */
+    public static Matcher<WebElement> selected() {
+        return HasAttributeMatcher.hasAttribute("selected", "true");
+    }
+
+    /**
+     * Creates matcher checking if the value of 'focused' attribute is 'true'
+     */
+    public static Matcher<WebElement> focused() {
+        return HasAttributeMatcher.hasAttribute("focused", "true");
+    }
 }
