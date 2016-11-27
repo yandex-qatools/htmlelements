@@ -23,7 +23,7 @@ import static org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructo
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 21.08.12
  */
-public final class HtmlElementUtils {
+public class HtmlElementUtils {
 
     private HtmlElementUtils() {
     }
