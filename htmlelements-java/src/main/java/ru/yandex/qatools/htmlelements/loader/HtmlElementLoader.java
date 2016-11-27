@@ -100,15 +100,25 @@ public class HtmlElementLoader {
 
     public static <T extends HtmlElement> T createHtmlElement(Class<T> elementClass, WebElement elementToWrap,
                                                               String name) {
-        try {
-            T instance = newInstance(elementClass);
+        return createHtmlElement(null, elementClass, elementToWrap, name);
+    }
+
+    public static <T extends HtmlElement>
+    T createHtmlElement(Object outerObject, Class<T> elementClass,
+                        WebElement elementToWrap, String name){
+        try{
+            T instance;
+            if (outerObject == null)
+                instance = newInstance(elementClass);
+            else
+                instance = newInstance(outerObject, elementClass);
             instance.setWrappedElement(elementToWrap);
             instance.setName(name);
             // Recursively initialize elements of the block
             populatePageObject(instance, elementToWrap);
             return instance;
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException
-                | InvocationTargetException e) {
+                | InvocationTargetException e){
             throw new HtmlElementsException(e);
         }
     }
