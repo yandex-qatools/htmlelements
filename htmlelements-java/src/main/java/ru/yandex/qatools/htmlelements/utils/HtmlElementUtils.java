@@ -28,7 +28,7 @@ public class HtmlElementUtils {
     private HtmlElementUtils() {
     }
 
-    public static <T> T newInstance(Class<T> clazz, Object outerObject, Object... args)
+    public static <T> T newInstance(Object outerObject, Class<T> clazz, Object... args)
             throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
         if (clazz.isMemberClass() && !Modifier.isStatic(clazz.getModifiers()))
             return invokeConstructor(clazz, Lists.asList(outerObject, args).toArray());
