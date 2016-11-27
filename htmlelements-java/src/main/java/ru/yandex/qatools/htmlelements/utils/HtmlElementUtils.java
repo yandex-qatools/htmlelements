@@ -28,14 +28,19 @@ public class HtmlElementUtils {
     private HtmlElementUtils() {
     }
 
+    public static <T> T newInstance(Class<T> clazz, Object outerObject, Object... args)
+            throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
+        if (clazz.isMemberClass() && !Modifier.isStatic(clazz.getModifiers()))
+            return invokeConstructor(clazz, Lists.asList(outerObject, args).toArray());
+        return invokeConstructor(clazz, args);
+    }
+
+
     public static <T> T newInstance(Class<T> clazz, Object... args) throws IllegalAccessException,
             InstantiationException, NoSuchMethodException, InvocationTargetException {
-        if (clazz.isMemberClass() && !Modifier.isStatic(clazz.getModifiers())) {
-            Class outerClass = clazz.getDeclaringClass();
-            Object outerObject = outerClass.newInstance();
-            return invokeConstructor(clazz, Lists.asList(outerObject, args).toArray());
-        }
-        return invokeConstructor(clazz, args);
+        Class outerClass = clazz.getDeclaringClass();
+        Object outerObject = outerClass.newInstance();
+        return newInstance(clazz, outerObject, args);
     }
 
     public static boolean isHtmlElement(Field field) {
