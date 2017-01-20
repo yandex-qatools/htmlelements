@@ -21,7 +21,7 @@ public class StaleElementReferenceTest {
     public void testOutput() {
         StaleElementReferencePage staleElementReferencePage = new StaleElementReferencePage();
         thrown.expect(StaleElementReferenceException.class);
-        assertThat(staleElementReferencePage.getElement().getText(), equalTo(StaleElementReferencePage.ELEMENT_TEXT));
+        staleElementReferencePage.getElement().getText();
     }
 
 }
