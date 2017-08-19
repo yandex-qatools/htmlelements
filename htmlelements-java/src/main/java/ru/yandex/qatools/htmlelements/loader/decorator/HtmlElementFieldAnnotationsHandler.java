@@ -1,10 +1,6 @@
 package ru.yandex.qatools.htmlelements.loader.decorator;
 
-import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.getGenericParameterClass;
-import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.isHtmlElement;
-import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.isHtmlElementList;
-import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.isTypifiedElement;
-import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.isTypifiedElementList;
+import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.*;
 
 import java.lang.reflect.Field;
 
