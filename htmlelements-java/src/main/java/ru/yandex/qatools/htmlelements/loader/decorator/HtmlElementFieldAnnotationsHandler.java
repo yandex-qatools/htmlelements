@@ -1,7 +1,5 @@
 package ru.yandex.qatools.htmlelements.loader.decorator;
 
-import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.*;
-
 import java.lang.reflect.Field;
 
 import org.openqa.selenium.By;
@@ -11,6 +9,8 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.pagefactory.Annotations;
 
 import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
+
+import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.*;
 
 /**
  * Extends default field annotations handling mechanism with processing
