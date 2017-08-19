@@ -26,7 +26,7 @@ public class HtmlElementClassAnnotationsHandler<T extends HtmlElement> extends A
         Class<?> clazz = elementClass;
         while (clazz != Object.class) {
             if (clazz.isAnnotationPresent(FindBy.class)) {
-				return new FindByBuilder().buildIt(clazz.getAnnotation(FindBy.class), null);
+                return new FindByBuilder().buildIt(clazz.getAnnotation(FindBy.class), null);
             }
             clazz = clazz.getSuperclass();
         }
