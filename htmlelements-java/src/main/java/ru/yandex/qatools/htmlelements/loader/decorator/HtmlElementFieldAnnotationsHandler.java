@@ -1,21 +1,22 @@
 package ru.yandex.qatools.htmlelements.loader.decorator;
 
+import java.lang.reflect.Field;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.pagefactory.Annotations;
-import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
 
-import java.lang.reflect.Field;
+import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
 
 import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.*;
 
 /**
- * Extends default field annotations handling mechanism with processing annotation for blocks and lists of blocks.
+ * Extends default field annotations handling mechanism with processing
+ * annotation for blocks and lists of blocks.
  *
- * @author Alexander Tolmachev starlight@yandex-team.ru
- *         Date: 15.08.12
+ * @author Alexander Tolmachev starlight@yandex-team.ru Date: 15.08.12
  */
 public class HtmlElementFieldAnnotationsHandler extends Annotations {
     public HtmlElementFieldAnnotationsHandler(Field field) {
@@ -36,17 +37,17 @@ public class HtmlElementFieldAnnotationsHandler extends Annotations {
     private By buildByFromFindAnnotations() {
         if (getField().isAnnotationPresent(FindBys.class)) {
             FindBys findBys = getField().getAnnotation(FindBys.class);
-            return buildByFromFindBys(findBys);
+            return new FindBys.FindByBuilder().buildIt(findBys, null);
         }
 
         if (getField().isAnnotationPresent(FindAll.class)) {
-            FindAll findBys = getField().getAnnotation(FindAll.class);
-            return buildBysFromFindByOneOf(findBys);
+            FindAll findAll = getField().getAnnotation(FindAll.class);
+            return new FindAll.FindByBuilder().buildIt(findAll, null);
         }
 
         if (getField().isAnnotationPresent(FindBy.class)) {
             FindBy findBy = getField().getAnnotation(FindBy.class);
-            return buildByFromFindBy(findBy);
+            return new FindBy.FindByBuilder().buildIt(findBy, null);
         }
         return null;
     }
@@ -62,7 +63,7 @@ public class HtmlElementFieldAnnotationsHandler extends Annotations {
         Class<?> fieldClass = getField().getType();
         while (fieldClass != Object.class) {
             if (fieldClass.isAnnotationPresent(FindBy.class)) {
-                return buildByFromFindBy(fieldClass.getAnnotation(FindBy.class));
+                return new FindBy.FindByBuilder().buildIt(fieldClass.getAnnotation(FindBy.class), null);
             }
             fieldClass = fieldClass.getSuperclass();
         }
@@ -81,7 +82,7 @@ public class HtmlElementFieldAnnotationsHandler extends Annotations {
         Class<?> listParameterClass = getGenericParameterClass(getField());
         while (listParameterClass != Object.class) {
             if (listParameterClass.isAnnotationPresent(FindBy.class)) {
-                return buildByFromFindBy(listParameterClass.getAnnotation(FindBy.class));
+                return new FindBy.FindByBuilder().buildIt(listParameterClass.getAnnotation(FindBy.class), null);
             }
             listParameterClass = listParameterClass.getSuperclass();
         }

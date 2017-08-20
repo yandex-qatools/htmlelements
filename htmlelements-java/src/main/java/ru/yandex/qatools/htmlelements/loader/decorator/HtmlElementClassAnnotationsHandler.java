@@ -2,7 +2,9 @@ package ru.yandex.qatools.htmlelements.loader.decorator;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBy.FindByBuilder;
 import org.openqa.selenium.support.pagefactory.AbstractAnnotations;
+
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
 
@@ -24,7 +26,7 @@ public class HtmlElementClassAnnotationsHandler<T extends HtmlElement> extends A
         Class<?> clazz = elementClass;
         while (clazz != Object.class) {
             if (clazz.isAnnotationPresent(FindBy.class)) {
-                return buildByFromFindBy(clazz.getAnnotation(FindBy.class));
+                return new FindByBuilder().buildIt(clazz.getAnnotation(FindBy.class), null);
             }
             clazz = clazz.getSuperclass();
         }
