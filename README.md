@@ -1,9 +1,8 @@
 Html Elements framework
 =======================
-[![release](http://github-release-version.herokuapp.com/github/yandex-qatools/htmlelements/release.svg?style=flat)]
-(https://github.com/yandex-qatools/htmlelements/releases/latest)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/ru.yandex.qatools.htmlelements/htmlelements-java/badge.svg?style=flat)]
-(https://maven-badges.herokuapp.com/maven-central/ru.yandex.qatools.htmlelements/htmlelements-java)
+[![release](http://github-release-version.herokuapp.com/github/yandex-qatools/htmlelements/release.svg?style=flat)](https://github.com/yandex-qatools/htmlelements/releases/latest) 
+
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/ru.yandex.qatools.htmlelements/htmlelements-java/badge.svg?style=flat)](https://maven-badges.herokuapp.com/maven-central/ru.yandex.qatools.htmlelements/htmlelements-java)
 
 
 This framework is designed to provide an easy-to-use way of interacting with web-page elements in your tests.
@@ -11,13 +10,10 @@ It can be considered to be an extension of WebDriver Page Object.
 
 With the help of the Html Elements framework you can group web-page elements into blocks, encapsulate logic of interaction within them 
 and then easily use created blocks in page objects. It also provides a set of helpful matchers to use with web-page elements 
-and blocks. See [JavaDocs]
-(https://oss.sonatype.org/service/local/repositories/releases/archive/ru/yandex/qatools/htmlelements/htmlelements-java/1.16/htmlelements-java-1.16-javadoc.jar/!/index.html) 
+and blocks. See [JavaDocs](https://oss.sonatype.org/service/local/repositories/releases/archive/ru/yandex/qatools/htmlelements/htmlelements-java/1.16/htmlelements-java-1.16-javadoc.jar/!/index.html) 
 and [Samples](https://github.com/yandex-qatools/htmlelements-examples) for more details.
 
-You can ask your questions on StackOverflow with the [![htmlelements]
-(https://img.shields.io/badge/stackoverflow-htmlelements-orange.svg?style=flat)]
-(http://stackoverflow.com/questions/tagged/htmlelements) tag.
+You can ask your questions on StackOverflow with the [![htmlelements](https://img.shields.io/badge/stackoverflow-htmlelements-orange.svg?style=flat)](http://stackoverflow.com/questions/tagged/htmlelements) tag.
 
 Other Languages
 -------------
