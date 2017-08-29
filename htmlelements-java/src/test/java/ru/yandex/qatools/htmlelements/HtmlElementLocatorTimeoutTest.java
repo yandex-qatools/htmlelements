@@ -44,7 +44,17 @@ public class HtmlElementLocatorTimeoutTest {
 
     @Test
     public void timeoutWithSystemProperty() {
-        System.setProperty("webdriver.timeouts.implicitlywait", "1");
-        Assert.assertEquals(1, factory.getTimeOut(HtmlElement.class));
+        final String propertyName = "webdriver.timeouts.implicitlywait";
+        final String previousTimeout = System.getProperty(propertyName);
+        System.setProperty(propertyName, "1");
+        try {
+            Assert.assertEquals(1, factory.getTimeOut(HtmlElement.class));
+        } finally {
+            if (previousTimeout == null) {
+                System.getProperties().remove(propertyName);
+            } else {
+                System.setProperty(propertyName, previousTimeout);
+            }
+        }
     }
 }
