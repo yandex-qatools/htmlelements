@@ -36,18 +36,18 @@ public class WebElementNamedProxyHandler extends LocatingElementHandler {
             return name;
         }
 
-        long end = this.clock.laterBy(TimeUnit.SECONDS.toMillis(this.timeOutInSeconds));
+        final long end = this.clock.laterBy(TimeUnit.SECONDS.toMillis(this.timeOutInSeconds));
 
-        StaleElementReferenceException lasException = null;
-        while (this.clock.isNowBefore(end)) {
+        StaleElementReferenceException lastException;
+        do {
             try {
                 return super.invoke(o, method, objects);
             } catch (StaleElementReferenceException e) {
-                lasException = e;
+                lastException = e;
                 this.waitFor();
             }
-        }
-        throw lasException;
+        } while (this.clock.isNowBefore(end));
+        throw lastException;
     }
 
     protected long sleepFor() {
