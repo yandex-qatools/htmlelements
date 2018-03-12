@@ -75,6 +75,17 @@ public class HtmlElementDecorator implements FieldDecorator {
         }
     }
 
+    public Object decorate(ClassLoader loader, Object outerObject, Field field)
+    {
+        try
+        {
+            if (isHtmlElement(field))
+                return decorateHtmlElement(loader, outerObject, field);
+        }
+        catch (ClassCastException ignore) {}
+        return decorate(loader, field);
+    }
+
     protected <T extends TypifiedElement> T decorateTypifiedElement(ClassLoader loader, Field field) {
         WebElement elementToWrap = decorateWebElement(loader, field);
 
@@ -87,6 +98,13 @@ public class HtmlElementDecorator implements FieldDecorator {
 
         //noinspection unchecked
         return createHtmlElement((Class<T>) field.getType(), elementToWrap, getElementName(field));
+    }
+
+    protected <T extends HtmlElement> T decorateHtmlElement(ClassLoader loader, Object outerObject, Field field) {
+        WebElement elementToWrap = decorateWebElement(loader, field);
+
+        //noinspection unchecked
+        return createHtmlElement(outerObject, (Class<T>) field.getType(), elementToWrap, getElementName(field));
     }
 
     protected WebElement decorateWebElement(ClassLoader loader, Field field) {
