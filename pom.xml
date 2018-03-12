@@ -4,7 +4,7 @@
 
     <groupId>ru.yandex.qatools.htmlelements</groupId>
     <artifactId>htmlelements</artifactId>
-    <version>1.19</version>
+    <version>1.20-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Yandex QATools HtmlElements</name>
@@ -38,7 +38,7 @@
         <url>git@github.com:yandex-qatools/htmlelements.git</url>
         <connection>scm:git:git@github.com:yandex-qatools/htmlelements.git</connection>
         <developerConnection>scm:git:git@github.com:yandex-qatools/htmlelements.git</developerConnection>
-      <tag>htmlelements-1.19</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <issueManagement>
