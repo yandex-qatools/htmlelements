@@ -4,7 +4,7 @@
 
     <groupId>ru.yandex.qatools.htmlelements</groupId>
     <artifactId>htmlelements</artifactId>
-    <version>1.19-SNAPSHOT</version>
+    <version>1.19</version>
     <packaging>pom</packaging>
 
     <name>Yandex QATools HtmlElements</name>
@@ -62,6 +62,11 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

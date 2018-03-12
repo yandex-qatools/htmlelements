@@ -1,5 +1,7 @@
-target
-*.iml
+# Idea files
 .idea
-.*
-*/bin/*
+*.iml
+
+# Maven files
+target
+
