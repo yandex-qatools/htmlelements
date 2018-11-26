@@ -3,10 +3,9 @@ package ru.yandex.qatools.htmlelements.loader.decorator.proxyhandlers;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler;
-import org.openqa.selenium.support.ui.Clock;
-import org.openqa.selenium.support.ui.SystemClock;
 
 import java.lang.reflect.Method;
+import java.time.Clock;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -26,7 +25,7 @@ public class WebElementNamedProxyHandler extends LocatingElementHandler {
     public WebElementNamedProxyHandler(ElementLocator locator, String name) {
         super(locator);
         this.name = name;
-        this.clock = new SystemClock();
+        this.clock = Clock.systemDefaultZone();
         this.timeOutInSeconds = Integer.getInteger("webdriver.timeouts.implicitlywait", DEFAULT_TIMEOUT);
     }
 
@@ -36,7 +35,7 @@ public class WebElementNamedProxyHandler extends LocatingElementHandler {
             return name;
         }
 
-        final long end = this.clock.laterBy(TimeUnit.SECONDS.toMillis(this.timeOutInSeconds));
+        final long end = this.clock.millis() + TimeUnit.SECONDS.toMillis(this.timeOutInSeconds);
 
         StaleElementReferenceException lastException;
         do {
@@ -46,7 +45,7 @@ public class WebElementNamedProxyHandler extends LocatingElementHandler {
                 lastException = e;
                 this.waitFor();
             }
-        } while (this.clock.isNowBefore(end));
+        } while (this.clock.millis() < end);
         throw lastException;
     }
 
