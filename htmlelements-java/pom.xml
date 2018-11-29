@@ -12,7 +12,7 @@
     <name>Yandex QATools HtmlElements For Java</name>
 
     <properties>
-        <selenium.version>3.5.1</selenium.version>
+        <selenium.version>3.14.0</selenium.version>
         <phantomjs-maven-plugin.version>0.7</phantomjs-maven-plugin.version>
         <phantomjs.binary.version>1.9.8</phantomjs.binary.version>
     </properties>
