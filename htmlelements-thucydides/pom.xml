@@ -11,7 +11,7 @@
     <name>Yandex QATools HtmlElements Thucydides Integration</name>
 
     <properties>
-        <thucydides.version>0.9.275</thucydides.version>
+        <serenity.version>2.0.30</serenity.version>
     </properties>
 
     <dependencies>
@@ -21,9 +21,9 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>net.thucydides</groupId>
-            <artifactId>thucydides-core</artifactId>
-            <version>${thucydides.version}</version>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-core</artifactId>
+            <version>${serenity.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.seleniumhq.selenium</groupId>
