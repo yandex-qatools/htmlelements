@@ -1,15 +1,10 @@
 package ru.yandex.qatools.htmlelements.element;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.*;
 import org.openqa.selenium.internal.WrapsElement;
-import org.openqa.selenium.Rectangle;
+import ru.yandex.qatools.htmlelements.annotations.Name;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 /**
@@ -216,6 +211,49 @@ public class HtmlElement implements WebElement, WrapsElement, Named {
     @Override
     public WebElement findElement(By by) {
         return wrappedElement.findElement(by);
+    }
+
+    /**
+     * Find the first {@link WebElement} using its name provided in {@link Name} annotation.
+     * An element is searched throughout the hierarchy of inheritance up to the superclass HtmlElement.
+     *
+     * @param name Name of the element as provided in {@link Name} annotation.
+     * @return The first matching element on the current context.
+     * @throws org.openqa.selenium.NoSuchElementException If no matching element found.
+     */
+    public <E> E findElement(String name) {
+        Class<?> classToParse = getClass();
+        E result = findElement(classToParse, name);
+        if (result != null) {
+            return result;
+        }
+        while (true) {
+            classToParse = classToParse.getSuperclass();
+            if (classToParse == null || classToParse == HtmlElement.class) {
+                break;
+            }
+            result = findElement(classToParse, name);
+            if (result != null) {
+                return result;
+            }
+        }
+        throw new NoSuchElementException("Cannot find an element using its name " + name);
+    }
+
+    @SuppressWarnings("unchecked")
+    private <E> E findElement(Class<?> holder, String name) {
+        for (Field field : holder.getDeclaredFields()) {
+            Name nameAnnotation = field.getAnnotation(Name.class);
+            if (nameAnnotation != null && nameAnnotation.value().equals(name)) {
+                field.setAccessible(true);
+                try {
+                    return (E) field.get(this);
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        return null;
     }
 
     /**
