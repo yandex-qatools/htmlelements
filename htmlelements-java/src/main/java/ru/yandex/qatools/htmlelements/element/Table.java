@@ -58,10 +58,9 @@ public class Table extends TypifiedElement {
      */
     public List<List<WebElement>> getRows() {
         return getWrappedElement()
-                .findElements(By.xpath(".//tr"))
+                .findElements(By.xpath(".//tr[.//td]")) // find elements with td tag only
                 .stream()
                 .map(rowElement -> rowElement.findElements(By.xpath(".//td")))
-                .filter(row -> row.size() > 0) // ignore rows with no <td> tags
                 .collect(toList());
     }
 
