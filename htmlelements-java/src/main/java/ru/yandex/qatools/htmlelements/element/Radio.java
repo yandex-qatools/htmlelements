@@ -12,7 +12,7 @@ import java.util.List;
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 14.08.12
  */
-public class Radio extends TypifiedElement {
+public class Radio extends TypifiedElement implements Fillable {
     /**
      * Specifies a radio button of a radio button group that will be used to find all other buttons of this group.
      *
@@ -105,5 +105,10 @@ public class Radio extends TypifiedElement {
         if (!button.isSelected()) {
             button.click();
         }
+    }
+
+    @Override
+    public void fill(String value) {
+        selectByValue(value);
     }
 }

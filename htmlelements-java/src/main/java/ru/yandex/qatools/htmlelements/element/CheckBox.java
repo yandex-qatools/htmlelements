@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
  * @author Artem Koshelev artkoshelev@yandex-team.ru
  * @author Alexander Tolmachev starlight@yandex-team.ru
  */
-public class CheckBox extends TypifiedElement {
+public class CheckBox extends TypifiedElement implements Fillable {
     /**
      * Specifies wrapped {@link WebElement}.
      *
@@ -79,5 +79,10 @@ public class CheckBox extends TypifiedElement {
         } else {
             deselect();
         }
+    }
+
+    @Override
+    public void fill(String value) {
+        set(Boolean.parseBoolean(value));
     }
 }
