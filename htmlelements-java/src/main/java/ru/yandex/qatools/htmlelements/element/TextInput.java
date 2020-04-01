@@ -12,7 +12,7 @@ import java.util.Optional;
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 13.08.12
  */
-public class TextInput extends TypifiedElement {
+public class TextInput extends TypifiedElement implements Fillable {
     /**
      * Specifies wrapped {@link WebElement}.
      *
@@ -54,5 +54,10 @@ public class TextInput extends TypifiedElement {
      */
     public String getClearCharSequence() {
         return StringUtils.repeat(Keys.DELETE.toString() + Keys.BACK_SPACE, getText().length());
+    }
+
+    @Override
+    public void fill(String value) {
+        sendKeys(getClearCharSequence() + value);
     }
 }

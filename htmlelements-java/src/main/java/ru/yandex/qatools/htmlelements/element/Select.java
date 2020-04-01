@@ -14,7 +14,7 @@ import java.util.List;
  * @author Artem Koshelev artkoshelev@yandex-team.ru
  * @author Alexander Tolmachev starlight@yandex-team.ru
  */
-public class Select extends TypifiedElement {
+public class Select extends TypifiedElement implements Fillable {
     /**
      * Specifies wrapped {@link WebElement}.
      * Performs no checks unlike {@link org.openqa.selenium.support.ui.Select}. All checks are made later
@@ -156,5 +156,10 @@ public class Select extends TypifiedElement {
      */
     public void deselectByVisibleText(String text) {
         getSelect().deselectByVisibleText(text);
+    }
+
+    @Override
+    public void fill(String value) {
+        selectByValue(value);
     }
 }

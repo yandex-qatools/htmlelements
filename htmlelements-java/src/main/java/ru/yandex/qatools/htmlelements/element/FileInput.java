@@ -15,7 +15,7 @@ import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.*;
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 11.04.13
  */
-public class FileInput extends TypifiedElement {
+public class FileInput extends TypifiedElement implements Fillable {
     /**
      * Specifies wrapped {@link WebElement}.
      *
@@ -73,5 +73,10 @@ public class FileInput extends TypifiedElement {
     private String getPathForSystemFile(final String fileName) {
         File file = new File(fileName);
         return file.getPath();
+    }
+
+    @Override
+    public void fill(String value) {
+        setFileToUpload(value);
     }
 }

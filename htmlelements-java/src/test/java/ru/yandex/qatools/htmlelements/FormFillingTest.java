@@ -3,6 +3,7 @@ package ru.yandex.qatools.htmlelements;
 import org.junit.Test;
 import org.openqa.selenium.Keys;
 import ru.yandex.qatools.htmlelements.testelements.MockedForm;
+import ru.yandex.qatools.htmlelements.testelements.MockedFormCustom;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,9 +20,9 @@ public class FormFillingTest {
     private static final boolean CHECKBOX_VALUE_TO_SET = true;
 
     private final MockedForm form = new MockedForm();
+    private final MockedFormCustom formCustom = new MockedFormCustom();
 
-    public void fillForm() {
-        // Prepare data to fill form with
+    public Map<String, Object> prepareDefaultData() {
         Map<String, Object> data = new HashMap<>();
         data.put(MockedForm.TEXT_INPUT_NAME, INPUT_TEXT_TO_SEND);
         data.put(MockedForm.TEXT_INPUT_WITH_TEXT_NAME, INPUT_TEXT_TO_SEND);
@@ -31,20 +32,40 @@ public class FormFillingTest {
         data.put(MockedForm.TEXT_AREA_NAME, INPUT_TEXT_TO_SEND);
         data.put(MockedForm.TEXT_AREA_WITH_TEXT_NAME, INPUT_TEXT_TO_SEND);
 
-        // Fill form
-        form.fill(data);
+        return data;
+    }
+
+    public Map<String, Object> prepareTextInputCustomData() {
+        Map<String, Object> data = prepareDefaultData();
+        data.put(MockedFormCustom.TEXT_INPUT_CUSTOM, INPUT_TEXT_TO_SEND);
+
+        return data;
     }
 
     @Test
     public void formFieldsShouldBeFilledCorrectly() {
-        fillForm();
-        verify(form.getTextInput()).sendKeys(INPUT_TEXT_TO_SEND);
-        verify(form.getTextInputWithText()).sendKeys(INPUT_WITH_TEXT_KEYS_TO_SEND);
+        form.fill(prepareDefaultData());
         verify(form.getCheckBox()).click();
         verify(form.getRadioButton()).click();
         verify(form.getSelectOption()).click();
         verify(form.getTextArea()).sendKeys(INPUT_TEXT_TO_SEND);
         verify(form.getTextAreaWithText()).sendKeys(INPUT_WITH_TEXT_KEYS_TO_SEND);
+        verify(form.getTextInput()).sendKeys(INPUT_TEXT_TO_SEND);
+        verify(form.getTextInputWithText()).sendKeys(INPUT_WITH_TEXT_KEYS_TO_SEND);
+    }
+
+    @Test
+    public void customFormFieldsShouldBeFilledCorrectly() {
+        formCustom.fill(prepareTextInputCustomData());
+        verify(formCustom.getTextInputCustomText()).click();
+        verify(formCustom.getTextInputCustomText()).sendKeys(INPUT_TEXT_TO_SEND);
+        verify(formCustom.getTextInput()).sendKeys(INPUT_TEXT_TO_SEND);
+        verify(formCustom.getTextInputWithText()).sendKeys(INPUT_WITH_TEXT_KEYS_TO_SEND);
+        verify(formCustom.getCheckBox()).click();
+        verify(formCustom.getRadioButton()).click();
+        verify(formCustom.getSelectOption()).click();
+        verify(formCustom.getTextArea()).sendKeys(INPUT_TEXT_TO_SEND);
+        verify(formCustom.getTextAreaWithText()).sendKeys(INPUT_WITH_TEXT_KEYS_TO_SEND);
     }
 
     @Test
