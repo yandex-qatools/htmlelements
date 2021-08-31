@@ -7,7 +7,7 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.internal.WrapsElement;
+import org.openqa.selenium.WrapsElement;
 import org.openqa.selenium.Rectangle;
 
 import java.util.List;
