@@ -2,7 +2,7 @@ package ru.yandex.qatools.htmlelements.matchers;
 
 import org.hamcrest.Matcher;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.WrapsElement;
+import org.openqa.selenium.WrapsElement;
 import ru.yandex.qatools.htmlelements.matchers.common.WrapsElementMatcher;
 
 /**
