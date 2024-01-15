@@ -5,14 +5,14 @@
     <parent>
         <groupId>ru.yandex.qatools.htmlelements</groupId>
         <artifactId>htmlelements</artifactId>
-        <version>1.21.0-SNAPSHOT</version>
+        <version>1.21.0</version>
     </parent>
 
     <artifactId>htmlelements-java</artifactId>
     <name>Yandex QATools HtmlElements For Java</name>
 
     <properties>
-        <selenium.version>4.1.0</selenium.version>
+        <selenium.version>4.16.1</selenium.version>
         <phantomjs-maven-plugin.version>0.7</phantomjs-maven-plugin.version>
         <phantomjs.binary.version>1.9.8</phantomjs.binary.version>
     </properties>
@@ -31,7 +31,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>4.13.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>

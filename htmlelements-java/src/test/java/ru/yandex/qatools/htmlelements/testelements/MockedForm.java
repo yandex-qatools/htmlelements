@@ -82,7 +82,9 @@ public class MockedForm extends Form {
     private WebElement mockSelectOption() {
         WebElement select = mock(WebElement.class);
         WebElement selectOption = mock(WebElement.class);
+        when(selectOption.isEnabled()).thenReturn(true);
         when(select.getTagName()).thenReturn("select");
+        when(select.isEnabled()).thenReturn(true);
         when(select.getAttribute("name")).thenReturn(SELECT_NAME);
         when(getWrappedElement().findElements(By.name(SELECT_NAME))).thenReturn(singletonList(select));
         when(select.findElements(By.xpath(String.format(".//option[@value = \"%s\"]", SELECT_OPTION_VALUE)))).
